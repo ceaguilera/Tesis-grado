@@ -1,0 +1,3 @@
+proceso_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ProcesoBundle:Default:index }
