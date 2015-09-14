@@ -3,6 +3,7 @@
 namespace Tati\ProcesoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Actividad
@@ -59,9 +60,10 @@ class Actividad
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_proceso", type="integer")
+     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso")
+     * @ORM\JoinColumn(name="proceso_id", referencedColumnName="id")
      */
-    private $idProceso;
+    private $Proceso;
 
     /**
      * @var \DateTime
@@ -70,6 +72,25 @@ class Actividad
      */
     private $tiempo;
 
+    /**
+    *  @var ArrayCollection $tareas
+     * @ORM\ManyToMany(targetEntity="tarea", inversedBy="actividades")
+     * JoinTable(name="tareas_actividades",
+     *      joinColumns={@JoinColumn(name="actividad_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="tarea_id", referencedColumnName="id")}
+     *      )
+     */
+    private $tareas;
+
+ 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -197,29 +218,6 @@ class Actividad
     }
 
     /**
-     * Set idProceso
-     *
-     * @param integer $idProceso
-     * @return Actividad
-     */
-    public function setIdProceso($idProceso)
-    {
-        $this->idProceso = $idProceso;
-
-        return $this;
-    }
-
-    /**
-     * Get idProceso
-     *
-     * @return integer 
-     */
-    public function getIdProceso()
-    {
-        return $this->idProceso;
-    }
-
-    /**
      * Set tiempo
      *
      * @param \DateTime $tiempo
@@ -240,5 +238,61 @@ class Actividad
     public function getTiempo()
     {
         return $this->tiempo;
+    }
+
+    /**
+     * Set Proceso
+     *
+     * @param \Tati\ProcesoBundle\Entity\Proceso $proceso
+     * @return Actividad
+     */
+    public function setProceso(\Tati\ProcesoBundle\Entity\Proceso $proceso = null)
+    {
+        $this->Proceso = $proceso;
+
+        return $this;
+    }
+
+    /**
+     * Get Proceso
+     *
+     * @return \Tati\ProcesoBundle\Entity\Proceso 
+     */
+    public function getProceso()
+    {
+        return $this->Proceso;
+    }
+
+    /**
+     * Add tareas
+     *
+     * @param \Tati\ProcesoBundle\Entity\tarea $tareas
+     * @return Actividad
+     */
+    public function addTarea(\Tati\ProcesoBundle\Entity\tarea $tareas)
+    {
+        $this->tareas[] = $tareas;
+
+        return $this;
+    }
+
+    /**
+     * Remove tareas
+     *
+     * @param \Tati\ProcesoBundle\Entity\tarea $tareas
+     */
+    public function removeTarea(\Tati\ProcesoBundle\Entity\tarea $tareas)
+    {
+        $this->tareas->removeElement($tareas);
+    }
+
+    /**
+     * Get tareas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
     }
 }

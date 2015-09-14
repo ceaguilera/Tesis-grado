@@ -3,6 +3,7 @@
 namespace Tati\ProcesoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection; 
 
 /**
  * Tarea
@@ -34,6 +35,12 @@ class Tarea
      * @ORM\Column(name="slug", type="string", length=100)
      */
     private $slug;
+
+    /**
+    * @var ArrayCollection $actividades
+     * @ORM\ManyToMany(targetEntity="tarea", mappedBy="tareas")
+     */
+    private $actividades;
 
 
     /**
@@ -90,5 +97,45 @@ class Tarea
     public function getSlug()
     {
         return $this->slug;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add actividades
+     *
+     * @param \Tati\ProcesoBundle\Entity\tarea $actividades
+     * @return Tarea
+     */
+    public function addActividade(\Tati\ProcesoBundle\Entity\tarea $actividades)
+    {
+        $this->actividades[] = $actividades;
+
+        return $this;
+    }
+
+    /**
+     * Remove actividades
+     *
+     * @param \Tati\ProcesoBundle\Entity\tarea $actividades
+     */
+    public function removeActividade(\Tati\ProcesoBundle\Entity\tarea $actividades)
+    {
+        $this->actividades->removeElement($actividades);
+    }
+
+    /**
+     * Get actividades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActividades()
+    {
+        return $this->actividades;
     }
 }
