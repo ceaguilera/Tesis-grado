@@ -6,7 +6,26 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+_adminWelcome:
+    pattern: /
+    defaults: { _controller: ProcesoBundle:Default:welcome }
 
-_portada:
-    pattern: /prueba
-    defaults: { _controller: ProcesoBundle:Default:prueba }
+_adminAddprocess:
+    pattern: /addprocess
+    defaults: { _controller: ProcesoBundle:Default:addProcess }
+
+_adminListProcessAct:
+    pattern: /listprocessact
+    defaults: { _controller: ProcesoBundle:Default:listProcessActive }
+
+_adminListProcessInactive:
+    pattern: /listProcessInactive
+    defaults: { _controller: ProcesoBundle:Default:listProcessInactive }
+
+_adminListTask:
+    pattern: /listTask
+    defaults: { _controller: ProcesoBundle:Default:listTask }
+
+_adminListRoles:
+    pattern: /listRoles
+    defaults: { _controller: ProcesoBundle:Default:listRoles }
