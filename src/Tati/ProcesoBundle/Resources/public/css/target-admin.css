@@ -1057,8 +1057,8 @@ input[type="checkbox"] {
   }
   .mainbar .mainbar-nav > li > a:hover,
   .mainbar .mainbar-nav > li > a:focus {
-    border-color: #148e76;
-    background: #159c81;
+    border-color: #188AB3;
+    background: #188AB3;
   }
   .mainbar .mainbar-nav > .active > a,
   .mainbar .mainbar-nav > .active > a:hover,
@@ -1164,7 +1164,7 @@ input[type="checkbox"] {
 }
 .content-header-title {
   margin-top: 0;
-  color: #16a085;
+  color: rgba(0, 136, 204, 0.62);
   font-size: 24px;
 }
 .content-header-subtitle {
