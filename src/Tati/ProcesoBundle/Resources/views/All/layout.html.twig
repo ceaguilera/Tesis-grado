@@ -1,241 +1,510 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Blank Page - Target Admin</title>
+
   <meta charset="utf-8">
-    <title>TatiWorkflow</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="{{ asset('bundles/proceso/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/proceso/css/bootstrap-responsive.min.css') }}" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-    rel="stylesheet">
-    <link href="{{ asset('bundles/proceso/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/proceso/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/proceso/css/pages/dashboard.css') }}" rel="stylesheet">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link href="{{ asset('bundles/proceso/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- App CSS -->
+  <link href="{{ asset('bundles/proceso/css/target-admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/custom.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300,700">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
   </head>
   <body>
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-            class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">Moodelador de procesos TatiWorkflow</a>
-            <div class="nav-collapse">
-              <ul class="nav pull-right">
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                  class="icon-cog"></i> Account <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="javascript:;">Settings</a></li>
-                    <li><a href="javascript:;">Help</a></li>
-                  </ul>
+      <div class="navbar">
+
+    <div class="container">
+
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-cogs"></i>
+        </button>
+
+        <a class="navbar-brand navbar-brand-image" href="index-2.html">
+          <img src="{{ asset('bundles/proceso/img/logo.png') }}" alt="Site Logo">
+        </a>
+
+      </div> <!-- /.navbar-header -->
+
+      <div class="navbar-collapse collapse">
+
+        
+
+        <ul class="nav navbar-nav noticebar navbar-left">
+
+          <li class="dropdown">
+            <a href="page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Notifications&nbsp;</span>
+              <span class="badge">3</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu" role="menu">
+              <li class="nav-header">
+                <div class="pull-left">
+                  Notifications
+                </div>
+
+                <div class="pull-right">
+                  <a href="javascript:;">Mark as Read</a>
+                </div>
+              </li>
+
+              <li>
+                <a href="page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <i class="fa fa-cloud-upload text-success"></i>
+                  </span>
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">Templates Synced</strong>
+                    <span class="noticebar-item-text">20 Templates have been synced to the Mashon Demo instance.</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 12 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <i class="fa fa-ban text-danger"></i>
+                  </span>
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">Sync Error</strong>
+                    <span class="noticebar-item-text">5 Designs have been failed to be synced to the Mashon Demo instance.</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li class="noticebar-menu-view-all">
+                <a href="page-notifications.html">View All Notifications</a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown">
+            <a href="page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Messages&nbsp;</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu" role="menu">                
+              <li class="nav-header">
+                <div class="pull-left">
+                  Messages
+                </div>
+
+                <div class="pull-right">
+                  <a href="javascript:;">New Message</a>
+                </div>
+              </li>
+
+              <li>
+                <a href="page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <img src="{{ asset('bundles/proceso/img/avatars/avatar-1-md.jpg') }}" style="width: 50px" alt="">
+                  </span>
+
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">New Message</strong>
+                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="page-notifications.html" class="noticebar-item">
+                  <span class="noticebar-item-image">
+                    <img src="{{ asset('bundles/proceso/img/avatars/avatar-2-md.jpg') }}" style="width: 50px" alt="">
+                  </span>
+
+                  <span class="noticebar-item-body">
+                    <strong class="noticebar-item-title">New Message</strong>
+                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
+                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 5 hours ago</span>
+                  </span>
+                </a>
+              </li>
+
+              <li class="noticebar-menu-view-all">
+                <a href="page-notifications.html">View All Messages</a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-exclamation-triangle"></i>
+              <span class="navbar-visible-collapsed">&nbsp;Alerts&nbsp;</span>
+            </a>
+
+            <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
+              <li class="nav-header">
+                <div class="pull-left">
+                  Alerts
+                </div>
+              </li>
+
+              <li class="noticebar-empty">                  
+                <h4 class="noticebar-empty-title">No alerts here.</h4>
+                <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">   
+
+          <li>
+            <a href="javascript:;">About</a>
+          </li>    
+            
+          <li>
+            <a href="javascript:;">Resources</a>
+          </li>    
+
+          <li class="dropdown navbar-profile">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+              <img src="{{ asset('bundles/proceso/img/avatars/avatar-1-xs.jpg') }}" class="navbar-profile-avatar" alt="">
+              <span class="navbar-profile-label">rod@rod.me &nbsp;</span>
+              <i class="fa fa-caret-down"></i>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+
+              <li>
+                <a href="page-profile.html">
+                  <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;My Profile
+                </a>
+              </li>
+
+              <li>
+                <a href="page-pricing.html">
+                  <i class="fa fa-dollar"></i> 
+                  &nbsp;&nbsp;Plans &amp; Billing
+                </a>
+              </li>
+
+              <li>
+                <a href="page-settings.html">
+                  <i class="fa fa-cogs"></i> 
+                  &nbsp;&nbsp;Settings
+                </a>
+              </li>
+
+              <li class="divider"></li>
+
+              <li>
+                <a href="account-login.html">
+                  <i class="fa fa-sign-out"></i> 
+                  &nbsp;&nbsp;Logout
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
+
+        </ul>
+
+      </div> <!--/.navbar-collapse -->
+
+    </div> <!-- /.container -->
+
+  </div> <!-- /.navbar -->
+
+  <div class="mainbar">
+
+  <div class="container">
+
+    <button type="button" class="btn mainbar-toggle" data-toggle="collapse" data-target=".mainbar-collapse">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="mainbar-collapse collapse">
+
+      <ul class="nav navbar-nav mainbar-nav">
+
+        <li class="">
+          <a href="index-2.html">
+            <i class="fa fa-tasks"></i>
+            Agregar nuevo proceso
+          </a>
+        </li>
+        <li class="">
+          <a href="index-2.html">
+            <i class="fa fa-check-square-o"></i>
+            Procesos activos
+          </a>
+        </li>
+        <li class="">
+          <a href="index-2.html">
+            <i class="fa fa-minus-square-o"></i>
+            Procesos inactivos
+          </a>
+        </li>
+        <li class="">
+          <a href="index-2.html">
+            <i class="fa fa-edit"></i>
+            Listas de tareas
+          </a>
+        </li>
+        <li class="">
+          <a href="index-2.html">
+            <i class="fa fa-group"></i>
+            Lista de responsables
+          </a>
+        </li>
+
+        <!-- <li class="dropdown ">
+          <a href="#about" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <i class="fa fa-desktop"></i>
+            UI Features
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">   
+            <li><a href="ui-buttons.html"><i class="fa fa-user nav-icon"></i> Buttons</a></li>
+            <li><a href="ui-tabs.html"><i class="fa fa-bars nav-icon"></i> Tabs & Accordions</a></li>
+            <li><a href="ui-notifications.html"><i class="fa fa-asterisk nav-icon"></i> Popups / Notifications</a></li>
+            <li><a href="ui-sliders.html"><i class="fa fa-tasks nav-icon"></i> Sliders</a></li>
+            <li><a href="ui-typography.html"><i class="fa fa-font nav-icon"></i> Typography</a></li>
+            <li><a href="ui-portlets.html"><i class="fa fa-list-alt nav-icon"></i> Portlets</a></li>
+            
+
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">
+              <i class="fa fa-bar-chart-o"></i> 
+              &nbsp;&nbsp;Charts & Graphs
+              </a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="ui-chart-flot.html">
+                  <i class="fa fa-bar-chart-o"></i> 
+                  &nbsp;&nbsp;jQuery Flot
+                  </a>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                  class="icon-user"></i> EGrappler.com <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="javascript:;">Profile</a></li>
-                    <li><a href="javascript:;">Logout</a></li>
-                  </ul>
+
+                <li>
+                  <a href="ui-chart-morris.html">
+                  <i class="fa fa-bar-chart-o"></i> 
+                  &nbsp;&nbsp;Morris.js
+                  </a>
+                </li> 
+              </ul>
+            </li>
+            
+          </ul>
+        </li>
+
+        <li class="dropdown ">
+          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <i class="fa fa-align-left"></i> 
+          Data Elements
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Form Elements</li>
+
+            <li>
+              <a href="ui-form-regular.html">
+              <i class="fa fa-location-arrow nav-icon"></i> 
+              Regular Elements
+              </a>
+            </li>
+
+            <li>
+              <a href="ui-form-extended.html">
+              <i class="fa fa-bolt nav-icon"></i> 
+              Extended Plugins
+              </a>
+            </li>
+
+            <li>
+              <a href="ui-form-validation.html">
+              <i class="fa fa-check nav-icon"></i> 
+              Form Validation
+              </a>
+            </li>
+
+            <li class="divider"></li>
+
+            <li class="dropdown-header">Data Tables</li>
+
+            <li>
+              <a href="ui-table-basic.html">
+              <i class="fa fa-table"></i> 
+              &nbsp;&nbsp;Basic Tables
+              </a>
+            </li>
+
+            <li>
+              <a href="ui-table-advanced.html">
+              <i class="fa fa-table"></i> 
+              &nbsp;&nbsp;Advanced Tables
+              </a>
+            </li>
+
+            <li>
+              <a href="ui-table-responsive.html">
+              <i class="fa fa-table"></i> 
+              &nbsp;&nbsp;Responsive Tables
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown ">
+          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <i class="fa fa-files-o"></i>
+            Sample Pages
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="page-profile.html"><i class="fa fa-user nav-icon"></i> Profile</a></li>
+            <li><a href="page-invoice.html"><i class="fa fa-money nav-icon"></i> Invoice</a></li>
+            <li><a href="page-pricing.html"><i class="fa fa-dollar nav-icon"></i> Pricing Plans</a></li>
+            <li><a href="page-support.html"><i class="fa fa-question nav-icon"></i> Support Page</a></li>
+            <li><a href="page-gallery.html"><i class="fa fa-picture-o nav-icon"></i> Gallery</a></li>
+            <li><a href="page-settings.html"><i class="fa fa-cogs nav-icon"></i> Settings</a></li>
+            <li><a href="page-calendar.html"><i class="fa fa-calendar nav-icon"></i> Calendar</a></li>
+          </ul>
+        </li>  
+
+        <li class="dropdown active">
+          <a href="#contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+            <i class="fa fa-external-link"></i>
+            Extra Pages
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="page-notifications.html">
+              <i class="fa fa-bell"></i> 
+              &nbsp;&nbsp;Notifications
+              </a>
+            </li>     
+
+            <li>
+              <a href="ui-icons.html">
+              <i class="fa fa-smile-o"></i> 
+              &nbsp;&nbsp;Font Icons
+              </a>
+            </li> 
+
+            <li class="dropdown-submenu">
+              <a tabindex="-1" href="#">
+              <i class="fa fa-ban"></i> 
+              &nbsp;&nbsp;Error Pages
+              </a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="page-404.html">
+                  <i class="fa fa-ban"></i> 
+                  &nbsp;&nbsp;404 Error
+                  </a>
+                </li>
+
+                <li>
+                  <a href="page-500.html">
+                  <i class="fa fa-ban"></i> 
+                  &nbsp;&nbsp;500 Error
+                  </a>
                 </li>
               </ul>
-             <!--  <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Search">
-              </form> -->
-            </div>
-            <!--/.nav-collapse --> 
-          </div>
-          <!-- /container --> 
-        </div>
-        <!-- /navbar-inner --> 
-      </div>
-      <!-- /navbar -->
-      <div class="subnavbar">
-        <div class="subnavbar-inner">
-          <div class="container">
-            <ul class="mainnav">
-              <li > <!--(_esto es para colocarlo activo) class="active" -->
-                <a href="{{path('_adminAddprocess')}}">
-                  <i class="icon-list-ol"></i>
-                  <span>Agregar nuevo proceso</span> 
-                </a> 
-              </li>
-              <li>
-                <a href="{{path('_adminListProcessAct')}}">
-                  <i class="icon-ok"></i>
-                  <span>Procesos activos</span> 
-                </a> 
-              </li>
-              <li>
-                <a href="{{path('_adminListProcessInactive')}}">
-                  <i class="icon-remove"></i>
-                  <span>Procesos inactivos</span> 
-                </a>
-              </li>
-              <li>
-                <a href="{{path('_adminListTask')}}">
-                  <i class="icon-list-alt"></i>
-                  <span>Listas de tareas</span> 
-                </a> 
-              </li>
-              <li>
-                <a href="{{path('_adminListRoles')}}">
-                  <i class="icon-group"></i>
-                  <span>Lista de responsables</span> 
-                </a> 
-              </li>
-              <!-- <li class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i>
-                  <span>Drops</span> 
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="icons.html">Icons</a></li>
-                  <li><a href="faq.html">FAQ</a></li>
-                  <li><a href="pricing.html">Pricing Plans</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="signup.html">Signup</a></li>
-                  <li><a href="error.html">404</a></li>
-                </ul>
-              </li> -->
-            </ul>
-          </div>
-          <!-- /container --> 
-        </div>
-        <!-- /subnavbar-inner --> 
-      </div>
-      <!-- /subnavbar -->
+            </li>
+
+            <li class="dropdown-submenu">
+
+              <a tabindex="-1" href="#">
+              <i class="fa fa-lock"></i> 
+              &nbsp;&nbsp;Login Pages
+              </a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="account-login.html">
+                  <i class="fa fa-unlock"></i> 
+                  &nbsp;&nbsp;Login
+                  </a>
+                </li>
+
+                <li>
+                  <a href="account-login-social.html">
+                  <i class="fa fa-unlock"></i> 
+                  &nbsp;&nbsp;Login Social
+                  </a>
+                </li>
+
+                <li>
+                  <a href="account-signup.html">
+                  <i class="fa fa-star"></i> 
+                  &nbsp;&nbsp;Signup
+                  </a>
+                  </li>
+
+                <li>
+                  <a href="account-forgot.html">
+                  <i class="fa fa-envelope"></i> 
+                  &nbsp;&nbsp;Forgot Password
+                  </a>
+                </li>
+              </ul>
+            </li> 
+
+            <li class="divider"></li>
+
+            <li>
+              <a href="page-blank.html">
+              <i class="fa fa-square-o"></i> 
+              &nbsp;&nbsp;Blank Page
+              </a>
+            </li> 
+
+          </ul>
+        </li> -->
+
+      </ul>
+
+    </div> <!-- /.navbar-collapse -->   
+
+  </div> <!-- /.container --> 
+
+  </div> <!-- /.mainbar -->
       {% block body %}
       {% endblock %}
       {% block footer%}
       {% include "ProcesoBundle:All:footer.html.twig" %}
       {% endblock footer%}
     <!-- Le javascript
-      ================================================== --> 
-      <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="{{ asset('bundles/proceso/js/jquery-1.7.2.min.js') }}"></script> 
-      <script src="{{ asset('bundles/proceso/js/excanvas.min.js') }}"></script> 
-      <script src="{{ asset('bundles/proceso/js/chart.min.js') }}" ></script> 
-      <script src="{{ asset('bundles/proceso/js/bootstrap.js') }}"></script>
-      <script src="{{ asset('bundles/proceso/js/full-calendar/fullcalendar.min.js') }}"></script>
-
-      <script src="{{ asset('bundles/proceso/js/base.js') }}"></script> 
-      <script>     
-
-        var lineChartData = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [
-          {
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            data: [65, 59, 90, 81, 56, 55, 40]
-          },
-          {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            data: [28, 48, 40, 19, 96, 27, 100]
-          }
-          ]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
-          datasets: [
-          {
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            data: [65, 59, 90, 81, 56, 55, 40]
-          },
-          {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 96, 27, 100]
-          }
-          ]
-
-        }    
-
-        $(document).ready(function() {
-          var date = new Date();
-          var d = date.getDate();
-          var m = date.getMonth();
-          var y = date.getFullYear();
-          var calendar = $('#calendar').fullCalendar({
-            header: {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,agendaWeek,agendaDay'
-            },
-            selectable: true,
-            selectHelper: true,
-            select: function(start, end, allDay) {
-              var title = prompt('Event Title:');
-              if (title) {
-                calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                    true // make the event "stick"
-                    );
-              }
-              calendar.fullCalendar('unselect');
-            },
-            editable: true,
-            events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-            {
-              title: 'EGrappler.com',
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: 'http://EGrappler.com/'
-            }
-            ]
-          });
-    });
-    </script><!-- /Calendar -->
+    
+   <!-- App JS -->
+  <script src="{{ asset('bundles/proceso/js/libs/jquery-1.10.1.min.js') }}"></script>
+  <script src="{{ asset('bundles/proceso/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>
+  <script src="{{ asset('bundles/proceso/js/libs/bootstrap.min.js') }}"></script> 
+  <script src="{{ asset('bundles/proceso/js/target-admin.js') }}"></script> 
   </body>
 </html>
