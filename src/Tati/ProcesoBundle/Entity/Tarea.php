@@ -37,6 +37,13 @@ class Tarea
     private $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=250)
+     */
+    private $descripcion;
+
+    /**
     * @var ArrayCollection $actividades
      * @ORM\ManyToMany(targetEntity="tarea", mappedBy="tareas")
      */
@@ -137,5 +144,28 @@ class Tarea
     public function getActividades()
     {
         return $this->actividades;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Tarea
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

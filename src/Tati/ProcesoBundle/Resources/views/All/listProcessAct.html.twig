@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container" ng-app="processActModule" ng-controller="processActController">
 
   <div class="content">
 
@@ -10,11 +10,19 @@
 
       <div class="content-header">
         <h2 class="content-header-title">Procesos activos</h2>
-    
+    	{[{algo}]}
+    	<div ng-init="hola=true" ng-if="hola==false" >hola</div>
+    	<div ng-if="1==1" >hola2</div>
       </div> <!-- /.content-header -->
     </div> <!-- /.content-container -->
       
   </div> <!-- /.content -->
 </div> <!-- /.container -->
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   <script src="{{ asset('bundles/proceso/js/angular/processAct/processActModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/processAct/processActController.js') }}"></script>
 
 {% endblock %}

@@ -37,6 +37,13 @@ class Tarea
     private $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=250)
+     */
+    private $descripcion;
+
+    /**
     * @var ArrayCollection $actividades
      * @ORM\ManyToMany(targetEntity="tarea", mappedBy="tareas")
      */

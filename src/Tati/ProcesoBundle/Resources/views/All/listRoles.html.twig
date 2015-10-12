@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container" ng-app="rolesModule" ng-controller="rolesController">
 
   <div class="content">
 
@@ -16,5 +16,11 @@
       
   </div> <!-- /.content -->
 </div> <!-- /.container -->
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   <script src="{{ asset('bundles/proceso/js/angular/roles/rolesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/roles/rolesController.js') }}"></script>
 
 {% endblock %}

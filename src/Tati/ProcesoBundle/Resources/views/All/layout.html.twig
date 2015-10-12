@@ -502,9 +502,14 @@
     <!-- Le javascript
     
    <!-- App JS -->
-  <script src="{{ asset('bundles/proceso/js/libs/jquery-1.10.1.min.js') }}"></script>
-  <script src="{{ asset('bundles/proceso/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>
-  <script src="{{ asset('bundles/proceso/js/libs/bootstrap.min.js') }}"></script> 
-  <script src="{{ asset('bundles/proceso/js/target-admin.js') }}"></script> 
+  {% block javascripts %}
+    <script src="{{ asset('bundles/proceso/js/angular.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/jquery-1.10.1.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/bootstrap.min.js') }}"></script> 
+    <script src="{{ asset('bundles/proceso/js/target-admin.js') }}"></script>
+  {% endblock %}
+  <script>
+  </script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container" ng-app="processInactModule" ng-controller="processInactController">
 
   <div class="content">
 
@@ -15,5 +15,11 @@
       
   </div> <!-- /.content -->
 </div> <!-- /.container -->
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   <script src="{{ asset('bundles/proceso/js/angular/processInact/processInactModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/processInact/processInactController.js') }}"></script>
 
 {% endblock %}
