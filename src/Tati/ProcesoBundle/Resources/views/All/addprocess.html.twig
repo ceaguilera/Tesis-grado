@@ -11,6 +11,49 @@
       <div class="content-header">
         <h2 class="content-header-title">Agregar nuevo proceso</h2>
       </div> <!-- /.content-header -->
+      <div class="container" align="center">
+        <div class="row">
+          <div class="col-xs-2"></div>  
+          <div class="col-xs-6">
+             <span>Nombre del proceso: {[{procesoNuevo.actividades.length}]}</span>
+             <input type="text" class="form-control">
+             <div ng-repeat-n="procesoNuevo.actividades.length" >
+                <div class="row">
+                  <div class="col-xs-6">
+                     <span>Nombre de la actividad:</span>
+                     <input type="text" class="form-control">
+                  </div>
+                  <div class="col-xs-6">
+                     <span>Descripcion:</span>
+                     <input type="text" class="form-control">
+                  </div>
+                </div>
+                <br>
+                <div class="row" ng-repeat-n="procesoNuevo.actividades[$index].tareas.length">
+                   <div class="col-xs-6">
+                     <span>Tipo de tarea:{[{procesoNuevo.actividades[$index].tareas.length}]}</span>
+                        <select class="form-control">
+                          <option>Verificar</option>
+                          <option>Aceptar</option>
+                          <option>Aprobar</option>
+                        </select>
+                   </div>
+                  <div class="col-xs-6">
+                     <span>Descripcion:</span>
+                     <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="row">
+                  <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
+                </div>
+             </div>
+              <br>
+              <hr>
+              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
+          </div>
+          <div class="col-xs-3"></div>
+        </div>
+      </div>
     </div> <!-- /.content-container -->
       
   </div> <!-- /.content -->
@@ -21,5 +64,6 @@
     {{ parent() }}
    <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessController.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular-repeat-n.js') }}"></script>
 
 {% endblock %}
