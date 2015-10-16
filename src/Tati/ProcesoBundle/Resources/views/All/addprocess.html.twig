@@ -11,50 +11,83 @@
       <div class="content-header">
         <h2 class="content-header-title">Agregar nuevo proceso</h2>
       </div> <!-- /.content-header -->
-      <div class="container" align="center">
-        <div class="row">
-          <div class="col-xs-2"></div>  
-          <div class="col-xs-6">
-             <span>Nombre del proceso: {[{procesoNuevo.actividades.length}]}</span>
-             <input type="text" class="form-control">
-             <div ng-repeat-n="procesoNuevo.actividades.length" >
-                <div class="row">
-                  <div class="col-xs-6">
-                     <span>Nombre de la actividad:</span>
-                     <input type="text" class="form-control">
-                  </div>
-                  <div class="col-xs-6">
-                     <span>Descripcion:</span>
-                     <input type="text" class="form-control">
-                  </div>
-                </div>
-                <br>
-                <div class="row" ng-repeat-n="procesoNuevo.actividades[$index].tareas.length">
-                   <div class="col-xs-6">
-                     <span>Tipo de tarea:{[{procesoNuevo.actividades[$index].tareas.length}]}</span>
-                        <select class="form-control">
-                          <option>Verificar</option>
-                          <option>Aceptar</option>
-                          <option>Aprobar</option>
-                        </select>
-                   </div>
-                  <div class="col-xs-6">
-                     <span>Descripcion:</span>
-                     <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="row">
-                  <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
-                </div>
-             </div>
-              <br>
-              <hr>
-              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
-          </div>
-          <div class="col-xs-3"></div>
+      <div class="row">
+        <div class="col-xs-6"> 
+          <label>Nombre del proceso:</label>
+          <input type="text" class="form-control" ng-model="procesoNuevo.nombre">
+          <br>
         </div>
       </div>
-    </div> <!-- /.content-container -->
+<!--       <div class="container" align="center"> -->
+        <div class="row">
+          <!-- <div class="col-xs-2"></div>   -->
+          <div class="col-xs-12">
+             <div ng-repeat-n="procesoNuevo.actividades.length" >
+                <div class="portlet">
+                    <div class="portlet-header"><h3>Actividad {[{$index+1}]}</h3></div>
+                    <div class="portlet-content">
+                      <div class="row">
+                              <div class="col-xs-6">
+                                 <label>Nombre de la actividad:</label>
+                                 <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombreAct">
+                                 <br>
+                                 <label>Responsable:</label>
+                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].responsableAct">
+                                      <option>Dir. Asuntos profesorales</option>
+                                      <option>Consejo de Departamento de Computacion</option>
+                                      <option>Consejo de Departamento de Matematicas</option>
+                                      <option>Consejo de Facultad</option>
+                                  </select>
+                              </div>
+                              <div class="col-xs-6">
+                                 <label>Descripcion:</label>
+                                 <textarea class="form-control" style="height: 113px;" ng-model="procesoNuevo.actividades[$index].descripcionAct"></textarea>
+                              </div> 
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col-xs-6" align="center">
+                            
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div ng-repeat-n="procesoNuevo.actividades[$index].tareas.length" ng-init="index2=0">
+                        <div class="col-xs-6">
+                          <div class="portlet" style="margin-left: 3%;margin-right: 3%;">
+                            <div class="portlet-header">Tarea {[{$index+1}]}</div>
+                            <div class="portlet-content">
+                              <div class="col-xs-12">
+                                    <label>Tipo de tarea:</label>
+                                    <select class="form-control" ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo">
+                                      <option>Verificar</option>
+                                      <option>Aceptar</option>
+                                      <option>Aprobar</option>
+                                    </select>
+                                    <br>
+                                    <label>Descripcion:</label>
+                                    <textarea class="form-control" ng-model="procesoNuevo.actividades[$index].tareas[index2].descripcion"></textarea>
+                              </div>   
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div align="center">
+                      <button type="button" class="btn btn-secondary" ng-click="addTarea(); index2=index2+1">Agregar Tarea</button>
+                    </div>
+                    <br>
+                </div>
+              <br>
+              <hr>
+              </div>
+              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
+              <button type="button" class="btn btn-secondary" ng-click="impress();">Imprimir</button>
+          </div>
+          <!-- <div class="col-xs-3"></div> -->
+        </div>
+      </div>
+   <!--  </div> --> <!-- /.content-container -->
       
   </div> <!-- /.content -->
 </div> <!-- /.container -->

@@ -4,7 +4,7 @@ addProcess.controller('addProcessController', function($scope, $http){
 	$scope.procesoNuevo.actividades = [];
 
 	$scope.add = function(){
-		console.log("estreoeneladd");
+		console.log("prueba");
 		$scope.procesoNuevo.actividades.length++;
 		 var pos = $scope.procesoNuevo.actividades.length;
 		 //console.log("pos1", pos);
@@ -17,5 +17,8 @@ addProcess.controller('addProcessController', function($scope, $http){
 		var pos = $scope.procesoNuevo.actividades.length;
 		console.log("pos2", pos);
 		$scope.procesoNuevo.actividades[pos-1].tareas.length++;
+	}
+	$scope.impress=function(){
+		console.log("$scope.procesoNuevo",$scope.procesoNuevo);
 	}
 });
