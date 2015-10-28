@@ -14,11 +14,14 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
     {
 
         //Carga de datos de una tarea nueva
-        $Tarea = new ETarea();
-        $Tarea->setNombre('Tarea1');
-        $Tarea->setSlug('Tarea1');
-        $Tarea->setDescripcion('esta tarea se encarga de una cosa tal');
-        $manager->persist($Tarea);
+        for($i=0;$i<=10;$i++){
+            $Tarea = new ETarea();
+            $Tarea->setNombre('Tarea'.$i);
+            $Tarea->setSlug('Tarea'.$i);
+            $Tarea->setDescripcion('esta tarea se encarga de una cosa tal');
+            $manager->persist($Tarea);
+            $tarea = null;
+        }
         $manager->flush();
     }
     public function getOrder()

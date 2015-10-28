@@ -59,10 +59,9 @@
                             <div class="portlet-content">
                               <div class="col-xs-12">
                                     <label>Tipo de tarea:</label>
-                                    <select class="form-control" ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo">
-                                      <option>Verificar</option>
-                                      <option>Aceptar</option>
-                                      <option>Aprobar</option>
+                                    <select class="form-control" {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#} >
+
+                                    <option ng-repeat="value in response" value="{[{value.nombre}]}">{[{value.nombre}]}</option>
                                     </select>
                                     <br>
                                     <label>Descripcion:</label>
@@ -95,6 +94,14 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
+          var response = "{{ task }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+    </script>
    <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessController.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular-repeat-n.js') }}"></script>

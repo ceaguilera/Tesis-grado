@@ -14,7 +14,19 @@ class DefaultController extends Controller
     }
     public function addProcessAction()
     {
-        return $this->render('ProcesoBundle:All:addprocess.html.twig');
+        $task = $this->getDoctrine()->getRepository('ProcesoBundle:Tarea')->findAll();        
+        $response = array();
+
+        foreach($task as $valor){
+            $task2 = array();
+            $task2['id'] = $valor->getId();
+            $task2['nombre'] = $valor->getNombre();
+            $task2['descripcion'] = $valor->getDescripcion();
+            array_push($response, $task2);
+        }
+        return $this->render('ProcesoBundle:All:addprocess.html.twig',  array(
+                'task' =>  json_encode($response)
+            ));
     }
     public function listProcessActiveAction()
     {
@@ -28,17 +40,19 @@ class DefaultController extends Controller
     {
 
         $task = $this->getDoctrine()->getRepository('ProcesoBundle:Tarea')->findAll();
-        foreach ($task as $valor){
-            print($valor->getid());
-            print($valor->getnombre());
-            print($valor->getslug());
-        }
+        // foreach ($task as $valor){
+        //     print($valor->getid());
+        //     print($valor->getnombre());
+        //     print($valor->getslug());
+        // }
         
         $response = array();
 
         foreach($task as $valor){
             $task2 = array();
             $task2['id'] = $valor->getId();
+            $task2['nombre'] = $valor->getNombre();
+            $task2['descripcion'] = $valor->getDescripcion();
             array_push($response, $task2);
         }
 

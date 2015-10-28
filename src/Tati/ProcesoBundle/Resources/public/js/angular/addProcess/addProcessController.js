@@ -2,6 +2,8 @@ addProcess.controller('addProcessController', function($scope, $http){
 
 	$scope.procesoNuevo = {};
 	$scope.procesoNuevo.actividades = [];
+	$scope.response = response;
+	console.log("scope.response",$scope.response);
 
 	$scope.add = function(){
 		console.log("prueba");
