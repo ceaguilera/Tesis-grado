@@ -8,17 +8,18 @@ addProcess.controller('addProcessController', function($scope, $http){
 	$scope.add = function(){
 		console.log("prueba");
 		$scope.procesoNuevo.actividades.length++;
-		 var pos = $scope.procesoNuevo.actividades.length;
+		$scope.actActual = $scope.procesoNuevo.actividades.length-1;
+		console.log("$scope.actActual",$scope.actActual);
 		 //console.log("pos1", pos);
-		 $scope.procesoNuevo.actividades[pos-1] = {};
+		 $scope.procesoNuevo.actividades[$scope.actActual] = {};
 		 //console.log("$scope.procesoNuevo.actividades",$scope.procesoNuevo.actividades);
-		 $scope.procesoNuevo.actividades[pos-1].tareas = [];
+		 $scope.procesoNuevo.actividades[$scope.actActual].tareas = [];
 		 //console.log("$scope.procesoNuevo.actividades",$scope.procesoNuevo.actividades);
 	}
 	$scope.addTarea = function(){
-		var pos = $scope.procesoNuevo.actividades.length;
-		console.log("pos2", pos);
-		$scope.procesoNuevo.actividades[pos-1].tareas.length++;
+	
+		$scope.procesoNuevo.actividades[$scope.actActual].tareas.length++;
+		$scope.tareaAct = $scope.procesoNuevo.actividades[$scope.actActual].tareas.length-1;
 	}
 	$scope.impress=function(){
 		console.log("$scope.procesoNuevo",$scope.procesoNuevo);

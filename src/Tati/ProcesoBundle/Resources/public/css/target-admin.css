@@ -1818,7 +1818,7 @@ input[type="checkbox"] {
   height: 45px;
   display: block;
   background-color: #16a085;
-  background-color: rgba(22, 160, 133, 0.3);
+  background-color: rgba(153, 201, 242, 1);
   font-size: 16px;
   text-align: center;
   line-height: 45px;
@@ -1832,7 +1832,7 @@ input[type="checkbox"] {
 #back-to-top:hover {
   text-decoration: none;
   background-color: #16a085;
-  background-color: rgba(22, 160, 133, 0.85);
+  background-color: rgba(66, 139, 202, 1);
 }
 #back-to-top i {
   color: #fff;

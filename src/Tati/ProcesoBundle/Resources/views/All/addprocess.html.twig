@@ -22,7 +22,7 @@
         <div class="row">
           <!-- <div class="col-xs-2"></div>   -->
           <div class="col-xs-12">
-             <div ng-repeat-n="procesoNuevo.actividades.length" >
+             <div ng-repeat=" (key1, value) in procesoNuevo.actividades" >
                 <div class="portlet">
                     <div class="portlet-header"><h3>Actividad {[{$index+1}]}</h3></div>
                     <div class="portlet-content">
@@ -41,7 +41,7 @@
                               </div>
                               <div class="col-xs-6">
                                  <label>Descripcion:</label>
-                                 <textarea class="form-control" style="height: 113px;" ng-model="procesoNuevo.actividades[$index].descripcionAct"></textarea>
+                                 <textarea class="form-control" style="height: 113px;" ng-model="procesoNuevo.actividades[key1].descripcionAct"></textarea>
                               </div> 
                         </div>
                         <br>
@@ -52,20 +52,22 @@
                         </div>
                     </div>
                     <div class="row">
-                      <div ng-repeat-n="procesoNuevo.actividades[$index].tareas.length" ng-init="index2=0">
+                      <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas"  >
                         <div class="col-xs-6">
                           <div class="portlet" style="margin-left: 3%;margin-right: 3%;">
                             <div class="portlet-header">Tarea {[{$index+1}]}</div>
                             <div class="portlet-content">
                               <div class="col-xs-12">
+                                  <label>Nombre:</label>
+                                    <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre">
+                                    <br>
                                     <label>Tipo de tarea:</label>
-                                    <select class="form-control" {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#} >
-
-                                    <option ng-repeat="value in response" value="{[{value.nombre}]}">{[{value.nombre}]}</option>
+                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
+                                      <option ng-repeat="value in response" value="{[{value.nombre}]}">{[{value.nombre}]} </option>
                                     </select>
                                     <br>
                                     <label>Descripcion:</label>
-                                    <textarea class="form-control" ng-model="procesoNuevo.actividades[$index].tareas[index2].descripcion"></textarea>
+                                    <textarea class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].descripcion"></textarea>
                               </div>   
                             </div>
                           </div>
@@ -73,7 +75,7 @@
                       </div>
                     </div>
                     <div align="center">
-                      <button type="button" class="btn btn-secondary" ng-click="addTarea(); index2=index2+1">Agregar Tarea</button>
+                      <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
                     </div>
                     <br>
                 </div>
