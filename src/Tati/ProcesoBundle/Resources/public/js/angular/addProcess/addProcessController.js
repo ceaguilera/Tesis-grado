@@ -24,4 +24,17 @@ addProcess.controller('addProcessController', function($scope, $http){
 	$scope.impress=function(){
 		console.log("$scope.procesoNuevo",$scope.procesoNuevo);
 	}
+	$scope.delete=function(posact, postar){
+		console.log("entro");
+		console.log("posact",posact);
+		console.log("postar",postar);
+		if(posact!=null && postar!=null){
+			console.log("entrosino");
+			$scope.procesoNuevo.actividades[posact].tareas.splice(postar, 1);
+		}else{
+			console.log("entrosi");
+			$scope.procesoNuevo.actividades.splice(posact, 1);
+		}
+	}
+
 });
