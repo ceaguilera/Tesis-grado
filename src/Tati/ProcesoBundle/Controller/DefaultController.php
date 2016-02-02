@@ -4,6 +4,7 @@ namespace Tati\ProcesoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tati\ProcesoBundle\Entity\Tarea;
+use Tati\ProcesoBundle\Entity\Responsable;
 use Doctrine\ORM\EntityRepository;
 
 class DefaultController extends Controller
@@ -62,6 +63,23 @@ class DefaultController extends Controller
     }
     public function listRolesAction()
     {
-        return $this->render('ProcesoBundle:All:listRoles.html.twig');
+         $role = $this->getDoctrine()->getRepository('ProcesoBundle:Responsable')->findAll();
+        // foreach ($task as $valor){
+        //     print($valor->getid());
+        //     print($valor->getnombre());
+        //     print($valor->getslug());
+        // }
+        
+        $response = array();
+
+        foreach($role as $valor){
+            $role2 = array();
+            $role2['id'] = $valor->getId();
+            $role2['nombre'] = $valor->getNombre();
+            array_push($response, $role2);
+        }
+        return $this->render('ProcesoBundle:All:listRoles.html.twig', array(
+                'task' =>  json_encode($response)
+            ));
     }
 }

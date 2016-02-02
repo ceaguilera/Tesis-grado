@@ -12,6 +12,30 @@
         <h2 class="content-header-title">Lista de responsables</h2>
         
       </div> <!-- /.content-header -->
+      <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">Listado de responsables</div>
+
+              <!-- Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="value in response">
+                  <tr>
+                    <td>{[{value.id}]}</td>
+                    <td>{[{value.nombre}]}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
     </div> <!-- /.content-container -->
       
   </div> <!-- /.content -->
@@ -20,6 +44,14 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
+          var response = "{{ task }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+      </script>
    <script src="{{ asset('bundles/proceso/js/angular/roles/rolesModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/roles/rolesController.js') }}"></script>
 

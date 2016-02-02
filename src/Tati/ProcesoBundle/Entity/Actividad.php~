@@ -53,7 +53,8 @@ class Actividad
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_responsable", type="integer")
+     * @ORM\OneToOne(targetEntity="Tati\ProcesoBundle\Entity\Responsable") 
+     * @ORM\JoinColumn(name="idResponsable", referencedColumnName="id")
      */
     private $idResponsable;
 

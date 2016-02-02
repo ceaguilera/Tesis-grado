@@ -145,4 +145,27 @@ class Tarea
     {
         return $this->actividades;
     }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Tarea
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
 }

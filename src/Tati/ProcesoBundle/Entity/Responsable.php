@@ -3,15 +3,15 @@
 namespace Tati\ProcesoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;    
+use Doctrine\Common\Collections\ArrayCollection; 
 
 /**
- * Proceso
+ * Responsable
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Proceso
+class Responsable
 {
     /**
      * @var integer
@@ -21,7 +21,7 @@ class Proceso
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
     /**
      * @var string
      *
@@ -29,29 +29,12 @@ class Proceso
      */
     private $nombre;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=100)
-     */
-    private $slug;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
+ 
     /**
      * Set nombre
      *
      * @param string $nombre
-     * @return Proceso
+     * @return Responsable
      */
     public function setNombre($nombre)
     {
@@ -71,25 +54,12 @@ class Proceso
     }
 
     /**
-     * Set slug
+     * Get id
      *
-     * @param string $slug
-     * @return Proceso
+     * @return integer 
      */
-    public function setSlug($slug)
+    public function getId()
     {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
+        return $this->id;
     }
 }
