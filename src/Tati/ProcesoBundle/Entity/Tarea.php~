@@ -45,7 +45,7 @@ class Tarea
 
     /**
     * @var ArrayCollection $actividades
-     * @ORM\ManyToMany(targetEntity="tarea", mappedBy="tareas")
+     * @ORM\ManyToMany(targetEntity="Actividad", mappedBy="tareas")
      */
     private $actividades;
 
@@ -119,7 +119,7 @@ class Tarea
      * @param \Tati\ProcesoBundle\Entity\tarea $actividades
      * @return Tarea
      */
-    public function addActividade(\Tati\ProcesoBundle\Entity\tarea $actividades)
+    public function addActividade(\Tati\ProcesoBundle\Entity\Actividad $actividades)
     {
         $this->actividades[] = $actividades;
 
@@ -131,7 +131,7 @@ class Tarea
      *
      * @param \Tati\ProcesoBundle\Entity\tarea $actividades
      */
-    public function removeActividade(\Tati\ProcesoBundle\Entity\tarea $actividades)
+    public function removeActividade(\Tati\ProcesoBundle\Entity\Actividad $actividades)
     {
         $this->actividades->removeElement($actividades);
     }

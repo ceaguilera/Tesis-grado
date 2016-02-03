@@ -37,6 +37,7 @@ class Proceso
     private $slug;
 
     /**
+    *  @var integer
      * @ORM\OneToMany(targetEntity="Tati\ProcesoBundle\Entity\Actividad", mappedBy="Proceso")
      */
     private $actividades;

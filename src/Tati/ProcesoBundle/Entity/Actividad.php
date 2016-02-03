@@ -172,28 +172,7 @@ class Actividad
         return $this->idActAnt;
     }
 
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Actividad
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
 
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
     /**
      * Set idResponsable
@@ -295,5 +274,28 @@ class Actividad
     public function getTareas()
     {
         return $this->tareas;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Actividad
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

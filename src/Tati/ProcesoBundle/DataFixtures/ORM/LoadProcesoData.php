@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tati\ProcesoBundle\Entity\Proceso as EProceso;
 use Tati\ProcesoBundle\Entity\Actividad as EActividad;
 use Tati\ProcesoBundle\Entity\Tarea as ETarea;
+use Tati\ProcesoBundle\Entity\Responsable as EResponsable;
 use Doctrine\ORM\EntityRepository;
 
 class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
@@ -19,17 +20,18 @@ class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
         $proceso = new EProceso();
         $proceso->setNombre("Proceso Prueba");
         $proceso->setSlug("Proceso-Prueba");
-
-            $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
-       for($i=0;$i<=5;$i++){
+        $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
+        $responsables = $manager->getRepository('ProcesoBundle:Responsable')->findAll();
+       for($i=1;$i<=5;$i++){
         $actividades = new EActividad();
         $actividades->setNombre("Actividad".$i);
         $actividades->setIdActSig($i+1);
         $actividades->setIdActAnt($i-1);
         $actividades->setStatus(true);
-        $actividades->setIdResponsable($i);
+        $responsable = $responsables[$i];
+        $actividades-> setIdResponsable($responsable);
         $actividades->setTiempo("tiempo".$i);
-        //$actividades->setProceso($proceso->getId());
+        $actividades->setProceso($proceso);
         //$tareas = new ETarea;
         for($j=0;$j<=2;$j++){
             $tarea = $tareas[$j];
@@ -38,6 +40,7 @@ class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
             $tarea = null;
         }
         $manager->persist($actividades);
+
        }
        $proceso->addActividade($actividades);
        $manager->persist($proceso);
