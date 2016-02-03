@@ -44,9 +44,9 @@ class Actividad
     private $idActAnt;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="boolean")
      */
     private $status;
 
@@ -61,21 +61,21 @@ class Actividad
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso")
+     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso", inversedBy="actividades")
      * @ORM\JoinColumn(name="proceso_id", referencedColumnName="id")
      */
     private $Proceso;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="tiempo", type="time")
+     * @ORM\Column(name="tiempo", type="string", length=100)
      */
     private $tiempo;
 
     /**
     *  @var ArrayCollection $tareas
-     * @ORM\ManyToMany(targetEntity="tarea", inversedBy="actividades")
+     * @ORM\ManyToMany(targetEntity="Tarea", inversedBy="actividades")
      * JoinTable(name="tareas_actividades",
      *      joinColumns={@JoinColumn(name="actividad_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="tarea_id", referencedColumnName="id")}
