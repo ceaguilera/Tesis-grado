@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="row">
-                      <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas"  >
+                      <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas track by $index"  >
                         <div class="col-xs-6">
                           <div class="portlet" style="margin-left: 3%;margin-right: 3%;">
                             <div class="portlet-header">
