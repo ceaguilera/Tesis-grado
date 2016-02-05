@@ -75,7 +75,7 @@ class Actividad
 
     /**
     *  @var ArrayCollection $tareas
-     * @ORM\ManyToMany(targetEntity="tarea", inversedBy="actividades")
+     * @ORM\ManyToMany(targetEntity="Tarea", inversedBy="actividades")
      * JoinTable(name="tareas_actividades",
      *      joinColumns={@JoinColumn(name="actividad_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="tarea_id", referencedColumnName="id")}
@@ -172,28 +172,7 @@ class Actividad
         return $this->idActAnt;
     }
 
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Actividad
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
 
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
     /**
      * Set idResponsable
