@@ -17,10 +17,11 @@ class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
     {
 
         $proceso = new EProceso();
+
         $proceso->setNombre("Proceso Prueba");
         $proceso->setSlug("Proceso-Prueba");
-
-            $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
+        $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
+        
        for($i=0;$i<=5;$i++){
         $actividades = new EActividad();
         $actividades->setNombre("Actividad".$i);
@@ -29,7 +30,7 @@ class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
         $actividades->setStatus(true);
         $actividades->setIdResponsable($i);
         $actividades->setTiempo("tiempo".$i);
-        //$actividades->setProceso($proceso->getId());
+        $actividades->setProceso($proceso->getId());
         //$tareas = new ETarea;
         for($j=0;$j<=2;$j++){
             $tarea = $tareas[$j];
