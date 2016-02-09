@@ -36,7 +36,7 @@ class TipoTarea
     private $descripcion;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tarea", mappedBy="TipoTarea")
+     * @ORM\OneToMany(targetEntity="Tarea", mappedBy="TipoTarea", cascade={"persist"})
      */
     private $tareas;
 

@@ -38,13 +38,13 @@ class Tarea
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="TipoTarea", inversedBy="tareas")
+     * @ORM\ManyToOne(targetEntity="TipoTarea", inversedBy="tareas", cascade={"persist"})
      * @ORM\JoinColumn(name="tipoTarea_id", referencedColumnName="id")
      */
     private $tipoTarea;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Actividad", inversedBy="tareas")
+     * @ORM\ManyToOne(targetEntity="Actividad", inversedBy="tareas", cascade={"persist"})
      * @ORM\JoinColumn(name="actividad_id", referencedColumnName="id")
      */
     private $actividades;
@@ -170,17 +170,6 @@ class Tarea
     }
 
     /**
-     * Set tarea
-     *
-     *  
-     */
-    public function setTarea($data)
-    {
-        $this->nombre = $data['nombre'];
-        $this->descripcion = $data['descripcion'];
-    }
-
-    /**
      * Set tipoTarea
      *
      * @param \Tati\ProcesoBundle\Entity\TipoTarea $tipoTarea
@@ -214,5 +203,15 @@ class Tarea
         $this->actividades = $actividades;
 
         return $this;
+    }
+
+    /**
+    *
+    * Set tarea
+    */
+    public function setTarea($data)
+    {
+        $this->nombre = $data['nombre'];
+        $this->descripcion= $data['descripcion'];
     }
 }

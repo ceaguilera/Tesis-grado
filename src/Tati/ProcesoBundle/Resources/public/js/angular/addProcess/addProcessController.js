@@ -47,7 +47,7 @@ addProcess.controller('addProcessController', function($scope, $http){
 	    	data: json,
 	    	url: url,
 	    	success: function(data) {
-		        //$scope.$apply();
+		        console.log(data);
 	    	},
 	    	error: function(e) {
 

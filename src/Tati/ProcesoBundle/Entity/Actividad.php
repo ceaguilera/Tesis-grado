@@ -51,10 +51,8 @@ class Actividad
     private $descripcion;
 
     /**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="Tati\ProcesoBundle\Entity\Responsable", cascade={"persist"}) 
-     * @ORM\JoinColumn(name="idResponsable", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Responsable", inversedBy="actividades")
+     * @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
      */
     private $idResponsable;
 

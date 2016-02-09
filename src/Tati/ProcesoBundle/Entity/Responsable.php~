@@ -29,6 +29,11 @@ class Responsable
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Actividad", mappedBy="idResponsable", cascade={"persist"})
+     */
+    private $actividades;
+
  
     /**
      * Set nombre
