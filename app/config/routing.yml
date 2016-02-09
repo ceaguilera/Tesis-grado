@@ -6,26 +6,32 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-_adminWelcome:
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+_expertWelcome:
     pattern: /
-    defaults: { _controller: ProcesoBundle:Default:welcome }
+    defaults: { _controller: ProcesoBundle:Expert:welcome }
 
-_adminAddprocess:
+_expertAddprocess:
     pattern: /addprocess
-    defaults: { _controller: ProcesoBundle:Default:addProcess }
+    defaults: { _controller: ProcesoBundle:Expert:addProcess }
+    options:
+        expose: true
 
-_adminListProcessAct:
+_expertListProcessAct:
     pattern: /listprocessact
-    defaults: { _controller: ProcesoBundle:Default:listProcessActive }
+    defaults: { _controller: ProcesoBundle:Expert:listProcessActive }
 
-_adminListProcessInactive:
+_expertListProcessInactive:
     pattern: /listProcessInactive
-    defaults: { _controller: ProcesoBundle:Default:listProcessInactive }
+    defaults: { _controller: ProcesoBundle:Expert:listProcessInactive }
 
-_adminListTask:
+_expertListTask:
     pattern: /listTask
-    defaults: { _controller: ProcesoBundle:Default:listTask }
+    defaults: { _controller: ProcesoBundle:Expert:listTask }
 
-_adminListRoles:
-    pattern: /listRoles
-    defaults: { _controller: ProcesoBundle:Default:listRoles }
+_expertListResponsible:
+    pattern: /listResponsible
+    defaults: { _controller: ProcesoBundle:Expert:listResponsible}
+

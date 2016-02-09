@@ -37,4 +37,23 @@ addProcess.controller('addProcessController', function($scope, $http){
 		}
 	}
 
+	$scope.addProcess = function(){
+		var json = {};
+		json = $scope.procesoNuevo;
+	    json = angular.toJson(json);
+	    var url= Routing.generate('_expertAddprocess');
+	    $.ajax({
+	    	method: 'POST',
+	    	data: json,
+	    	url: url,
+	    	success: function(data) {
+		        //$scope.$apply();
+	    	},
+	    	error: function(e) {
+
+	    	}
+		});        
+	}
+
+
 });

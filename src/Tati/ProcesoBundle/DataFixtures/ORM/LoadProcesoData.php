@@ -17,50 +17,45 @@ class LoadProcesoData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
 
-        $proceso = new EProceso();
+       //  $proceso = new EProceso();
 
-        $proceso->setNombre("Proceso Prueba");
-        $proceso->setSlug("Proceso-Prueba");
-        $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
+       //  $proceso->setNombre("Proceso Prueba");
+       //  $proceso->setSlug("Proceso-Prueba");
+       //  $tareas = $manager->getRepository('ProcesoBundle:Tarea')->findAll();
+       //  $responsables = $manager->getRepository('ProcesoBundle:Responsable')->findAll();
+       //  for($i=1;$i<=5;$i++){
+       //  $actividades = new EActividad();
+       //  $actividades->setNombre("Actividad".$i);
+       //  $actividades->setIdActSig($i+1);
+       //  $actividades->setIdActAnt($i-1);
+       //  $actividades->setStatus(true);
+       //  $responsable = $responsables[$i];
+       //  $actividades-> setIdResponsable($responsable);
+       //  $actividades->setTiempo("tiempo".$i);
+       //  $actividades->setProceso($proceso);
+       //  //$tareas = new ETarea;
+       //  for($j=0;$j<=2;$j++){
+       //      $tarea = $tareas[$j];
+       //      $actividades->addTarea($tarea);
+       //      $tarea->addActividade($actividades);
+       //      $tarea = null;
+       //  }
+       //  $manager->persist($actividades);
 
-        
-       for($i=0;$i<=5;$i++){
+       // }
+       // $proceso->addActividade($actividades);
+       // $manager->persist($proceso);
+       // $manager->flush();
 
-        $responsables = $manager->getRepository('ProcesoBundle:Responsable')->findAll();
-       for($i=1;$i<=5;$i++){
-        $actividades = new EActividad();
-        $actividades->setNombre("Actividad".$i);
-        $actividades->setIdActSig($i+1);
-        $actividades->setIdActAnt($i-1);
-        $actividades->setStatus(true);
-        $responsable = $responsables[$i];
-        $actividades-> setIdResponsable($responsable);
-        $actividades->setTiempo("tiempo".$i);
-
-        $actividades->setProceso($proceso);
-        //$tareas = new ETarea;
-        for($j=0;$j<=2;$j++){
-            $tarea = $tareas[$j];
-            $actividades->addTarea($tarea);
-            $tarea->addActividade($actividades);
-            $tarea = null;
-        }
-        $manager->persist($actividades);
-
-       }
-       $proceso->addActividade($actividades);
-       $manager->persist($proceso);
-       $manager->flush();
-
-        // //Carga de datos de una tarea nueva
-        // for($i=0;$i<=10;$i++){
-        //     $Tarea = new ETarea();
-        //     $Tarea->setNombre('Tarea'.$i);
-        //     $Tarea->setSlug('Tarea'.$i);
-        //     $Tarea->setDescripcion('esta tarea se encarga de una cosa tal');
-        //     $manager->persist($Tarea);
-        //     $tarea = null;
-        // }
+       //  // //Carga de datos de una tarea nueva
+       //  // for($i=0;$i<=10;$i++){
+       //  //     $Tarea = new ETarea();
+       //  //     $Tarea->setNombre('Tarea'.$i);
+       //  //     $Tarea->setSlug('Tarea'.$i);
+       //  //     $Tarea->setDescripcion('esta tarea se encarga de una cosa tal');
+       //  //     $manager->persist($Tarea);
+       //  //     $tarea = null;
+       //  // }
     }
     public function getOrder()
     {

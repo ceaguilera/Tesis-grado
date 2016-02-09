@@ -30,15 +30,8 @@ class Proceso
     private $nombre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=100)
-     */
-    private $slug;
-
-    /**
     *  @var integer
-     * @ORM\OneToMany(targetEntity="Tati\ProcesoBundle\Entity\Actividad", mappedBy="Proceso")
+     * @ORM\OneToMany(targetEntity="Tati\ProcesoBundle\Entity\Actividad", mappedBy="Proceso", cascade={"persist"})
      */
     private $actividades;
 
@@ -75,28 +68,6 @@ class Proceso
         return $this->nombre;
     }
 
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Proceso
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
     /**
      * Constructor
      */
@@ -136,5 +107,17 @@ class Proceso
     public function getActividades()
     {
         return $this->actividades;
+    }
+
+    /**
+     * Set Actividad
+     *
+     *  
+     */
+    public function setProceso($data)
+    {
+        $this->nombre = $data['nombre'];
+
+        return $this;
     }
 }

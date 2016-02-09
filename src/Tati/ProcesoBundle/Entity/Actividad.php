@@ -44,16 +44,16 @@ class Actividad
     private $idActAnt;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="descripcion", type="string")
      */
-    private $status;
+    private $descripcion;
 
     /**
      * @var integer
      *
-     * @ORM\OneToOne(targetEntity="Tati\ProcesoBundle\Entity\Responsable") 
+     * @ORM\OneToOne(targetEntity="Tati\ProcesoBundle\Entity\Responsable", cascade={"persist"}) 
      * @ORM\JoinColumn(name="idResponsable", referencedColumnName="id")
      */
     private $idResponsable;
@@ -61,7 +61,7 @@ class Actividad
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso", inversedBy="actividades")
+     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso", inversedBy="actividades", cascade={"persist"})
      * @ORM\JoinColumn(name="proceso_id", referencedColumnName="id")
      */
     private $Proceso;
@@ -74,12 +74,7 @@ class Actividad
     private $tiempo;
 
     /**
-    *  @var ArrayCollection $tareas
-     * @ORM\ManyToMany(targetEntity="Tarea", inversedBy="actividades")
-     * JoinTable(name="tareas_actividades",
-     *      joinColumns={@JoinColumn(name="actividad_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="tarea_id", referencedColumnName="id")}
-     *      )
+     * @ORM\OneToMany(targetEntity="Tarea", mappedBy="actividades", cascade={"persist"})
      */
     private $tareas;
 
@@ -297,5 +292,42 @@ class Actividad
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set Actividad
+     *
+     *  
+     */
+    public function setActividad($data)
+    {
+        $this->nombre = $data['nombre'];
+        $this->idActSig = $data['idActSig'];
+        $this->idActAnt = $data['idActAnt'];
+        $this->tiempo = $data['tiempo'];
+        $this->descripcion = $data['descripcion'];
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Actividad
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
     }
 }

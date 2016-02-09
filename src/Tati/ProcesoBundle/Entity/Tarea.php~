@@ -32,20 +32,20 @@ class Tarea
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=100)
-     */
-    private $slug;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="descripcion", type="string", length=250)
      */
     private $descripcion;
 
+
     /**
-    * @var ArrayCollection $actividades
-     * @ORM\ManyToMany(targetEntity="Actividad", mappedBy="tareas")
+     * @ORM\ManyToOne(targetEntity="TipoTarea", inversedBy="tareas")
+     * @ORM\JoinColumn(name="tipoTarea_id", referencedColumnName="id")
+     */
+    private $tipoTarea;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Actividad", inversedBy="tareas")
+     * @ORM\JoinColumn(name="actividad_id", referencedColumnName="id")
      */
     private $actividades;
 
@@ -167,5 +167,52 @@ class Tarea
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set tarea
+     *
+     *  
+     */
+    public function setTarea($data)
+    {
+        $this->nombre = $data['nombre'];
+        $this->descripcion = $data['descripcion'];
+    }
+
+    /**
+     * Set tipoTarea
+     *
+     * @param \Tati\ProcesoBundle\Entity\TipoTarea $tipoTarea
+     * @return Tarea
+     */
+    public function setTipoTarea(\Tati\ProcesoBundle\Entity\TipoTarea $tipoTarea = null)
+    {
+        $this->tipoTarea = $tipoTarea;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoTarea
+     *
+     * @return \Tati\ProcesoBundle\Entity\TipoTarea 
+     */
+    public function getTipoTarea()
+    {
+        return $this->tipoTarea;
+    }
+
+    /**
+     * Set actividades
+     *
+     * @param \Tati\ProcesoBundle\Entity\Actividad $actividades
+     * @return Tarea
+     */
+    public function setActividades(\Tati\ProcesoBundle\Entity\Actividad $actividades = null)
+    {
+        $this->actividades = $actividades;
+
+        return $this;
     }
 }

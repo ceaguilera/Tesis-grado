@@ -5,7 +5,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Tati\ProcesoBundle\Entity\Tarea as ETarea;
+use Tati\ProcesoBundle\Entity\TipoTarea as ETipoTarea;
 
 class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -15,11 +15,10 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
 
         //Carga de datos de una tarea nueva
         for($i=0;$i<=10;$i++){
-            $Tarea = new ETarea();
-            $Tarea->setNombre('Tarea'.$i);
-            $Tarea->setSlug('Tarea'.$i);
-            $Tarea->setDescripcion('esta tarea se encarga de una cosa tal');
-            $manager->persist($Tarea);
+            $TipoTarea = new ETipoTarea();
+            $TipoTarea->setNombre('Tipo Tarea'.$i);
+            $TipoTarea->setDescripcion('esta tarea se encarga de una cosa tal');
+            $manager->persist($TipoTarea);
             $tarea = null;
         }
         $manager->flush();

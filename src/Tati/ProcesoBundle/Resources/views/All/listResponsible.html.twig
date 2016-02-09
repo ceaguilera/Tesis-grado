@@ -45,7 +45,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-          var response = "{{ task }}";
+          var response = "{{ responsible }}";
           var div = document.createElement('div');
           div.innerHTML = response;
           response = div.firstChild.nodeValue;
