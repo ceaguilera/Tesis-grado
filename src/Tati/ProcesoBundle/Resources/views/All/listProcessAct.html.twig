@@ -10,10 +10,34 @@
 
       <div class="content-header">
         <h2 class="content-header-title">Procesos activos</h2>
-    	{[{algo}]}
-    	<div ng-init="hola=true" ng-if="hola==false" >hola</div>
-    	<div ng-if="1==1" >hola2</div>
       </div> <!-- /.content-header -->
+      <div ng-if="response.length>0" class="row">
+          <div class="col-sm-8">
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Listado de Procesos Activos</div>
+
+                <!-- Table -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Catidad de Actividades</th>
+                    </tr>
+                  </thead>
+                  <tbody ng-repeat="value in response">
+                    <tr>
+                      <td>{[{value.nombre}]}</td>
+                      <td>{[{value.numActividades}]}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+      <div ng-if="response.length==0" class="alert alert-warning " role="alert">
+        <strong>No hay ningun proceso activo en este momento</strong>
+      </div>
     </div> <!-- /.content-container -->
       
   </div> <!-- /.content -->
@@ -22,6 +46,14 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
+          var response = "{{ processActive }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+    </script>
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActController.js') }}"></script>
 

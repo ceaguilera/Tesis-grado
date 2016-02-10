@@ -34,11 +34,17 @@ class ExpertController extends Controller
     }
     public function listProcessActiveAction()
     {
-        return $this->render('ProcesoBundle:All:listProcessAct.html.twig');
+            $response = $this->get('InformationService')->listProcessActive();
+            return $this->render('ProcesoBundle:All:listProcessAct.html.twig',  array(
+                        'processActive' =>  json_encode($response)
+                    ));
     }
     public function listProcessInactiveAction()
     {
-        return $this->render('ProcesoBundle:All:listProcessInactive.html.twig');
+        $response = $this->get('InformationService')->listProcessInactive();
+        return $this->render('ProcesoBundle:All:listProcessInactive.html.twig',  array(
+                        'processInactive' =>  json_encode($response)
+                    ));
     }
     public function listTaskAction()
     {

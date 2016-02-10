@@ -36,6 +36,13 @@ class Proceso
     private $actividades;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean")
+     */
+    private $status;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -117,7 +124,31 @@ class Proceso
     public function setProceso($data)
     {
         $this->nombre = $data['nombre'];
+        $this->status = true;
 
         return $this;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Proceso
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

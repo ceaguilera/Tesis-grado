@@ -98,4 +98,34 @@ class InformationService
         $this->em->flush();
     }
 
+    public function listProcessActive(){
+        $procesos = $this->em->getRepository('ProcesoBundle:Proceso')->findBy(array(
+        'status' => true));
+        $response = array();
+        foreach ($procesos as $valor) {
+            $response2 = array();
+            $response2['nombre'] = $valor->getNombre();
+            $response2['numActividades'] = count($valor->getActividades());
+            array_push($response, $response2);
+        }
+
+        return $response;
+
+    }
+
+    public function listProcessInactive(){
+        $procesos = $this->em->getRepository('ProcesoBundle:Proceso')->findBy(array(
+        'status' => false));
+        $response = array();
+        foreach ($procesos as $valor) {
+            $response2 = array();
+            $response2['nombre'] = $valor->getNombre();
+            $response2['numActividades'] = count($valor->getActividades());
+            array_push($response, $response2);
+        }
+
+        return $response;
+
+    }
+
 }
