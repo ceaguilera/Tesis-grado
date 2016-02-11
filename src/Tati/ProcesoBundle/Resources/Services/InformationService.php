@@ -104,6 +104,7 @@ class InformationService
         $response = array();
         foreach ($procesos as $valor) {
             $response2 = array();
+            $response2['id']=$valor->getId();
             $response2['nombre'] = $valor->getNombre();
             $response2['numActividades'] = count($valor->getActividades());
             array_push($response, $response2);
@@ -119,6 +120,7 @@ class InformationService
         $response = array();
         foreach ($procesos as $valor) {
             $response2 = array();
+            $response2['id']=$valor->getId();
             $response2['nombre'] = $valor->getNombre();
             $response2['numActividades'] = count($valor->getActividades());
             array_push($response, $response2);
@@ -128,4 +130,32 @@ class InformationService
 
     }
 
+    public function getProcess($id){
+        $proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($id);
+        //$response = $proceso->getNombre();
+        //print($response);
+        $response = array();
+            $response['nombre'] = $proceso->getNombre();
+            $response['actividades'] = array();
+            $actividades = $proceso->getActividades();
+            foreach ($actividades as $actividadesP) {
+                $actividad = array();
+                $actividad['nombre'] = $actividadesP->getNombre();
+                $actividad['idActSig'] = $actividadesP->getIdActSig();
+                $actividad['idActAn'] = $actividadesP->getIdActAnt();
+                $actividad['tiempo'] = $actividadesP->getTiempo();
+                $actividad['descripcion'] = $actividadesP->getDescripcion();
+                $actividad['responsable'] = $actividadesP->getIdResponsable()->getId();
+                $actividad['tareas']= array();
+                $tareas = $actividadesP->getTareas();
+                foreach ($tareas as $tareasP) {
+                    $tarea['nombre'] = $tareasP->getNombre();
+                    $tarea['descripcion'] = $tareasP->getDescripcion();
+                    $tarea['tipo'] = $tareasP->getTipoTarea()->getId();
+                    array_push($actividad['tareas'], $tarea);
+                }
+                array_push($response['actividades'], $actividad);
+            }
+        return $response;
+        }
 }

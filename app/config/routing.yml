@@ -35,3 +35,8 @@ _expertListResponsible:
     pattern: /listResponsible
     defaults: { _controller: ProcesoBundle:Expert:listResponsible}
 
+_expertEditProcess:
+    pattern: /editProcess/{id}
+    defaults: { _controller: ProcesoBundle:Expert:editProcess}
+    options:
+        expose: true

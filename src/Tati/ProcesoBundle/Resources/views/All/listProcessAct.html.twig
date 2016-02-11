@@ -23,12 +23,14 @@
                     <tr>
                       <th>Nombre</th>
                       <th>Catidad de Actividades</th>
+                      <th>Editar</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.numActividades}]}</td>
+                      <td> <button ng-click="edit(value.id)" type="button" class="btn btn-info">Editar</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -56,5 +58,7 @@
     </script>
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActController.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+      <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
 {% endblock %}

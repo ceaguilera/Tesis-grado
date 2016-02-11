@@ -34,10 +34,10 @@ class ExpertController extends Controller
     }
     public function listProcessActiveAction()
     {
-            $response = $this->get('InformationService')->listProcessActive();
-            return $this->render('ProcesoBundle:All:listProcessAct.html.twig',  array(
-                        'processActive' =>  json_encode($response)
-                    ));
+        $response = $this->get('InformationService')->listProcessActive();
+        return $this->render('ProcesoBundle:All:listProcessAct.html.twig',  array(
+                    'processActive' =>  json_encode($response)
+                ));
     }
     public function listProcessInactiveAction()
     {
@@ -59,5 +59,13 @@ class ExpertController extends Controller
         return $this->render('ProcesoBundle:All:listResponsible.html.twig', array(
                 'responsible' =>  json_encode($response)
             ));
+    }
+    public function editProcessAction($id)
+    {
+        $response = $this->get('InformationService')->getProcess($id);
+        return $this->render('ProcesoBundle:All:editProcess.html.twig', array(
+                'process' =>  json_encode($response)
+            ));
+
     }
 }
