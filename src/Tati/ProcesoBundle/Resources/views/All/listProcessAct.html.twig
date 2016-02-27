@@ -9,10 +9,10 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title">Procesos activos</h2>
+        <h2 class="content-header-title">Procesos activos</h2> <estiquta ng-click="showModalConfirm()">modal</estiquta>
       </div> <!-- /.content-header -->
       <div ng-if="response.length>0" class="row">
-          <div class="col-sm-8">
+          <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Listado de Procesos Activos</div>
@@ -24,6 +24,7 @@
                       <th>Nombre</th>
                       <th>Catidad de Actividades</th>
                       <th>Editar</th>
+                      <th>Desactivar</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
@@ -31,6 +32,7 @@
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.numActividades}]}</td>
                       <td> <button ng-click="edit(value.id)" type="button" class="btn btn-info">Editar</button></td>
+                      <td> <button ng-click="" type="button" class="btn btn-primary">Desactivar</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -43,8 +45,8 @@
     </div> <!-- /.content-container -->
       
   </div> <!-- /.content -->
+  {{ include("ProcesoBundle:All:modales/modalConfirm.html.twig") }}
 </div> <!-- /.container -->
-
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
@@ -59,6 +61,9 @@
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/processAct/processActController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-      <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}">
+   </script>
+   <script src="{{ asset('bundles/proceso/js/angular-strap.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular-strap.tpl.js')}}"></script>
 
 {% endblock %}

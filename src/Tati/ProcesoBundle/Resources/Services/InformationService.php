@@ -142,10 +142,10 @@ class InformationService
                 $actividad = array();
                 $actividad['nombre'] = $actividadesP->getNombre();
                 $actividad['idActSig'] = $actividadesP->getIdActSig();
-                $actividad['idActAn'] = $actividadesP->getIdActAnt();
+                $actividad['idActAnt'] = $actividadesP->getIdActAnt();
                 $actividad['tiempo'] = $actividadesP->getTiempo();
                 $actividad['descripcion'] = $actividadesP->getDescripcion();
-                $actividad['responsable'] = $actividadesP->getIdResponsable()->getId();
+                $actividad['idResponsable'] = $actividadesP->getIdResponsable()->getId();
                 $actividad['tareas']= array();
                 $tareas = $actividadesP->getTareas();
                 foreach ($tareas as $tareasP) {
@@ -156,6 +156,24 @@ class InformationService
                 }
                 array_push($response['actividades'], $actividad);
             }
-        return $response;
+
+        $task = $this->em->getRepository('ProcesoBundle:TipoTarea')->findAll(); 
+        $role = $this->em->getRepository('ProcesoBundle:Responsable')->findAll();       
+        $response['tareas'] = array();
+        $response['responsables'] = array();
+
+        foreach($task as $valor){
+            $task2 = array();
+            $task2['id'] = $valor->getId();
+            $task2['nombre'] = $valor->getNombre();
+            array_push($response['tareas'], $task2);
         }
+        foreach($role as $valor){
+            $role2 = array();
+            $role2['id'] = $valor->getId();
+            $role2['nombre'] = $valor->getNombre();
+            array_push($response['responsables'], $role2);
+        }
+        return $response;
+    }
 }

@@ -9,7 +9,7 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title">Agregar nuevo proceso</h2>
+        <h2 class="content-header-title">Editar proceso</h2>
       </div> <!-- /.content-header -->
       <div class="row">
         <div class="col-xs-6"> 
@@ -35,20 +35,20 @@
                                  <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre">
                                  <br>
                                  <label>Responsable:</label>
-                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable">
+                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable" number-converter>
                                       <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                   </select>
                               </div>
                               <div class="col-xs-4">
                                 <label>Actividad Siguiente:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActSig">
+                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActSig" number-converter>
                                   <option value="">Seleccione</option>
                                   <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
                                 </select>
                                 <br>
                                 <label>Actividad Anterior:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActAnt">
+                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActAnt" number-converter>
                                   <option value="">Seleccione</option>
                                   <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
                                 </select>
@@ -84,7 +84,7 @@
                                     <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre">
                                     <br>
                                     <label>Tipo de tarea:</label>
-                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
+                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  number-converter {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
                                     <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.tareas" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                     </select>
