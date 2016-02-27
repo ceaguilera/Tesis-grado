@@ -74,28 +74,76 @@ class InformationService
 
     public function insertProcess($data){
 
-        $proceso = new EProceso();
-        $proceso->setProceso($data);
-        foreach ($data['actividades'] as $dataActividad) {
-            $responsable = $this->em->getRepository('ProcesoBundle:Responsable')->find($dataActividad['idResponsable']);
-            $actividad = new EActividad;
-            $actividad->setActividad($dataActividad);
-            foreach ($dataActividad['tareas'] as $dataTarea) {
-                $tarea = new ETarea();
-                $tarea->setTarea($dataTarea);
-                $tipoTarea = $this->em->getRepository('ProcesoBundle:TipoTarea')->find($dataTarea['tipo']);
-                $tarea->setTipoTarea($tipoTarea);
-                $tipoTarea->addTarea($tarea);
+        if(is_null($data['id']))
+        {
+            $proceso = new EProceso();
+            $proceso->setProceso($data);
+            foreach ($data['actividades'] as $dataActividad) {
+                $responsable = $this->em->getRepository('ProcesoBundle:Responsable')->find($dataActividad['idResponsable']);
+                $actividad = new EActividad;
+                $actividad->setActividad($dataActividad);
+                foreach ($dataActividad['tareas'] as $dataTarea) {
+                    $tarea = new ETarea();
+                    $tarea->setTarea($dataTarea);
+                    $tipoTarea = $this->em->getRepository('ProcesoBundle:TipoTarea')->find($dataTarea['tipo']);
+                    $tarea->setTipoTarea($tipoTarea);
+                    $tipoTarea->addTarea($tarea);
 
-                $actividad->addTarea($tarea);
-                $tarea->setActividades($actividad);
+                    $actividad->addTarea($tarea);
+                    $tarea->setActividades($actividad);
+                }
+                $actividad-> setIdResponsable($responsable);
+                $actividad->setProceso($proceso);
+                $proceso->addActividade($actividad);
             }
-            $actividad-> setIdResponsable($responsable);
-            $actividad->setProceso($proceso);
-            $proceso->addActividade($actividad);
+            $this->em->persist($proceso);
+            $this->em->flush();
+
+        }else{
+
+            $proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($data['id']);
+            //Eliminando los datos
+            foreach ($proceso->getActividades() as $actividad) 
+            {
+                foreach ($actividad->getTareas() as $tarea) 
+                {
+                    $tarea->setActividades(null);
+                    $actividad->removeTarea($tarea);
+                    $this->em->remove($tarea);
+                }
+                $actividad->setProceso(null);
+                $proceso->removeActividade($actividad);
+                $this->em->remove($actividad);
+            }
+            $this->em->persist($proceso);
+            $this->em->flush();
+
+
+            $proceso->setProceso($data);
+
+            foreach ($data['actividades'] as $dataActividad) 
+            {
+                $responsable = $this->em->getRepository('ProcesoBundle:Responsable')->find($dataActividad['idResponsable']);
+                $actividad = new EActividad;
+                $actividad->setActividad($dataActividad);
+                foreach ($dataActividad['tareas'] as $dataTarea) 
+                {
+                    $tarea = new ETarea();
+                    $tarea->setTarea($dataTarea);
+                    $tipoTarea = $this->em->getRepository('ProcesoBundle:TipoTarea')->find($dataTarea['tipo']);
+                    $tarea->setTipoTarea($tipoTarea);
+                    $tipoTarea->addTarea($tarea);
+
+                    $actividad->addTarea($tarea);
+                    $tarea->setActividades($actividad);
+                }
+                $actividad-> setIdResponsable($responsable);
+                $actividad->setProceso($proceso);
+                $proceso->addActividade($actividad);
+            }
+            $this->em->persist($proceso);
+            $this->em->flush();
         }
-        $this->em->persist($proceso);
-        $this->em->flush();
     }
 
     public function listProcessActive(){
@@ -136,6 +184,7 @@ class InformationService
         //print($response);
         $response = array();
             $response['nombre'] = $proceso->getNombre();
+            $response['id'] = $proceso->getId();
             $response['actividades'] = array();
             $actividades = $proceso->getActividades();
             foreach ($actividades as $actividadesP) {
