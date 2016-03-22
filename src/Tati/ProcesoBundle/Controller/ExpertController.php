@@ -9,6 +9,9 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class ExpertController extends Controller
 {
@@ -67,5 +70,17 @@ class ExpertController extends Controller
                 'process' =>  json_encode($response)
             ));
 
+    }
+    public function renderViewsAction()
+    {
+        $user = $this->getUser();
+        
+        if($this->isGranted('ROLE_ESPECIALISTA')){
+
+            
+            return $this->redirectToRoute('_expertAddprocess');
+        }
+
+        return null;
     }
 }
