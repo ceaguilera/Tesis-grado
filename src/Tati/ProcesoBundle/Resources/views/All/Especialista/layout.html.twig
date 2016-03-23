@@ -192,31 +192,24 @@
               <li>
                 <a href="page-profile.html">
                   <i class="fa fa-user"></i> 
-                  &nbsp;&nbsp;My Profile
-                </a>
-              </li>
-
-              <li>
-                <a href="page-pricing.html">
-                  <i class="fa fa-dollar"></i> 
-                  &nbsp;&nbsp;Plans &amp; Billing
+                  &nbsp;&nbsp;Mi Perfil
                 </a>
               </li>
 
               <li>
                 <a href="page-settings.html">
                   <i class="fa fa-cogs"></i> 
-                  &nbsp;&nbsp;Settings
+                  &nbsp;&nbsp;Configuracion
                 </a>
               </li>
 
               <li class="divider"></li>
 
               <li>
-                <a href="account-login.html">
+                <a href="{{ path("tatiSoft_logout") }}">
                   <i class="fa fa-sign-out"></i> 
-                  &nbsp;&nbsp;Logout
-                </a>
+                  &nbsp;&nbsp;Salir
+                  </a>
               </li>
 
             </ul>
@@ -497,7 +490,7 @@
       {% block body %}
       {% endblock %}
       {% block footer%}
-      {% include "ProcesoBundle:All:footer.html.twig" %}
+      {% include "ProcesoBundle:All:Especialista/footer.html.twig" %}
       {% endblock footer%}
     <!-- Le javascript
     

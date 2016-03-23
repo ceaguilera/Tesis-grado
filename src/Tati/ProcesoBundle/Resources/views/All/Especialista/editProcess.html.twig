@@ -1,15 +1,15 @@
-{% extends "ProcesoBundle:All:layout.html.twig" %}
+{% extends "ProcesoBundle:All:Especialista/layout.html.twig" %}
 
 {% block body %}
 
-<div class="container" class="container" ng-app="addProcessModule" ng-controller="addProcessController">
+<div class="container" class="container" ng-app="editProcessModule" ng-controller="editProcessController">
 
   <div class="content">
 
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title">Agregar nuevo proceso</h2>
+        <h2 class="content-header-title">Editar proceso</h2>
       </div> <!-- /.content-header -->
       <div class="row">
         <div class="col-xs-6"> 
@@ -35,20 +35,20 @@
                                  <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre">
                                  <br>
                                  <label>Responsable:</label>
-                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable">
+                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable" number-converter>
                                       <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                   </select>
                               </div>
                               <div class="col-xs-4">
                                 <label>Actividad Siguiente:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActSig">
+                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActSig" number-converter>
                                   <option value="">Seleccione</option>
                                   <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
                                 </select>
                                 <br>
                                 <label>Actividad Anterior:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActAnt">
+                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActAnt" number-converter>
                                   <option value="">Seleccione</option>
                                   <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
                                 </select>
@@ -84,7 +84,7 @@
                                     <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre">
                                     <br>
                                     <label>Tipo de tarea:</label>
-                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
+                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  number-converter {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
                                     <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.tareas" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                     </select>
@@ -106,7 +106,7 @@
               <hr>
               </div>
               <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
-              <button type="button" class="btn btn-secondary" ng-click="addProcess();">Enviar</button>
+              <button type="button" class="btn btn-secondary" ng-click="addProcess(response.id);">Enviar</button>
           </div>
           <!-- <div class="col-xs-3"></div> -->
         </div>
@@ -119,18 +119,19 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-          var response = "{{ information }}";
+     <script type="text/javascript">
+          var response = "{{ process }}";
           var div = document.createElement('div');
           div.innerHTML = response;
           response = div.firstChild.nodeValue;
           response = JSON.parse(response);
           console.log("response",response);
     </script>
-   <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessModule.js') }}"></script>
-   <script src="{{ asset('bundles/proceso/js/angular/addProcess/addProcessController.js') }}"></script>
+ 
+   <script src="{{ asset('bundles/proceso/js/angular/editProcess/editProcessModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/editProcess/editProcessController.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular-repeat-n.js') }}"></script>
       <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+      <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
 {% endblock %}

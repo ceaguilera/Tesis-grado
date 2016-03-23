@@ -1,24 +1,121 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+<head>
+  <title>TatiSoft</title>
 
-<form action="{{ path("tatiSoft_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link href="{{ asset('bundles/proceso/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- App CSS -->
+  <link href="{{ asset('bundles/proceso/css/target-admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('bundles/proceso/css/custom.css') }}" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300,700"> -->
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  </head>
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+<body class="account-bg">
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+<div class="navbar">
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+  <div class="container">
+
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <i class="fa fa-cogs"></i>
+      </button>
+
+      <a class="navbar-brand navbar-brand-image" href="index-2.html">
+        <img>
+      </a>
+
+    </div> <!-- /.navbar-header -->
+
+    <div class="navbar-collapse collapse">
+
+    </div> <!--/.navbar-collapse -->
+
+  </div> <!-- /.container -->
+
+</div> <!-- /.navbar -->
+
+<hr class="account-header-divider">
+
+<div class="account-wrapper">
+
+
+
+    <div class="account-body" style="margin-top: 10%;">
+
+      <h3 class="account-body-title" style="font-weight: bold;font-family: inherit;">Bienvenido a TatiSoft</h3>
+
+      <h5 class="account-body-subtitle">Por favor inicie sesión</h5>
+
+      <form  action="{{ path("tatiSoft_check") }}" method="post">
+       <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Email" id="username" name="_username" value="{{ last_username }}" required="required">
+
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Contraseña" >
+        </div> <!-- /.form-group -->
+        {% if error %}
+        <div style="background-color: rgb(231, 76, 60);font-weight: 400;font-family: monospace;margin-bottom: 2%;color: #FFF;">Usuario o Contraseña inválidos</div>
+        {% endif %}
+        <div class="form-group clearfix">
+          <div class="pull-left">         
+            <label class="checkbox-inline">
+            <input <input type="checkbox" id="remember_me" name="_remember_me" value="on" />Recordarme
+            </label>
+          </div>
+
+          <div class="pull-right">
+            <a href="account-forgot.html">Olvidaste tu contraseña?</a>
+          </div>
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block btn-lg boton-login" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">
+            Iniciar sesión &nbsp; <i class="fa fa-play-circle"></i>
+          </button>
+        </div> <!-- /.form-group -->
+
+      </form>
+
+
+    </div> <!-- /.account-body -->
+
+
+  </div> <!-- /.account-wrapper -->
+
+
+
+        
+  {% block javascripts %}
+    <script src="{{ asset('bundles/proceso/js/angular.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/proceso/js/angular-animate.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/jquery-1.10.1.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/libs/bootstrap.min.js') }}"></script> 
+    <script src="{{ asset('bundles/proceso/js/target-admin.js') }}"></script>
+  {% endblock %}
+
+</body>
+
 {% endblock fos_user_content %}

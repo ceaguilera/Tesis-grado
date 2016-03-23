@@ -68,8 +68,6 @@ class SecurityController extends Controller
     protected function renderLogin(array $data)
     {
         $user = $this->get('security.context')->getToken()->getUser();
-// Symfony 2.6;
-        var_dump($user);
         return $this->render('FOSUserBundle:Security:login.html.twig', $data);
     }
 

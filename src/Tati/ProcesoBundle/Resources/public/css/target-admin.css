@@ -3032,7 +3032,7 @@ table.table thead .sorting_desc_disabled,
 }
 .account-header-divider {
   margin-top: 0;
-  border-top: 10px solid #fff;
+  border-top: 10px solid rgba(0, 136, 204, 0.62);
   border-bottom: none;
 }
 .account-wrapper {
@@ -3143,4 +3143,14 @@ ul.support-list li {
   height: 300px;
   overflow-y: hidden;
   outline: none;
+}
+.boton-login{
+  color: #ffffff;
+  background-color: rgba(0, 136, 204, 0.62);
+  border-color: rgba(0, 136, 204, 0.62);
+}
+.boton-login:hover{
+  color: #ffffff;
+  background-color: rgba(1, 118, 176, 0.62);;
+  border-color: rgba(0, 136, 204, 0.62);
 }

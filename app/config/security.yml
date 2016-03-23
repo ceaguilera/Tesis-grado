@@ -3,9 +3,13 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ESPECIALISTA: ROLE_USER
-        ROLE_ADMIN:       ROLE_ESPECIALISTA
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ESPECIALISTA_READ: ROLE_ESPECIALISTA_READ
+        ROLE_ESPECIALISTA_UPDATE: ROLE_ESPECIALISTA_READ
+        ROLE_ESPECIALISTA_CREATE_ALL: ROLE_ESPECIALISTA_UPDATE
+        ROLE_SOLICITANTE: ROLE_SOLICITANTE
+        ROLE_RESPONSABLE_READ: ROLE_RESPONSABLE_READ
+        ROLE_RESPONSABLE_UPDATE: ROLE_RESPONSABLE_READ
+        ROLE_AUTORIDAD: ROLE_AUTORIDAD
 
     providers:
         fos_userbundle:
@@ -29,4 +33,11 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/specialist/, role: ROLE_ESPECIALISTA }
+
+        #Rutas permitidad para el usuario especialista
+        - { path: ^/specialist/addprocess, role: ROLE_ESPECIALISTA_CREATE_ALL }
+        - { path: ^/specialist/listprocessact, role: ROLE_ESPECIALISTA_READ }
+        - { path: ^/specialist/listTask, role: ROLE_ESPECIALISTA_READ }
+        - { path: ^/specialist/listResponsible, role: ROLE_ESPECIALISTA_READ }
+        - { path: ^/specialist/editProcess, role: ROLE_ESPECIALISTA_UPDATE }
+        - { path: ^/solicitante/hola, role: ROLE_SOLICITANTE}

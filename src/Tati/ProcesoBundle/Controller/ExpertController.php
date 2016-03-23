@@ -17,7 +17,7 @@ class ExpertController extends Controller
 {
     public function welcomeAction()
     {
-        return $this->render('ProcesoBundle:All:welcome.html.twig');
+        return $this->render('ProcesoBundle:All:Especialista:welcome.html.twig');
     }
     public function addProcessAction(Request $request)
     {
@@ -30,7 +30,7 @@ class ExpertController extends Controller
             return $response;
         }else{   
             $response = $this->get('InformationService')->getInformationProcess();
-            return $this->render('ProcesoBundle:All:addprocess.html.twig',  array(
+            return $this->render('ProcesoBundle:All:Especialista/addprocess.html.twig',  array(
                     'information' =>  json_encode($response)
                 ));
             }
@@ -38,35 +38,35 @@ class ExpertController extends Controller
     public function listProcessActiveAction()
     {
         $response = $this->get('InformationService')->listProcessActive();
-        return $this->render('ProcesoBundle:All:listProcessAct.html.twig',  array(
+        return $this->render('ProcesoBundle:All:Especialista/listProcessAct.html.twig',  array(
                     'processActive' =>  json_encode($response)
                 ));
     }
     public function listProcessInactiveAction()
     {
         $response = $this->get('InformationService')->listProcessInactive();
-        return $this->render('ProcesoBundle:All:listProcessInactive.html.twig',  array(
+        return $this->render('ProcesoBundle:All:Especialista/listProcessInactive.html.twig',  array(
                         'processInactive' =>  json_encode($response)
                     ));
     }
     public function listTaskAction()
     {
         $response = $this->get('InformationService')->getListTasks();
-        return $this->render('ProcesoBundle:All:listTask.html.twig',  array(
+        return $this->render('ProcesoBundle:All:Especialista/listTask.html.twig',  array(
                 'task' =>  json_encode($response)
             ));
     }
     public function listResponsibleAction()
     {
         $response = $this->get('InformationService')->getListResponsibles();
-        return $this->render('ProcesoBundle:All:listResponsible.html.twig', array(
+        return $this->render('ProcesoBundle:All:Especialista/listResponsible.html.twig', array(
                 'responsible' =>  json_encode($response)
             ));
     }
     public function editProcessAction($id)
     {
         $response = $this->get('InformationService')->getProcess($id);
-        return $this->render('ProcesoBundle:All:editProcess.html.twig', array(
+        return $this->render('ProcesoBundle:All:Especialista/editProcess.html.twig', array(
                 'process' =>  json_encode($response)
             ));
 
@@ -75,12 +75,20 @@ class ExpertController extends Controller
     {
         $user = $this->getUser();
         
-        if($this->isGranted('ROLE_ESPECIALISTA')){
-
-            
+        if($this->isGranted('ROLE_ESPECIALISTA_READ') || 
+        $this->isGranted('ROLE_ESPECIALISTA_UPDATE') ||
+        $this->isGranted('ROLE_ESPECIALISTA_CREATE_ALL')){
             return $this->redirectToRoute('_expertAddprocess');
+        }else if($this->isGranted('ROLE_SOLICITANTE')){
+            return $this->redirectToRoute('tatiSoft_solicitante');
         }
 
         return null;
+    }
+
+    public function holaSolicitanteAction()
+    {
+        return $this->render('ProcesoBundle:All:Solicitante/solicitante.html.twig');
+
     }
 }
