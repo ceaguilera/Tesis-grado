@@ -32,6 +32,12 @@ _expertAddprocess:
     options:
         expose: true
 
+_expertActivity:
+    pattern: /specialist/addActivity
+    defaults: { _controller: ProcesoBundle:Expert:addActivity }
+    options:
+        expose: true
+
 _expertListProcessAct:
     pattern: /specialist/listprocessact
     defaults: { _controller: ProcesoBundle:Expert:listProcessActive }
@@ -47,6 +53,12 @@ _expertListTask:
 _expertListResponsible:
     pattern: /specialist/listResponsible
     defaults: { _controller: ProcesoBundle:Expert:listResponsible}
+
+_expertActivityRelationship:
+    pattern: /specialist/activityRelationship/{id}
+    defaults: { _controller: ProcesoBundle:Expert:activityRelationship}
+    options:
+        expose: true
 
 _expertEditProcess:
     pattern: /specialist/editProcess/{id}

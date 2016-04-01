@@ -19,9 +19,38 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Actividad", mappedBy="user")
+     */
+    private $actividad;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+
+    /**
+     * Set actividad
+     *
+     * @param \Tati\ProcesoBundle\Entity\Actividad $actividad
+     * @return User
+     */
+    public function setActividad(\Tati\ProcesoBundle\Entity\Actividad $actividad = null)
+    {
+        $this->actividad = $actividad;
+
+        return $this;
+    }
+
+    /**
+     * Get actividad
+     *
+     * @return \Tati\ProcesoBundle\Entity\Actividad 
+     */
+    public function getActividad()
+    {
+        return $this->actividad;
     }
 }

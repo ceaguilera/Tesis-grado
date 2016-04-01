@@ -92,12 +92,13 @@ class InformationService
                     $actividad->addTarea($tarea);
                     $tarea->setActividades($actividad);
                 }
-                $actividad-> setIdResponsable($responsable);
+                $actividad->setResponsable($responsable);
                 $actividad->setProceso($proceso);
                 $proceso->addActividade($actividad);
             }
             $this->em->persist($proceso);
             $this->em->flush();
+            return $proceso->getId();
 
         }else{
 
@@ -224,5 +225,57 @@ class InformationService
             array_push($response['responsables'], $role2);
         }
         return $response;
+    }
+
+    public function listActivity($id){
+        $proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($id);
+
+        $response = array();
+        $response['actividades'] = array();
+        $response['id'] = $id;
+
+        $actividades = $proceso->getActividades();
+        foreach ($actividades as $actividad) {
+                $response2 = array();
+                $response2['id'] = $actividad->getId();
+                $response2['nombre'] = $actividad->getNombre();
+                array_push($response['actividades'], $response2);
+        }
+        return $response;
+    }
+
+    public function insertActivity($data){
+        //var_dump($data);
+
+        //$proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($data['id']);
+        // var_dump($data);
+
+        foreach ($data['actividades'] as $actividad) {
+              $actividadActual = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['id']);
+              
+              $actividadSig = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actSig']);
+           
+              $actividadAnt = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actAnt']);
+           
+              $actividadActual->setActSig($actividadSig);
+              $this->em->persist($actividadActual);
+              $this->em->flush();
+              //$actividadSig->setActAnt($actividadActual);
+
+              $actividadActual->setActAnt($actividadAnt);
+              $this->em->persist($actividadActual);
+              $this->em->flush();
+              //$actividadAnt->setActSig($actividadActual);
+
+              // $this->em->persist($actividadActual);
+              // $this->em->persist($actividadSig);
+              // $this->em->persist($actividadAnt);
+
+        }
+        // $actividadActual = $this->em->getRepository('ProcesoBundle:Actividad')->find(1);
+        // $actividadPrueba = $this->em->getRepository('ProcesoBundle:Actividad')->find(2);
+        // $actividadActual->setActprueba($actividadPrueba);
+        // $this->em->persist($actividadActual);
+        // $this->em->flush();
     }
 }

@@ -1,4 +1,4 @@
-var addProcess = angular.module("addProcessModule", ['angular-repeat-n'])
+var addProcess = angular.module("addProcessModule", ['angularjs-autocomplete', 'ngSanitize'])
 
 .config(function($interpolateProvider){
 	$interpolateProvider.startSymbol('{[{').endSymbol('}]}');

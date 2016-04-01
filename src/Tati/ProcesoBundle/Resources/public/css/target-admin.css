@@ -668,7 +668,7 @@ fieldset[disabled] .btn-twitter.active {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #e74c3c;
+  background-color: #428bca;
 }
 .nav-pills > li.active .caret,
 .nav-pills > li.active a:hover .caret {
@@ -678,7 +678,7 @@ fieldset[disabled] .btn-twitter.active {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #e74c3c;
+  color: #428bca;
   font-weight: 600;
 }
 .nav-tabs > li > a {

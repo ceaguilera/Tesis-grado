@@ -29,19 +29,23 @@ class Actividad
      */
     private $nombre;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_act_sig", type="integer")
+     /**
+     * @ORM\OneToOne(targetEntity="Actividad", cascade={"persist"})
+     * @ORM\JoinColumn(name="actSig_id", referencedColumnName="id")
      */
-    private $idActSig;
+    private $actSig;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_act_ant", type="integer")
+     /**
+     * @ORM\OneToOne(targetEntity="Actividad", cascade={"persist"})
+     * @ORM\JoinColumn(name="actAnt_id", referencedColumnName="id")
      */
-    private $idActAnt;
+    private $actAnt;
+
+     /**
+     * @ORM\OneToOne(targetEntity="Actividad", cascade={"persist"})
+     * @ORM\JoinColumn(name="id_act_prueba", referencedColumnName="id")
+     */
+    private $actprueba;
 
     /**
      * @var string
@@ -54,7 +58,7 @@ class Actividad
      * @ORM\ManyToOne(targetEntity="Responsable", inversedBy="actividades")
      * @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
      */
-    private $idResponsable;
+    private $responsable;
 
     /**
      * @var integer
@@ -76,7 +80,11 @@ class Actividad
      */
     private $tareas;
 
- 
+    /**
+     * @ORM\OneToOne(targetEntity="User", inversedBy="Actividad")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * Constructor
@@ -120,80 +128,32 @@ class Actividad
     }
 
     /**
-     * Set idActSig
+     * Set descripcion
      *
-     * @param integer $idActSig
+     * @param string $descripcion
      * @return Actividad
      */
-    public function setIdActSig($idActSig)
+    public function setDescripcion($descripcion)
     {
-        $this->idActSig = $idActSig;
+        $this->descripcion = $descripcion;
 
         return $this;
     }
 
     /**
-     * Get idActSig
+     * Get descripcion
      *
-     * @return integer 
+     * @return string 
      */
-    public function getIdActSig()
+    public function getDescripcion()
     {
-        return $this->idActSig;
-    }
-
-    /**
-     * Set idActAnt
-     *
-     * @param integer $idActAnt
-     * @return Actividad
-     */
-    public function setIdActAnt($idActAnt)
-    {
-        $this->idActAnt = $idActAnt;
-
-        return $this;
-    }
-
-    /**
-     * Get idActAnt
-     *
-     * @return integer 
-     */
-    public function getIdActAnt()
-    {
-        return $this->idActAnt;
-    }
-
-
-
-    /**
-     * Set idResponsable
-     *
-     * @param integer $idResponsable
-     * @return Actividad
-     */
-    public function setIdResponsable($idResponsable)
-    {
-        $this->idResponsable = $idResponsable;
-
-        return $this;
-    }
-
-    /**
-     * Get idResponsable
-     *
-     * @return integer 
-     */
-    public function getIdResponsable()
-    {
-        return $this->idResponsable;
+        return $this->descripcion;
     }
 
     /**
      * Set tiempo
      *
-     * @param \DateTime $tiempo
+     * @param string $tiempo
      * @return Actividad
      */
     public function setTiempo($tiempo)
@@ -206,11 +166,103 @@ class Actividad
     /**
      * Get tiempo
      *
-     * @return \DateTime 
+     * @return string 
      */
     public function getTiempo()
     {
         return $this->tiempo;
+    }
+
+    /**
+     * Set actSig
+     *
+     * @param \Tati\ProcesoBundle\Entity\Actividad $actSig
+     * @return Actividad
+     */
+    public function setActSig(\Tati\ProcesoBundle\Entity\Actividad $actSig = null)
+    {
+        $this->actSig = $actSig;
+
+        return $this;
+    }
+
+    /**
+     * Get actSig
+     *
+     * @return \Tati\ProcesoBundle\Entity\Actividad 
+     */
+    public function getActSig()
+    {
+        return $this->actSig;
+    }
+
+    /**
+     * Set actAnt
+     *
+     * @param \Tati\ProcesoBundle\Entity\Actividad $actAnt
+     * @return Actividad
+     */
+    public function setActAnt(\Tati\ProcesoBundle\Entity\Actividad $actAnt = null)
+    {
+        $this->actAnt = $actAnt;
+
+        return $this;
+    }
+
+    /**
+     * Get actAnt
+     *
+     * @return \Tati\ProcesoBundle\Entity\Actividad 
+     */
+    public function getActAnt()
+    {
+        return $this->actAnt;
+    }
+
+    /**
+     * Set actprueba
+     *
+     * @param \Tati\ProcesoBundle\Entity\Actividad $actprueba
+     * @return Actividad
+     */
+    public function setActprueba(\Tati\ProcesoBundle\Entity\Actividad $actprueba = null)
+    {
+        $this->actprueba = $actprueba;
+
+        return $this;
+    }
+
+    /**
+     * Get actprueba
+     *
+     * @return \Tati\ProcesoBundle\Entity\Actividad 
+     */
+    public function getActprueba()
+    {
+        return $this->actprueba;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\Responsable $responsable
+     * @return Actividad
+     */
+    public function setResponsable(\Tati\ProcesoBundle\Entity\Responsable $responsable = null)
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Tati\ProcesoBundle\Entity\Responsable 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
     }
 
     /**
@@ -239,10 +291,10 @@ class Actividad
     /**
      * Add tareas
      *
-     * @param \Tati\ProcesoBundle\Entity\tarea $tareas
+     * @param \Tati\ProcesoBundle\Entity\Tarea $tareas
      * @return Actividad
      */
-    public function addTarea(\Tati\ProcesoBundle\Entity\tarea $tareas)
+    public function addTarea(\Tati\ProcesoBundle\Entity\Tarea $tareas)
     {
         $this->tareas[] = $tareas;
 
@@ -252,9 +304,9 @@ class Actividad
     /**
      * Remove tareas
      *
-     * @param \Tati\ProcesoBundle\Entity\tarea $tareas
+     * @param \Tati\ProcesoBundle\Entity\Tarea $tareas
      */
-    public function removeTarea(\Tati\ProcesoBundle\Entity\tarea $tareas)
+    public function removeTarea(\Tati\ProcesoBundle\Entity\Tarea $tareas)
     {
         $this->tareas->removeElement($tareas);
     }
@@ -270,62 +322,34 @@ class Actividad
     }
 
     /**
-     * Set status
+     * Set user
      *
-     * @param boolean $status
+     * @param \Tati\ProcesoBundle\Entity\User $user
      * @return Actividad
      */
-    public function setStatus($status)
+    public function setUser(\Tati\ProcesoBundle\Entity\User $user = null)
     {
-        $this->status = $status;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get user
      *
-     * @return boolean 
+     * @return \Tati\ProcesoBundle\Entity\User 
      */
-    public function getStatus()
+    public function getUser()
     {
-        return $this->status;
+        return $this->user;
     }
 
-    /**
-     * Set Actividad
-     *
-     *  
-     */
     public function setActividad($data)
     {
         $this->nombre = $data['nombre'];
-        $this->idActSig = $data['idActSig'];
-        $this->idActAnt = $data['idActAnt'];
+        // $this->idActSig = $data['idActSig'];
+        // $this->idActAnt = $data['idActAnt'];
         $this->tiempo = $data['tiempo'];
         $this->descripcion = $data['descripcion'];
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     * @return Actividad
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string 
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
     }
 }

@@ -30,11 +30,35 @@ class Responsable
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Actividad", mappedBy="idResponsable", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Actividad", mappedBy="responsable", cascade={"persist"})
      */
     private $actividades;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ActividadSolicitada", mappedBy="responsable", cascade={"persist"})
+     */
+    private $actividadesSolicitadas;
  
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->actividadesSolicitadas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * Set nombre
      *
@@ -56,24 +80,6 @@ class Responsable
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -107,5 +113,38 @@ class Responsable
     public function getActividades()
     {
         return $this->actividades;
+    }
+
+    /**
+     * Add actividadesSolicitadas
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSolicitadas
+     * @return Responsable
+     */
+    public function addActividadesSolicitada(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSolicitadas)
+    {
+        $this->actividadesSolicitadas[] = $actividadesSolicitadas;
+
+        return $this;
+    }
+
+    /**
+     * Remove actividadesSolicitadas
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSolicitadas
+     */
+    public function removeActividadesSolicitada(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSolicitadas)
+    {
+        $this->actividadesSolicitadas->removeElement($actividadesSolicitadas);
+    }
+
+    /**
+     * Get actividadesSolicitadas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActividadesSolicitadas()
+    {
+        return $this->actividadesSolicitadas;
     }
 }

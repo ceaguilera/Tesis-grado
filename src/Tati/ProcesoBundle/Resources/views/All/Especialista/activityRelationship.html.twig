@@ -1,0 +1,63 @@
+{% extends "ProcesoBundle:All:Especialista/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="listActivityModule" ng-controller="listActivityController">
+
+  <div class="content">
+
+    <div class="content-container">
+
+      <div class="content-header">
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="#">Editar proceso</a></li>
+          <li role="presentation" class="active"><a href="#">Relaciones entre actividades</a></li>
+        </ul>
+      </div> <!-- /.content-header -->
+      <div class="row" ng-repeat="(key, value) in response.actividades">
+        <div class="col-sm-8 col-md-offset-2" style="background-color: #f3f3f3;  border-radius: 4px;margin-bottom: 2%;">
+          <br>
+          <div class="row">
+            <div align="center"  class="col-md-4"><label>Actividad anterior</label>
+            <br><select class="form-control" ng-model="value.actAnt" number-converter>
+              <option ng-repeat="(key2, value2) in response.actividades" value="{[{value2.id}]}">{[{value2.nombre}]}</option>
+            </select>
+            </div>
+            <div align="center" class="col-md-4"><label>Nombre de la actividad</label>
+            <br>{[{value.nombre}]}</div>
+            <div align="center"  class="col-md-4"><label>Actividad siguiente</label>
+            <br><select class="form-control" ng-model="value.actSig" number-converter>
+              <option ng-repeat="(key2, value2) in response.actividades" value="{[{value2.id}]}">{[{value2.nombre}]}</option>
+            </select>
+            </div>
+          </div>
+          <br>
+        </div>
+
+      </div>
+      <br>
+      <div align="center">
+        <button type="button" class="btn btn-secondary" ng-click="addActivity()">Guardar Cambios</button>
+      </div>
+    </div> <!-- /.content-container -->
+      
+  </div> <!-- /.content -->
+</div> <!-- /.container -->
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+          var response = "{{ listActivity }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+    </script>
+   <script src="{{ asset('bundles/proceso/js/angular/listActivity/listActivityModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/listActivity/listActivityController.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+{% endblock %}

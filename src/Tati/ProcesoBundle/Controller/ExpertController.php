@@ -23,10 +23,11 @@ class ExpertController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             $data = json_decode($request->getContent(),true);
-            $this->get('InformationService')->insertProcess($data);
+            $id = $this->get('InformationService')->insertProcess($data);
             $response = new JsonResponse();
             $response->setData(array(
-            'Insertado proceso' => 200));
+            'Insertado proceso' => 200,
+            'id' => $id));
             return $response;
         }else{   
             $response = $this->get('InformationService')->getInformationProcess();
@@ -71,6 +72,13 @@ class ExpertController extends Controller
             ));
 
     }
+
+    public function activityRelationshipAction($id){
+        $response = $this->get('InformationService')->listActivity($id);
+        return $this->render('ProcesoBundle:All:Especialista/activityRelationship.html.twig', array(
+                'listActivity' =>  json_encode($response)
+            ));
+    }
     public function renderViewsAction()
     {
         $user = $this->getUser();
@@ -90,5 +98,19 @@ class ExpertController extends Controller
     {
         return $this->render('ProcesoBundle:All:Solicitante/solicitante.html.twig');
 
+    }
+
+    public function addActivityAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $data = json_decode($request->getContent(),true);
+            $this->get('InformationService')->insertActivity($data);
+        }
+
+        $response = new JsonResponse();
+            $response->setData(array(
+            'Insertado proceso' => 200));
+
+        return $response;
     }
 }

@@ -1,4 +1,4 @@
-addProcess.controller('addProcessController', function($scope, $http){
+addProcess.controller('addProcessController', function($scope, $http, $window){
 
 	$scope.procesoNuevo = {};
 	$scope.procesoNuevo.actividades = [];
@@ -49,6 +49,9 @@ addProcess.controller('addProcessController', function($scope, $http){
 	    	url: url,
 	    	success: function(data) {
 		        console.log(data);
+		        var url = Routing.generate('_expertActivityRelationship', {id:data.id});
+            	$window.location.href = url;
+            	$scope.$apply();
 	    	},
 	    	error: function(e) {
 
