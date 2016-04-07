@@ -38,7 +38,7 @@ class TareaSolicitada
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="TipoTarea", inversedBy="tareas", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="TipoTarea", inversedBy="tareasSolicitadas", cascade={"persist"})
      * @ORM\JoinColumn(name="tipoTarea_id", referencedColumnName="id")
      */
     private $tipoTarea;

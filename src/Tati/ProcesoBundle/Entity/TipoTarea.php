@@ -40,6 +40,10 @@ class TipoTarea
      */
     private $tareas;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TareaSolicitada", mappedBy="TipoTarea", cascade={"persist"})
+     */
+    private $tareasSolicitadas;
 
     /**
      * Constructor
@@ -136,5 +140,38 @@ class TipoTarea
     public function getTareas()
     {
         return $this->tareas;
+    }
+
+    /**
+     * Add tareasSolicitadas
+     *
+     * @param \Tati\ProcesoBundle\Entity\TareaSolicitada $tareasSolicitadas
+     * @return TipoTarea
+     */
+    public function addTareasSolicitada(\Tati\ProcesoBundle\Entity\TareaSolicitada $tareasSolicitadas)
+    {
+        $this->tareasSolicitadas[] = $tareasSolicitadas;
+
+        return $this;
+    }
+
+    /**
+     * Remove tareasSolicitadas
+     *
+     * @param \Tati\ProcesoBundle\Entity\TareaSolicitada $tareasSolicitadas
+     */
+    public function removeTareasSolicitada(\Tati\ProcesoBundle\Entity\TareaSolicitada $tareasSolicitadas)
+    {
+        $this->tareasSolicitadas->removeElement($tareasSolicitadas);
+    }
+
+    /**
+     * Get tareasSolicitadas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTareasSolicitadas()
+    {
+        return $this->tareasSolicitadas;
     }
 }

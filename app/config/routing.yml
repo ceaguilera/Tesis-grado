@@ -26,6 +26,7 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+#rutas de usurio experto
 _expertAddprocess:
     pattern: /specialist/addprocess
     defaults: { _controller: ProcesoBundle:Expert:addProcess }
@@ -66,6 +67,7 @@ _expertEditProcess:
     options:
         expose: true
 
+#rutas de login
 tatiSoft_login:
     pattern:  /
     defaults: { _controller:  ProcesoBundle:Security\Security:login }
@@ -86,6 +88,13 @@ renderView:
     pattern:  /s
     defaults: { _controller: ProcesoBundle:Expert:renderViews }
 
+#Runtas de usuario solicitantes
 tatiSoft_solicitante:
     pattern:  /solicitante/hola
-    defaults: { _controller:  ProcesoBundle:Expert:holaSolicitante}
+    defaults: { _controller:  ProcesoBundle:Solicitante:holaSolicitante}
+
+_tatiSoft_solicitud:
+    pattern:  /solicitante/solicitud
+    defaults: { _controller:  ProcesoBundle:Solicitante:Requestprocess}
+    options:
+        expose: true

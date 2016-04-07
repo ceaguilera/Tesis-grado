@@ -30,13 +30,13 @@ class ActividadSolicitada
     private $nombre;
 
      /**
-     * @ORM\OneToOne(targetEntity="ActividadSolicitada")
+     * @ORM\OneToOne(targetEntity="ActividadSolicitada", cascade={"persist"})
      * @ORM\JoinColumn(name="actSig_id", referencedColumnName="id")
      */
     private $actSig;
 
      /**
-     * @ORM\OneToOne(targetEntity="ActividadSolicitada")
+     * @ORM\OneToOne(targetEntity="ActividadSolicitada", cascade={"persist"})
      * @ORM\JoinColumn(name="actAnt_id", referencedColumnName="id")
      */
     private $actAnt;

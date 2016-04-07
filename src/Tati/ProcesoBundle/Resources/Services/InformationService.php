@@ -253,16 +253,21 @@ class InformationService
         foreach ($data['actividades'] as $actividad) {
               $actividadActual = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['id']);
               
-              $actividadSig = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actSig']);
-           
-              $actividadAnt = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actAnt']);
-           
-              $actividadActual->setActSig($actividadSig);
+              if($actividad['actSig']==null){
+                $actividadActual->setActSig(null);
+              }else{
+                  $actividadSig = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actSig']);
+                  $actividadActual->setActSig($actividadSig);
+              }
               $this->em->persist($actividadActual);
               $this->em->flush();
               //$actividadSig->setActAnt($actividadActual);
-
-              $actividadActual->setActAnt($actividadAnt);
+              if($actividad['actAnt']==null){
+                $actividadActual->setActAnt(null);
+              }else{
+                  $actividadAnt = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actAnt']);
+                  $actividadActual->setActAnt($actividadAnt);
+              }
               $this->em->persist($actividadActual);
               $this->em->flush();
               //$actividadAnt->setActSig($actividadActual);

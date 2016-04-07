@@ -19,15 +19,19 @@
           <br>
           <div class="row">
             <div align="center"  class="col-md-4"><label>Actividad anterior</label>
-            <br><select class="form-control" ng-model="value.actAnt" number-converter>
+            <br><select class="form-control" ng-model="value.actAnt"  number-converter>
+              <option>Seleccione</option>
               <option ng-repeat="(key2, value2) in response.actividades" value="{[{value2.id}]}">{[{value2.nombre}]}</option>
+              <option value="">Ninguna</option>
             </select>
             </div>
             <div align="center" class="col-md-4"><label>Nombre de la actividad</label>
             <br>{[{value.nombre}]}</div>
             <div align="center"  class="col-md-4"><label>Actividad siguiente</label>
             <br><select class="form-control" ng-model="value.actSig" number-converter>
+              <option >Seleccione</option>
               <option ng-repeat="(key2, value2) in response.actividades" value="{[{value2.id}]}">{[{value2.nombre}]}</option>
+              <option value="">Ninguna</option>
             </select>
             </div>
           </div>

@@ -32,12 +32,12 @@ class Solicitud
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="idSolicitante", referencedColumnName="id")
      */
-    private $idSolicitante;
+    private $solicitante;
 
     /**
      * @var date
      *
-     * @ORM\Column(name="fecha", type="date")
+     * @ORM\Column(name="fecha", type="date", nullable=true)
      */
     private $fecha;
 
@@ -48,6 +48,14 @@ class Solicitud
     private $actividades;
 
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -83,79 +91,49 @@ class Solicitud
     }
 
     /**
-     * Set idProceso
+     * Set proceso
      *
-     * @param \Tati\ProcesoBundle\Entity\Proceso $idProceso
+     * @param \Tati\ProcesoBundle\Entity\Proceso $proceso
      * @return Solicitud
      */
-    public function setIdProceso(\Tati\ProcesoBundle\Entity\Proceso $idProceso = null)
+    public function setProceso(\Tati\ProcesoBundle\Entity\Proceso $proceso = null)
     {
-        $this->idProceso = $idProceso;
+        $this->proceso = $proceso;
 
         return $this;
     }
 
     /**
-     * Get idProceso
+     * Get proceso
      *
      * @return \Tati\ProcesoBundle\Entity\Proceso 
      */
-    public function getIdProceso()
+    public function getProceso()
     {
-        return $this->idProceso;
+        return $this->proceso;
     }
 
     /**
-     * Set idSolicitante
+     * Set solicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\User $idSolicitante
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
      * @return Solicitud
      */
-    public function setIdSolicitante(\Tati\ProcesoBundle\Entity\User $idSolicitante = null)
+    public function setSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante = null)
     {
-        $this->idSolicitante = $idSolicitante;
+        $this->solicitante = $solicitante;
 
         return $this;
     }
 
     /**
-     * Get idSolicitante
+     * Get solicitante
      *
      * @return \Tati\ProcesoBundle\Entity\User 
      */
-    public function getIdSolicitante()
+    public function getSolicitante()
     {
-        return $this->idSolicitante;
-    }
-
-    /**
-     * Set actividades
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades
-     * @return Solicitud
-     */
-    public function setActividades(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades = null)
-    {
-        $this->actividades = $actividades;
-
-        return $this;
-    }
-
-    /**
-     * Get actividades
-     *
-     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
-     */
-    public function getActividades()
-    {
-        return $this->actividades;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->solicitante;
     }
 
     /**
@@ -182,25 +160,12 @@ class Solicitud
     }
 
     /**
-     * Set proceso
+     * Get actividades
      *
-     * @param \Tati\ProcesoBundle\Entity\Proceso $proceso
-     * @return Solicitud
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setProceso(\Tati\ProcesoBundle\Entity\Proceso $proceso = null)
+    public function getActividades()
     {
-        $this->proceso = $proceso;
-
-        return $this;
-    }
-
-    /**
-     * Get proceso
-     *
-     * @return \Tati\ProcesoBundle\Entity\Proceso 
-     */
-    public function getProceso()
-    {
-        return $this->proceso;
+        return $this->actividades;
     }
 }
