@@ -41,5 +41,16 @@ class SolicitanteController extends Controller
         return $response;
     }
 
+    public function listRequestAction(){
+        return $this->render('ProcesoBundle:All:Solicitante/listaSolicitudes.html.twig');
+    }
+
+    public function uploadedFilesAction(){
+        return $this->render('ProcesoBundle:All:Solicitante/archivosSubidos.html.twig');
+    }
+
+    public function finishedProcessesAction(){
+        return $this->render('ProcesoBundle:All:Solicitante/procesosTerminados.html.twig');
+    }
 
 }

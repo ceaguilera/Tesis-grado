@@ -40,4 +40,14 @@ security:
         - { path: ^/specialist/listTask, role: ROLE_ESPECIALISTA_READ }
         - { path: ^/specialist/listResponsible, role: ROLE_ESPECIALISTA_READ }
         - { path: ^/specialist/editProcess, role: ROLE_ESPECIALISTA_UPDATE }
-        - { path: ^/solicitante/hola, role: ROLE_SOLICITANTE}
+        #Rutas permitidas para el usuario solicitante
+        - { path: ^/solicitante/solicitar, role: ROLE_SOLICITANTE}
+        - { path: ^/solicitante/solicitud, role: ROLE_SOLICITANTE}
+        - { path: ^/solicitante/listaSolicitudes, role: ROLE_SOLICITANTE}
+        - { path: ^/solicitante/archivos, role: ROLE_SOLICITANTE}
+        - { path: ^/solicitante/procesosFinalizados, role: ROLE_SOLICITANTE}
+        #Rutas permitidas para el usuario responsable
+        - { path: ^/responsable/actividadesPendientes, role: ROLE_RESPONSABLE_UPDATE}
+        - { path: ^/responsable/actividadesTerminadas, role: ROLE_RESPONSABLE_UPDATE}
+        - { path: ^/responsable/archivos, role: ROLE_RESPONSABLE_UPDATE}
+        - { path: ^/responsable/alertas, role: ROLE_RESPONSABLE_UPDATE}

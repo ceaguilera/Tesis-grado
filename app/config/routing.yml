@@ -89,12 +89,56 @@ renderView:
     defaults: { _controller: ProcesoBundle:Expert:renderViews }
 
 #Runtas de usuario solicitantes
-tatiSoft_solicitante:
-    pattern:  /solicitante/hola
+tatiSoft_soli_solicitante:
+    pattern:  /solicitante/solicitar
     defaults: { _controller:  ProcesoBundle:Solicitante:holaSolicitante}
 
-_tatiSoft_solicitud:
+_tatiSoft_soli_solicitud:
     pattern:  /solicitante/solicitud
     defaults: { _controller:  ProcesoBundle:Solicitante:Requestprocess}
+    options:
+        expose: true
+
+_tatiSoft_soli_list:
+    pattern:  /solicitante/listaSolicitudes
+    defaults: { _controller:  ProcesoBundle:Solicitante:listRequest}
+    options:
+        expose: true
+
+_tatiSoft_soli_files:
+    pattern:  /solicitante/archivos
+    defaults: { _controller:  ProcesoBundle:Solicitante:uploadedFiles}
+    options:
+        expose: true
+
+_tatiSoft_soli_finished:
+    pattern:  /solicitante/procesosFinalizados
+    defaults: { _controller:  ProcesoBundle:Solicitante:finishedProcesses}
+    options:
+        expose: true
+
+#rutas de usuario responsable
+
+_tatiSoft_resp_list:
+    pattern:  /responsable/actividadesPendientes
+    defaults: { _controller:  ProcesoBundle:Responsable:pendingActivities}
+    options:
+        expose: true
+
+_tatiSoft_resp_end_acitivity:
+    pattern:  /responsable/actividadesTerminadas
+    defaults: { _controller:  ProcesoBundle:Responsable:endActivities}
+    options:
+        expose: true
+
+_tatiSoft_resp_file:
+    pattern:  /responsable/archivos
+    defaults: { _controller:  ProcesoBundle:Responsable:file}
+    options:
+        expose: true
+
+_tatiSoft_resp_alert:
+    pattern:  /responsable/alertas
+    defaults: { _controller:  ProcesoBundle:Responsable:alert}
     options:
         expose: true

@@ -88,7 +88,9 @@ class ExpertController extends Controller
         $this->isGranted('ROLE_ESPECIALISTA_CREATE_ALL')){
             return $this->redirectToRoute('_expertAddprocess');
         }else if($this->isGranted('ROLE_SOLICITANTE')){
-            return $this->redirectToRoute('tatiSoft_solicitante');
+            return $this->redirectToRoute('tatiSoft_soli_solicitante');
+        }else if($this->isGranted('ROLE_RESPONSABLE_UPDATE')){
+            return $this->redirectToRoute('_tatiSoft_resp_list');
         }
 
         return null;

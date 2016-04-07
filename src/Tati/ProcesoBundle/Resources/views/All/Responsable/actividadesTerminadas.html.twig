@@ -1,4 +1,4 @@
-{% extends "ProcesoBundle:All:Solicitante/layout.html.twig" %}
+{% extends "ProcesoBundle:All:Responsable/layout.html.twig" %}
 
 {% block body %}
 
@@ -9,14 +9,11 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Solicitud</strong></h2>
+        <h2 class="content-header-title"><strong>Actividades Terminadas</strong></h2>
         
       </div> <!-- /.content-header -->
       <div class="col-md-6 col-md-offset-3">
- 		<select class="form-control" ng-model="solicitud.idSolicitud">
- 			<option value="">Seleccione</option>
- 			<option ng-repeat="value in response.procesos" value="{[{value.id}]}">{[{value.nombre}]}</option>
- 		</select>
+
       </div>
     </div> <!-- /.content-container -->
     <br>
@@ -28,14 +25,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-          var response = "{{ data }}";
-          var div = document.createElement('div');
-          div.innerHTML = response;
-          response = div.firstChild.nodeValue;
-          response = JSON.parse(response);
-          console.log("response",response);
-     </script>
+
    <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
