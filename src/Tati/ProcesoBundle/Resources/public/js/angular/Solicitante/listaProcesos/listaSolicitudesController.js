@@ -13,7 +13,7 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 		var json = {};
 		json = $scope.solicitud;
 		json = angular.toJson(json);
-		var url= Routing.generate('_tatiSoft_solicitud');
+		var url= Routing.generate('_tatiSoft_soli_solicitud');
 		console.log(url);
 		$.ajax({
 			method: 'POST',

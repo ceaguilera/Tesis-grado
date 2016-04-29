@@ -54,6 +54,7 @@ class InformationService
             $task2['descripcion'] = $valor->getDescripcion();
             array_push($response, $task2);
         }
+        dump($response);
         return $response;
 	}
 

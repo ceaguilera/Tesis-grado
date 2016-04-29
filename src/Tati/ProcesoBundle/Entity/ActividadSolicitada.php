@@ -192,26 +192,72 @@ class ActividadSolicitada
     }
 
     /**
-     * Set idResponsable
+     * Set actSig
      *
-     * @param \Tati\ProcesoBundle\Entity\Responsable $idResponsable
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig
      * @return ActividadSolicitada
      */
-    public function setIdResponsable(\Tati\ProcesoBundle\Entity\Responsable $idResponsable = null)
+    public function setActSig(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig = null)
     {
-        $this->idResponsable = $idResponsable;
+        $this->actSig = $actSig;
 
         return $this;
     }
 
     /**
-     * Get idResponsable
+     * Get actSig
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActSig()
+    {
+        return $this->actSig;
+    }
+
+    /**
+     * Set actAnt
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt
+     * @return ActividadSolicitada
+     */
+    public function setActAnt(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt = null)
+    {
+        $this->actAnt = $actAnt;
+
+        return $this;
+    }
+
+    /**
+     * Get actAnt
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActAnt()
+    {
+        return $this->actAnt;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\Responsable $responsable
+     * @return ActividadSolicitada
+     */
+    public function setResponsable(\Tati\ProcesoBundle\Entity\Responsable $responsable = null)
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Get responsable
      *
      * @return \Tati\ProcesoBundle\Entity\Responsable 
      */
-    public function getIdResponsable()
+    public function getResponsable()
     {
-        return $this->idResponsable;
+        return $this->responsable;
     }
 
     /**
@@ -268,74 +314,5 @@ class ActividadSolicitada
     public function getTareas()
     {
         return $this->tareas;
-    }
-
-    /**
-     * Set responsable
-     *
-     * @param \Tati\ProcesoBundle\Entity\Responsable $responsable
-     * @return ActividadSolicitada
-     */
-    public function setResponsable(\Tati\ProcesoBundle\Entity\Responsable $responsable = null)
-    {
-        $this->responsable = $responsable;
-
-        return $this;
-    }
-
-    /**
-     * Get responsable
-     *
-     * @return \Tati\ProcesoBundle\Entity\Responsable 
-     */
-    public function getResponsable()
-    {
-        return $this->responsable;
-    }
-
-    /**
-     * Set ActSig
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig
-     * @return ActividadSolicitada
-     */
-    public function setActSig(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig = null)
-    {
-        $this->ActSig = $actSig;
-
-        return $this;
-    }
-
-    /**
-     * Get ActSig
-     *
-     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
-     */
-    public function getActSig()
-    {
-        return $this->ActSig;
-    }
-
-    /**
-     * Set ActAnt
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt
-     * @return ActividadSolicitada
-     */
-    public function setActAnt(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt = null)
-    {
-        $this->ActAnt = $actAnt;
-
-        return $this;
-    }
-
-    /**
-     * Get ActAnt
-     *
-     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
-     */
-    public function getActAnt()
-    {
-        return $this->ActAnt;
     }
 }

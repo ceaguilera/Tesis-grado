@@ -47,8 +47,6 @@ class Solicitud
     */
     private $actividades;
 
-
-
     /**
      * Constructor
      */

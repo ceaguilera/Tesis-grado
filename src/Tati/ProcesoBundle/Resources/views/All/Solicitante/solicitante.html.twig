@@ -19,6 +19,9 @@
  		</select>
       </div>
     </div> <!-- /.content-container -->
+  <div align="center">
+		<button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button>
+  </div>
     <br>
 
       
@@ -36,9 +39,9 @@
           response = JSON.parse(response);
           console.log("response",response);
      </script>
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
 
 {% endblock %}

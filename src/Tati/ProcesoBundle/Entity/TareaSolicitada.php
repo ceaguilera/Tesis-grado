@@ -60,9 +60,6 @@ class TareaSolicitada
     private $actividad;
 
 
-
-
-
     /**
      * Get id
      *
@@ -163,29 +160,6 @@ class TareaSolicitada
     public function getTipoTarea()
     {
         return $this->tipoTarea;
-    }
-
-    /**
-     * Set actividades
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades
-     * @return TareaSolicitada
-     */
-    public function setActividades(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades = null)
-    {
-        $this->actividades = $actividades;
-
-        return $this;
-    }
-
-    /**
-     * Get actividades
-     *
-     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
-     */
-    public function getActividades()
-    {
-        return $this->actividades;
     }
 
     /**
