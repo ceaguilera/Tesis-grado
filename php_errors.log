@@ -16,3 +16,4 @@
 [29-Mar-2016 17:06:02 America/Caracas] PHP Fatal error:  Cannot redeclare class Tati\ProcesoBundle\Entity\actividadSolicitada in /home/carlos/tesis/src/Tati/ProcesoBundle/Entity/actividadSolicitada.php on line 11
 [29-Mar-2016 17:06:28 America/Caracas] PHP Fatal error:  Cannot redeclare class Tati\ProcesoBundle\Entity\actividadSolicitada in /home/carlos/tesis/src/Tati/ProcesoBundle/Entity/actividadSolicitada.php on line 11
 [29-Mar-2016 17:10:42 America/Caracas] PHP Fatal error:  Cannot redeclare class Tati\ProcesoBundle\Entity\actividadSolicitada in /home/carlos/tesis/src/Tati/ProcesoBundle/Entity/actividadSolicitada.php on line 11
+[29-Apr-2016 00:45:32 America/Caracas] PHP Fatal error:  Cannot redeclare class Cupon\OfertaBundle\DataFixtures\ORM\LoadResponsableData in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadResponsableData.php on line 10

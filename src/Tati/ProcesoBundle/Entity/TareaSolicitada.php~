@@ -59,4 +59,129 @@ class TareaSolicitada
      */
     private $actividad;
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return TareaSolicitada
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return TareaSolicitada
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return TareaSolicitada
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set tipoTarea
+     *
+     * @param \Tati\ProcesoBundle\Entity\TipoTarea $tipoTarea
+     * @return TareaSolicitada
+     */
+    public function setTipoTarea(\Tati\ProcesoBundle\Entity\TipoTarea $tipoTarea = null)
+    {
+        $this->tipoTarea = $tipoTarea;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoTarea
+     *
+     * @return \Tati\ProcesoBundle\Entity\TipoTarea 
+     */
+    public function getTipoTarea()
+    {
+        return $this->tipoTarea;
+    }
+
+    /**
+     * Set actividad
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividad
+     * @return TareaSolicitada
+     */
+    public function setActividad(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividad = null)
+    {
+        $this->actividad = $actividad;
+
+        return $this;
+    }
+
+    /**
+     * Get actividad
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActividad()
+    {
+        return $this->actividad;
+    }
 }

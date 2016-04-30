@@ -1,0 +1,37 @@
+<?php
+
+namespace Tati\ProcesoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection; 
+
+/**
+ * Responsable
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Departamento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=100)
+     */
+    private $nombre;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Unidad_academica", mappedBy="departamento", cascade={"persist"})
+    */
+    private $unidadesAcademicas;
+ 
+}

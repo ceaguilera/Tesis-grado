@@ -81,4 +81,238 @@ class ActividadSolicitada
      */
     private $tareas;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return ActividadSolicitada
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return ActividadSolicitada
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set tiempo
+     *
+     * @param string $tiempo
+     * @return ActividadSolicitada
+     */
+    public function setTiempo($tiempo)
+    {
+        $this->tiempo = $tiempo;
+
+        return $this;
+    }
+
+    /**
+     * Get tiempo
+     *
+     * @return string 
+     */
+    public function getTiempo()
+    {
+        return $this->tiempo;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return ActividadSolicitada
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set actSig
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig
+     * @return ActividadSolicitada
+     */
+    public function setActSig(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actSig = null)
+    {
+        $this->actSig = $actSig;
+
+        return $this;
+    }
+
+    /**
+     * Get actSig
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActSig()
+    {
+        return $this->actSig;
+    }
+
+    /**
+     * Set actAnt
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt
+     * @return ActividadSolicitada
+     */
+    public function setActAnt(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actAnt = null)
+    {
+        $this->actAnt = $actAnt;
+
+        return $this;
+    }
+
+    /**
+     * Get actAnt
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActAnt()
+    {
+        return $this->actAnt;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\Responsable $responsable
+     * @return ActividadSolicitada
+     */
+    public function setResponsable(\Tati\ProcesoBundle\Entity\Responsable $responsable = null)
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Tati\ProcesoBundle\Entity\Responsable 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * Set solicitud
+     *
+     * @param \Tati\ProcesoBundle\Entity\Solicitud $solicitud
+     * @return ActividadSolicitada
+     */
+    public function setSolicitud(\Tati\ProcesoBundle\Entity\Solicitud $solicitud = null)
+    {
+        $this->solicitud = $solicitud;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitud
+     *
+     * @return \Tati\ProcesoBundle\Entity\Solicitud 
+     */
+    public function getSolicitud()
+    {
+        return $this->solicitud;
+    }
+
+    /**
+     * Add tareas
+     *
+     * @param \Tati\ProcesoBundle\Entity\TareaSolicitada $tareas
+     * @return ActividadSolicitada
+     */
+    public function addTarea(\Tati\ProcesoBundle\Entity\TareaSolicitada $tareas)
+    {
+        $this->tareas[] = $tareas;
+
+        return $this;
+    }
+
+    /**
+     * Remove tareas
+     *
+     * @param \Tati\ProcesoBundle\Entity\TareaSolicitada $tareas
+     */
+    public function removeTarea(\Tati\ProcesoBundle\Entity\TareaSolicitada $tareas)
+    {
+        $this->tareas->removeElement($tareas);
+    }
+
+    /**
+     * Get tareas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
 }
