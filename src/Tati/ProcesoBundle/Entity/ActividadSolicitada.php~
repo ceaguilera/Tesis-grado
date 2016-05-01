@@ -31,13 +31,13 @@ class ActividadSolicitada
 
      /**
      * @ORM\OneToOne(targetEntity="ActividadSolicitada", cascade={"persist"})
-     * @ORM\JoinColumn(name="actSig_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="actSig_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $actSig;
 
      /**
      * @ORM\OneToOne(targetEntity="ActividadSolicitada", cascade={"persist"})
-     * @ORM\JoinColumn(name="actAnt_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="actAnt_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $actAnt;
 

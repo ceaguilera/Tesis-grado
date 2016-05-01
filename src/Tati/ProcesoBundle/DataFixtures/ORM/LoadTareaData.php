@@ -12,14 +12,19 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
    
     public function load(ObjectManager $manager)
     {
-
-        //Carga de datos de una tarea nueva
-        for($i=0;$i<=10;$i++){
-            $TipoTarea = new ETipoTarea();
-            $TipoTarea->setNombre('Tipo Tarea'.$i);
-            $TipoTarea->setDescripcion('esta tarea se encarga de una cosa tal');
-            $manager->persist($TipoTarea);
-            $tarea = null;
+        $tareas = array(
+            "Subir archivo",
+            "Verificar",
+            "Analizar",
+            "Aprobar",
+            "Respuesta",
+        );
+        //Carga de datos de una tareas
+        foreach ($tareas as $tarea) {
+            $tareaNueva = new ETipoTarea();
+            $tareaNueva->setNombre($tarea);
+            $tareaNueva->setDescripcion(null);
+            $manager->persist($tareaNueva);
         }
         $manager->flush();
     }

@@ -74,10 +74,10 @@ class UnidadAcademica
     /**
      * Set departamento
      *
-     * @param \Tati\ProcesoBundle\Entity\Proceso $departamento
+     * @param \Tati\ProcesoBundle\Entity\Departamento $departamento
      * @return UnidadAcademica
      */
-    public function setDepartamento(\Tati\ProcesoBundle\Entity\Proceso $departamento = null)
+    public function setDepartamento(\Tati\ProcesoBundle\Entity\Departamento $departamento = null)
     {
         $this->departamento = $departamento;
 
@@ -87,7 +87,7 @@ class UnidadAcademica
     /**
      * Get departamento
      *
-     * @return \Tati\ProcesoBundle\Entity\Proceso 
+     * @return \Tati\ProcesoBundle\Entity\Departamento 
      */
     public function getDepartamento()
     {

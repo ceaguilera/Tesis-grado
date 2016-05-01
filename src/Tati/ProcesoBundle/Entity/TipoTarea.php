@@ -31,7 +31,7 @@ class TipoTarea
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=250)
+     * @ORM\Column(name="descripcion", type="string", length=250, nullable=true)
      */
     private $descripcion;
 
@@ -51,6 +51,7 @@ class TipoTarea
     public function __construct()
     {
         $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tareasSolicitadas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -12,13 +12,17 @@ class LoadResponsableData extends AbstractFixture implements OrderedFixtureInter
    
     public function load(ObjectManager $manager)
     {
-
+        $responsables =array(
+            "Departamento",
+            "Asuntos profesorales",
+            "Consejo de facultad",
+            "Unidad academica"
+            );
         //Carga de datos de una tarea nueva
-        for($i=0;$i<=10;$i++){
-            $Responsable = new EResponsable();
-            $Responsable->setNombre('Responsable'.$i);
-            $manager->persist($Responsable);
-            $Responsable = null;
+        foreach ($responsables as $responsable){
+            $responsableNuevo = new EResponsable();
+            $responsableNuevo->setNombre($responsable);
+            $manager->persist($responsableNuevo);
         }
         $manager->flush();
     }

@@ -32,9 +32,65 @@ class UnidadAcademica
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Proceso", inversedBy="unidadesAcademicas", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Tati\ProcesoBundle\Entity\Departamento", inversedBy="unidadesAcademicas", cascade={"persist"})
      * @ORM\JoinColumn(name="departameto_id", referencedColumnName="id")
      */
     private $departamento;
  
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return UnidadAcademica
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set departamento
+     *
+     * @param \Tati\ProcesoBundle\Entity\Departamento $departamento
+     * @return UnidadAcademica
+     */
+    public function setDepartamento(\Tati\ProcesoBundle\Entity\Departamento $departamento = null)
+    {
+        $this->departamento = $departamento;
+
+        return $this;
+    }
+
+    /**
+     * Get departamento
+     *
+     * @return \Tati\ProcesoBundle\Entity\Departamento 
+     */
+    public function getDepartamento()
+    {
+        return $this->departamento;
+    }
 }
