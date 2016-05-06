@@ -20,3 +20,6 @@
 [30-Apr-2016 19:59:25 America/Caracas] PHP Parse error:  syntax error, unexpected ')' in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadUnidadesAcademicasData.php on line 79
 [30-Apr-2016 22:07:43 America/Caracas] PHP Parse error:  syntax error, unexpected '$unidadNueva' (T_VARIABLE) in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadUnidadesAcademicasData.php on line 78
 [30-Apr-2016 22:10:05 America/Caracas] PHP Parse error:  syntax error, unexpected '$unidadNueva' (T_VARIABLE) in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadUnidadesAcademicasData.php on line 80
+[30-Apr-2016 23:25:23 America/Caracas] PHP Parse error:  syntax error, unexpected ',' in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadResponsableData.php on line 16
+[30-Apr-2016 23:25:43 America/Caracas] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/carlos/tesis/src/Tati/ProcesoBundle/DataFixtures/ORM/LoadResponsableData.php on line 22
+[01-May-2016 22:41:14 America/Caracas] PHP Parse error:  syntax error, unexpected ';', expecting function (T_FUNCTION) in /home/carlos/tesis/src/Tati/ProcesoBundle/Entity/Documento.php on line 46

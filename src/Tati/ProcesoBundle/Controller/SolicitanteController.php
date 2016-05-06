@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Tati\ProcesoBundle\Entity\Documento as Edocumento;
 
 class SolicitanteController extends Controller
 {
@@ -53,4 +54,50 @@ class SolicitanteController extends Controller
         return $this->render('ProcesoBundle:All:Solicitante/procesosTerminados.html.twig');
     }
 
+    public function uploadFileAction(Request $request){
+        if ($request->isXmlHttpRequest()) {
+            $data = json_decode($request->getContent(),true);
+            
+            $documento = new Edocumento();
+            $documento->setFile($data['file']);
+            $documento->setName($data['name']);
+            $documento->upload($data['userName']);
+            // $this->em->persist($documento);
+            // $this->em->flush();
+
+
+            $response = new JsonResponse();
+            $response->setData(array(
+            'Insertado proceso' => 200,
+            'data' => $data['file']));
+
+        return $response;
+        }
+        
+    }
+
 }
+
+
+
+  //   $scope.upload = function () {
+  //    console.log($scope.file);
+
+  //    var json = {};
+  //    json.userName = "Carlos";
+  //    json.name = "prueba";
+        // json.file = $scope.file;
+        // json = angular.toJson(json);
+        // var url= Routing.generate('_tatiSoft_soli_upload');
+        // console.log("json",json);
+        // $.ajax({
+        //  method: 'POST',
+        //  data: json,
+        //  url: url,
+        //  success: function(data) {
+        //      console.log(data);
+        //  },
+        //  error: function(e) {
+
+        //  }
+        // })

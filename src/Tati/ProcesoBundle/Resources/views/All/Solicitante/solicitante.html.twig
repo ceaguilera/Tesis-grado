@@ -13,16 +13,24 @@
         
       </div> <!-- /.content-header -->
       <div class="col-md-6 col-md-offset-3">
- 		<select class="form-control" ng-model="solicitud.idSolicitud">
- 			<option value="">Seleccione</option>
- 			<option ng-repeat="value in response.procesos" value="{[{value.id}]}">{[{value.nombre}]}</option>
- 		</select>
+        <!-- <select class="form-control" ng-model="solicitud.idSolicitud">
+          <option value="">Seleccione</option>
+          <option ng-repeat="value in response.procesos" value="{[{value.id}]}">{[{value.nombre}]}</option>
+        </select> -->
+        <div>Username
+          <input type="text" ng-model="username"><br/><br/>
+          watching model:
+          <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
+          
+          Upload Log:
+          <pre>{[{log}]}</pre>
       </div>
-    </div> <!-- /.content-container -->
+  </div> <!-- /.content-container -->
   <div align="center">
-		<button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button>
+    <!-- <button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button> -->
+    <button type="button" class="btn btn-secondary" ng-click="upload()">Enviar</button>
   </div>
-    <br>
+  <br>
 
       
   </div> <!-- /.content -->
@@ -39,6 +47,9 @@
           response = JSON.parse(response);
           console.log("response",response);
      </script>
+    
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload-shim.min.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>

@@ -99,6 +99,12 @@ _tatiSoft_soli_solicitud:
     options:
         expose: true
 
+_tatiSoft_soli_upload:
+    pattern:  /solicitante/subir
+    defaults: { _controller:  ProcesoBundle:Solicitante:uploadFile}
+    options:
+        expose: true
+
 _tatiSoft_soli_list:
     pattern:  /solicitante/listaSolicitudes
     defaults: { _controller:  ProcesoBundle:Solicitante:listRequest}

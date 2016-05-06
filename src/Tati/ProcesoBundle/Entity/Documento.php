@@ -32,7 +32,7 @@ class Documento
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="documentos", cascade={"persist"})
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id",nullable=true)
      */
     public $usuario;
 
@@ -41,7 +41,7 @@ class Documento
      * JoinTable(name="actSol_documento",
      *      joinColumns={@JoinColumn(name="documento_id", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="actSol_id", referencedColumnName="id")}
-     *      )
+     *      , nullable=true)
      */
     public $actividades_sol;
 
@@ -55,7 +55,7 @@ class Documento
      *
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file = null)
+    public function setFile($file = null)
     {
         $this->file = $file;
     }
@@ -90,36 +90,37 @@ class Documento
     {
         // se deshace del __DIR__ para no meter la pata
         // al mostrar el documento/imagen cargada en la vista.
-        return 'uploads/documents';
+        return 'uploads';
     }
 
-    public function upload($typeFile = 'image', $subDir = '', $nameFile = null)
+    public function upload($nameFile = null)
     {
 
         if (null === $this->getFile()) {
             return;
         }
 
-        $pathTypeFile = $this->getPathTypeFile($typeFile);
-        $this->setSubDir($pathTypeFile.$subDir);
+        // $pathTypeFile = $this->getPathTypeFile($typeFile);
+        // $this->setSubDir($pathTypeFile.$subDir);
 
         // Si no existe el directorio se crea el directorio
-        if (!file_exists($this->getUploadRootDir())) {
-            mkdir($this->getUploadRootDir(),0755, true);
-        }
+        // if (!file_exists($this->getUploadRootDir())) {
+        //     mkdir($this->getUploadRootDir(),0755, true);
+        // }
+
 
         if (is_null($nameFile))
             $nameFile = substr(time() + rand(), 0, 14);
         else{
             $nameFile = $nameFile.substr(time()+rand(), 0, 14);
         }
-        
-        $extension = $this->getFile()->guessExtension();
+        //print($this->getFile());
+        //$extension = $this->getFile()->guessExtension();
+        $extension = "pdf";
         $path = $this->getUploadRootDir().$nameFile.'.'.$extension;
 
-
-        $this->setFileName($subDir.$nameFile.'.'.$extension);
-        move_uploaded_file($this->getFile(), $path);
+        $respuesta = move_uploaded_file($this->getFile(), $path);
+        var_dump($respuesta);
     }
 
 
