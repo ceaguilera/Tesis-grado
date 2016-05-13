@@ -57,6 +57,7 @@ class Documento
      */
     public function setFile($file = null)
     {
+        var_dump($file);
         $this->file = $file;
     }
 

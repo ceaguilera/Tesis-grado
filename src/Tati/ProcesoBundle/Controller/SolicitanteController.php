@@ -56,12 +56,13 @@ class SolicitanteController extends Controller
 
     public function uploadFileAction(Request $request){
         if ($request->isXmlHttpRequest()) {
-            $data = json_decode($request->getContent(),true);
+            $data = json_decode($request->getContent()->get('data'),true);
             
-            $documento = new Edocumento();
-            $documento->setFile($data['file']);
-            $documento->setName($data['name']);
-            $documento->upload($data['userName']);
+            $file = $request->files->get('file');
+            // $documento = new Edocumento();
+            // $documento->setFile($data['file']);
+            // $documento->setName($data['name']);
+            // $documento->upload($data['userName']);
             // $this->em->persist($documento);
             // $this->em->flush();
 
@@ -69,7 +70,7 @@ class SolicitanteController extends Controller
             $response = new JsonResponse();
             $response->setData(array(
             'Insertado proceso' => 200,
-            'data' => $data['file']));
+            'data' => $data));
 
         return $response;
         }

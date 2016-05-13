@@ -47,7 +47,7 @@ listaSolicitudes.controller('listaSolicitudesController', ['$scope', 'Upload', '
     // });
     // $scope.log = '';
 
-    $scope.upload = function () {
+    $scope.upload = function ($file) {
         // if (files && files.length) {
         //     for (var i = 0; i < files.length; i++) {
         // 		files[i]
@@ -76,24 +76,19 @@ listaSolicitudes.controller('listaSolicitudesController', ['$scope', 'Upload', '
         //       }
         //     }
         // }
-
-        var json = {};
-		json.file = $scope.file;
-		json.userName = "Carlos";
-		json.name = "prueba";
-		json = angular.toJson(json);
+        var data= {};
+		data.userName = "Carlos";
+		data.name = "prueba";
+		data = angular.toJson(data);
+		console.log(Upload);
 		var url= Routing.generate('_tatiSoft_soli_upload');
-		console.log(url);
-		$.ajax({
-			method: 'POST',
-			data: json,
-			url: url,
-			success: function(data) {
-				console.log(data);
-			},
-			error: function(e) {
-
-			}
-		})
+    	Upload.upload({
+            url: url,
+            data: {file: Upload.dataUrltoBlob($file), data: data}
+        }).success(function (request) {
+        	
+       	}).error(function (data, status, headers, config) {
+       		
+        });
     };
 }]);
