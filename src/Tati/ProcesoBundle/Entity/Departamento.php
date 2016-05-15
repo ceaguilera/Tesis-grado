@@ -78,10 +78,10 @@ class Departamento
     /**
      * Add unidadesAcademicas
      *
-     * @param \Tati\ProcesoBundle\Entity\Unidad_academica $unidadesAcademicas
+     * @param \Tati\ProcesoBundle\Entity\UnidadAcademica $unidadesAcademicas
      * @return Departamento
      */
-    public function addUnidadesAcademica(\Tati\ProcesoBundle\Entity\Unidad_academica $unidadesAcademicas)
+    public function addUnidadesAcademica(\Tati\ProcesoBundle\Entity\UnidadAcademica $unidadesAcademicas)
     {
         $this->unidadesAcademicas[] = $unidadesAcademicas;
 
@@ -91,9 +91,9 @@ class Departamento
     /**
      * Remove unidadesAcademicas
      *
-     * @param \Tati\ProcesoBundle\Entity\Unidad_academica $unidadesAcademicas
+     * @param \Tati\ProcesoBundle\Entity\UnidadAcademica $unidadesAcademicas
      */
-    public function removeUnidadesAcademica(\Tati\ProcesoBundle\Entity\Unidad_academica $unidadesAcademicas)
+    public function removeUnidadesAcademica(\Tati\ProcesoBundle\Entity\UnidadAcademica $unidadesAcademicas)
     {
         $this->unidadesAcademicas->removeElement($unidadesAcademicas);
     }
