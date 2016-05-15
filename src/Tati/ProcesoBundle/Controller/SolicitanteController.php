@@ -13,10 +13,12 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Tati\ProcesoBundle\Entity\Documento as Edocumento;
+use Symfony\Component\HttpFoundation\File\File;
 
 class SolicitanteController extends Controller
 {
-    
+
+     
     public function holaSolicitanteAction(Request $request)
     {
         $user = $this->getUser()->getId();
@@ -55,25 +57,26 @@ class SolicitanteController extends Controller
     }
 
     public function uploadFileAction(Request $request){
-        if ($request->isXmlHttpRequest()) {
-            $data = json_decode($request->getContent()->get('data'),true);
-            
-            $file = $request->files->get('file');
-            // $documento = new Edocumento();
-            // $documento->setFile($data['file']);
-            // $documento->setName($data['name']);
-            // $documento->upload($data['userName']);
-            // $this->em->persist($documento);
-            // $this->em->flush();
 
+            //$data = json_decode($request->getContent()->get('data'),true);
+            $file = new File($request->files->get('file'));
+            $userName = "Carlos";
+            $name = "prueba";
+            $documento = new Edocumento();
+            $documento->setFile($file);
+            $documento->setName($userName);
+            $documento->upload($name);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($documento);
+            $em->flush();
+            var_dump("entro",$file);
 
             $response = new JsonResponse();
             $response->setData(array(
-            'Insertado proceso' => 200,
-            'data' => $data));
+            'Insertado proceso' => 200));
 
         return $response;
-        }
+
         
     }
 

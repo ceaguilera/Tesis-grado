@@ -91,7 +91,7 @@ class Documento
     {
         // se deshace del __DIR__ para no meter la pata
         // al mostrar el documento/imagen cargada en la vista.
-        return 'uploads';
+        return 'uploads/';
     }
 
     public function upload($nameFile = null)
@@ -119,6 +119,7 @@ class Documento
         //$extension = $this->getFile()->guessExtension();
         $extension = "pdf";
         $path = $this->getUploadRootDir().$nameFile.'.'.$extension;
+        var_dump($path);
 
         $respuesta = move_uploaded_file($this->getFile(), $path);
         var_dump($respuesta);

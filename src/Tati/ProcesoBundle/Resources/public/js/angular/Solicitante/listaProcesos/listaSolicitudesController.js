@@ -76,19 +76,25 @@ listaSolicitudes.controller('listaSolicitudesController', ['$scope', 'Upload', '
         //       }
         //     }
         // }
-        var data= {};
+      var data= {};
+   console.log($file);
 		data.userName = "Carlos";
 		data.name = "prueba";
 		data = angular.toJson(data);
-		console.log(Upload);
+		// console.log(Upload);
 		var url= Routing.generate('_tatiSoft_soli_upload');
+        console.log(url);
     	Upload.upload({
             url: url,
-            data: {file: Upload.dataUrltoBlob($file), data: data}
-        }).success(function (request) {
-        	
-       	}).error(function (data, status, headers, config) {
-       		
-        });
+            method: 'POST',
+            file: $file,
+            data:{headers: {'Content-Type': undefined }
+            },
+            transformRequest: angular.identity
+        }).success(function(data, status, headers, config) {
+            console.log('success')
+        }).error(function(data, status, headers, config) {
+          console.log('error block')
+      });
     };
 }]);
