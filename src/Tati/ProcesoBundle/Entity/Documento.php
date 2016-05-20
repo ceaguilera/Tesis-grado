@@ -31,10 +31,10 @@ class Documento
     public $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="documentos", cascade={"persist"})
-     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id",nullable=true)
+     * @ORM\ManyToOne(targetEntity="PerfilSolicitante", inversedBy="documentos", cascade={"persist"})
+     * @ORM\JoinColumn(name="usuarioSolicitante_id", referencedColumnName="id",nullable=true)
      */
-    public $usuario;
+    public $usuarioSolicitante;
 
     /**
      * @ORM\ManyToMany(targetEntity="ActividadSolicitada")
@@ -125,6 +125,13 @@ class Documento
         var_dump($respuesta);
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actividades_sol = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -183,33 +190,26 @@ class Documento
     }
 
     /**
-     * Set usuario
+     * Set usuarioSolicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\User $usuario
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $usuarioSolicitante
      * @return Documento
      */
-    public function setUsuario(\Tati\ProcesoBundle\Entity\User $usuario = null)
+    public function setUsuarioSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $usuarioSolicitante = null)
     {
-        $this->usuario = $usuario;
+        $this->usuarioSolicitante = $usuarioSolicitante;
 
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get usuarioSolicitante
      *
-     * @return \Tati\ProcesoBundle\Entity\User 
+     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
      */
-    public function getUsuario()
+    public function getUsuarioSolicitante()
     {
-        return $this->usuario;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->actividades_sol = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->usuarioSolicitante;
     }
 
     /**

@@ -30,6 +30,13 @@ class Responsable
     private $nombre;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="rutaCarpeta", type="string", length=100)
+    */
+    private $rutaCarpeta;
+
+    /**
      * @ORM\OneToMany(targetEntity="Actividad", mappedBy="responsable", cascade={"persist"})
      */
     private $actividades;
@@ -38,8 +45,8 @@ class Responsable
      * @ORM\OneToMany(targetEntity="ActividadSolicitada", mappedBy="responsable", cascade={"persist"})
      */
     private $actividadesSolicitadas;
- 
-
+    
+  
     /**
      * Constructor
      */
@@ -80,6 +87,29 @@ class Responsable
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set rutaCarpeta
+     *
+     * @param string $rutaCarpeta
+     * @return Responsable
+     */
+    public function setRutaCarpeta($rutaCarpeta)
+    {
+        $this->rutaCarpeta = $rutaCarpeta;
+
+        return $this;
+    }
+
+    /**
+     * Get rutaCarpeta
+     *
+     * @return string 
+     */
+    public function getRutaCarpeta()
+    {
+        return $this->rutaCarpeta;
     }
 
     /**

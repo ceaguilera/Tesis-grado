@@ -33,7 +33,7 @@ class Departamento
     * @ORM\OneToMany(targetEntity="UnidadAcademica", mappedBy="departamento", cascade={"persist"})
     */
     private $unidadesAcademicas;
- 
+    
     /**
      * Constructor
      */

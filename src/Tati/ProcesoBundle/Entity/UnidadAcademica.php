@@ -36,8 +36,7 @@ class UnidadAcademica
      * @ORM\JoinColumn(name="departameto_id", referencedColumnName="id")
      */
     private $departamento;
- 
-
+    
     /**
      * Get id
      *

@@ -20,75 +20,60 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Actividad", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="PerfilSolicitante", mappedBy="user")
      */
-    private $actividad;
+    private $perfilSolicitante;
 
     /**
-     * @ORM\OneToMany(targetEntity="Documento", mappedBy="usuario", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="PerfilResponsable", mappedBy="user")
      */
-    private $documentos;
+    private $perfilResponsable;
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 
 
     /**
-     * Set actividad
+     * Set perfilSolicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\Actividad $actividad
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante
      * @return User
      */
-    public function setActividad(\Tati\ProcesoBundle\Entity\Actividad $actividad = null)
+    public function setPerfilSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante = null)
     {
-        $this->actividad = $actividad;
+        $this->perfilSolicitante = $perfilSolicitante;
 
         return $this;
     }
 
     /**
-     * Get actividad
+     * Get perfilSolicitante
      *
-     * @return \Tati\ProcesoBundle\Entity\Actividad 
+     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
      */
-    public function getActividad()
+    public function getPerfilSolicitante()
     {
-        return $this->actividad;
+        return $this->perfilSolicitante;
     }
 
     /**
-     * Add documentos
+     * Set perfilResponsable
      *
-     * @param \Tati\ProcesoBundle\Entity\Documento $documentos
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable
      * @return User
      */
-    public function addDocumento(\Tati\ProcesoBundle\Entity\Documento $documentos)
+    public function setPerfilResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable = null)
     {
-        $this->documentos[] = $documentos;
+        $this->perfilResponsable = $perfilResponsable;
 
         return $this;
     }
 
     /**
-     * Remove documentos
+     * Get perfilResponsable
      *
-     * @param \Tati\ProcesoBundle\Entity\Documento $documentos
+     * @return \Tati\ProcesoBundle\Entity\PerfilResponsable 
      */
-    public function removeDocumento(\Tati\ProcesoBundle\Entity\Documento $documentos)
+    public function getPerfilResponsable()
     {
-        $this->documentos->removeElement($documentos);
-    }
-
-    /**
-     * Get documentos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDocumentos()
-    {
-        return $this->documentos;
+        return $this->perfilResponsable;
     }
 }

@@ -50,9 +50,14 @@ class ActividadSolicitada
 
     /**
      * @ORM\ManyToOne(targetEntity="Responsable", inversedBy="actividades")
-     * @ORM\JoinColumn(name="responsable_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="responsable_id", referencedColumnName="id", nullable=true)
      */
     private $responsable;
+    /**
+     * @ORM\ManyToOne(targetEntity="PerfilSolicitante", inversedBy="actividades")
+     * @ORM\JoinColumn(name="solicitante_id", referencedColumnName="id", nullable=true)
+     */
+    private $solicitante;
 
     /**
      * @var integer
@@ -258,6 +263,29 @@ class ActividadSolicitada
     public function getResponsable()
     {
         return $this->responsable;
+    }
+
+    /**
+     * Set solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @return ActividadSolicitada
+     */
+    public function setSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante = null)
+    {
+        $this->solicitante = $solicitante;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitante
+     *
+     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
+     */
+    public function getSolicitante()
+    {
+        return $this->solicitante;
     }
 
     /**
