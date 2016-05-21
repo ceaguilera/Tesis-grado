@@ -32,7 +32,7 @@ class Responsable
     /**
     * @var string
     *
-    * @ORM\Column(name="rutaCarpeta", type="string", length=100)
+    * @ORM\Column(name="rutaCarpeta", type="string", length=100, nullable=true)
     */
     private $rutaCarpeta;
 

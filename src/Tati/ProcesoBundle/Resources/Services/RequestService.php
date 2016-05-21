@@ -9,6 +9,8 @@ use Tati\ProcesoBundle\Entity\TipoTarea as ETipoTarea;
 use Tati\ProcesoBundle\Entity\Solicitud as ESolicitud;
 use Tati\ProcesoBundle\Entity\ActividadSolicitada as EActividadSolicitada;
 use Tati\ProcesoBundle\Entity\TareaSolicitada as ETareaSolicitada;
+use Symfony\Component\Filesystem\Filesystem;
+use \DateTime;
 
 class RequestService
 {
@@ -29,8 +31,15 @@ class RequestService
         $solicitante = $this->em->getRepository('ProcesoBundle:User')->find($data['userId']);
         $solicitud->setProceso($proceso);
         $solicitud->setSolicitante($solicitante);
+        $fs = new Filesystem();
         //$solicitud->setFecha($data['fecha']);
         $actividadesProcesoPadre = $proceso->getActividades();
+        $direcrotioRaiz = "/web/upload"; //nombre del la carpte raiz
+        //$fecha = new dateTime("dd-mm-YYYY");
+        $directoriodeSolicitud = $direcrotioRaiz."/"."sol"."user".$data['userId']."/";
+        var_dump($directoriodeSolicitud);
+        //Cambiare que traiga el id de la persona(usuario) que lo solicita
+        $fs->mkdir($directoriodeSolicitud, 0755, true);
 
         foreach ($actividadesProcesoPadre as $actividadPP) {
             $actividadSol = new EActividadSolicitada;
@@ -55,7 +64,6 @@ class RequestService
         }
         $this->em->persist($solicitud);
         $this->em->flush();
-
         $actividadesSolicitadas = $solicitud->getActividades();
         //creando las relaciones entre las actividades de la solicitud
         foreach ($actividadesProcesoPadre as $key => $actividadPP) {

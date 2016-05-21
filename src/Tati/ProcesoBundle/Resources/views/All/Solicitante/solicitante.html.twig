@@ -13,22 +13,22 @@
         
       </div> <!-- /.content-header -->
       <div class="col-md-6 col-md-offset-3">
-        <!-- <select class="form-control" ng-model="solicitud.idSolicitud">
+          <select class="form-control" ng-model="solicitud.idSolicitud">
           <option value="">Seleccione</option>
           <option ng-repeat="value in response.procesos" value="{[{value.id}]}">{[{value.nombre}]}</option>
         </select> -->
-        <div>Username
+{#         <div>Username
           <input type="text" ng-model="username"><br/><br/>
           watching model:
           <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
           
           Upload Log:
-          <pre>{[{log}]}</pre>
+          <pre>{[{log}]}</pre> #}
       </div>
   </div> <!-- /.content-container -->
   <div align="center">
-    <!-- <button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button> -->
-    <button type="button" class="btn btn-secondary" ng-click="upload(file)">Enviar</button>
+    <button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button> 
+  {#   <button type="button" class="btn btn-secondary" ng-click="upload(file)">Enviar</button> #}
   </div>
   <br>
 
