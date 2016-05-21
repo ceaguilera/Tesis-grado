@@ -29,6 +29,12 @@ class User extends BaseUser
      */
     private $perfilResponsable;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Notificaciones", mappedBy="receptor")
+     */
+    private $notificaciones;
+
+
 
 
     /**
@@ -75,5 +81,38 @@ class User extends BaseUser
     public function getPerfilResponsable()
     {
         return $this->perfilResponsable;
+    }
+
+    /**
+     * Add notificaciones
+     *
+     * @param \Tati\ProcesoBundle\Entity\Notificaciones $notificaciones
+     * @return User
+     */
+    public function addNotificacione(\Tati\ProcesoBundle\Entity\Notificaciones $notificaciones)
+    {
+        $this->notificaciones[] = $notificaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove notificaciones
+     *
+     * @param \Tati\ProcesoBundle\Entity\Notificaciones $notificaciones
+     */
+    public function removeNotificacione(\Tati\ProcesoBundle\Entity\Notificaciones $notificaciones)
+    {
+        $this->notificaciones->removeElement($notificaciones);
+    }
+
+    /**
+     * Get notificaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotificaciones()
+    {
+        return $this->notificaciones;
     }
 }
