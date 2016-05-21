@@ -32,6 +32,13 @@ class PerfilResponsable
     /**
      * @var string
      *
+     * @ORM\Column(name="apellido", type="string", length=100)
+     */
+    private $apellido;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="cargo", type="string", length=100)
      */
     private $cargo;
@@ -252,5 +259,28 @@ class PerfilResponsable
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set apellido
+     *
+     * @param string $apellido
+     * @return PerfilResponsable
+     */
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    /**
+     * Get apellido
+     *
+     * @return string 
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
     }
 }
