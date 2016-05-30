@@ -35,12 +35,10 @@ class SolicitanteController extends Controller
 
         if ($request->isXmlHttpRequest()) {
             $data = json_decode($request->getContent(),true);
-            $this->get('RequestService')->requestProcess($data);
+            $cualquier = $this->get('RequestService')->requestProcess($data);
+            var_dump("paso por aqui");
         }
-        $response = new JsonResponse();
-            $response->setData(array(
-            'Insertado proceso' => 200));
-
+        $response = new JsonResponse($cualquier, 200);
         return $response;
     }
 

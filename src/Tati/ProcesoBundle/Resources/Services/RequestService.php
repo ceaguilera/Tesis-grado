@@ -31,16 +31,10 @@ class RequestService
         $solicitante = $this->em->getRepository('ProcesoBundle:User')->find($data['userId']);
         $solicitud->setProceso($proceso);
         $solicitud->setSolicitante($solicitante);
-        $fs = new Filesystem();
-        //$solicitud->setFecha($data['fecha']);
+        $fecha = new \DateTime();
+        $solicitud->setFecha($fecha);
         $actividadesProcesoPadre = $proceso->getActividades();
-        $direcrotioRaiz = "/web/upload"; //nombre del la carpte raiz
-        //$fecha = new dateTime("dd-mm-YYYY");
-        $directoriodeSolicitud = $direcrotioRaiz."/"."sol"."user".$data['userId']."/";
-        var_dump($directoriodeSolicitud);
-        //Cambiare que traiga el id de la persona(usuario) que lo solicita
-        $fs->mkdir($directoriodeSolicitud, 0755, true);
-
+        
         foreach ($actividadesProcesoPadre as $actividadPP) {
             $actividadSol = new EActividadSolicitada;
             $tareasPP = $actividadPP->getTareas();
@@ -64,6 +58,18 @@ class RequestService
         }
         $this->em->persist($solicitud);
         $this->em->flush();
+
+        //se define el nombre de la carpeta de la solicitud
+        $carpeta = "solicitud-".$solicitud->getId()."-user-"
+        .$data['userId']."-fecha-".$fecha->format('d-m-Y-H:i:s');
+        $direcrotioRaiz = __DIR__."/../../../../../web/uploads"; //nombre del la carpte raiz
+
+        //se crea la carpeta
+        //$fs = new Filesystem();
+        $directoriodeSolicitud = $direcrotioRaiz."/".$carpeta;
+        mkdir($directoriodeSolicitud, 0777, true);
+        
+        $solicitud->setNombreCarpeta($carpeta);
         $actividadesSolicitadas = $solicitud->getActividades();
         //creando las relaciones entre las actividades de la solicitud
         foreach ($actividadesProcesoPadre as $key => $actividadPP) {
@@ -95,6 +101,25 @@ class RequestService
             }
             var_dump('fin');   
         }
+
+        $actividadSolicitud = $solicitud->getActividades();
+        var_dump($actividadSolicitud[0]->getResponsable()->getId());
+        if($actividadSolicitud[0]->getResponsable()->getId() == 5){
+            $response = array();
+            $response['actividad'] = array();
+            $response['actividad']['nombre'] = $actividadSolicitud[0]->getNombre();
+            $response['actividad']['id'] = $actividadSolicitud[0]->getId();
+            $tareas = array();
+            foreach ($actividadSolicitud[0]->getTareas() as $tarea) {
+                $tareaAux = array();
+                $tareaAux['id'] = $tarea->getId();
+                $tareaAux['nombre'] = $tarea->getNombre();
+                $tareaAux['tipo'] = $tarea->getTipoTarea()->getId();
+                array_push($tareas, $tareaAux);
+            }
+            $response['actividad']['tareas'] = $tareas;
+        }
+        return $response;
 
 
     }

@@ -48,6 +48,13 @@ class Solicitud
     private $actividades;
 
     /**
+    *
+    *   @var string
+    * @ORM\Column(name="nombre_carpeta", type="string", nullable=true)
+    */
+    private $nombreCarpeta;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -165,5 +172,28 @@ class Solicitud
     public function getActividades()
     {
         return $this->actividades;
+    }
+
+    /**
+     * Set nombreCarpeta
+     *
+     * @param string $nombreCarpeta
+     * @return Solicitud
+     */
+    public function setNombreCarpeta($nombreCarpeta)
+    {
+        $this->nombreCarpeta = $nombreCarpeta;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreCarpeta
+     *
+     * @return string 
+     */
+    public function getNombreCarpeta()
+    {
+        return $this->nombreCarpeta;
     }
 }

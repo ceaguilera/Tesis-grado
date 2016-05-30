@@ -48,6 +48,13 @@ class Solicitud
     private $actividades;
 
     /**
+    *
+    *   @var string
+    * @ORM\Column(name="nombre_carpeta", type="string", nullable=true)
+    */
+    private $nombreCarpeta;
+
+    /**
      * Constructor
      */
     public function __construct()
