@@ -83,12 +83,12 @@ class RequestService
             $actividad2 = $actividadesSolicitadas->get($posSig);
             $actividad->setActSig($actividad2);
             $actividad2->setActAnt($actividad);
-            var_dump($actividad->getNombre());
-            var_dump($actividad->getId());
-            var_dump($actividad->getActSig()->getNombre());
-            var_dump($actividad->getActSig()->getId());
-            var_dump($actividad2->getActAnt()->getNombre());
-            var_dump($actividad2->getActAnt()->getId());
+            // var_dump($actividad->getNombre());
+            // var_dump($actividad->getId());
+            // var_dump($actividad->getActSig()->getNombre());
+            // var_dump($actividad->getActSig()->getId());
+            // var_dump($actividad2->getActAnt()->getNombre());
+            // var_dump($actividad2->getActAnt()->getId());
             //var_dump("sadas",get_class($actividad));
             //var_dump($actividad->getActSig()->getSolicitud()->getId());
             $this->em->persist($actividad);
@@ -99,11 +99,11 @@ class RequestService
             // $this->em->persist($actividad);
             // $this->em->flush();
             }
-            var_dump('fin');   
+            //var_dump('fin');   
         }
 
         $actividadSolicitud = $solicitud->getActividades();
-        var_dump($actividadSolicitud[0]->getResponsable()->getId());
+        //var_dump($actividadSolicitud[0]->getResponsable()->getId());
         if($actividadSolicitud[0]->getResponsable()->getId() == 5){
             $response = array();
             $response['actividad'] = array();

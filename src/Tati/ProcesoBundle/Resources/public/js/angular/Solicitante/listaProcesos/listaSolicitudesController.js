@@ -9,7 +9,7 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	$scope.procesarSolicitud = function(){
 
 		$scope.solicitud.userId = $scope.response.userId;
-		//console.log($scope.solicitud);
+		console.log("entro en aqui");
 		var json = {};
 		json = $scope.solicitud;
 		json = angular.toJson(json);
