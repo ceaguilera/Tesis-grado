@@ -173,4 +173,27 @@ class Solicitud
     {
         return $this->actividades;
     }
+
+    /**
+     * Set nombreCarpeta
+     *
+     * @param string $nombreCarpeta
+     * @return Solicitud
+     */
+    public function setNombreCarpeta($nombreCarpeta)
+    {
+        $this->nombreCarpeta = $nombreCarpeta;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreCarpeta
+     *
+     * @return string 
+     */
+    public function getNombreCarpeta()
+    {
+        return $this->nombreCarpeta;
+    }
 }

@@ -82,6 +82,13 @@ class ActividadSolicitada
     private $status;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activa", type="boolean", nullable=true)
+     */
+    private $activa;
+
+    /**
      * @ORM\OneToMany(targetEntity="TareaSolicitada", mappedBy="actividades", cascade={"persist"})
      */
     private $tareas;
@@ -342,5 +349,29 @@ class ActividadSolicitada
     public function getTareas()
     {
         return $this->tareas;
+    }
+
+
+    /**
+     * Set activa
+     *
+     * @param boolean $activa
+     * @return ActividadSolicitada
+     */
+    public function setActiva($activa)
+    {
+        $this->activa = $activa;
+
+        return $this;
+    }
+
+    /**
+     * Get activa
+     *
+     * @return boolean 
+     */
+    public function getActiva()
+    {
+        return $this->activa;
     }
 }
