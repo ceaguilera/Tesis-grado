@@ -3,6 +3,7 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
+        ROLE_ADMINISTRADOR: ROLE_ADMINISTRADOR
         ROLE_ESPECIALISTA_READ: ROLE_ESPECIALISTA_READ
         ROLE_ESPECIALISTA_UPDATE: ROLE_ESPECIALISTA_READ
         ROLE_ESPECIALISTA_CREATE_ALL: ROLE_ESPECIALISTA_UPDATE
@@ -51,3 +52,9 @@ security:
         - { path: ^/responsable/actividadesTerminadas, role: ROLE_RESPONSABLE_UPDATE}
         - { path: ^/responsable/archivos, role: ROLE_RESPONSABLE_UPDATE}
         - { path: ^/responsable/alertas, role: ROLE_RESPONSABLE_UPDATE}
+        #Rutas permitidas para el usuario administrador
+        - { path: ^/administrador/listaUsuarios, role: ROLE_ADMINISTRADOR}
+        - { path: ^/administrador/agregarSolicitante, role: ROLE_ADMINISTRADOR}
+        - { path: ^/administrador/agregarResponsable, role: ROLE_ADMINISTRADOR}
+        - { path: ^/administrador/agregarEspecialista, role: ROLE_ADMINISTRADOR}
+        - { path: ^/administrador/agregarAutoridad, role: ROLE_ADMINISTRADOR}

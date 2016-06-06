@@ -6,3 +6,7 @@ services:
     RequestService:
         class: Tati\ProcesoBundle\Resources\Services\RequestService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    AdminService:
+        class: Tati\ProcesoBundle\Resources\Services\AdminService
+        arguments: ["@doctrine.orm.entity_manager"]

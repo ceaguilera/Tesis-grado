@@ -2,21 +2,48 @@
 
 {% block body %}
 
-<div class="container" ng-app="listaSolicitudesModule" ng-controller="listaSolicitudesController">
+<div class="container" ng-app="listaSolicitudesModule" ng-controller="listaSolicitudesController" ng-cloak>
 
   <div class="content">
-
-    <div class="content-container">
+    <div class="content-container" ng-if="!SiActividad">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Solicitud</strong></h2>
-        
+        <h2 class="content-header-title"><strong>Solicitud</strong></h2> 
       </div> <!-- /.content-header -->
       <div class="col-md-6 col-md-offset-3">
           <select class="form-control" ng-model="solicitud.idSolicitud">
           <option value="">Seleccione</option>
           <option ng-repeat="value in response.procesos" value="{[{value.id}]}">{[{value.nombre}]}</option>
-        </select> -->
+        </select>
+        <br>
+        <div align="center">
+          <button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">
+          Enviar
+          </button> 
+        </div>
+      </div>
+    </div>
+    <div class="content-container" ng-if="SiActividad">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>{[{actividad.nombre}]}</strong></h2> 
+      </div> <!-- /.content-header -->
+      <div class="container">
+        <div class="row" style="margin-bottom: 15px;" ng-repeat="tarea in actividad.tareas track by $index">
+          <div class="col-md-3">
+            <strong>{[{tarea.nombre}]}</strong>
+          </div>
+          <div class="col-md-5" ng-if="tarea.tipo == 1">
+            
+            <div type="button" class="btn btn-secondary" ngf-select ng-model="file" ngf-multiple="false">
+            Seleccione el archivo
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
 {#         <div>Username
           <input type="text" ng-model="username"><br/><br/>
           watching model:
@@ -24,14 +51,6 @@
           
           Upload Log:
           <pre>{[{log}]}</pre> #}
-      </div>
-  </div> <!-- /.content-container -->
-  <div align="center">
-    <button type="button" class="btn btn-secondary" ng-click="procesarSolicitud();">Enviar</button> 
-  {#   <button type="button" class="btn btn-secondary" ng-click="upload(file)">Enviar</button> #}
-  </div>
-  <br>
-
       
   </div> <!-- /.content -->
 </div> <!-- /.container -->

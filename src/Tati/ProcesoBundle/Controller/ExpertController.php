@@ -91,6 +91,8 @@ class ExpertController extends Controller
             return $this->redirectToRoute('tatiSoft_soli_solicitante');
         }else if($this->isGranted('ROLE_RESPONSABLE_UPDATE')){
             return $this->redirectToRoute('_tatiSoft_resp_list');
+        }else if ($this->isGranted('ROLE_ADMINISTRADOR')){
+            return $this->redirectToRoute('_tatiSoft_admin_listUsers');
         }
 
         return null;

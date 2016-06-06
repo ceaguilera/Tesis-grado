@@ -20,17 +20,17 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="PerfilSolicitante", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="PerfilSolicitante", mappedBy="user", cascade={"persist"})
      */
     private $perfilSolicitante;
 
     /**
-     * @ORM\OneToOne(targetEntity="PerfilResponsable", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="PerfilResponsable", mappedBy="user", cascade={"persist"})
      */
     private $perfilResponsable;
 
     /**
-     * @ORM\OneToMany(targetEntity="Notificaciones", mappedBy="receptor")
+     * @ORM\OneToMany(targetEntity="Notificaciones", mappedBy="receptor", cascade={"persist"})
      */
     private $notificaciones;
 

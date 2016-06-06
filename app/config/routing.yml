@@ -148,3 +148,36 @@ _tatiSoft_resp_alert:
     defaults: { _controller:  ProcesoBundle:Responsable:alert}
     options:
         expose: true
+
+#Rutas de usurio administrador
+_tatiSoft_admin_listUsers:
+    pattern:  /administrador/listaUsuarios
+    defaults: { _controller:  ProcesoBundle:Admin:listUsers}
+
+_tatiSoft_admin_addUserSolicitante:
+    pattern:  /administrador/agregarSolicitante
+    defaults: { _controller:  ProcesoBundle:Admin:addSolicitante}
+
+_tatiSoft_admin_addUserResponsable:
+    pattern:  /administrador/agregarResponsable
+    defaults: { _controller:  ProcesoBundle:Admin:addResponsable}
+
+_tatiSoft_admin_addUserEspecialista:
+    pattern:  /administrador/agregarEspecialista
+    defaults: { _controller:  ProcesoBundle:Admin:addEspecialista}
+
+_tatiSoft_admin_addUserAutoridad:
+    pattern:  /administrador/agregarAutoridad
+    defaults: { _controller:  ProcesoBundle:Admin:addAutoridad}
+
+_tatiSoft_admin_getUnit:
+    pattern:  /adminstrador/unidades
+    defaults: { _controller:  ProcesoBundle:Admin:getUnidades}
+    options:
+        expose: true
+
+_tatiSoft_admin_register:
+    pattern:  /adminstrador/registro
+    defaults: { _controller:  ProcesoBundle:Admin:register}
+    options:
+        expose: true

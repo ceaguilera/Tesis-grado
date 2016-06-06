@@ -1,0 +1,78 @@
+{% extends "ProcesoBundle:All:Admin/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="listaSolicitudesModule" ng-controller="listaSolicitudesController">
+
+  <div class="content">
+
+    <div class="content-container">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>Registrar Usuario Nuevo</strong></h2>
+        
+      </div> <!-- /.content-header -->
+      <div class="portlet">
+        <div class="portlet-header">Datos del usuario</div>
+        <div class="portlet-content">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Nombre</label>
+              <input type="text" class="form-control">
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div> <!-- /.content-container -->
+    <br>
+
+      
+  </div> <!-- /.content -->
+</div> <!-- /.container -->
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+{% endblock %}

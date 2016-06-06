@@ -1,0 +1,97 @@
+{% extends "ProcesoBundle:All:Admin/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="adminModule" ng-controller="adminController">
+
+  <div class="content">
+
+    <div class="content-container">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>Registrar nuevo solicitante</strong></h2>
+        <p>Un usuario solicitante es Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+      </div> <!-- /.content-header -->
+      <div class="portlet">
+        <div class="portlet-header">
+          <strong>
+            Datos del usuario
+          </strong>
+        </div>
+        <div class="portlet-content">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nombre y apellido</label>
+              <input type="text" class="form-control" ng-model="datos.nombre">
+            </div>
+            <div class="col-md-4">
+              <label>Correo</label>
+              <input type="text" class="form-control" ng-model="datos.correo">
+            </div>
+            <div class="col-md-4">
+              <label>Cedula</label>
+              <input type="text" class="form-control" ng-model="datos.cedula">
+            </div> 
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Cargo</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Departamento</label>
+              <select class="form-control" ng-model="departamento">
+                <option value="">Seleccione</option>
+                <option ng-repeat="departamento in response" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Unidad Academica</label>
+              <select class="form-control" ng-model="datos.unidad">
+                <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
+              </select>
+            </div> 
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Contrasena</label>
+              <input class="form-control" type="password" ng-model="datos.password"></input>
+            </div>
+          </div>
+          <div class="row" align="center">
+            <button class="btn button-secundary" ng-click="registrar()">Registrar</button>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /.content-container -->
+    <br>
+
+      
+  </div> <!-- /.content -->
+</div> <!-- /.container -->
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+        <script type="text/javascript">
+      var response = "{{ departament }}";
+      var div = document.createElement('div');
+      div.innerHTML = response;
+      response = div.firstChild.nodeValue;
+      response = JSON.parse(response);
+      console.log("response",response);
+    </script>
+   <script src="{{ asset('bundles/proceso/js/angular/admin/adminModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/admin/adminController.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+{% endblock %}

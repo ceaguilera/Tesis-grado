@@ -1,0 +1,68 @@
+{% extends "ProcesoBundle:All:Admin/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="rolesModule" ng-controller="rolesController" >
+
+  <div class="content">
+
+    <div class="content-container">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>Usuarios TatiSoft</strong></h2>
+        
+      </div> <!-- /.content-header -->
+      <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">Listado de Usuarios</div>
+
+              <!-- Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>UserName</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Ultima Sesion</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="value in response">
+                  <tr>
+                    <td>{[{value.id}]}</td>
+                    <td>{[{value.userName}]}</td>
+                    <td>{[{value.email}]}</td>
+                    <td>{[{value.rol}]}</td>
+                    <td>{[{value.lastLogin.date}]}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div> <!-- /.content-container -->
+    <br>
+
+      
+  </div> <!-- /.content -->
+</div> <!-- /.container -->
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+      var response = "{{ users }}";
+      var div = document.createElement('div');
+      div.innerHTML = response;
+      response = div.firstChild.nodeValue;
+      response = JSON.parse(response);
+      console.log("response",response);
+    </script>
+      <script src="{{ asset('bundles/proceso/js/angular/roles/rolesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/roles/rolesController.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+{% endblock %}

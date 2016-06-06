@@ -2,6 +2,7 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 
 	$scope.response = response;
 	$scope.solicitud = {};
+	$scope.SiActividad = false;
 	$scope.imprimir = function(){
 		console.log("response", $scope.response);
 	}
@@ -22,6 +23,9 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 			success: function(data) {
 				console.log("exito");
 				console.log(data);
+				$scope.SiActividad = true;
+				$scope.actividad = data.actividad;
+				$scope.$apply()
 			},
 			error: function(e) {
 
