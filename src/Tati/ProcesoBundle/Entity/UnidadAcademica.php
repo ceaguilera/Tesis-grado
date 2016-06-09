@@ -36,7 +36,16 @@ class UnidadAcademica
      * @ORM\JoinColumn(name="departameto_id", referencedColumnName="id")
      */
     private $departamento;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="unidadAcademica")
+     */
+    private $responsable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="unidadAcademica")
+     */
+    private $solicitante;
     /**
      * Get id
      *
@@ -91,5 +100,79 @@ class UnidadAcademica
     public function getDepartamento()
     {
         return $this->departamento;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->solicitante = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @return UnidadAcademica
+     */
+    public function addResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    {
+        $this->responsable[] = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Remove responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     */
+    public function removeResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    {
+        $this->responsable->removeElement($responsable);
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * Add solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @return UnidadAcademica
+     */
+    public function addSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    {
+        $this->solicitante[] = $solicitante;
+
+        return $this;
+    }
+
+    /**
+     * Remove solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     */
+    public function removeSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    {
+        $this->solicitante->removeElement($solicitante);
+    }
+
+    /**
+     * Get solicitante
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSolicitante()
+    {
+        return $this->solicitante;
     }
 }

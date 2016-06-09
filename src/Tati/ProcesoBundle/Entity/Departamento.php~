@@ -35,6 +35,15 @@ class Departamento
     private $unidadesAcademicas;
     
     /**
+     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="departamento")
+     */
+    private $responsable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="departamento")
+     */
+    private $solicitante;
+    /**
      * Constructor
      */
     public function __construct()

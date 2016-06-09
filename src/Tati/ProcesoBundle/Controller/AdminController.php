@@ -27,7 +27,13 @@ class AdminController extends Controller
                     'departament' =>  json_encode($response)));
     }
     public function addResponsableAction(){
-        return $this->render('ProcesoBundle:All:Admin/agregarResponsable.html.twig');
+    	$departamentos = $this->get('AdminService')->getListDepartament();
+    	$responsables = $this->get('AdminService')->getTiposResposables();
+    	$response = array();
+    	$response['departamentos'] = $departamentos;
+    	$response['responsables'] = $responsables;
+        return $this->render('ProcesoBundle:All:Admin/agregarResponsable.html.twig', array(
+                    'data' =>  json_encode($response)));
     }
     public function addEspecialistaAction(){
         return $this->render('ProcesoBundle:All:Admin/agregarEspecialista.html.twig');

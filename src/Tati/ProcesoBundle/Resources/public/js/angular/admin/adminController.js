@@ -22,11 +22,12 @@ admin.controller('adminController', function($scope, $http, $window){
 	 	});        
 	 });
 
-	 $scope.registrar = function(){
+	 $scope.registrar = function(tipo){
 	 	$scope.datos.departamento = $scope.departamento;
+	 	console.log($scope.datos);
 	 	var json = {};
 	 	json.datos = $scope.datos;
-	 	json.tipo = 1;
+	 	json.tipo = tipo;
 	 	json = angular.toJson(json);
 	 	console.log(json);
 	 	var url= Routing.generate('_tatiSoft_admin_register');

@@ -48,13 +48,13 @@ class PerfilSolicitante
     private $rutaCarpeta;
 
     /**
-     * @ORM\OneToOne(targetEntity="Departamento")
+     * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="solicitante")
      * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
      */
     private $departamento;
 
     /**
-     * @ORM\OneToOne(targetEntity="UnidadAcademica")
+     * @ORM\ManyToOne(targetEntity="UnidadAcademica", inversedBy="solicitante")
      * @ORM\JoinColumn(name="unidad_id", referencedColumnName="id")
      */
     private $unidadAcademcia;

@@ -35,6 +35,15 @@ class Departamento
     private $unidadesAcademicas;
     
     /**
+     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="departamento")
+     */
+    private $responsable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="departamento")
+     */
+    private $solicitante;
+    /**
      * Constructor
      */
     public function __construct()
@@ -106,5 +115,71 @@ class Departamento
     public function getUnidadesAcademicas()
     {
         return $this->unidadesAcademicas;
+    }
+
+    /**
+     * Add responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @return Departamento
+     */
+    public function addResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    {
+        $this->responsable[] = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Remove responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     */
+    public function removeResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    {
+        $this->responsable->removeElement($responsable);
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * Add solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @return Departamento
+     */
+    public function addSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    {
+        $this->solicitante[] = $solicitante;
+
+        return $this;
+    }
+
+    /**
+     * Remove solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     */
+    public function removeSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    {
+        $this->solicitante->removeElement($solicitante);
+    }
+
+    /**
+     * Get solicitante
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSolicitante()
+    {
+        return $this->solicitante;
     }
 }

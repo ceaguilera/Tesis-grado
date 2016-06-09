@@ -36,7 +36,16 @@ class UnidadAcademica
      * @ORM\JoinColumn(name="departameto_id", referencedColumnName="id")
      */
     private $departamento;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="unidadAcademica")
+     */
+    private $responsable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="unidadAcademica")
+     */
+    private $solicitante;
     /**
      * Get id
      *

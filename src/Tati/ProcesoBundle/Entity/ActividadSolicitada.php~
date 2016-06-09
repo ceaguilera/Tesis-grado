@@ -351,4 +351,27 @@ class ActividadSolicitada
         return $this->tareas;
     }
 
+
+    /**
+     * Set activa
+     *
+     * @param boolean $activa
+     * @return ActividadSolicitada
+     */
+    public function setActiva($activa)
+    {
+        $this->activa = $activa;
+
+        return $this;
+    }
+
+    /**
+     * Get activa
+     *
+     * @return boolean 
+     */
+    public function getActiva()
+    {
+        return $this->activa;
+    }
 }
