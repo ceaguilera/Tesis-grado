@@ -104,21 +104,14 @@ class RequestService
 
         $actividadSolicitud = $solicitud->getActividades();
         //var_dump($actividadSolicitud[0]->getResponsable()->getId());
+        $response = array();
         if($actividadSolicitud[0]->getResponsable()->getId() == 5){
-            $response = array();
-            $response['actividad'] = array();
-            $response['actividad']['nombre'] = $actividadSolicitud[0]->getNombre();
-            $response['actividad']['id'] = $actividadSolicitud[0]->getId();
-            $tareas = array();
-            foreach ($actividadSolicitud[0]->getTareas() as $tarea) {
-                $tareaAux = array();
-                $tareaAux['id'] = $tarea->getId();
-                $tareaAux['nombre'] = $tarea->getNombre();
-                $tareaAux['tipo'] = $tarea->getTipoTarea()->getId();
-                array_push($tareas, $tareaAux);
-            }
-            $response['actividad']['tareas'] = $tareas;
+            $response['actividad'] = true;
+            $response['idActividad'] = $actividadSolicitud[0]->getId();
+        }else{
+            $response['actividad'] = false;
         }
+
         return $response;
 
 

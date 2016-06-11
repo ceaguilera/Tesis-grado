@@ -10,3 +10,7 @@ services:
     AdminService:
         class: Tati\ProcesoBundle\Resources\Services\AdminService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    GeneralService:
+        class: Tati\ProcesoBundle\Resources\Services\GeneralService
+        arguments: ["@doctrine.orm.entity_manager"]

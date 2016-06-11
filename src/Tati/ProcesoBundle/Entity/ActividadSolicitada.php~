@@ -89,7 +89,7 @@ class ActividadSolicitada
     private $activa;
 
     /**
-     * @ORM\OneToMany(targetEntity="TareaSolicitada", mappedBy="actividades", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="TareaSolicitada", mappedBy="actividad", cascade={"persist"})
      */
     private $tareas;
 

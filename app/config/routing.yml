@@ -123,6 +123,13 @@ _tatiSoft_soli_finished:
     options:
         expose: true
 
+_tatiSoft_soli_getTask:
+    pattern: /solicitante/detalleActividad/{id}
+    defaults: { _controller: ProcesoBundle:Solicitante:getActividad}
+    options:
+        expose: true
+
+
 #rutas de usuario responsable
 
 _tatiSoft_resp_list:

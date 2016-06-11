@@ -1,8 +1,7 @@
-listaSolicitudes.controller('listaSolicitudesController', function($scope, $http){
+listaSolicitudes.controller('listaSolicitudesController', function($scope, $http, $window){
 
 	$scope.response = response;
 	$scope.solicitud = {};
-	$scope.SiActividad = false;
 	$scope.imprimir = function(){
 		console.log("response", $scope.response);
 	}
@@ -23,8 +22,13 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 			success: function(data) {
 				console.log("exito");
 				console.log(data);
-				$scope.SiActividad = true;
 				$scope.actividad = data.actividad;
+				$scope.exito = true;
+				if(data.actividad){
+					var url = Routing.generate('_tatiSoft_soli_getTask', { id: data.idActividad});
+					$window.location.href = url;		
+				}
+
 				$scope.$apply()
 			},
 			error: function(e) {

@@ -79,6 +79,15 @@ class SolicitanteController extends Controller
         
     }
 
+        public function getActividadAction($id){
+
+            $response = $this->get('GeneralService')->getTareas($id);
+            return $this->render('ProcesoBundle:All:Solicitante/detalleActividad.html.twig',  array(
+                    'data' =>  json_encode($response)
+                ));
+        
+    }
+
 }
 
 
