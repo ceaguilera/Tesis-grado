@@ -37,6 +37,9 @@ class RequestService
         
         foreach ($actividadesProcesoPadre as $actividadPP) {
             $actividadSol = new EActividadSolicitada;
+            if($actividadPP->getResponsable()->getNombre() == "Solicitante"){
+                $actividadSol->setSolicitante($data['solicitante']);
+            }
             $tareasPP = $actividadPP->getTareas();
             foreach ($tareasPP as $tareaPP) {
                 $tareaSol = new ETareaSolicitada;
@@ -113,10 +116,25 @@ class RequestService
         }
 
         return $response;
-
-
     }
 
+    public function listaActividadesSol($data){
+        $actividades = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->findBy(array(
+        'solicitante' => $data['idSolicitante']));
+
+        $response = array();
+
+        foreach ($actividades as $actividad) {
+            $actiAux = array();
+            $actiAux['id'] = $actividad->getId();
+            $actiAux['nombre'] = $actividad->getNombre();
+            $actiAux['descripcion'] = $actividad->getDescripcion();
+            $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
+            array_push($response, $actiAux);
+        }
+
+        return $response;
+    }
 
 
 }
