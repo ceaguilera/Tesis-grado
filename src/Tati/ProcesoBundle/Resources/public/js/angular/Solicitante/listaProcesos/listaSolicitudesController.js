@@ -1,4 +1,4 @@
-listaSolicitudes.controller('listaSolicitudesController', function($scope, $http, $window){
+listaSolicitudes.controller('listaSolicitudesController', function($scope, $http, $window, Upload){
 
 	$scope.response = response;
 	$scope.solicitud = {};
@@ -40,6 +40,57 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	// $scope.archivoM = function(a){
 	// 	console.log($scope.myFile);
 	// }
+
+	    $scope.upload = function ($file) {
+        // if (files && files.length) {
+        //     for (var i = 0; i < files.length; i++) {
+        // 		files[i]
+        //       var file = files[i];
+        //       if (!file.$error) {
+        //         Upload.upload({
+        //             url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+        //             data: {
+        //               username: $scope.username,
+        //               file: file  
+        //             }
+        //         }).then(function (resp) {
+        //             $timeout(function() {
+        //                 $scope.log = 'file: ' +
+        //                 resp.config.data.file.name +
+        //                 ', Response: ' + JSON.stringify(resp.data) +
+        //                 '\n' + $scope.log;
+        //             });
+        //         }, null, function (evt) {
+        //             var progressPercentage = parseInt(100.0 *
+        //             		evt.loaded / evt.total);
+        //             $scope.log = 'progress: ' + progressPercentage + 
+        //             	'% ' + evt.config.data.file.name + '\n' + 
+        //               $scope.log;
+        //         });
+        //       }
+        //     }
+        // }
+      	var data= {};
+   		console.log($scope.file);
+		// data.userName = "Carlos";
+		// data.name = "prueba";
+		// data = angular.toJson(data);
+		// // console.log(Upload);
+		// var url= Routing.generate('_tatiSoft_soli_upload');
+  //       console.log(url);
+  //   	Upload.upload({
+  //           url: url,
+  //           method: 'POST',
+  //           file: $file,
+  //           data:{headers: {'Content-Type': undefined }
+  //           },
+  //           transformRequest: angular.identity
+  //       }).success(function(data, status, headers, config) {
+  //           console.log('success')
+  //       }).error(function(data, status, headers, config) {
+  //         console.log('error block')
+  //     });
+    };
 
 });
 

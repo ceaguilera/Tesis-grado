@@ -13,13 +13,16 @@
       <div class="container">
         <div class="row" style="margin-bottom: 15px;" ng-repeat="tarea in response.actividad.tareas track by $index">
           <div class="col-md-3">
-            <strong>{[{tarea.nombre}]}</strong>
+            <strong>{[{tarea.nombre}]}{[{$index}]}</strong>
           </div>
           <div class="col-md-5" ng-if="tarea.tipo == 1">
             
-            <div type="button" class="btn btn-secondary" ngf-select ng-model="file" ngf-multiple="false">
+          <div type="button" class="btn btn-secondary" ngf-select ng-model="file" ngf-multiple="false">
             Seleccione el archivo
             </div>
+          </div>
+          <div class="col-md-3">
+            <button ng-click="upload(file)" type="button" class="btn btn-secondary">Subir</button>
           </div>
         </div>
       </div>
