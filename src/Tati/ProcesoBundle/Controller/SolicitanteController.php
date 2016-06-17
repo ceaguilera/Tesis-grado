@@ -73,11 +73,13 @@ class SolicitanteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($documento);
             $em->flush();
-            var_dump("entro",$file);
+            //var_dump("entro",$file);
 
             $response = new JsonResponse();
             $response->setData(array(
-            'Insertado proceso' => 200));
+            'Archivo subido' => 200,
+            'path' => $documento->getPath(),
+            'nombre' => $documento->getName()));
 
         return $response;
 

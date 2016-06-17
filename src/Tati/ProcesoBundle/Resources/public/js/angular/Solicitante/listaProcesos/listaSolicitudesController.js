@@ -41,7 +41,7 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	// 	console.log($scope.myFile);
 	// }
 
-	    $scope.upload = function ($file) {
+	    $scope.upload = function ($file, key) {
         // if (files && files.length) {
         //     for (var i = 0; i < files.length; i++) {
         // 		files[i]
@@ -71,25 +71,31 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
         //     }
         // }
       	var data= {};
-   		console.log($scope.file);
-		// data.userName = "Carlos";
-		// data.name = "prueba";
-		// data = angular.toJson(data);
-		// // console.log(Upload);
-		// var url= Routing.generate('_tatiSoft_soli_upload');
-  //       console.log(url);
-  //   	Upload.upload({
-  //           url: url,
-  //           method: 'POST',
-  //           file: $file,
-  //           data:{headers: {'Content-Type': undefined }
-  //           },
-  //           transformRequest: angular.identity
-  //       }).success(function(data, status, headers, config) {
-  //           console.log('success')
-  //       }).error(function(data, status, headers, config) {
-  //         console.log('error block')
-  //     });
+   		console.log($file);
+		data.userName = "Carlos";
+		data.name = "prueba";
+		data = angular.toJson(data);
+		console.log(data);
+		// console.log(Upload);
+		var url= Routing.generate('_tatiSoft_soli_upload');
+        console.log(url);
+    	Upload.upload({
+            url: url,
+            method: 'POST',
+            file: $file,
+            data:{headers: {'Content-Type': undefined }
+            },
+            transformRequest: angular.identity
+        }).success(function(data) {
+            console.log('success');
+            console.log(data);
+            $scope.response.actividad.tareas[key].filePath = data.path;
+            $scope.response.actividad.tareas[key].fileName = data.nombre;
+            $scope.response.actividad.tareas[key].subido = true;
+        }).error(function(data) {
+          console.log('error block');
+          console.log(data);
+      });
     };
 
 });

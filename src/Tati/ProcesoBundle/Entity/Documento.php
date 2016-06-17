@@ -57,7 +57,7 @@ class Documento
      */
     public function setFile($file = null)
     {
-        var_dump($file);
+        //var_dump($file);
         $this->file = $file;
     }
 
@@ -119,10 +119,12 @@ class Documento
         //$extension = $this->getFile()->guessExtension();
         $extension = "pdf";
         $path = $this->getUploadRootDir().$nameFile.'.'.$extension;
-        var_dump($path);
+        $this->setPath($this->getUploadDir().$nameFile.'.'.$extension);
+        $this->setName($nameFile);
+        //var_dump($path);
 
         $respuesta = move_uploaded_file($this->getFile(), $path);
-        var_dump($respuesta);
+        //var_dump($respuesta);
     }
 
     /**
