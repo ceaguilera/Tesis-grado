@@ -5,6 +5,7 @@ namespace Tati\ProcesoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tati\ProcesoBundle\Entity\Tarea;
 use Tati\ProcesoBundle\Entity\Responsable;
+use Tati\ProcesoBundle\Entity\TareaSolicitada;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,15 +65,22 @@ class SolicitanteController extends Controller
 
             //$data = json_decode($request->getContent()->get('data'),true);
             $file = new File($request->files->get('file'));
-            $userName = "Carlos";
-            $name = "prueba";
+            // var_dump($request->get('userName'));
+            // var_dump($request->get('name'));
+            // var_dump($request->get('actividadRelacionada'));
+
+            $userName = $request->get('userName');
+            $name = $request->get('name');
+            $actividad = $this->getDoctrine()->getRepository('ProcesoBundle:ActividadSolicitada')->find($request->get('actividadRelacionada'));
             $documento = new Edocumento();
             $documento->setFile($file);
             $documento->setName($userName);
-            $documento->upload($name);
+            $documento->upload($name,$actividad->getSolicitud()->getNombreCarpeta(),$userName);
+            $documento->addActividadesSol($actividad);
             $em = $this->getDoctrine()->getManager();
             $em->persist($documento);
             $em->flush();
+            $this->get('GeneralService')->setStatusTareasSolicitadas($request->get('idTarea'));
             //var_dump("entro",$file);
 
             $response = new JsonResponse();
@@ -86,13 +94,28 @@ class SolicitanteController extends Controller
         
     }
 
-        public function getActividadAction($id){
+    public function getActividadAction($id){
 
             $response = $this->get('GeneralService')->getTareas($id);
+            $response['nombreUser'] = $this->getUser()->getUserName();
             return $this->render('ProcesoBundle:All:Solicitante/detalleActividad.html.twig',  array(
                     'data' =>  json_encode($response)
                 ));
         
+    }
+
+    public function ejecutarActividadAction(Request $request){
+
+        if ($request->isXmlHttpRequest()){
+            $data = json_decode($request->getContent(),true);
+            $status = $this->get('GeneralService')->setStatusActividadSolicitada($data['idActividad']);
+            if($status){
+                $response = new JsonResponse("Actividad ejecuada correctamente", 200);
+            }else{
+                $response = new JsonResponse("Hubo un error, falta alguna tarea por ser ejecutada", 500);
+            }
+            return $response;
+        }
     }
 
 }

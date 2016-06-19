@@ -236,6 +236,7 @@ class InformationService
         $response['id'] = $id;
 
         $actividades = $proceso->getActividades();
+
         foreach ($actividades as $actividad) {
                 $response2 = array();
                 $response2['id'] = $actividad->getId();

@@ -129,6 +129,11 @@ _tatiSoft_soli_getTask:
     options:
         expose: true
 
+_tatiSoft_soli_ejecutar_actividad:
+    pattern:  /solicitante/ejecutarAct
+    defaults: { _controller:  ProcesoBundle:Solicitante:ejecutarActividad}
+    options:
+        expose: true
 
 #rutas de usuario responsable
 

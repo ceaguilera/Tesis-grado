@@ -39,6 +39,7 @@ class Proceso
     /**
     *  @var integer
     * @ORM\OneToMany(targetEntity="Tati\ProcesoBundle\Entity\Actividad", mappedBy="Proceso", cascade={"persist"})
+    * @ORM\OrderBy({"id" = "ASC"})
     */
     private $actividades;
 

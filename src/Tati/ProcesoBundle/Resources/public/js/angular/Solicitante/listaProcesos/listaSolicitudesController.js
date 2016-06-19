@@ -37,130 +37,54 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 		})
 	}
 
-	// $scope.archivoM = function(a){
-	// 	console.log($scope.myFile);
-	// }
-
-	    $scope.upload = function ($file, key) {
-        // if (files && files.length) {
-        //     for (var i = 0; i < files.length; i++) {
-        // 		files[i]
-        //       var file = files[i];
-        //       if (!file.$error) {
-        //         Upload.upload({
-        //             url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-        //             data: {
-        //               username: $scope.username,
-        //               file: file  
-        //             }
-        //         }).then(function (resp) {
-        //             $timeout(function() {
-        //                 $scope.log = 'file: ' +
-        //                 resp.config.data.file.name +
-        //                 ', Response: ' + JSON.stringify(resp.data) +
-        //                 '\n' + $scope.log;
-        //             });
-        //         }, null, function (evt) {
-        //             var progressPercentage = parseInt(100.0 *
-        //             		evt.loaded / evt.total);
-        //             $scope.log = 'progress: ' + progressPercentage + 
-        //             	'% ' + evt.config.data.file.name + '\n' + 
-        //               $scope.log;
-        //         });
-        //       }
-        //     }
-        // }
-      	var data= {};
-   		console.log($file);
-		data.userName = "Carlos";
-		data.name = "prueba";
-		data = angular.toJson(data);
-		console.log(data);
-		// console.log(Upload);
-		var url= Routing.generate('_tatiSoft_soli_upload');
-        console.log(url);
-    	Upload.upload({
-            url: url,
-            method: 'POST',
-            file: $file,
-            data:{headers: {'Content-Type': undefined }
-            },
-            transformRequest: angular.identity
-        }).success(function(data) {
-            console.log('success');
-            console.log(data);
-            $scope.response.actividad.tareas[key].filePath = data.path;
-            $scope.response.actividad.tareas[key].fileName = data.nombre;
-            $scope.response.actividad.tareas[key].subido = true;
-        }).error(function(data) {
-          console.log('error block');
-          console.log(data);
-      });
+	 $scope.upload = function ($file, key) {
+	      	var json= {};
+	   		console.log($file);
+			var userName = $scope.response.nombreUser;
+			var name = $scope.response.actividad.tareas[key].nombre;
+			var idTarea = $scope.response.actividad.tareas[key].id;
+			var actividadRelacionada = response.actividad.id;
+			//json = angular.toJson(json);
+			console.log(json);
+			// console.log(Upload);
+			var url= Routing.generate('_tatiSoft_soli_upload');
+	        console.log(url);
+	    	Upload.upload({
+	            url: url,
+	            method: 'POST',
+	            file: $file,
+	            data:{headers: {'Content-Type': undefined}
+	            , 'userName': userName, 'name': name, 'actividadRelacionada': actividadRelacionada, 'idTarea': idTarea },
+	            transformRequest: angular.identity
+	        }).success(function(data) {
+	            console.log('success');
+	            console.log(data);
+	            $scope.response.actividad.tareas[key].filePath = data.path;
+	            $scope.response.actividad.tareas[key].fileName = data.nombre;
+	            $scope.response.actividad.tareas[key].subido = true;
+	        }).error(function(data) {
+	          console.log('error block');
+	          console.log(data);
+	      });
     };
 
+    $scope.ejecutarActividad = function(){
+    	var json = {};
+		json.idActividad = response.actividad.id;
+		json = angular.toJson(json);
+		var url= Routing.generate('_tatiSoft_soli_ejecutar_actividad');
+		//console.log(url);
+		$.ajax({
+			method: 'POST',
+			data: json,
+			url: url,
+			success: function(data) {
+				console.log(data);
+			},
+			error: function(e) {
+				console.log(e);
+			}
+		})
+    }
+
 });
-
-
-
-// listaSolicitudes.controller('listaSolicitudesController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-//     // $scope.$watch('files', function () {
-//     //     $scope.upload($scope.files);
-//     // });
-//     // $scope.$watch('file', function () {
-//     //     if ($scope.file != null) {
-//     //         $scope.files = [$scope.file]; 
-//     //     }
-//     // });
-//     // $scope.log = '';
-
-//     $scope.upload = function ($file) {
-//         // if (files && files.length) {
-//         //     for (var i = 0; i < files.length; i++) {
-//         // 		files[i]
-//         //       var file = files[i];
-//         //       if (!file.$error) {
-//         //         Upload.upload({
-//         //             url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-//         //             data: {
-//         //               username: $scope.username,
-//         //               file: file  
-//         //             }
-//         //         }).then(function (resp) {
-//         //             $timeout(function() {
-//         //                 $scope.log = 'file: ' +
-//         //                 resp.config.data.file.name +
-//         //                 ', Response: ' + JSON.stringify(resp.data) +
-//         //                 '\n' + $scope.log;
-//         //             });
-//         //         }, null, function (evt) {
-//         //             var progressPercentage = parseInt(100.0 *
-//         //             		evt.loaded / evt.total);
-//         //             $scope.log = 'progress: ' + progressPercentage + 
-//         //             	'% ' + evt.config.data.file.name + '\n' + 
-//         //               $scope.log;
-//         //         });
-//         //       }
-//         //     }
-//         // }
-//       var data= {};
-//    console.log($file);
-// 		data.userName = "Carlos";
-// 		data.name = "prueba";
-// 		data = angular.toJson(data);
-// 		// console.log(Upload);
-// 		var url= Routing.generate('_tatiSoft_soli_upload');
-//         console.log(url);
-//     	Upload.upload({
-//             url: url,
-//             method: 'POST',
-//             file: $file,
-//             data:{headers: {'Content-Type': undefined }
-//             },
-//             transformRequest: angular.identity
-//         }).success(function(data, status, headers, config) {
-//             console.log('success')
-//         }).error(function(data, status, headers, config) {
-//           console.log('error block')
-//       });
-//     };
-// }]);

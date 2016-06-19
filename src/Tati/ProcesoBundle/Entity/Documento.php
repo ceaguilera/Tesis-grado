@@ -94,7 +94,7 @@ class Documento
         return 'uploads/';
     }
 
-    public function upload($nameFile = null)
+    public function upload($nameFile = null, $carpetaRaiz, $subCarpeta)
     {
 
         if (null === $this->getFile()) {
@@ -104,10 +104,10 @@ class Documento
         // $pathTypeFile = $this->getPathTypeFile($typeFile);
         // $this->setSubDir($pathTypeFile.$subDir);
 
-        // Si no existe el directorio se crea el directorio
-        // if (!file_exists($this->getUploadRootDir())) {
-        //     mkdir($this->getUploadRootDir(),0755, true);
-        // }
+        //Si no existe el directorio se crea el directorio
+        if (!file_exists($this->getUploadDir().$carpetaRaiz.'/'.$subCarpeta)) {
+            mkdir($this->getUploadDir().$carpetaRaiz.'/'.$subCarpeta,0755, true);
+        }
 
 
         if (is_null($nameFile))
@@ -118,8 +118,8 @@ class Documento
         //print($this->getFile());
         //$extension = $this->getFile()->guessExtension();
         $extension = "pdf";
-        $path = $this->getUploadRootDir().$nameFile.'.'.$extension;
-        $this->setPath($this->getUploadDir().$nameFile.'.'.$extension);
+        $path = $this->getUploadDir().$carpetaRaiz.'/'.$subCarpeta.'/'.$nameFile.'.'.$extension;
+        $this->setPath($this->getUploadDir().$carpetaRaiz.'/'.$subCarpeta.'/'.$nameFile.'.'.$extension);
         $this->setName($nameFile);
         //var_dump($path);
 
