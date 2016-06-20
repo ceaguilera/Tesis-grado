@@ -1,0 +1,128 @@
+{% extends "ProcesoBundle:All:Responsable/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="listaActividadesModule" ng-controller="listaActividadesController" ng-cloak>
+
+  <div class="content">
+    <div class="content-container">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>{[{response.actividad.nombre}]}</strong></h2> 
+      </div>
+      <div class="col-md-10">
+        <label>Descripcion de la actividad: {[{response.actividad.descripcion}]}</label>
+      </div>
+       <!-- /.content-header -->
+<!--         <div class="row" style="margin-bottom: 15px;" ng-repeat="(key, tarea) in response.actividad.tareas track by $index">
+          <div class="col-md-3">
+            <strong>Nombre de Tarea: {[{tarea.nombre}]}{[{$index}]}</strong>
+          </div>
+          <div ng-if="!tarea.filePath">
+            <div class="col-md-3" ng-if="tarea.tipo == 1">
+              <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
+                Seleccione el archivo
+                </div>
+            </div>
+            <div class="col-md-3">
+              <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir</button>
+            </div>
+          </div>
+          <div ng-if="tarea.filePath">
+               <div class="col-md-3"><a target="_blank" href="{{ asset('{[{tarea.filePath}]}') }}">{[{tarea.fileName}]}</a></div>
+          </div>
+        </div> -->
+        <br>
+        <div class="row" ng-repeat="(key, tarea) in response.actividad.tareas track by $index">
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <strong>
+                  Nombre de Tarea Nro {[{$index+1}]}: {[{tarea.nombre}]}  
+                </strong>
+              </div>
+
+              <!-- Table -->
+              <div style="height: 60px;padding-top: 13px;">
+                <div class="col-md-3">Descripcion: {[{tarea.descripcion}]} 
+                </div>
+                <div ng-if="tarea.tipo == 1">
+                  <div ng-if="!tarea.filePath">
+                      <div class="col-md-3">
+                        <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
+                          Seleccione el archivo
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir
+                        </button>
+                      </div>
+                  </div>
+                  <div ng-if="tarea.filePath">
+                   <div class="col-md-3">
+                     <label>Archivo: </label>
+                     <a target="_blank" href="{{ asset('{[{tarea.filePath}]}') }}">
+                     {[{tarea.fileName}]}
+                     </a>
+                   </div>
+                  </div>
+                </div>
+                 <div ng-if="tarea.tipo == 2">
+                  <div>
+                      <div class="col-md-3" ng-repeat="(key, documento) in response.actividad.tareas[key].documentos track by $index">
+                        <div>
+                          Archivo: <a target="_blank" href="{{ asset('{[{documento.path}]}') }}">{[{documento.nombre}]}</a>
+                        </div>
+                        <br>
+                      </div>
+
+                      <div class="col-md-3">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Verificar
+                        </button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+
+        <div align="center">
+          <button ng-click="ejecutarActividad()" type="button" class="btn btn-secondary">Ejecutar Actividad</button>
+        </div>
+      </div>
+   </div>
+  </div>
+
+
+{#         <div>Username
+          <input type="text" ng-model="username"><br/><br/>
+          watching model:
+          <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
+          
+          Upload Log:
+          <pre>{[{log}]}</pre> #}
+      
+
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+          var response = "{{ data }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+     </script>
+    
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload-shim.min.js') }}"></script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+      <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesController.js') }}"></script>
+
+{% endblock %}

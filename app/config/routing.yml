@@ -161,6 +161,25 @@ _tatiSoft_resp_alert:
     options:
         expose: true
 
+_tatiSoft_resp_getTask:
+    pattern: /solicitante/detallseActividad/{id}
+    defaults: { _controller: ProcesoBundle:Responsable:getActividad}
+    options:
+        expose: true
+
+_tatiSoft_resp_setTask:
+    pattern: /solicitante/cambioStatusTarea
+    defaults: { _controller: ProcesoBundle:Responsable:statusTarea}
+    options:
+        expose: true
+
+_tatiSoft_resp_setActividad:
+    pattern: /solicitante/cambioStatusActividad
+    defaults: { _controller: ProcesoBundle:Responsable:ejecutarActividad}
+    options:
+        expose: true
+
+
 #Rutas de usurio administrador
 _tatiSoft_admin_listUsers:
     pattern:  /administrador/listaUsuarios

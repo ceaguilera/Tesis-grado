@@ -76,7 +76,7 @@ class SolicitanteController extends Controller
             $documento->setFile($file);
             $documento->setName($userName);
             $documento->upload($name,$actividad->getSolicitud()->getNombreCarpeta(),$userName);
-            $documento->addActividadesSol($actividad);
+            $documento->setActividadesSol($actividad);
             $em = $this->getDoctrine()->getManager();
             $em->persist($documento);
             $em->flush();

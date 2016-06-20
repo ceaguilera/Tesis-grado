@@ -14,3 +14,7 @@ services:
     GeneralService:
         class: Tati\ProcesoBundle\Resources\Services\GeneralService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    ResponsableService:
+        class: Tati\ProcesoBundle\Resources\Services\ResponsableService
+        arguments: ["@doctrine.orm.entity_manager"]

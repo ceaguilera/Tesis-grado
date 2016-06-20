@@ -37,11 +37,8 @@ class Documento
     public $usuarioSolicitante;
 
     /**
-     * @ORM\ManyToMany(targetEntity="ActividadSolicitada")
-     * JoinTable(name="actSol_documento",
-     *      joinColumns={@JoinColumn(name="documento_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="actSol_id", referencedColumnName="id")}
-     *      , nullable=true)
+     * @ORM\OneToOne(targetEntity="ActividadSolicitada")
+     * @ORM\JoinColumn(name="actividaSol_id", referencedColumnName="id", nullable=true)
      */
     public $actividades_sol;
 
@@ -214,33 +211,25 @@ class Documento
         return $this->usuarioSolicitante;
     }
 
+
+
     /**
-     * Add actividades_sol
+     * Set actividades_sol
      *
      * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol
      * @return Documento
      */
-    public function addActividadesSol(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol)
+    public function setActividadesSol(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol = null)
     {
-        $this->actividades_sol[] = $actividadesSol;
+        $this->actividades_sol = $actividadesSol;
 
         return $this;
     }
 
     /**
-     * Remove actividades_sol
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol
-     */
-    public function removeActividadesSol(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol)
-    {
-        $this->actividades_sol->removeElement($actividadesSol);
-    }
-
-    /**
      * Get actividades_sol
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
      */
     public function getActividadesSol()
     {

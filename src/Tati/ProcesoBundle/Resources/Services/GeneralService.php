@@ -35,6 +35,17 @@ class GeneralService
             $tareaAux['nombre'] = $tarea->getNombre();
             $tareaAux['tipo'] = $tarea->getTipoTarea()->getId();
             $tareaAux['descripcion'] = $tarea->getDescripcion();
+            if($tareaAux['tipo'] == 2){
+                $documentos = array();
+                $documentosRelacionados = $this->em->getRepository('ProcesoBundle:Documento')
+                ->findBy(array('actividades_sol' => $id));
+                foreach ($documentosRelacionados as $documento) {
+                    $docAux['nombre'] = $documento->getName();
+                    $docAux['path'] = $documento-> getPath();
+                    array_push($documentos, $docAux);
+                }
+                $tareaAux['documentos'] = $documentos;
+            }
             array_push($tareas, $tareaAux);
         }
         $response['actividad']['tareas'] = $tareas;
@@ -65,7 +76,16 @@ class GeneralService
         }else{
             $actividad->setStatus(true);
             $actividadSig = $actividad->getActSig();
-            $actividadSig->setActiva(true);
+            if($actividadSig != null){
+                $documentos = $this->em->getRepository('ProcesoBundle:Documento')
+                ->findBy(array('actividades_sol' => $id));
+                foreach ($documentos as $key => $documento) {
+                    $documento->setActividadesSol($actividadSig);
+                    $this->em->persist($documento);
+                    $this->em->flush();
+                }
+                $actividadSig->setActiva(true);                
+            }
             $actividad->setActiva(false);
             $this->em->persist($tarea);
             $this->em->flush();
