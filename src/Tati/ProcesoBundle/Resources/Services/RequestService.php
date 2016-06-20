@@ -107,6 +107,11 @@ class RequestService
 
         $actividadSolicitud = $solicitud->getActividades();
         //var_dump($actividadSolicitud[0]->getResponsable()->getId());
+        //se activa la primera actividad
+        $actividadSolicitud[0]->setActiva(true);
+        $this->em->persist($actividadSolicitud[0]);
+        $this->em->flush();
+        
         $response = array();
         if($actividadSolicitud[0]->getResponsable()->getId() == 5){
             $response['actividad'] = true;
@@ -120,7 +125,7 @@ class RequestService
 
     public function listaActividadesSol($data){
         $actividades = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->findBy(array(
-        'solicitante' => $data['idSolicitante']));
+        'solicitante' => $data['idSolicitante'], 'activa' => true));
 
         $response = array();
 
