@@ -94,6 +94,14 @@ class ActividadSolicitada
     private $tareas;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="fechaActivacion", type="date", nullable=true)
+     */
+    private $fechaActivacion;
+
+
+    /**
      * Constructor
      */
     public function __construct()

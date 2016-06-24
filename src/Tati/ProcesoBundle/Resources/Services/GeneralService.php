@@ -8,6 +8,7 @@ use Tati\ProcesoBundle\Entity\UnidadAcademica as EUni;
 use Tati\ProcesoBundle\Entity\PerfilSolicitante as EPS;
 use Tati\ProcesoBundle\Entity\PerfilResponsable as EPR;
 use Tati\ProcesoBundle\Entity\Responsable as EResponsanble;
+use Tati\ProcesoBundle\Entity\Notificaciones as ENotificacion;
 
 class GeneralService
 {
@@ -91,6 +92,28 @@ class GeneralService
             $this->em->flush();
             return true;     
         }
+    }
+
+    public function generarNotificacion($user, $tipoNotificacion, $actividad){
+
+        $notificacion = new ENotificacion();
+        $notificacion->setReceptor($user);
+        $notificacion->setTipo($tipoNotificacion);
+        $notificacion->getVisto(false);
+        $nombreActividad = $actividad->getNombre();
+        $nombreProceso = $actividad->getProceso()->getNombre();
+
+        if($tipoNotificacion == 1){
+            $notificacion->setMensaje("Nueva actividad "+$nombreActividad+
+                " proviniente del proceso"+$nombreProceso);
+        }else if($tipoNotificacion == 2){
+            $notificacion->setMensaje("Parece que esta actividad vencida "+$nombreActividad+
+                " proviniente del proceso"+$nombreProceso);
+        }
+
+        $this->em->persist($notificacion);
+        $this->em->flush();
+
     }
 
 

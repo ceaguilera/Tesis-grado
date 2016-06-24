@@ -212,4 +212,27 @@ class Documento
     }
 
 
+
+    /**
+     * Set actividades_sol
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol
+     * @return Documento
+     */
+    public function setActividadesSol(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividadesSol = null)
+    {
+        $this->actividades_sol = $actividadesSol;
+
+        return $this;
+    }
+
+    /**
+     * Get actividades_sol
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActividadesSol()
+    {
+        return $this->actividades_sol;
+    }
 }

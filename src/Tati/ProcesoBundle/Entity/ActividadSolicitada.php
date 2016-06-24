@@ -94,6 +94,14 @@ class ActividadSolicitada
     private $tareas;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="fecha_activacion", type="date", nullable=true)
+     */
+    private $fechaActivacion;
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -373,5 +381,28 @@ class ActividadSolicitada
     public function getActiva()
     {
         return $this->activa;
+    }
+
+    /**
+     * Set fechaActivacion
+     *
+     * @param \DateTime $fechaActivacion
+     * @return ActividadSolicitada
+     */
+    public function setFechaActivacion($fechaActivacion)
+    {
+        $this->fechaActivacion = $fechaActivacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaActivacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaActivacion()
+    {
+        return $this->fechaActivacion;
     }
 }

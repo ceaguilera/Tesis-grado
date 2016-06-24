@@ -23,7 +23,7 @@ class ASActividadesVencidasCommand extends ContainerAwareCommand
     {
         $this
             ->setName('tati:actividad:vencidas')
-            ->setDescription('Verificacion de actividades venciadas')
+            ->setDescription('Agente de software que verifica si hay alguna actividad con el tiempo de ejecucion vencido')
         ;
     }
 
@@ -32,6 +32,33 @@ class ASActividadesVencidasCommand extends ContainerAwareCommand
         global $kernel;
 		$container = $kernel->getContainer();
         //print("ejecutado");
+        //Se obtiene la fecha actual
+        $fechaActual = new \DateTime();
+        //Se obtienen todas las actividades solicitadas (revisar lo del $doctrine)
+        $actividades = $container->$doctrine->getRepository('ProcesoBundle:ActividadSolicitada')->finBy((array('activa' => true )));
+
+        foreach ($actividades as $actividad) {
+            $fechaActivacion = $actividad->getFechaActivacion();
+            //$diferencia = se hace la diferencia entre la fecha de activacion y el dia actual 
+            //Se verifica si alguna actividad se le vencio el tiempo de ejecucion
+            if($diferencia > $actividad->getTiempo()){
+                if($actividad->getSolicitante != null)
+                {
+                    $user = $actividad->getSolicitante()->getUser();
+                    $container->get('GeneralService')->generarNotificacion($user,2,$actividad);
+                }
+                else{
+                    $users = $container->$doctrine->getRepository('ProcesoBundle:PerfilResponsable')
+                    ->findBy(array('tipoResponsable' => $actividad->getResponsable()->getId()));
+                    //Se genera una notificacion a cada usuario que sea de ese tipo de responsable
+                    foreach ($users as $userResponsable) {
+                       $container->get('GeneralService')->generarNotificacion($userResponsable
+                        ->getUser(),2,$actividad);
+                    }
+                }
+            }
+        }
+
         $output->writeln("ejecutado el comando de actividades\n");
         // $command = new TransferReservationExpirationCommand();
         // $response = $container->get('CommandBus')->execute($command);
