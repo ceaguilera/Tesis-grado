@@ -24,6 +24,8 @@
   </head>
   <body>
       {% set notificaciones = app.session.get("notificationesAlertas") %}
+      {% set notificacionesNormales = app.session.get("notificationesNormales") %}
+
       <div class="navbar">
 
     <div class="container">
@@ -42,60 +44,59 @@
 
       <div class="navbar-collapse collapse">
 
-        
-
         <ul class="nav navbar-nav noticebar navbar-left">
 
           <li class="dropdown">
-            <a href="page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell"></i>
-              <span class="navbar-visible-collapsed">&nbsp;Notifications&nbsp;</span>
-              <span class="badge">3</span>
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+            
+              {% if notificacionesNormales is defined %}
+             
+                {% if notificacionesNormales|length > 0 %}
+                  <span 
+                  
+                         class="badge">
+                         {{notificaciones|length}}
+                  </span>
+                  <i class="fa fa-bell" style="color:#FFF"></i>
+                {% else %}
+                  <i class="fa fa-bell"></i>
+                {% endif %}
+              {% endif %}
+              <span class="navbar-visible-collapsed">&nbsp;Alerts&nbsp;</span>
             </a>
 
             <ul class="dropdown-menu noticebar-menu" role="menu">
               <li class="nav-header">
                 <div class="pull-left">
-                  Notificaciones
+                Notificaciones
                 </div>
 
               </li>
-              
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-cloud-upload text-success"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Templates Synced</strong>
-                    <span class="noticebar-item-text">20 Templates have been synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 12 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-ban text-danger"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Sync Error</strong>
-                    <span class="noticebar-item-text">5 Designs have been failed to be synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
+              {% if notificacionesNormales is empty %}
+                <li class="noticebar-empty">                  
+                  <h4 class="noticebar-empty-title">No alerts here.</h4>
+                  <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+                </li>
+              {% else %}
+                {% for notificacion in notificacionesNormales %}
+                <li>
+                  <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
+                    <span class="noticebar-item-image">
+                      <i class="fa fa-calendar-o" style="color:rgba(87, 172, 214, 0.99)"></i>
+                    </span>
+                    <span class="noticebar-item-body">
+                      <strong class="noticebar-item-title">¡Hola!</strong>
+                      <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
+                    </span>
+                  </a>
+                </li>
+                {% endfor %}
+              {% endif %}
               <li class="noticebar-menu-view-all">
-                <a href="page-notifications.html">View All Notifications</a>
+                <a href="page-notifications.html">Ver historial de Notificaciones</a>
               </li>
             </ul>
           </li>
-
-
-
 
           <li class="dropdown">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">

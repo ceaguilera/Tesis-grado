@@ -92,6 +92,20 @@ class GeneralService
                 $actividadSig->setActiva(true);
                 $fecha = new \DateTime();
                 $actividadSig->setFechaActivacion($fecha);
+                if($actividadSig->getSolicitante()!=null)
+                {
+                    $this->generarNotificacion($actividadSig->getSolicitante(),1,$actividadSig);
+                }
+                else{
+                    $users = $this->em->getRepository('ProcesoBundle:PerfilResponsable')
+                ->findBy(array('responsable' => $actividadSig->getResponsable()->getId()));
+
+                    foreach ($users as $user) {
+                        $this->generarNotificacion($user->getUser(),1,$actividadSig);
+                    }
+                }
+
+
                 $this->em->persist($actividadSig);
 
             }
@@ -135,7 +149,7 @@ class GeneralService
         // dump("")
 
         $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false));
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 2));
 
         $getNotificaciones = array();
 
@@ -149,6 +163,30 @@ class GeneralService
         }
         //return $notificaciones;
         $container->get('session')->set("notificationesAlertas", $getNotificaciones);
+
+    }
+
+    public function getNotificacionesNormales($userId){
+        global $kernel;
+        $container = $kernel->getcontainer();
+        // dump($container->get('session'));
+        // dump("")
+
+        $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 1));
+
+        $getNotificaciones = array();
+
+        foreach ($notificaciones as $notificacion) {
+
+            $notificacionAux = array();
+            $notificacionAux['mensaje'] = $notificacion->getMensaje();
+            $notificacionAux['idActividad'] = $notificacion->getActividad()->getId();
+            //agreagar el id de la actividad
+            array_push($getNotificaciones, $notificacionAux);
+        }
+        //return $notificaciones;
+        $container->get('session')->set("notificationesNormales", $getNotificaciones);
 
     }
 

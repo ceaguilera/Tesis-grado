@@ -17,6 +17,7 @@ class ResponsableController extends Controller
 {
     public function pendingActivitiesAction(){
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $responsable  = $this->getUser()->getPerfilResponsable()->getResponsable()->getId();
         $response = $this->get('ResponsableService')->listaActividadesSol($responsable);
         return $this->render('ProcesoBundle:All:Responsable/actividadesPendientes.html.twig', array(
@@ -26,14 +27,17 @@ class ResponsableController extends Controller
     }
 
     public function endActivitiesAction(){
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         return $this->render('ProcesoBundle:All:Responsable/actividadesTerminadas.html.twig');
     }
 
     public function fileAction(){
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         return $this->render('ProcesoBundle:All:Responsable/archivos.html.twig');
     }
 
     public function alertAction(){
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         return $this->render('ProcesoBundle:All:Responsable/alertas.html.twig');
     }
 
