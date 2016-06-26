@@ -25,6 +25,7 @@
   <body>
       {% set notificaciones = app.session.get("notificationesAlertas") %}
       {% set notificacionesNormales = app.session.get("notificationesNormales") %}
+      {% set nombre = app.session.get("userNombre") %}
 
       <div class="navbar">
 
@@ -157,13 +158,9 @@
         <ul class="nav navbar-nav navbar-right">   
 
           <li>
-            <a href="javascript:;">About</a>
+            <a href=""><strong>Bienvenido {{nombre}}</strong></a>
           </li>    
             
-          <li>
-            <a href="javascript:;">Resources</a>
-          </li>    
-
           <li class="dropdown navbar-profile">
             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
               <img src="{{ asset('bundles/proceso/img/avatars/avatar.png') }}" class="navbar-profile-avatar" alt="">

@@ -57,7 +57,16 @@ class SecurityController extends Controller
         //     dump(get_class_methods($user));
         //     $this->get('GeneralService')->getNotificacionesAlertas($user->getId());
         // }
+        // $user = $this->get('security.context')->gettoken()->getuser();
+        // if($user != "anon."){
+            
+        //     if($user->getperfilsolicitante()!=null)
+        //         $nombre = $user->getperfilsolicitante()->nombre();
+        //     else
+        //         $nombre = $user->getperfilresponsable()->nombre();
 
+        //     $this->get('session')->set("usernombre", $nombre);
+        // }
 
 
         return $this->renderLogin(array(

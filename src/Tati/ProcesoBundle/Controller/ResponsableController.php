@@ -18,6 +18,13 @@ class ResponsableController extends Controller
     public function pendingActivitiesAction(){
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
+        $user = $this->getUser();
+        if($user->getPerfilSolicitante()!=null)
+                $nombre = $user->getPerfilSolicitante()->getNombre();
+            else
+                $nombre = $user->getPerfilResponsable()->getNombre();
+
+        $this->get('session')->set("userNombre", $nombre);
         $responsable  = $this->getUser()->getPerfilResponsable()->getResponsable()->getId();
         $response = $this->get('ResponsableService')->listaActividadesSol($responsable);
         return $this->render('ProcesoBundle:All:Responsable/actividadesPendientes.html.twig', array(
