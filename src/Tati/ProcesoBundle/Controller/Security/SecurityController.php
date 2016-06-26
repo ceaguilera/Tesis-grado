@@ -50,6 +50,16 @@ class SecurityController extends Controller
                 : null;
         }
 
+        // //inyecta notificaciones a la sesion
+        // $user = $this->get('Security.context')->getToken()->getUser();
+        // dump($user);
+        // if($user != "anon."){
+        //     dump(get_class_methods($user));
+        //     $this->get('GeneralService')->getNotificacionesAlertas($user->getId());
+        // }
+
+
+
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
             'error' => $error,

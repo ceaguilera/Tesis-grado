@@ -9,6 +9,9 @@ use Tati\ProcesoBundle\Entity\PerfilSolicitante as EPS;
 use Tati\ProcesoBundle\Entity\PerfilResponsable as EPR;
 use Tati\ProcesoBundle\Entity\Responsable as EResponsanble;
 use Tati\ProcesoBundle\Entity\Notificaciones as ENotificacion;
+use Symfony\Component\HttpFoundation\Session\Session;
+//use Tati\ProcesoBundle\Adapter\CoreSession;
+//use Tati\ProcesoBundle\Adapter\CoreTranslator;
 use \DateTime;
 
 class GeneralService
@@ -120,6 +123,29 @@ class GeneralService
         }
         $this->em->persist($notificacion);
         $this->em->flush();
+
+    }
+
+    public function getNotificacionesAlertas($userId){
+        global $kernel;
+        $container = $kernel->getcontainer();
+        // dump($container->get('session'));
+        // dump("")
+
+        $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
+                ->findBy(array('receptor' => $userId, 'visto' => false));
+
+        $getNotificaciones = array();
+
+        foreach ($notificaciones as $notificacion) {
+
+            $notificacionAux = array();
+            $notificacionAux['mensaje'] = $notificacion->getMensaje();
+            //agreagar el id de la actividad
+            array_push($getNotificaciones, $notificacionAux);
+        }
+        //return $notificaciones;
+        $container->get('session')->set("notificationesAlertas", $getNotificaciones);
 
     }
 
