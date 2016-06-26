@@ -109,7 +109,9 @@ class GeneralService
         $notificacion->setReceptor($user);
         $notificacion->setTipo($tipoNotificacion);
         $notificacion->getVisto(false);
+        $notificacion->setActividad($actividad);
         $nombreActividad = $actividad->getNombre();
+        $idActividad = $actividad->getId();
         $nombreProceso = $actividad->getSolicitud()->getProceso()->getNombre();
 
         if($tipoNotificacion == 1){
@@ -118,8 +120,8 @@ class GeneralService
         }else if($tipoNotificacion == 2){
             $actividad->setNotificacionVencida(true);
             $this->em->persist($actividad);
-            $notificacion->setMensaje("Parece que esta actividad vencida ".$nombreActividad.
-                " proviniente del proceso".$nombreProceso);
+            $notificacion->setMensaje("Parece que la actividad #".$idActividad." ".$nombreActividad.
+                " proviniente del proceso ".$nombreProceso." tiene el tiempo de ejecución VENCIDO");
         }
         $this->em->persist($notificacion);
         $this->em->flush();
@@ -141,6 +143,7 @@ class GeneralService
 
             $notificacionAux = array();
             $notificacionAux['mensaje'] = $notificacion->getMensaje();
+            $notificacionAux['idActividad'] = $notificacion->getActividad()->getId();
             //agreagar el id de la actividad
             array_push($getNotificaciones, $notificacionAux);
         }

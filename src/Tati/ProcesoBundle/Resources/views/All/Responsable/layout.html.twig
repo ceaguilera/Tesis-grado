@@ -103,7 +103,13 @@
               {% if notificaciones is defined %}
              
                 {% if notificaciones|length > 0 %}
-                  <span style="" class="badge">{{notificaciones|length}}</span>
+                  <span 
+                  style="color: #FFFFFF;
+                         border-color: #DAD700;
+                         background: transparent;" 
+                         class="badge">
+                         {{notificaciones|length}}
+                  </span>
                   <i class="fa fa-exclamation-triangle" style="color:#DAD700;"></i>
                 {% else %}
                   <i class="fa fa-exclamation-triangle"></i>
@@ -127,12 +133,12 @@
               {% else %}
                 {% for notificacion in notificaciones %}
                 <li>
-                  <a href="page-notifications.html" class="noticebar-item">
+                  <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
                     <span class="noticebar-item-image">
                       <i class="fa fa-exclamation-triangle" style="color:#DAD700"></i>
                     </span>
                     <span class="noticebar-item-body">
-                      <strong class="noticebar-item-title">Nueva alerta</strong>
+                      <strong class="noticebar-item-title">¡Hola!</strong>
                       <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
                     </span>
                   </a>

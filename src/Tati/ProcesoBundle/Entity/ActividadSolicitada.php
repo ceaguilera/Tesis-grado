@@ -113,6 +113,10 @@ class ActividadSolicitada
     private $notificacionVencida;
 
     /**
+     * @ORM\OneToMany(targetEntity="Notificaciones", mappedBy="actividad", cascade={"persist"})
+     */
+    private $notificaciones;
+    /**
      * Constructor
      */
     public function __construct()
@@ -472,5 +476,38 @@ class ActividadSolicitada
     public function getNotificacionVencida()
     {
         return $this->notificacionVencida;
+    }
+
+    /**
+     * Add notificaciones
+     *
+     * @param \Tati\ProcesoBundle\Entity\Notificaciones $notificaciones
+     * @return ActividadSolicitada
+     */
+    public function addNotificacione(\Tati\ProcesoBundle\Entity\Notificaciones $notificaciones)
+    {
+        $this->notificaciones[] = $notificaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove notificaciones
+     *
+     * @param \Tati\ProcesoBundle\Entity\Notificaciones $notificaciones
+     */
+    public function removeNotificacione(\Tati\ProcesoBundle\Entity\Notificaciones $notificaciones)
+    {
+        $this->notificaciones->removeElement($notificaciones);
+    }
+
+    /**
+     * Get notificaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotificaciones()
+    {
+        return $this->notificaciones;
     }
 }

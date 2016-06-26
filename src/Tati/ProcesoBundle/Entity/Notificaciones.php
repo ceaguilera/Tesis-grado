@@ -65,6 +65,11 @@ class Notificaciones
     private $mensaje;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ActividadSolicitada", inversedBy="notificaciones")
+     * @ORM\JoinColumn(name="actividad_id", referencedColumnName="id")
+     */
+    private $actividad;
+    /**
      * Get id
      *
      * @return integer 
@@ -210,5 +215,28 @@ class Notificaciones
     public function getMensaje()
     {
         return $this->mensaje;
+    }
+
+    /**
+     * Set actividad
+     *
+     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividad
+     * @return Notificaciones
+     */
+    public function setActividad(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividad = null)
+    {
+        $this->actividad = $actividad;
+
+        return $this;
+    }
+
+    /**
+     * Get actividad
+     *
+     * @return \Tati\ProcesoBundle\Entity\ActividadSolicitada 
+     */
+    public function getActividad()
+    {
+        return $this->actividad;
     }
 }
