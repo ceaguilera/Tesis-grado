@@ -46,7 +46,7 @@ class Notificaciones
     private $tipo;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json_array", nullable=true)
      * 
      */
     private $datos;

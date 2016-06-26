@@ -3,7 +3,7 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 	$scope.response = response;
 	$scope.solicitud = {};
 
-	$scope.ejecutarActividad = function(idActividad){
+	$scope.detalleActividad = function(idActividad){
 		var url = Routing.generate('_tatiSoft_resp_getTask', { id: idActividad});
 		$window.location.href = url;
 	}

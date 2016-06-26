@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class ResponsableController extends Controller
 {
     public function pendingActivitiesAction(){
-        $responsable  = $this->getUser()->getPerfilResponsable()->getTipoResponsable()->getId();
+        $responsable  = $this->getUser()->getPerfilResponsable()->getResponsable()->getId();
         $response = $this->get('ResponsableService')->listaActividadesSol($responsable);
         return $this->render('ProcesoBundle:All:Responsable/actividadesPendientes.html.twig', array(
                     'data' =>  json_encode($response)

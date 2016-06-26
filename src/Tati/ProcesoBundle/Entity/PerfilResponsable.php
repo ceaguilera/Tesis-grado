@@ -36,16 +36,13 @@ class PerfilResponsable
      */
     private $cargo;
 
+
     /**
      * @ORM\OneToOne(targetEntity="Responsable")
      * @ORM\JoinColumn(name="tipoResponsable_id", referencedColumnName="id")
      */
-    private $tipoResponsable;
+    private $responsable;
 
-    /**
-     * @ORM\OneToMany(targetEntity="ActividadSolicitada", mappedBy="usuarioSolicitante", cascade={"persist"})
-     */
-    private $actividades;
 
     /**
      * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="responsable")
@@ -60,11 +57,11 @@ class PerfilResponsable
     private $unidadAcademcia;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="PerfilResponsable")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="User", mappedBy="perfilResponsable", cascade={"persist"})
      */
     private $user;
 
+ 
     /**
      * Constructor
      */
@@ -72,6 +69,8 @@ class PerfilResponsable
     {
         $this->actividades = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -127,62 +126,6 @@ class PerfilResponsable
     public function getCargo()
     {
         return $this->cargo;
-    }
-
-    /**
-     * Set tipoResponsable
-     *
-     * @param \Tati\ProcesoBundle\Entity\Responsable $tipoResponsable
-     * @return PerfilResponsable
-     */
-    public function setTipoResponsable(\Tati\ProcesoBundle\Entity\Responsable $tipoResponsable = null)
-    {
-        $this->tipoResponsable = $tipoResponsable;
-
-        return $this;
-    }
-
-    /**
-     * Get tipoResponsable
-     *
-     * @return \Tati\ProcesoBundle\Entity\Responsable 
-     */
-    public function getTipoResponsable()
-    {
-        return $this->tipoResponsable;
-    }
-
-    /**
-     * Add actividades
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades
-     * @return PerfilResponsable
-     */
-    public function addActividade(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades)
-    {
-        $this->actividades[] = $actividades;
-
-        return $this;
-    }
-
-    /**
-     * Remove actividades
-     *
-     * @param \Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades
-     */
-    public function removeActividade(\Tati\ProcesoBundle\Entity\ActividadSolicitada $actividades)
-    {
-        $this->actividades->removeElement($actividades);
-    }
-
-    /**
-     * Get actividades
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getActividades()
-    {
-        return $this->actividades;
     }
 
     /**
@@ -252,5 +195,28 @@ class PerfilResponsable
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set responsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\Responsable $responsable
+     * @return PerfilResponsable
+     */
+    public function setResponsable(\Tati\ProcesoBundle\Entity\Responsable $responsable = null)
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * Get responsable
+     *
+     * @return \Tati\ProcesoBundle\Entity\Responsable 
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
     }
 }

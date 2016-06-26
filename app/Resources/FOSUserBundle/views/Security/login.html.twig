@@ -60,7 +60,7 @@
 
 
 
-    <div class="account-body" style="margin-top: 10%;">
+    <div class="account-body" style="margin-top: 3%;margin-bottom: -10%;">
 
       <h3 class="account-body-title" style="font-weight: bold;font-family: inherit;">Bienvenido a TatiSoft</h3>
 
@@ -87,9 +87,9 @@
             </label>
           </div>
 
-          <div class="pull-right">
+          <!-- <div class="pull-right">
             <a href="account-forgot.html">Olvidaste tu contraseña?</a>
-          </div>
+          </div> -->
         </div> <!-- /.form-group -->
 
         <div class="form-group">
@@ -121,3 +121,6 @@
 </body>
 
 {% endblock fos_user_content %}
+{% block footer%}
+{% include "ProcesoBundle:All:Especialista/footer.html.twig" %}
+{% endblock footer%}

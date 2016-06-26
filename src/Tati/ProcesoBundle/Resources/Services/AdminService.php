@@ -23,14 +23,14 @@ class AdminService
 
     public function getListUsers(){
 
-        $user = $this->em->getRepository('ProcesoBundle:User')->find(1);
+        //$user = $this->em->getRepository('ProcesoBundle:User')->find(1);
         $users = $this->em->getRepository('ProcesoBundle:User')->findAll();         
         $response = array();
-        dump(get_class_methods($user));
+        //dump(get_class_methods($user));
         foreach($users as $user){
             $usuario = array();
             $usuario['id'] = $user->getId();
-            $usuario['userName'] = $user->getUsername();
+            $usuario['userName'] = $user->getUserName();
             $usuario['email'] = $user->getEmail();
             $usuario['rol'] = $user->getRoles()[0];
             $usuario['lastLogin'] = $user->getLastLogin();
@@ -118,7 +118,7 @@ class AdminService
             }else{
                 $responsable = $this->em->getRepository('ProcesoBundle:Responsable')->find($data['datos']['responsable']);
             }
-            $perfilResponsable->setTipoResponsable($responsable);
+            $perfilResponsable->setResponsable($responsable);
             $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
             $perfilResponsable->setDepartamento($departamento);
             $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);

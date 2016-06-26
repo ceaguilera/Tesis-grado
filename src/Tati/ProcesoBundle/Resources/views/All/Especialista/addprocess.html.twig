@@ -34,32 +34,31 @@
                     </div>
                     <div class="portlet-content">
                       <div class="row">
-                              <div class="col-xs-6">
+                              <div class="col-xs-4">
                                  <label>Nombre de la actividad:</label>
                                  <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre">
-                                 <br>
-                                 <label>Responsable:</label>
+                              </div>
+                              <div class="col-xs-4">
+                                <label>Responsable:</label>
                                   <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable">
                                       <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                   </select>
                               </div>
-                              <div class="col-xs-6">
+                              <div class="col-xs-4">
                                 <label>Tiempo:</label>
-                                <select class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo">
-                                  <option value="">Seleccione</option>
-                                  <option value="24 horas">24 horas</option>
-                                  <option value="48 horas">48 horas</option>
-                                  <option value="72 horas">72 horas</option>
-                                  <option value="96 horas">96 horas</option>
-                                </select>
-                                <br>
-                                 <label>Descripcion:</label>
-                                 <textarea class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion"></textarea>
+                                <input type="number" min="0" placeholder="Numero de días" class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo">  
                               </div> 
+                      </div>
+                    <div class="portlet-content">
+                      <div class="row">
+                        <div class="col-xs-16">
+                          <label>Descripcion:</label>
+                          <textarea style="height: 90px;" class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion"></textarea>
                         </div>
-                        <br>
-                        <hr>
+                      </div>
+                      <hr>
+                    </div>
                     </div>
                     <div class="row">
                       <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas track by $index"  >

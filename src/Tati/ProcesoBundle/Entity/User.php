@@ -20,12 +20,14 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="PerfilSolicitante", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="PerfilSolicitante", inversedBy="user",  cascade={"persist"})
+     * @ORM\JoinColumn(name="sSolicitante_id", referencedColumnName="id")
      */
     private $perfilSolicitante;
 
     /**
-     * @ORM\OneToOne(targetEntity="PerfilResponsable", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="PerfilResponsable", inversedBy="user",  cascade={"persist"})
+     * @ORM\JoinColumn(name="pResponsable_id", referencedColumnName="id")
      */
     private $perfilResponsable;
 
@@ -34,54 +36,6 @@ class User extends BaseUser
      */
     private $notificaciones;
 
-
-
-
-    /**
-     * Set perfilSolicitante
-     *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante
-     * @return User
-     */
-    public function setPerfilSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante = null)
-    {
-        $this->perfilSolicitante = $perfilSolicitante;
-
-        return $this;
-    }
-
-    /**
-     * Get perfilSolicitante
-     *
-     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
-     */
-    public function getPerfilSolicitante()
-    {
-        return $this->perfilSolicitante;
-    }
-
-    /**
-     * Set perfilResponsable
-     *
-     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable
-     * @return User
-     */
-    public function setPerfilResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable = null)
-    {
-        $this->perfilResponsable = $perfilResponsable;
-
-        return $this;
-    }
-
-    /**
-     * Get perfilResponsable
-     *
-     * @return \Tati\ProcesoBundle\Entity\PerfilResponsable 
-     */
-    public function getPerfilResponsable()
-    {
-        return $this->perfilResponsable;
-    }
 
     /**
      * Add notificaciones
@@ -114,5 +68,51 @@ class User extends BaseUser
     public function getNotificaciones()
     {
         return $this->notificaciones;
+    }
+
+    /**
+     * Set perfilResponsable
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable
+     * @return User
+     */
+    public function setPerfilResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $perfilResponsable = null)
+    {
+        $this->perfilResponsable = $perfilResponsable;
+
+        return $this;
+    }
+
+    /**
+     * Get perfilResponsable
+     *
+     * @return \Tati\ProcesoBundle\Entity\PerfilResponsable 
+     */
+    public function getPerfilResponsable()
+    {
+        return $this->perfilResponsable;
+    }
+
+    /**
+     * Set perfilSolicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante
+     * @return User
+     */
+    public function setPerfilSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $perfilSolicitante = null)
+    {
+        $this->perfilSolicitante = $perfilSolicitante;
+
+        return $this;
+    }
+
+    /**
+     * Get perfilSolicitante
+     *
+     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
+     */
+    public function getPerfilSolicitante()
+    {
+        return $this->perfilSolicitante;
     }
 }

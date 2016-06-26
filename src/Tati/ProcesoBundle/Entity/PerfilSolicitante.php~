@@ -65,8 +65,7 @@ class PerfilSolicitante
     private $documentos;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="PerfilSolicitante")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="User", mappedBy="perfilSolicitante;", cascade={"persist"})
      */
     private $user;
  

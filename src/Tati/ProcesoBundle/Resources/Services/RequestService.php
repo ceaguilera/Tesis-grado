@@ -109,6 +109,7 @@ class RequestService
         //var_dump($actividadSolicitud[0]->getResponsable()->getId());
         //se activa la primera actividad
         $actividadSolicitud[0]->setActiva(true);
+        $actividadSolicitud[0]->setFechaActivacion($fecha);
         $this->em->persist($actividadSolicitud[0]);
         $this->em->flush();
         

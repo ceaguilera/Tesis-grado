@@ -37,7 +37,7 @@ class Documento
     public $usuarioSolicitante;
 
     /**
-     * @ORM\OneToOne(targetEntity="ActividadSolicitada")
+     * @ORM\ManyToOne(targetEntity="ActividadSolicitada", inversedBy="documentos", cascade={"persist"})
      * @ORM\JoinColumn(name="actividaSol_id", referencedColumnName="id", nullable=true)
      */
     public $actividades_sol;
@@ -210,7 +210,6 @@ class Documento
     {
         return $this->usuarioSolicitante;
     }
-
 
 
     /**

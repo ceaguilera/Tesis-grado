@@ -16,7 +16,8 @@ class LoadResponsableData extends AbstractFixture implements OrderedFixtureInter
             "Departamento",
             "Asuntos profesorales",
             "Consejo de facultad",
-            "Unidad academica"
+            "Unidad academica",
+            "Solicitante"
             );
         //Carga de datos de una tarea nueva
         foreach ($responsables as $responsable){

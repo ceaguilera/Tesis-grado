@@ -69,9 +69,9 @@ class Actividad
     private $Proceso;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="tiempo", type="string", length=100)
+     * @ORM\Column(name="tiempo", type="integer")
      */
     private $tiempo;
 
@@ -150,28 +150,7 @@ class Actividad
         return $this->descripcion;
     }
 
-    /**
-     * Set tiempo
-     *
-     * @param string $tiempo
-     * @return Actividad
-     */
-    public function setTiempo($tiempo)
-    {
-        $this->tiempo = $tiempo;
 
-        return $this;
-    }
-
-    /**
-     * Get tiempo
-     *
-     * @return string 
-     */
-    public function getTiempo()
-    {
-        return $this->tiempo;
-    }
 
     /**
      * Set actSig
@@ -351,5 +330,28 @@ class Actividad
         // $this->idActAnt = $data['idActAnt'];
         $this->tiempo = $data['tiempo'];
         $this->descripcion = $data['descripcion'];
+    }
+
+    /**
+     * Set tiempo
+     *
+     * @param integer $tiempo
+     * @return Actividad
+     */
+    public function setTiempo($tiempo)
+    {
+        $this->tiempo = $tiempo;
+
+        return $this;
+    }
+
+    /**
+     * Get tiempo
+     *
+     * @return integer 
+     */
+    public function getTiempo()
+    {
+        return $this->tiempo;
     }
 }

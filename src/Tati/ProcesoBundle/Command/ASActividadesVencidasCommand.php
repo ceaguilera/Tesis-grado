@@ -9,13 +9,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 
 /**
- * El siguiente handler es usado para ejecutar el caso de uso TransferReservationExpiration
- * por medio de un comando en la terminal.
  * 
- * Class AdminCommand
  *
- * @author Joel D. Requena P. <Joel.2005.2@gmail.com>
- * @author Currently Working: Joel D. Requena P.
  */
 class ASActividadesVencidasCommand extends ContainerAwareCommand
 {
@@ -31,35 +26,44 @@ class ASActividadesVencidasCommand extends ContainerAwareCommand
     {
         global $kernel;
 		$container = $kernel->getContainer();
+        $em = $container->get('doctrine')->getManager();
         //print("ejecutado");
         //Se obtiene la fecha actual
         $fechaActual = new \DateTime();
         //Se obtienen todas las actividades solicitadas (revisar lo del $doctrine)
-        $actividades = $container->$doctrine->getRepository('ProcesoBundle:ActividadSolicitada')->finBy((array('activa' => true )));
-
+        $actividades = $em->getRepository('ProcesoBundle:ActividadSolicitada')->findBy((array('activa' => true, 'notificacionVencida' =>false )));
+        if(count($actividades)<=1)
+        {
+            $output->writeln("Ninguna actividad venciada actualmente\n");
+        }
         foreach ($actividades as $actividad) {
             $fechaActivacion = $actividad->getFechaActivacion();
-            //$diferencia = se hace la diferencia entre la fecha de activacion y el dia actual 
-            //Se verifica si alguna actividad se le vencio el tiempo de ejecucion
-            if($diferencia > $actividad->getTiempo()){
-                if($actividad->getSolicitante != null)
+            $diferencia = $actividad->getFechaActivacion()->diff($fechaActual);
+            $diferencia = (int)$diferencia->format('%d');
+            //$output->writeln($diferencia);
+            //se verifica si alguna actividad se le vencio el tiempo de ejecucion
+            if($diferencia >= $actividad->getTiempo()){
+                if($actividad->getsolicitante() != null)
                 {
-                    $user = $actividad->getSolicitante()->getUser();
-                    $container->get('GeneralService')->generarNotificacion($user,2,$actividad);
+                    $user = $actividad->getsolicitante()->getuser();
+                    $container->get('generalservice')->generarnotificacion($user,2,$actividad);
+                    $output->writeln("genero notificaciones a usuario solicitante\n");
                 }
                 else{
-                    $users = $container->$doctrine->getRepository('ProcesoBundle:PerfilResponsable')
-                    ->findBy(array('tipoResponsable' => $actividad->getResponsable()->getId()));
-                    //Se genera una notificacion a cada usuario que sea de ese tipo de responsable
-                    foreach ($users as $userResponsable) {
-                       $container->get('GeneralService')->generarNotificacion($userResponsable
-                        ->getUser(),2,$actividad);
+                    $users = $em->getrepository('ProcesoBundle:PerfilResponsable')
+                    ->findby((array('responsable' => $actividad->getresponsable()->getid())));
+                    //$users = $em->getrepository('procesobundle:perfilresponsable')->findall();
+                    $output->writeln("genero notificaciones a usuario responsable\n");
+                    //se genera una notificacion a cada usuario que sea de ese tipo de responsable
+                    foreach ($users as $userresponsable) {
+                       $container->get('generalservice')->generarnotificacion($userresponsable
+                        ->getuser(),2,$actividad);
                     }
                 }
             }
         }
 
-        $output->writeln("ejecutado el comando de actividades\n");
+        
         // $command = new TransferReservationExpirationCommand();
         // $response = $container->get('CommandBus')->execute($command);
 

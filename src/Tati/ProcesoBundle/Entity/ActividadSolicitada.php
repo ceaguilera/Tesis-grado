@@ -68,9 +68,9 @@ class ActividadSolicitada
     private $solicitud;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="tiempo", type="string", length=100)
+     * @ORM\Column(name="tiempo", type="integer")
      */
     private $tiempo;
 
@@ -100,6 +100,17 @@ class ActividadSolicitada
      */
     private $fechaActivacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Documento", mappedBy="actividades_sol", cascade={"persist"})
+     */
+    private $documentos;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="notificacionVencida", type="boolean", nullable=true)
+     */
+    private $notificacionVencida;
 
     /**
      * Constructor
@@ -107,6 +118,7 @@ class ActividadSolicitada
     public function __construct()
     {
         $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->notificacionVencida = false;
     }
 
     /**
@@ -163,29 +175,6 @@ class ActividadSolicitada
     public function getDescripcion()
     {
         return $this->descripcion;
-    }
-
-    /**
-     * Set tiempo
-     *
-     * @param string $tiempo
-     * @return ActividadSolicitada
-     */
-    public function setTiempo($tiempo)
-    {
-        $this->tiempo = $tiempo;
-
-        return $this;
-    }
-
-    /**
-     * Get tiempo
-     *
-     * @return string 
-     */
-    public function getTiempo()
-    {
-        return $this->tiempo;
     }
 
     /**
@@ -404,5 +393,84 @@ class ActividadSolicitada
     public function getFechaActivacion()
     {
         return $this->fechaActivacion;
+    }
+
+    /**
+     * Set tiempo
+     *
+     * @param integer $tiempo
+     * @return ActividadSolicitada
+     */
+    public function setTiempo($tiempo)
+    {
+        $this->tiempo = $tiempo;
+
+        return $this;
+    }
+
+    /**
+     * Get tiempo
+     *
+     * @return integer 
+     */
+    public function getTiempo()
+    {
+        return $this->tiempo;
+    }
+
+    /**
+     * Add documentos
+     *
+     * @param \Tati\ProcesoBundle\Entity\Documento $documentos
+     * @return ActividadSolicitada
+     */
+    public function addDocumento(\Tati\ProcesoBundle\Entity\Documento $documentos)
+    {
+        $this->documentos[] = $documentos;
+
+        return $this;
+    }
+
+    /**
+     * Remove documentos
+     *
+     * @param \Tati\ProcesoBundle\Entity\Documento $documentos
+     */
+    public function removeDocumento(\Tati\ProcesoBundle\Entity\Documento $documentos)
+    {
+        $this->documentos->removeElement($documentos);
+    }
+
+    /**
+     * Get documentos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocumentos()
+    {
+        return $this->documentos;
+    }
+
+    /**
+     * Set notificacionVencida
+     *
+     * @param boolean $notificacionVencida
+     * @return ActividadSolicitada
+     */
+    public function setNotificacionVencida($notificacionVencida)
+    {
+        $this->notificacionVencida = $notificacionVencida;
+
+        return $this;
+    }
+
+    /**
+     * Get notificacionVencida
+     *
+     * @return boolean 
+     */
+    public function getNotificacionVencida()
+    {
+        return $this->notificacionVencida;
     }
 }

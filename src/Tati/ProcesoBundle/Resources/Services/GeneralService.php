@@ -9,6 +9,7 @@ use Tati\ProcesoBundle\Entity\PerfilSolicitante as EPS;
 use Tati\ProcesoBundle\Entity\PerfilResponsable as EPR;
 use Tati\ProcesoBundle\Entity\Responsable as EResponsanble;
 use Tati\ProcesoBundle\Entity\Notificaciones as ENotificacion;
+use \DateTime;
 
 class GeneralService
 {
@@ -85,7 +86,11 @@ class GeneralService
                     $this->em->persist($documento);
                     $this->em->flush();
                 }
-                $actividadSig->setActiva(true);                
+                $actividadSig->setActiva(true);
+                $fecha = new \DateTime();
+                $actividadSig->setFechaActivacion($fecha);
+                $this->em->persist($actividadSig);
+
             }
             $actividad->setActiva(false);
             $this->em->persist($tarea);
@@ -97,20 +102,22 @@ class GeneralService
     public function generarNotificacion($user, $tipoNotificacion, $actividad){
 
         $notificacion = new ENotificacion();
+        $notificacion->setFecha(new \DateTime);
         $notificacion->setReceptor($user);
         $notificacion->setTipo($tipoNotificacion);
         $notificacion->getVisto(false);
         $nombreActividad = $actividad->getNombre();
-        $nombreProceso = $actividad->getProceso()->getNombre();
+        $nombreProceso = $actividad->getSolicitud()->getProceso()->getNombre();
 
         if($tipoNotificacion == 1){
-            $notificacion->setMensaje("Nueva actividad "+$nombreActividad+
-                " proviniente del proceso"+$nombreProceso);
+            $notificacion->setMensaje("Nueva actividad ".$nombreActividad.
+                " proviniente del proceso".$nombreProceso);
         }else if($tipoNotificacion == 2){
-            $notificacion->setMensaje("Parece que esta actividad vencida "+$nombreActividad+
-                " proviniente del proceso"+$nombreProceso);
+            $actividad->setNotificacionVencida(true);
+            $this->em->persist($actividad);
+            $notificacion->setMensaje("Parece que esta actividad vencida ".$nombreActividad.
+                " proviniente del proceso".$nombreProceso);
         }
-
         $this->em->persist($notificacion);
         $this->em->flush();
 
