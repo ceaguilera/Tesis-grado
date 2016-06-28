@@ -36,7 +36,7 @@ class SolicitanteController extends Controller
 
         if ($request->isXmlHttpRequest()) {
             $data = json_decode($request->getContent(),true);
-            $data['solicitante'] = $this->getUser()->getPerfilSolicitante();
+            $data['solicitante'] = $this->getUser();
             $actividad = $this->get('RequestService')->requestProcess($data);
             ///var_dump("paso por aqui");
         }
@@ -46,7 +46,7 @@ class SolicitanteController extends Controller
     }
 
     public function listRequestAction(){
-        $data['idSolicitante'] = $this->getUser()->getPerfilSolicitante()->getId();
+        $data['idSolicitante'] = $this->getUser()->getId();
         $response = $this->get('RequestService')->listaActividadesSol($data);
         return $this->render('ProcesoBundle:All:Solicitante/listaSolicitudes.html.twig', array(
                     'data' =>  json_encode($response)

@@ -97,11 +97,12 @@ class GeneralService
                     $this->generarNotificacion($actividadSig->getSolicitante(),1,$actividadSig);
                 }
                 else{
-                    $users = $this->em->getRepository('ProcesoBundle:PerfilResponsable')
-                ->findBy(array('responsable' => $actividadSig->getResponsable()->getId()));
+                //     $users = $this->em->getRepository('ProcesoBundle:PerfilResponsable')
+                // ->findBy(array('responsable' => $actividadSig->getResponsable()->getId()));
+                    $users = $actividadSig->getResponsable()->getUsers();
 
                     foreach ($users as $user) {
-                        $this->generarNotificacion($user->getUser(),1,$actividadSig);
+                        $this->generarNotificacion($user,1,$actividadSig);
                     }
                 }
 

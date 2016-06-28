@@ -22,7 +22,11 @@ class AdminController extends Controller
         );
     }
     public function addSolicitanteAction(){
-    	$response = $this->get('AdminService')->getListDepartament();
+    	$departamentos = $this->get('AdminService')->getListDepartament();
+        $responsables = $this->get('AdminService')->getTiposResposables();
+        $response = array();
+        $response['departamentos'] = $departamentos;
+        $response['responsables'] = $responsables;        
         return $this->render('ProcesoBundle:All:Admin/agregarSolicitante.html.twig',  array(
                     'departament' =>  json_encode($response)));
     }

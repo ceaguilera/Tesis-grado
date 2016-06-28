@@ -42,14 +42,10 @@
           <br>
           <div class="row">
             <div class="col-md-4">
-              <label>Cargo</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="col-md-4">
               <label>Departamento</label>
               <select class="form-control" ng-model="departamento">
                 <option value="">Seleccione</option>
-                <option ng-repeat="departamento in response" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
+                <option ng-repeat="departamento in response.departamentos" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
               </select>
             </div>
             <div class="col-md-4">
@@ -58,13 +54,30 @@
                 <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
               </select>
             </div> 
+            <div class="col-md-4">
+              <label>Es responsable?</label>
+              <select class="form-control" ng-model="responsable">
+                <option value="0">No</option>
+                <option value="1">Si</option>
+              </select>
+            </div>
           </div>
           <br>
-          <div class="row">
+          <div class="row" ng-repeat="responsabilidad in datos.responsabilidades track by $index">
             <div class="col-md-4">
-              <label>Contrasena</label>
-              <input class="form-control" type="password" ng-model="datos.password"></input>
+              <label>Responsable de:</label>
+              <select class="form-control" ng-model="responsabilidad.id">
+                <option value="">Seleccione</option>
+                <option ng-repeat="responsable in response.responsables" value="{[{responsable.id}]}">{[{responsable.nombre}]}</option>
+              </select>
             </div>
+            <div class="col-md-4">
+              
+            </div>
+          </div>
+          <br>
+          <div ng-if="datos.responsabilidades.length>0">
+            <button class="btn btn-secondary" ng-click="addResponsa()">Agregar Otra responsabilidad</button>
           </div>
           <div class="row" align="center">
             <button class="btn button-secundary" ng-click="registrar(1)">Registrar</button>

@@ -54,7 +54,7 @@ class ActividadSolicitada
      */
     private $responsable;
     /**
-     * @ORM\ManyToOne(targetEntity="PerfilSolicitante", inversedBy="actividades")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="actividades")
      * @ORM\JoinColumn(name="solicitante_id", referencedColumnName="id", nullable=true)
      */
     private $solicitante;
@@ -273,28 +273,7 @@ class ActividadSolicitada
         return $this->responsable;
     }
 
-    /**
-     * Set solicitante
-     *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
-     * @return ActividadSolicitada
-     */
-    public function setSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante = null)
-    {
-        $this->solicitante = $solicitante;
 
-        return $this;
-    }
-
-    /**
-     * Get solicitante
-     *
-     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
-     */
-    public function getSolicitante()
-    {
-        return $this->solicitante;
-    }
 
     /**
      * Set solicitud
@@ -509,5 +488,28 @@ class ActividadSolicitada
     public function getNotificaciones()
     {
         return $this->notificaciones;
+    }
+
+    /**
+     * Set solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
+     * @return ActividadSolicitada
+     */
+    public function setSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante = null)
+    {
+        $this->solicitante = $solicitante;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitante
+     *
+     * @return \Tati\ProcesoBundle\Entity\User 
+     */
+    public function getSolicitante()
+    {
+        return $this->solicitante;
     }
 }

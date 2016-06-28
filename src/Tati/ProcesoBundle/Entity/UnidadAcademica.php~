@@ -38,14 +38,24 @@ class UnidadAcademica
     private $departamento;
 
     /**
-     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="unidadAcademica")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="unidadAcademica")
      */
     private $responsable;
 
     /**
-     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="unidadAcademica")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="unidadAcademica")
      */
     private $solicitante;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->solicitante = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -101,22 +111,14 @@ class UnidadAcademica
     {
         return $this->departamento;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->solicitante = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add responsable
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @param \Tati\ProcesoBundle\Entity\User $responsable
      * @return UnidadAcademica
      */
-    public function addResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    public function addResponsable(\Tati\ProcesoBundle\Entity\User $responsable)
     {
         $this->responsable[] = $responsable;
 
@@ -126,9 +128,9 @@ class UnidadAcademica
     /**
      * Remove responsable
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @param \Tati\ProcesoBundle\Entity\User $responsable
      */
-    public function removeResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    public function removeResponsable(\Tati\ProcesoBundle\Entity\User $responsable)
     {
         $this->responsable->removeElement($responsable);
     }
@@ -146,10 +148,10 @@ class UnidadAcademica
     /**
      * Add solicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
      * @return UnidadAcademica
      */
-    public function addSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    public function addSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante)
     {
         $this->solicitante[] = $solicitante;
 
@@ -159,9 +161,9 @@ class UnidadAcademica
     /**
      * Remove solicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
      */
-    public function removeSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    public function removeSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante)
     {
         $this->solicitante->removeElement($solicitante);
     }

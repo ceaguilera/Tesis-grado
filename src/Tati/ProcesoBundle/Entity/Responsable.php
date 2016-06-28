@@ -46,6 +46,10 @@ class Responsable
      */
     private $actividadesSolicitadas;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="responsabilidades")
+     */
+    private $users;
   
     /**
      * Constructor
@@ -176,5 +180,38 @@ class Responsable
     public function getActividadesSolicitadas()
     {
         return $this->actividadesSolicitadas;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Tati\ProcesoBundle\Entity\User $users
+     * @return Responsable
+     */
+    public function addUser(\Tati\ProcesoBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Tati\ProcesoBundle\Entity\User $users
+     */
+    public function removeUser(\Tati\ProcesoBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

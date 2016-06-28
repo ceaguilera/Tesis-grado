@@ -35,20 +35,23 @@ class Departamento
     private $unidadesAcademicas;
     
     /**
-     * @ORM\OneToMany(targetEntity="PerfilResponsable", mappedBy="departamento")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="departamento")
      */
     private $responsable;
 
     /**
-     * @ORM\OneToMany(targetEntity="PerfilSolicitante", mappedBy="departamento")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="departamento")
      */
     private $solicitante;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->unidadesAcademicas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->responsable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->solicitante = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -120,10 +123,10 @@ class Departamento
     /**
      * Add responsable
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @param \Tati\ProcesoBundle\Entity\User $responsable
      * @return Departamento
      */
-    public function addResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    public function addResponsable(\Tati\ProcesoBundle\Entity\User $responsable)
     {
         $this->responsable[] = $responsable;
 
@@ -133,9 +136,9 @@ class Departamento
     /**
      * Remove responsable
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilResponsable $responsable
+     * @param \Tati\ProcesoBundle\Entity\User $responsable
      */
-    public function removeResponsable(\Tati\ProcesoBundle\Entity\PerfilResponsable $responsable)
+    public function removeResponsable(\Tati\ProcesoBundle\Entity\User $responsable)
     {
         $this->responsable->removeElement($responsable);
     }
@@ -153,10 +156,10 @@ class Departamento
     /**
      * Add solicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
      * @return Departamento
      */
-    public function addSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    public function addSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante)
     {
         $this->solicitante[] = $solicitante;
 
@@ -166,9 +169,9 @@ class Departamento
     /**
      * Remove solicitante
      *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
      */
-    public function removeSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $solicitante)
+    public function removeSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante)
     {
         $this->solicitante->removeElement($solicitante);
     }

@@ -50,14 +50,12 @@ class ASActividadesVencidasCommand extends ContainerAwareCommand
                     $output->writeln("genero notificaciones a usuario solicitante\n");
                 }
                 else{
-                    $users = $em->getrepository('ProcesoBundle:PerfilResponsable')
-                    ->findby((array('responsable' => $actividad->getresponsable()->getid())));
+                    $users = $actividad->getResponsable()->getUsers();
                     //$users = $em->getrepository('procesobundle:perfilresponsable')->findall();
                     $output->writeln("genero notificaciones a usuario responsable\n");
                     //se genera una notificacion a cada usuario que sea de ese tipo de responsable
                     foreach ($users as $userresponsable) {
-                       $container->get('generalservice')->generarnotificacion($userresponsable
-                        ->getuser(),2,$actividad);
+                       $container->get('generalservice')->generarnotificacion($userresponsable,2,$actividad);
                     }
                 }
             }

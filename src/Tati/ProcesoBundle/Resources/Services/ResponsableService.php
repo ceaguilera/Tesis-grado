@@ -22,19 +22,35 @@ class ResponsableService
     }
 
     public function listaActividadesSol($responsable){
-        $actividades = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->findBy(array(
-        'responsable' => $responsable, 'activa' => true));
 
         $response = array();
-
-        foreach ($actividades as $actividad) {
-            $actiAux = array();
-            $actiAux['id'] = $actividad->getId();
-            $actiAux['nombre'] = $actividad->getNombre();
-            $actiAux['descripcion'] = $actividad->getDescripcion();
-            $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
-            array_push($response, $actiAux);
+        $responsabilidades = $responsable->getResponsabilidades();
+        foreach ($responsabilidades as $responsabilidad) {
+            $actividades = $responsabilidad->getActividadesSolicitadas();
+            foreach ($actividades as $actividad) {
+                $actiAux = array();
+                $actiAux['id'] = $actividad->getId();
+                $actiAux['nombre'] = $actividad->getNombre();
+                $actiAux['descripcion'] = $actividad->getDescripcion();
+                $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
+                $actiAux['resposable_por'] = $actividad->getResponsable()->getNombre();
+                array_push($response, $actiAux);
+            }
         }
+
+        // $actividades = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->findBy(array(
+        // 'responsable' => $responsable, 'activa' => true));
+
+        // $response = array();
+
+        // foreach ($actividades as $actividad) {
+        //     $actiAux = array();
+        //     $actiAux['id'] = $actividad->getId();
+        //     $actiAux['nombre'] = $actividad->getNombre();
+        //     $actiAux['descripcion'] = $actividad->getDescripcion();
+        //     $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
+        //     array_push($response, $actiAux);
+        // }
 
         return $response;
     }

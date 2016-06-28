@@ -31,12 +31,6 @@ class Documento
     public $path;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PerfilSolicitante", inversedBy="documentos", cascade={"persist"})
-     * @ORM\JoinColumn(name="usuarioSolicitante_id", referencedColumnName="id",nullable=true)
-     */
-    public $usuarioSolicitante;
-
-    /**
      * @ORM\ManyToOne(targetEntity="ActividadSolicitada", inversedBy="documentos", cascade={"persist"})
      * @ORM\JoinColumn(name="actividaSol_id", referencedColumnName="id", nullable=true)
      */

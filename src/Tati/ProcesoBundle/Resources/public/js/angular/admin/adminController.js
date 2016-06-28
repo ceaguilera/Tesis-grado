@@ -22,12 +22,27 @@ admin.controller('adminController', function($scope, $http, $window){
 	 	});        
 	 });
 
+	 $scope.$watch('responsable', function() {
+	 	console.log("entro", $scope.responsable);
+
+	 	if($scope.responsable == 1){
+	 		$scope.datos.responsabilidades = [];
+	 		$scope.datos.responsabilidades[$scope.datos.responsabilidades.length] = {};
+	 	}
+
+	 });
+
+	 $scope.addResponsa = function(){
+	 	$scope.datos.responsabilidades[$scope.datos.responsabilidades.length] = {};
+	 }
+
+
 	 $scope.registrar = function(tipo){
 	 	$scope.datos.departamento = $scope.departamento;
 	 	console.log($scope.datos);
 	 	var json = {};
 	 	json.datos = $scope.datos;
-	 	json.tipo = tipo;
+	 	//json.tipo = tipo;
 	 	json = angular.toJson(json);
 	 	console.log(json);
 	 	var url= Routing.generate('_tatiSoft_admin_register');
