@@ -1143,7 +1143,7 @@ input[type="checkbox"] {
 }
 @media (min-width: 768px) {
   .content {
-    min-height: 750px;
+    min-height: 270px;
     padding: 0;
     margin-top: -52px;
     border-top-right-radius: 5px;

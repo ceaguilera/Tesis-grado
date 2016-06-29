@@ -85,7 +85,7 @@ tatiSoft_logout:
     defaults: { _controller:  ProcesoBundle:Security\Security:logout }
 
 renderView:
-    pattern:  /s
+    pattern:  /redirect
     defaults: { _controller: ProcesoBundle:Expert:renderViews }
 
 #Runtas de usuario solicitantes

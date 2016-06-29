@@ -19,8 +19,6 @@ class ResponsableController extends Controller
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $user = $this->getUser();
-        $nombre = $user->getNombre();
-        $this->get('session')->set("userNombre", $nombre);
         $responsable  = $this->getUser();
         $response = $this->get('ResponsableService')->listaActividadesSol($responsable);
         return $this->render('ProcesoBundle:All:Responsable/actividadesPendientes.html.twig', array(

@@ -27,7 +27,7 @@
       {% set notificacionesNormales = app.session.get("notificationesNormales") %}
       {% set nombre = app.session.get("userNombre") %}
 
-      <div class="navbar">
+  <div class="navbar">
 
     <div class="container">
 
@@ -75,8 +75,8 @@
               </li>
               {% if notificacionesNormales is empty %}
                 <li class="noticebar-empty">                  
-                  <h4 class="noticebar-empty-title">No alerts here.</h4>
-                  <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+                  <h4 class="noticebar-empty-title">Ninguna notificación por ahora</h4>
+                  <p class="noticebar-empty-text">¡Vuelve mas tarde!</p>                
                 </li>
               {% else %}
                 {% for notificacion in notificacionesNormales %}
@@ -129,8 +129,8 @@
               </li>
               {% if notificaciones is empty %}
                 <li class="noticebar-empty">                  
-                  <h4 class="noticebar-empty-title">No alerts here.</h4>
-                  <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+                  <h4 class="noticebar-empty-title">Ninguna alerta por ahora</h4>
+                  <p class="noticebar-empty-text">¡Vuelve mas tarde!</p>                
                 </li>
               {% else %}
                 {% for notificacion in notificaciones %}
@@ -169,22 +169,18 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-
+            {% if is_granted("ROLE_SOLICITANTE") %}
               <li>
-                <a href="page-profile.html">
-                  <i class="fa fa-user"></i> 
-                  &nbsp;&nbsp;Mi Perfil
-                </a>
-              </li>
-
-              <li>
-                <a href="page-settings.html">
-                  <i class="fa fa-cogs"></i> 
-                  &nbsp;&nbsp;Configuracion
+                <a href="{{path('tatiSoft_soli_solicitante')}}">
+                 <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;Modulo Solicitante
                 </a>
               </li>
 
               <li class="divider"></li>
+              
+              {% endif %}
+
 
               <li>
                 <a href="{{ path("tatiSoft_logout") }}">
@@ -231,13 +227,13 @@
         </li>
         <li class="">
           <a href="{{path('_tatiSoft_resp_file')}}">
-            <i class="fa fa-folder-open"></i>
-            Mis Archivos subidos y relacionados
+            <i class="fa fa-bell"></i>
+            Notificaciones
           </a>
         </li>
         <li class="">
           <a href="{{path('_tatiSoft_resp_alert')}}">
-            <i class="fa fa-bell"></i>
+            <i class="fa fa-exclamation-triangle"></i>
             Alertas
           </a>
         </li>

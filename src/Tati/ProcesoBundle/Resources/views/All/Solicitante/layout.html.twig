@@ -23,7 +23,11 @@
   <![endif]-->
   </head>
   <body>
-      <div class="navbar">
+      {% set notificaciones = app.session.get("notificationesAlertas") %}
+      {% set notificacionesNormales = app.session.get("notificationesNormales") %}
+      {% set nombre = app.session.get("userNombre") %}
+
+  <div class="navbar">
 
     <div class="container">
 
@@ -41,129 +45,110 @@
 
       <div class="navbar-collapse collapse">
 
-        
-
         <ul class="nav navbar-nav noticebar navbar-left">
 
           <li class="dropdown">
-            <a href="page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell"></i>
-              <span class="navbar-visible-collapsed">&nbsp;Notifications&nbsp;</span>
-              <span class="badge">3</span>
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+            
+              {% if notificacionesNormales is defined %}
+             
+                {% if notificacionesNormales|length > 0 %}
+                  <span 
+                  
+                         class="badge">
+                         {{notificacionesNormales|length}}
+                  </span>
+                  <i class="fa fa-bell" style="color:#FFF"></i>
+                {% else %}
+                  <i class="fa fa-bell"></i>
+                {% endif %}
+              {% endif %}
+              <span class="navbar-visible-collapsed">&nbsp;Alerts&nbsp;</span>
             </a>
 
             <ul class="dropdown-menu noticebar-menu" role="menu">
               <li class="nav-header">
                 <div class="pull-left">
-                  Notifications
+                Notificaciones
                 </div>
 
-                <div class="pull-right">
-                  <a href="javascript:;">Mark as Read</a>
-                </div>
               </li>
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-cloud-upload text-success"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Templates Synced</strong>
-                    <span class="noticebar-item-text">20 Templates have been synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 12 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <i class="fa fa-ban text-danger"></i>
-                  </span>
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">Sync Error</strong>
-                    <span class="noticebar-item-text">5 Designs have been failed to be synced to the Mashon Demo instance.</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
+              {% if notificacionesNormales is empty %}
+                <li class="noticebar-empty">                  
+                  <h4 class="noticebar-empty-title">Ninguna notificación por ahora</h4>
+                  <p class="noticebar-empty-text">¡Vuelve mas tarde!</p>                
+                </li>
+              {% else %}
+                {% for notificacion in notificacionesNormales %}
+                <li>
+                  <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
+                    <span class="noticebar-item-image">
+                      <i class="fa fa-calendar-o" style="color:rgba(87, 172, 214, 0.99)"></i>
+                    </span>
+                    <span class="noticebar-item-body">
+                      <strong class="noticebar-item-title">¡Hola!</strong>
+                      <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
+                    </span>
+                  </a>
+                </li>
+                {% endfor %}
+              {% endif %}
               <li class="noticebar-menu-view-all">
-                <a href="page-notifications.html">View All Notifications</a>
+                <a href="page-notifications.html">Ver historial de Notificaciones</a>
               </li>
             </ul>
           </li>
-
-
-          <li class="dropdown">
-            <a href="page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope"></i>
-              <span class="navbar-visible-collapsed">&nbsp;Messages&nbsp;</span>
-            </a>
-
-            <ul class="dropdown-menu noticebar-menu" role="menu">                
-              <li class="nav-header">
-                <div class="pull-left">
-                  Messages
-                </div>
-
-                <div class="pull-right">
-                  <a href="javascript:;">New Message</a>
-                </div>
-              </li>
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <img src="{{ asset('bundles/proceso/img/avatars/avatar-1-md.jpg') }}" style="width: 50px" alt="">
-                  </span>
-
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">New Message</strong>
-                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 20 minutes ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="page-notifications.html" class="noticebar-item">
-                  <span class="noticebar-item-image">
-                    <img src="{{ asset('bundles/proceso/img/avatars/avatar-2-md.jpg') }}" style="width: 50px" alt="">
-                  </span>
-
-                  <span class="noticebar-item-body">
-                    <strong class="noticebar-item-title">New Message</strong>
-                    <span class="noticebar-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</span>
-                    <span class="noticebar-item-time"><i class="fa fa-clock-o"></i> 5 hours ago</span>
-                  </span>
-                </a>
-              </li>
-
-              <li class="noticebar-menu-view-all">
-                <a href="page-notifications.html">View All Messages</a>
-              </li>
-            </ul>
-          </li>
-
 
           <li class="dropdown">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-exclamation-triangle"></i>
+            
+              {% if notificaciones is defined %}
+             
+                {% if notificaciones|length > 0 %}
+                  <span 
+                  style="color: #FFFFFF;
+                         border-color: #DAD700;
+                         background: transparent;" 
+                         class="badge">
+                         {{notificaciones|length}}
+                  </span>
+                  <i class="fa fa-exclamation-triangle" style="color:#DAD700;"></i>
+                {% else %}
+                  <i class="fa fa-exclamation-triangle"></i>
+                {% endif %}
+              {% endif %}
               <span class="navbar-visible-collapsed">&nbsp;Alerts&nbsp;</span>
             </a>
 
-            <ul class="dropdown-menu noticebar-menu noticebar-hoverable" role="menu">                
+            <ul class="dropdown-menu noticebar-menu" role="menu">
               <li class="nav-header">
                 <div class="pull-left">
-                  Alerts
+                Alertas
                 </div>
-              </li>
 
-              <li class="noticebar-empty">                  
-                <h4 class="noticebar-empty-title">No alerts here.</h4>
-                <p class="noticebar-empty-text">Check out what other makers are doing on Explore!</p>                
+              </li>
+              {% if notificaciones is empty %}
+                <li class="noticebar-empty">                  
+                  <h4 class="noticebar-empty-title">Ninguna alerta por ahora</h4>
+                  <p class="noticebar-empty-text">¡Vuelve mas tarde!</p>                
+                </li>
+              {% else %}
+                {% for notificacion in notificaciones %}
+                <li>
+                  <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
+                    <span class="noticebar-item-image">
+                      <i class="fa fa-exclamation-triangle" style="color:#DAD700"></i>
+                    </span>
+                    <span class="noticebar-item-body">
+                      <strong class="noticebar-item-title">¡Hola!</strong>
+                      <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
+                    </span>
+                  </a>
+                </li>
+                {% endfor %}
+              {% endif %}
+              <li class="noticebar-menu-view-all">
+                <a href="page-notifications.html">Ver historial de alertas</a>
               </li>
             </ul>
           </li>
@@ -173,13 +158,9 @@
         <ul class="nav navbar-nav navbar-right">   
 
           <li>
-            <a href="javascript:;">About</a>
+            <a href=""><strong>Bienvenido {{nombre}}</strong></a>
           </li>    
             
-          <li>
-            <a href="javascript:;">Resources</a>
-          </li>    
-
           <li class="dropdown navbar-profile">
             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
               <img src="{{ asset('bundles/proceso/img/avatars/avatar.png') }}" class="navbar-profile-avatar" alt="">
@@ -188,22 +169,18 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-
+            {% if is_granted("ROLE_RESPONSABLE_UPDATE") %}
               <li>
-                <a href="page-profile.html">
-                  <i class="fa fa-user"></i> 
-                  &nbsp;&nbsp;Mi Perfil
-                </a>
-              </li>
-
-              <li>
-                <a href="page-settings.html">
-                  <i class="fa fa-cogs"></i> 
-                  &nbsp;&nbsp;Configuracion
+                <a href="{{path('_tatiSoft_resp_list')}}">
+                 <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;Modulo Responsable
                 </a>
               </li>
 
               <li class="divider"></li>
+              
+              {% endif %}
+
 
               <li>
                 <a href="{{ path("tatiSoft_logout") }}">
@@ -260,220 +237,6 @@
             Procesos terminados
           </a>
         </li>
-
-        <!-- <li class="dropdown ">
-          <a href="#about" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-desktop"></i>
-            UI Features
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu">   
-            <li><a href="ui-buttons.html"><i class="fa fa-user nav-icon"></i> Buttons</a></li>
-            <li><a href="ui-tabs.html"><i class="fa fa-bars nav-icon"></i> Tabs & Accordions</a></li>
-            <li><a href="ui-notifications.html"><i class="fa fa-asterisk nav-icon"></i> Popups / Notifications</a></li>
-            <li><a href="ui-sliders.html"><i class="fa fa-tasks nav-icon"></i> Sliders</a></li>
-            <li><a href="ui-typography.html"><i class="fa fa-font nav-icon"></i> Typography</a></li>
-            <li><a href="ui-portlets.html"><i class="fa fa-list-alt nav-icon"></i> Portlets</a></li>
-            
-
-            <li class="dropdown-submenu">
-              <a tabindex="-1" href="#">
-              <i class="fa fa-bar-chart-o"></i> 
-              &nbsp;&nbsp;Charts & Graphs
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="ui-chart-flot.html">
-                  <i class="fa fa-bar-chart-o"></i> 
-                  &nbsp;&nbsp;jQuery Flot
-                  </a>
-                </li>
-
-                <li>
-                  <a href="ui-chart-morris.html">
-                  <i class="fa fa-bar-chart-o"></i> 
-                  &nbsp;&nbsp;Morris.js
-                  </a>
-                </li> 
-              </ul>
-            </li>
-            
-          </ul>
-        </li>
-
-        <li class="dropdown ">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-          <i class="fa fa-align-left"></i> 
-          Data Elements
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">Form Elements</li>
-
-            <li>
-              <a href="ui-form-regular.html">
-              <i class="fa fa-location-arrow nav-icon"></i> 
-              Regular Elements
-              </a>
-            </li>
-
-            <li>
-              <a href="ui-form-extended.html">
-              <i class="fa fa-bolt nav-icon"></i> 
-              Extended Plugins
-              </a>
-            </li>
-
-            <li>
-              <a href="ui-form-validation.html">
-              <i class="fa fa-check nav-icon"></i> 
-              Form Validation
-              </a>
-            </li>
-
-            <li class="divider"></li>
-
-            <li class="dropdown-header">Data Tables</li>
-
-            <li>
-              <a href="ui-table-basic.html">
-              <i class="fa fa-table"></i> 
-              &nbsp;&nbsp;Basic Tables
-              </a>
-            </li>
-
-            <li>
-              <a href="ui-table-advanced.html">
-              <i class="fa fa-table"></i> 
-              &nbsp;&nbsp;Advanced Tables
-              </a>
-            </li>
-
-            <li>
-              <a href="ui-table-responsive.html">
-              <i class="fa fa-table"></i> 
-              &nbsp;&nbsp;Responsive Tables
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="dropdown ">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-files-o"></i>
-            Sample Pages
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu">
-            <li><a href="page-profile.html"><i class="fa fa-user nav-icon"></i> Profile</a></li>
-            <li><a href="page-invoice.html"><i class="fa fa-money nav-icon"></i> Invoice</a></li>
-            <li><a href="page-pricing.html"><i class="fa fa-dollar nav-icon"></i> Pricing Plans</a></li>
-            <li><a href="page-support.html"><i class="fa fa-question nav-icon"></i> Support Page</a></li>
-            <li><a href="page-gallery.html"><i class="fa fa-picture-o nav-icon"></i> Gallery</a></li>
-            <li><a href="page-settings.html"><i class="fa fa-cogs nav-icon"></i> Settings</a></li>
-            <li><a href="page-calendar.html"><i class="fa fa-calendar nav-icon"></i> Calendar</a></li>
-          </ul>
-        </li>  
-
-        <li class="dropdown active">
-          <a href="#contact" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            <i class="fa fa-external-link"></i>
-            Extra Pages
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="page-notifications.html">
-              <i class="fa fa-bell"></i> 
-              &nbsp;&nbsp;Notifications
-              </a>
-            </li>     
-
-            <li>
-              <a href="ui-icons.html">
-              <i class="fa fa-smile-o"></i> 
-              &nbsp;&nbsp;Font Icons
-              </a>
-            </li> 
-
-            <li class="dropdown-submenu">
-              <a tabindex="-1" href="#">
-              <i class="fa fa-ban"></i> 
-              &nbsp;&nbsp;Error Pages
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="page-404.html">
-                  <i class="fa fa-ban"></i> 
-                  &nbsp;&nbsp;404 Error
-                  </a>
-                </li>
-
-                <li>
-                  <a href="page-500.html">
-                  <i class="fa fa-ban"></i> 
-                  &nbsp;&nbsp;500 Error
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="dropdown-submenu">
-
-              <a tabindex="-1" href="#">
-              <i class="fa fa-lock"></i> 
-              &nbsp;&nbsp;Login Pages
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="account-login.html">
-                  <i class="fa fa-unlock"></i> 
-                  &nbsp;&nbsp;Login
-                  </a>
-                </li>
-
-                <li>
-                  <a href="account-login-social.html">
-                  <i class="fa fa-unlock"></i> 
-                  &nbsp;&nbsp;Login Social
-                  </a>
-                </li>
-
-                <li>
-                  <a href="account-signup.html">
-                  <i class="fa fa-star"></i> 
-                  &nbsp;&nbsp;Signup
-                  </a>
-                  </li>
-
-                <li>
-                  <a href="account-forgot.html">
-                  <i class="fa fa-envelope"></i> 
-                  &nbsp;&nbsp;Forgot Password
-                  </a>
-                </li>
-              </ul>
-            </li> 
-
-            <li class="divider"></li>
-
-            <li>
-              <a href="page-blank.html">
-              <i class="fa fa-square-o"></i> 
-              &nbsp;&nbsp;Blank Page
-              </a>
-            </li> 
-
-          </ul>
-        </li> -->
-
       </ul>
 
     </div> <!-- /.navbar-collapse -->   

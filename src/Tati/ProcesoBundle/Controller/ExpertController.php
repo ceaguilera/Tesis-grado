@@ -82,15 +82,17 @@ class ExpertController extends Controller
     public function renderViewsAction()
     {
         $user = $this->getUser();
+        $nombre = $user->getNombre();
+        $this->get('session')->set("userNombre", $nombre);
         
         if($this->isGranted('ROLE_ESPECIALISTA_READ') || 
         $this->isGranted('ROLE_ESPECIALISTA_UPDATE') ||
         $this->isGranted('ROLE_ESPECIALISTA_CREATE_ALL')){
             return $this->redirectToRoute('_expertAddprocess');
-        }else if($this->isGranted('ROLE_SOLICITANTE')){
-            return $this->redirectToRoute('tatiSoft_soli_solicitante');
         }else if($this->isGranted('ROLE_RESPONSABLE_UPDATE')){
             return $this->redirectToRoute('_tatiSoft_resp_list');
+        }else if($this->isGranted('ROLE_SOLICITANTE')){
+            return $this->redirectToRoute('tatiSoft_soli_solicitante');
         }else if ($this->isGranted('ROLE_ADMINISTRADOR')){
             return $this->redirectToRoute('_tatiSoft_admin_listUsers');
         }
