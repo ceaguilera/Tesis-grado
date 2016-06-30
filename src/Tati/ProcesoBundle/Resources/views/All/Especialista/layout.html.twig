@@ -59,7 +59,28 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
+              {% if is_granted("ROLE_RESPONSABLE_UPDATE") %}
+              <li>
+                <a href="{{path('_tatiSoft_resp_list')}}">
+                 <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;Modulo Responsable
+                </a>
+              </li>
 
+              <li class="divider"></li>
+              
+            {% endif %}
+            {% if is_granted("ROLE_SOLICITANTE") %}
+              <li>
+                <a href="{{path('tatiSoft_soli_solicitante')}}">
+                 <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;Modulo Solicitante
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              
+              {% endif %}
               <li>
                 <a href="{{ path("tatiSoft_logout") }}">
                   <i class="fa fa-sign-out"></i> 

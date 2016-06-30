@@ -4,7 +4,7 @@ namespace Tati\ProcesoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tati\ProcesoBundle\Entity\Tarea;
-use Tati\ProcesoBundle\Entity\Responsable;
+use Tati\ProcesoBundle\Entity\Responsable as ERes;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AdminController extends Controller
 {
+
     public function listUsersAction(){
     	$response = $this->get('AdminService')->getListUsers();
         return $this->render('ProcesoBundle:All:Admin/listaUsuarios.html.twig',  array(
@@ -40,7 +41,10 @@ class AdminController extends Controller
                     'data' =>  json_encode($response)));
     }
     public function addEspecialistaAction(){
-        return $this->render('ProcesoBundle:All:Admin/agregarEspecialista.html.twig');
+        $response = $this->get('InformationService')->getListResponsibles();
+        return $this->render('ProcesoBundle:All:Admin/listaResponsables.html.twig', array(
+                'responsible' =>  json_encode($response)
+            ));
     }
     public function addAutoridadAction(){
         return $this->render('ProcesoBundle:All:Admin/agregarAutoridad.html.twig');
@@ -66,6 +70,23 @@ class AdminController extends Controller
 
     	$response = new JsonResponse("Usuario registrado", 200);
     	return $response;
+    }
+
+    public function registerResponsableAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        if ($request->isXmlHttpRequest()) {
+            $datos = json_decode($request->getContent(),true);
+            
+            foreach ($datos as $dato) {
+                $responsible = new ERes();
+                $responsible->setNombre($dato['nombre']);
+                $em->persist($responsible);
+                $em->flush();
+            }
+        }
+
+        $response = new JsonResponse("Responsables Registrados", 200);
+        return $response;
     }
 
 }

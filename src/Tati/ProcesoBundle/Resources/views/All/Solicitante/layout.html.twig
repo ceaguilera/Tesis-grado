@@ -179,7 +179,18 @@
 
               <li class="divider"></li>
               
-              {% endif %}
+            {% endif %}
+            {% if is_granted("ROLE_ESPECIALISTA_CREATE_ALL") %}
+              <li>
+                <a href="{{path('_expertAddprocess')}}">
+                 <i class="fa fa-user"></i> 
+                  &nbsp;&nbsp;Modulo Especialista
+                </a>
+              </li>
+
+              <li class="divider"></li>
+              
+            {% endif %}
 
 
               <li>

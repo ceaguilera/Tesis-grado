@@ -184,6 +184,8 @@ _tatiSoft_resp_setActividad:
 _tatiSoft_admin_listUsers:
     pattern:  /administrador/listaUsuarios
     defaults: { _controller:  ProcesoBundle:Admin:listUsers}
+    options:
+        expose: true
 
 _tatiSoft_admin_addUserSolicitante:
     pattern:  /administrador/agregarSolicitante
@@ -194,8 +196,10 @@ _tatiSoft_admin_addUserResponsable:
     defaults: { _controller:  ProcesoBundle:Admin:addResponsable}
 
 _tatiSoft_admin_addUserEspecialista:
-    pattern:  /administrador/agregarEspecialista
+    pattern:  /administrador/listaResponsables
     defaults: { _controller:  ProcesoBundle:Admin:addEspecialista}
+    options:
+        expose: true
 
 _tatiSoft_admin_addUserAutoridad:
     pattern:  /administrador/agregarAutoridad
@@ -210,5 +214,11 @@ _tatiSoft_admin_getUnit:
 _tatiSoft_admin_register:
     pattern:  /adminstrador/registro
     defaults: { _controller:  ProcesoBundle:Admin:register}
+    options:
+        expose: true
+
+_tatiSoft_admin_register_rep:
+    pattern:  /adminstrador/registroResp
+    defaults: { _controller:  ProcesoBundle:Admin:registerResponsable}
     options:
         expose: true

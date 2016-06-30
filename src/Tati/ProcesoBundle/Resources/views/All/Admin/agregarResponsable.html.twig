@@ -21,87 +21,26 @@
       <div class="portlet">
         <div class="portlet-header">
           <strong>
-            Datos del usuario
+            Datos del responsable
           </strong>
         </div>
         <div class="portlet-content">
           <div class="row">
-            <div class="col-md-4">
-              <label>Nombre y apellido</label>
-              <input type="text" class="form-control" ng-model="datos.nombre">
-            </div>
-            <div class="col-md-4">
-              <label>Correo</label>
-              <input type="text" class="form-control" ng-model="datos.correo">
-            </div>
-            <div class="col-md-4">
-              <label>Cedula</label>
-              <input type="text" class="form-control" ng-model="datos.cedula">
-            </div> 
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-4">
-              <label>Contrasena</label>
-              <input class="form-control" type="password" ng-model="datos.password"></input>
-            </div>
-            <div class="col-md-4">
-              <label>Tipo de responsable</label>
-              <select class="form-control" ng-model="datos.tipoResponsable">
-                <option value="">Seleccione</option>
-                <option value="1">Nuevo</option>
-                <option value="2">Uno existente</option>
-              </select>
-            </div>
-            <div class="col-md-4" ng-if="datos.tipoResponsable == 1">
-              <label>Tipo</label>
-              <input class="form-control" type="text" ng-model="datos.responsable"></input>
-            </div>
-            <div class="col-md-4" ng-if="datos.tipoResponsable == 2">
-              <label>Tipo</label>
-              <select class="form-control" ng-model="datos.responsable">
-                <option value="">Seleccione</option>
-                <option ng-repeat="responsable in response.responsables" value="{[{responsable.id}]}">{[{responsable.nombre}]}</option>
-              </select>
+            <div class="col-md-4"  ng-repeat="responsable in responsables track by $index">
+              <label>Nombre de la entidad responsable</label>
+              <input type="text" class="form-control" ng-model="responsable.nombre">
             </div>
           </div>
           <br>
-          <div class="row">
-            <div class="col-md-4">
-              <label>Departamento</label>
-              <select class="form-control" ng-model="departamento">
-                <option value="">Seleccione</option>
-                <option ng-repeat="departamento in response.departamentos" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label>Unidad Academica</label>
-              <select class="form-control" ng-model="datos.unidad">
-                <option value="">Seleccione</option>
-                <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
-              </select>
-            </div> 
-            <div class="col-md-4">
-              <label>Cargo</label>
-              <input type="text" class="form-control" ng-model="datos.cargo">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-           <div class="col-md-4">
-              <label>Permisos</label>
-              <select class="form-control" ng-model="datos.permiso">
-                <option value="">Seleccione</option>
-                <option value="1">Solo ver actividades</option>
-                <option value="2">Ver Actividades y ejecutarlas</option>
-              </select>
-            </div>
+          <div>
+            <button class="btn btn-secondary" ng-click="addResponsables()">Agregar Otro responsable</button>
           </div>
         </div>
           <br>
           <div class="row" align="center">
-            <button class="btn button-secundary" ng-click="registrar(2)">Registrar</button>
+            <button class="btn button-secundary" ng-click="registrarResponsable()">Registrar</button>
           </div>
+          <br>
         </div>
       </div>
     </div> <!-- /.content-container -->

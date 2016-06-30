@@ -9,8 +9,8 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Registrar nuevo solicitante</strong></h2>
-        <p>Un usuario solicitante es Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        <h2 class="content-header-title"><strong>Registrar nuevo usuario</strong></h2>
+        <p>Un usuario es Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -55,7 +55,17 @@
               </select>
             </div> 
             <div class="col-md-4">
-              <label>Es responsable?</label>
+              <label>¿Es especialista?</label>
+              <select class="form-control" ng-model="datos.esEspecialista">
+                <option value="0">No</option>
+                <option value="1">Si</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <label>¿Es responsable?</label>
               <select class="form-control" ng-model="responsable">
                 <option value="0">No</option>
                 <option value="1">Si</option>
@@ -63,8 +73,8 @@
             </div>
           </div>
           <br>
-          <div class="row" ng-repeat="responsabilidad in datos.responsabilidades track by $index">
-            <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4"  ng-repeat="responsabilidad in datos.responsabilidades track by $index">
               <label>Responsable de:</label>
               <select class="form-control" ng-model="responsabilidad.id">
                 <option value="">Seleccione</option>
@@ -101,10 +111,11 @@
       response = div.firstChild.nodeValue;
       response = JSON.parse(response);
       console.log("response",response);
+      </script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     </script>
    <script src="{{ asset('bundles/proceso/js/angular/admin/adminModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/admin/adminController.js') }}"></script>
-   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
 {% endblock %}
