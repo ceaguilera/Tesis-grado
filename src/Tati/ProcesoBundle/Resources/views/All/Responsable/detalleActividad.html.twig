@@ -68,7 +68,7 @@
                    </div>
                   </div>
                 </div>
-                 <div ng-if="tarea.tipo == 2">
+                <div ng-if="tarea.tipo == 2 || tarea.tipo == 3 || tarea.tipo == 4">
                   <div>
                       <div class="col-md-3" ng-repeat="(key, documento) in response.actividad.tareas[key].documentos track by $index">
                         <div>
@@ -77,12 +77,21 @@
                         <br>
                       </div>
 
-                      <div class="col-md-3">
+                      <div class="col-md-3" ng-if="tarea.tipo == 2 ">
                         <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Verificar
+                        </button>
+                      </div>
+                      <div class="col-md-3" ng-if="tarea.tipo == 3 ">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Analizar
+                        </button>
+                      </div>
+                      <div class="col-md-3" ng-if="tarea.tipo == 4 ">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Aprobar
                         </button>
                       </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
          </div>

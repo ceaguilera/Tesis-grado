@@ -57,7 +57,7 @@ class User extends BaseUser
     private $responsabilidades;
 
     /**
-    * @ORM\OneToMany(targetEntity="ActividadSolicitada", mappedBy="usuarioSolicitante", cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="ActividadSolicitada", mappedBy="user", cascade={"persist"})
     */
     private $actividades;
 

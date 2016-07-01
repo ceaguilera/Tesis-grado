@@ -44,27 +44,52 @@
               </div>
 
               <!-- Table -->
-              <div style="height: 60px;padding-top: 13px;">
+                            <div style="height: 60px;padding-top: 13px;">
                 <div class="col-md-3">Descripcion: {[{tarea.descripcion}]} 
                 </div>
-                <div ng-if="!tarea.filePath">
-                    <div class="col-md-3" ng-if="tarea.tipo == 1">
-                      <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
-                        Seleccione el archivo
+                <div ng-if="tarea.tipo == 1">
+                  <div ng-if="!tarea.filePath">
+                      <div class="col-md-3">
+                        <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
+                          Seleccione el archivo
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-3">
-                      <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir
-                      </button>
-                    </div>
+                      <div class="col-md-3">
+                        <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir
+                        </button>
+                      </div>
+                  </div>
+                  <div ng-if="tarea.filePath">
+                   <div class="col-md-3">
+                     <label>Archivo: </label>
+                     <a target="_blank" href="{{ asset('{[{tarea.filePath}]}') }}">
+                     {[{tarea.fileName}]}
+                     </a>
+                   </div>
+                  </div>
                 </div>
-                <div ng-if="tarea.filePath">
-                 <div class="col-md-3">
-                   <label>Archivo: </label>
-                   <a target="_blank" href="{{ asset('{[{tarea.filePath}]}') }}">
-                   {[{tarea.fileName}]}
-                   </a>
-                 </div>
+                <div ng-if="tarea.tipo == 2 || tarea.tipo == 3 || tarea.tipo == 4">
+                  <div>
+                      <div class="col-md-3" ng-repeat="(key, documento) in response.actividad.tareas[key].documentos track by $index">
+                        <div>
+                          Archivo: <a target="_blank" href="{{ asset('{[{documento.path}]}') }}">{[{documento.nombre}]}</a>
+                        </div>
+                        <br>
+                      </div>
+
+                      <div class="col-md-3" ng-if="tarea.tipo == 2 ">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Verificar
+                        </button>
+                      </div>
+                      <div class="col-md-3" ng-if="tarea.tipo == 3 ">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Analizar
+                        </button>
+                      </div>
+                      <div class="col-md-3" ng-if="tarea.tipo == 5 ">
+                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Aprobar
+                        </button>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>

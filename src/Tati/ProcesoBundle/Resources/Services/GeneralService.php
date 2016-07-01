@@ -40,7 +40,7 @@ class GeneralService
             $tareaAux['nombre'] = $tarea->getNombre();
             $tareaAux['tipo'] = $tarea->getTipoTarea()->getId();
             $tareaAux['descripcion'] = $tarea->getDescripcion();
-            if($tareaAux['tipo'] == 2){
+            if(($tareaAux['tipo'] == 2) || ($tareaAux['tipo'] == 3) || ($tareaAux['tipo'] == 4) ){
                 $documentos = array();
                 $documentosRelacionados = $this->em->getRepository('ProcesoBundle:Documento')
                 ->findBy(array('actividades_sol' => $id));
@@ -189,6 +189,62 @@ class GeneralService
         //return $notificaciones;
         $container->get('session')->set("notificationesNormales", $getNotificaciones);
 
+    }
+
+    public function limpiarNotificaciones($user, $tipo){
+
+        $notificaciones = $user->getNotificaciones();
+
+        foreach ($notificaciones as $notificacion) {
+
+            if($notificacion->getTipo()==$tipo)
+            {
+                $notificacion->setVisto(true);
+                 $this->em->persist($notificacion);
+                 $this->em->flush();
+
+            }
+        }  
+    }
+    
+    public function listarNotificaciones($user, $tipo){
+
+        $notificaciones = $user->getNotificaciones();
+        $response = array();
+        foreach ($notificaciones as $notificacion) {
+            if($notificacion->getTipo()==$tipo)
+            {
+                $noti = array();
+                $noti['id'] =$notificacion->getId();
+                $noti['mensaje'] = $notificacion->getMensaje();
+                $noti['nombreActividad'] = $notificacion->getActividad()->getNombre();
+                $noti['fecha'] = $notificacion->getFecha();
+                array_push($response, $noti);
+            }
+        }
+
+        return $response;
+    }
+
+    public function actTerminadas($user){
+        
+        $response = array();
+        $responsabilidades = $user->getResponsabilidades();
+        foreach ($responsabilidades as $responsabilidad) {
+            $actividades = $responsabilidad->getActividadesSolicitadas();
+            foreach ($actividades as $actividad) {
+                if($actividad->getStatus()==true){
+                    $actiAux = array();
+                    $actiAux['id'] = $actividad->getId();
+                    $actiAux['nombre'] = $actividad->getNombre();
+                    $actiAux['descripcion'] = $actividad->getDescripcion();
+                    $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
+                    $actiAux['resposable_por'] = $actividad->getResponsable()->getNombre();
+                    array_push($response, $actiAux);
+                }
+            }
+        }
+        return $response;
     }
 
 

@@ -94,7 +94,7 @@
                 {% endfor %}
               {% endif %}
               <li class="noticebar-menu-view-all">
-                <a href="page-notifications.html">Ver historial de Notificaciones</a>
+                <a href="{{path('_tatiSoft_resp_noti')}}">Ver historial de Notificaciones</a>
               </li>
             </ul>
           </li>
@@ -148,7 +148,7 @@
                 {% endfor %}
               {% endif %}
               <li class="noticebar-menu-view-all">
-                <a href="page-notifications.html">Ver historial de alertas</a>
+                <a href="{{path('_tatiSoft_resp_alert')}}">Ver historial de alertas</a>
               </li>
             </ul>
           </li>
@@ -236,7 +236,7 @@
           </a>
         </li>
         <li class="">
-          <a href="{{path('_tatiSoft_resp_file')}}">
+          <a href="{{path('_tatiSoft_resp_noti')}}">
             <i class="fa fa-bell"></i>
             Notificaciones
           </a>

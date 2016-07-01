@@ -2,18 +2,46 @@
 
 {% block body %}
 
-<div class="container" ng-app="listaSolicitudesModule" ng-controller="listaSolicitudesController">
+<div class="container" ng-app="listaActividadesModule" ng-controller="listaActividadesController">
 
   <div class="content">
 
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Actividades Terminadas</strong></h2>
+        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
         
       </div> <!-- /.content-header -->
-      <div class="col-md-6 col-md-offset-3">
+      <div>
+      <div ng-if="response.length>0" class="row">
+          <div class="col-sm-12">
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Listado de Actividades Pendientes</div>
 
+                <!-- Table -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nombre de proceso</th>
+                      <th>Nombre de Actividad</th>
+                      <th>Descripcion</th>
+                    </tr>
+                  </thead>
+                  <tbody ng-repeat="value in response">
+                    <tr>
+                      <td>{[{value.nombreProceso}]}</td>
+                      <td>{[{value.nombre}]}</td>
+                      <td>{[{value.descripcion}]}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+      <div ng-if="response.length==0" class="alert alert-warning " role="alert">
+        <strong>No hay ninguna actividad pendiente en este momento, vuelve mas tarde!</strong>
+      </div>
       </div>
     </div> <!-- /.content-container -->
     <br>
@@ -25,9 +53,18 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
+        <script type="text/javascript">
+          var response = "{{ data }}";
+          var div = document.createElement('div');
+          div.innerHTML = response;
+          response = div.firstChild.nodeValue;
+          response = JSON.parse(response);
+          console.log("response",response);
+     </script>
+      <script src="{{ asset('bundles/proceso/js/ng-file-upload.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload-shim.min.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 

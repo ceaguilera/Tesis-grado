@@ -29,17 +29,34 @@ class ResponsableController extends Controller
 
     public function endActivitiesAction(){
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
-        return $this->render('ProcesoBundle:All:Responsable/actividadesTerminadas.html.twig');
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
+        $response = $this->get('GeneralService')->actTerminadas($this->getUser());
+        return $this->render('ProcesoBundle:All:Responsable/actividadesTerminadas.html.twig', array(
+                    'data' =>  json_encode($response)
+                    
+                ));
     }
 
-    public function fileAction(){
+    public function notificacionesAction(){
+        $this->get('GeneralService')->limpiarNotificaciones($this->getUser(),1);
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
-        return $this->render('ProcesoBundle:All:Responsable/archivos.html.twig');
+        $response = $this->get('GeneralService')->listarNotificaciones($this->getUser(),1);
+        return $this->render('ProcesoBundle:All:Responsable/notificaciones.html.twig', array(
+                    'data' =>  json_encode($response)
+                    
+                ));
     }
 
     public function alertAction(){
+        $this->get('GeneralService')->limpiarNotificaciones($this->getUser(),2);
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
-        return $this->render('ProcesoBundle:All:Responsable/alertas.html.twig');
+        $response = $this->get('GeneralService')->listarNotificaciones($this->getUser(),2);
+        return $this->render('ProcesoBundle:All:Responsable/alertas.html.twig', array(
+                    'data' =>  json_encode($response)
+                    
+                ));
     }
 
     public function getActividadAction($id){

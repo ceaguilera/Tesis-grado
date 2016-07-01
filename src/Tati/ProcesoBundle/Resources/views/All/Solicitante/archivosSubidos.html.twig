@@ -25,7 +25,8 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-
+     <script src="{{ asset('bundles/proceso/js/ng-file-upload.min.js') }}"></script>
+    <script src="{{ asset('bundles/proceso/js/ng-file-upload-shim.min.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaProcesos/listaSolicitudesController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

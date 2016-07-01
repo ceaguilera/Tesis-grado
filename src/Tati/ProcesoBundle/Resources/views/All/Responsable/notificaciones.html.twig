@@ -1,4 +1,4 @@
-{% extends "ProcesoBundle:All:Solicitante/layout.html.twig" %}
+{% extends "ProcesoBundle:All:Responsable/layout.html.twig" %}
 
 {% block body %}
 
@@ -9,7 +9,7 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
+        <h2 class="content-header-title"><strong>Lista de notificaciones</strong></h2>
         
       </div> <!-- /.content-header -->
       <div>
@@ -17,24 +17,24 @@
           <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Listado de Actividades Pendientes</div>
+                <div class="panel-heading">Listado de notificaciones</div>
 
                 <!-- Table -->
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Nombre de proceso</th>
-                      <th>Nombre de Actividad</th>
-                      <th>Descripcion</th>
-                      <th>Ajecutar</th>
+                      <th>Id</th>
+                      <th>Mensanje</th>
+                      <th>Actividad</th>
+                      <th>fecha</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
-                      <td>{[{value.nombreProceso}]}</td>
-                      <td>{[{value.nombre}]}</td>
-                      <td>{[{value.descripcion}]}</td>
-                      <td> <button ng-click="ejecutarActividad(value.id)" type="button" class="btn btn-secondary">Ejecutar</button></td>
+                      <td>{[{value.id}]}</td>
+                      <td>{[{value.mensaje}]}</td>
+                      <td>{[{value.nombreActividad}]}</td>
+                      <td>{[{value.fecha.date}]}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -65,8 +65,8 @@
      </script>
       <script src="{{ asset('bundles/proceso/js/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('bundles/proceso/js/ng-file-upload-shim.min.js') }}"></script>
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaActividad/listaActividadesModule.js') }}"></script>
-   <script src="{{ asset('bundles/proceso/js/angular/Solicitante/listaActividad/listaActividadesController.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/Responsable/listaActividadesController.js') }}"></script>
    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 

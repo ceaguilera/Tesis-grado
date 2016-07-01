@@ -149,9 +149,9 @@ _tatiSoft_resp_end_acitivity:
     options:
         expose: true
 
-_tatiSoft_resp_file:
-    pattern:  /responsable/archivos
-    defaults: { _controller:  ProcesoBundle:Responsable:file}
+_tatiSoft_resp_noti:
+    pattern:  /responsable/notificaciones
+    defaults: { _controller:  ProcesoBundle:Responsable:notificaciones}
     options:
         expose: true
 
