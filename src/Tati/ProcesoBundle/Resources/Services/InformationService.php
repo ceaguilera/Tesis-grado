@@ -187,16 +187,17 @@ class InformationService
         $response = array();
             $response['nombre'] = $proceso->getNombre();
             $response['id'] = $proceso->getId();
+            $response['descripcion'] = $proceso->getDescripcion();
             $response['actividades'] = array();
             $actividades = $proceso->getActividades();
             foreach ($actividades as $actividadesP) {
                 $actividad = array();
                 $actividad['nombre'] = $actividadesP->getNombre();
-                $actividad['idActSig'] = $actividadesP->getIdActSig();
-                $actividad['idActAnt'] = $actividadesP->getIdActAnt();
+                //$actividad['idActSig'] = $actividadesP->getIdActSig();
+                //$actividad['idActAnt'] = $actividadesP->getIdActAnt();
                 $actividad['tiempo'] = $actividadesP->getTiempo();
                 $actividad['descripcion'] = $actividadesP->getDescripcion();
-                $actividad['idResponsable'] = $actividadesP->getIdResponsable()->getId();
+                $actividad['idResponsable'] = $actividadesP->getResponsable()->getId();
                 $actividad['tareas']= array();
                 $tareas = $actividadesP->getTareas();
                 foreach ($tareas as $tareasP) {

@@ -9,12 +9,16 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title">Editar proceso</h2>
+        <h2 class="content-header-title">Agregar nuevo proceso</h2>
       </div> <!-- /.content-header -->
       <div class="row">
         <div class="col-xs-6"> 
           <label>Nombre del proceso:</label>
           <input type="text" class="form-control" ng-model="procesoNuevo.nombre">
+        </div>
+        <div class="col-xs-6"> 
+          <label>Descripcion:</label>
+          <textarea class="form-control" style="height: 82px;"  ng-model="procesoNuevo.descripcion"></textarea>
           <br>
         </div>
       </div>
@@ -33,42 +37,28 @@
                               <div class="col-xs-4">
                                  <label>Nombre de la actividad:</label>
                                  <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre">
-                                 <br>
-                                 <label>Responsable:</label>
-                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable" number-converter>
+                              </div>
+                              <div class="col-xs-4">
+                                <label>Responsable:</label>
+                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable" number-converter >
                                       <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                   </select>
                               </div>
                               <div class="col-xs-4">
-                                <label>Actividad Siguiente:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActSig" number-converter>
-                                  <option value="">Seleccione</option>
-                                  <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
-                                </select>
-                                <br>
-                                <label>Actividad Anterior:</label>
-                                <select class="form-control"ng-model="procesoNuevo.actividades[$index].idActAnt" number-converter>
-                                  <option value="">Seleccione</option>
-                                  <option ng-repeat=" (key2, value) in procesoNuevo.actividades" value="{[{key2}]}">Actividad {[{key2+1}]}</option>
-                                </select>
-                              </div>
-                              <div class="col-xs-4">
                                 <label>Tiempo:</label>
-                                <select class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo">
-                                  <option value="">Seleccione</option>
-                                  <option value="24 horas">24 horas</option>
-                                  <option value="48 horas">48 horas</option>
-                                  <option value="72 horas">72 horas</option>
-                                  <option value="96 horas">96 horas</option>
-                                </select>
-                                <br>
-                                 <label>Descripcion:</label>
-                                 <textarea class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion"></textarea>
+                                <input type="number" min="0" placeholder="Numero de días" class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo">  
                               </div> 
+                      </div>
+                    <div class="portlet-content">
+                      <div class="row">
+                        <div class="col-xs-16">
+                          <label>Descripcion:</label>
+                          <textarea style="height: 90px;" class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion"></textarea>
                         </div>
-                        <br>
-                        <hr>
+                      </div>
+                      <hr>
+                    </div>
                     </div>
                     <div class="row">
                       <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas track by $index"  >
@@ -84,7 +74,7 @@
                                     <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre">
                                     <br>
                                     <label>Tipo de tarea:</label>
-                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  number-converter {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
+                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#} number-converter>
                                     <option value="">Seleccione</option>
                                       <option ng-repeat="value in response.tareas" value="{[{value.id}]}">{[{value.nombre}]} </option>
                                     </select>
@@ -105,8 +95,11 @@
               <br>
               <hr>
               </div>
-              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
-              <button type="button" class="btn btn-secondary" ng-click="addProcess(response.id);">Enviar</button>
+              <br>
+              <div align="center">
+                <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
+                <button type="button" class="btn btn-secondary" ng-click="addProcess(response.id);">Enviar</button>   
+              </div>
           </div>
           <!-- <div class="col-xs-3"></div> -->
         </div>
