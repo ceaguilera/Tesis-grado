@@ -81,7 +81,8 @@
               {% else %}
                 {% for notificacion in notificacionesNormales %}
                 <li>
-                  <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
+                {% if notificacion.idActividad is defined %}
+                <a href="{{path('_tatiSoft_resp_getTask',{"id": notificacion.idActividad})}}" class="noticebar-item">
                     <span class="noticebar-item-image">
                       <i class="fa fa-calendar-o" style="color:rgba(87, 172, 214, 0.99)"></i>
                     </span>
@@ -90,6 +91,18 @@
                       <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
                     </span>
                   </a>
+                {% else %}
+                <a href="">
+                    <span class="noticebar-item-image">
+                      <i class="fa fa-calendar-o" style="color:rgba(87, 172, 214, 0.99)"></i>
+                    </span>
+                    <span class="noticebar-item-body">
+                      <strong class="noticebar-item-title">¡Hola!</strong>
+                      <span class="noticebar-item-text">{{notificacion.mensaje}}</span>
+                    </span>
+                  </a>
+                {% endif %}
+
                 </li>
                 {% endfor %}
               {% endif %}
@@ -234,12 +247,6 @@
           <a href="{{path('_tatiSoft_soli_list')}}">
             <i class="fa fa-list-alt"></i>
             Actividades pendientes
-          </a>
-        </li>
-        <li class="">
-          <a href="{{path('_tatiSoft_soli_files')}}">
-            <i class="fa fa-folder-open"></i>
-            Mis Archivos subidos
           </a>
         </li>
         <li class="">

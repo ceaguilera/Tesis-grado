@@ -26,7 +26,17 @@ class RequestService
 
     public function requestProcess($data){
 
+        $solicitud = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
+        'solicitante' => $data['userId'], 'proceso' => $data['idSolicitud'], 'status' => false));
+
+        if(count($solicitud)>0)
+        {
+            return false;
+
+        }else{
+
         $solicitud = new ESolicitud();
+        $solicitud->getStatus(false);
         $proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($data['idSolicitud']);
         $solicitante = $this->em->getRepository('ProcesoBundle:User')->find($data['userId']);
         $solicitud->setProceso($proceso);
@@ -122,6 +132,9 @@ class RequestService
         }
 
         return $response;
+        }
+
+
     }
 
     public function listaActividadesSol($data){
@@ -136,6 +149,23 @@ class RequestService
             $actiAux['nombre'] = $actividad->getNombre();
             $actiAux['descripcion'] = $actividad->getDescripcion();
             $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
+            array_push($response, $actiAux);
+        }
+
+        return $response;
+    }
+
+    public function procesosTerminados($user)
+    {
+        $procesos = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
+        'solicitante' => $user->getId(), 'status' => true));
+
+        $response = array();
+
+        foreach ($procesos as $proceso) {
+            $actiAux = array();
+            $actiAux['id'] = $proceso->getId();
+            $actiAux['nombre'] = $proceso->getProceso()->getNombre();
             array_push($response, $actiAux);
         }
 

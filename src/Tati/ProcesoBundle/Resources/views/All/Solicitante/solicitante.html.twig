@@ -6,10 +6,12 @@
 
   <div class="content">
     <div class="content-container" ng-if="!exito">
-
       <div class="content-header">
         <h2 class="content-header-title"><strong>Solicitud</strong></h2> 
       </div> <!-- /.content-header -->
+      <div ng-if="error==true" class="alert alert-danger " role="alert">
+          <strong>{[{mensajeError}]}</strong>
+      </div>
       <div class="col-md-6 col-md-offset-3">
           <select class="form-control" ng-model="solicitud.idSolicitud">
           <option value="">Seleccione</option>

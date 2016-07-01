@@ -55,6 +55,13 @@ class Solicitud
     private $nombreCarpeta;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean")
+     */
+    private $status;
+
+    /**
      * Constructor
      */
     public function __construct()

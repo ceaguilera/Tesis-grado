@@ -489,4 +489,27 @@ class ActividadSolicitada
     {
         return $this->notificaciones;
     }
+
+    /**
+     * Set solicitante
+     *
+     * @param \Tati\ProcesoBundle\Entity\User $solicitante
+     * @return ActividadSolicitada
+     */
+    public function setSolicitante(\Tati\ProcesoBundle\Entity\User $solicitante = null)
+    {
+        $this->solicitante = $solicitante;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitante
+     *
+     * @return \Tati\ProcesoBundle\Entity\User 
+     */
+    public function getSolicitante()
+    {
+        return $this->solicitante;
+    }
 }

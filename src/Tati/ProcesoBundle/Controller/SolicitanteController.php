@@ -22,6 +22,8 @@ class SolicitanteController extends Controller
      
     public function holaSolicitanteAction(Request $request)
     {
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $user = $this->getUser()->getId();
         $procesos = $this->get('InformationService')->listProcessActive();
         $response['userId'] = $user;
@@ -40,13 +42,18 @@ class SolicitanteController extends Controller
             $actividad = $this->get('RequestService')->requestProcess($data);
             ///var_dump("paso por aqui");
         }
-
-        $response = new JsonResponse($actividad, 200);
+        if($actividad!=false){
+            $response = new JsonResponse($actividad, 200);
+        }else{
+            $response = new JsonResponse("error, ya tiene una solicitud de este tipo en curso", 500);
+        }
         return $response;
     }
 
     public function listRequestAction(){
         $data['idSolicitante'] = $this->getUser()->getId();
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $response = $this->get('RequestService')->listaActividadesSol($data);
         return $this->render('ProcesoBundle:All:Solicitante/listaSolicitudes.html.twig', array(
                     'data' =>  json_encode($response)
@@ -58,7 +65,12 @@ class SolicitanteController extends Controller
     }
 
     public function finishedProcessesAction(){
-        return $this->render('ProcesoBundle:All:Solicitante/procesosTerminados.html.twig');
+        $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
+        $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
+        $response = $this->get('RequestService')->procesosTerminados($this->getUser());
+        return $this->render('ProcesoBundle:All:Solicitante/procesosTerminados.html.twig', array(
+                    'data' =>  json_encode($response)
+                ));
     }
 
     public function uploadFileAction(Request $request){

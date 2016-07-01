@@ -32,7 +32,9 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 				$scope.$apply()
 			},
 			error: function(e) {
-
+				$scope.error = true;
+				$scope.mensajeError= e.responseJSON;
+				$scope.$apply()
 			}
 		})
 	}

@@ -55,6 +55,13 @@ class Solicitud
     private $nombreCarpeta;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean", nullable=true)
+     */
+    private $status;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -195,5 +202,28 @@ class Solicitud
     public function getNombreCarpeta()
     {
         return $this->nombreCarpeta;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Solicitud
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
