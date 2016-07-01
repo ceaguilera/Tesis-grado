@@ -18,7 +18,8 @@
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         
       </div> <!-- /.content-header -->
-      <div class="portlet">
+      <form name="responsable">
+        <div class="portlet">
         <div class="portlet-header">
           <strong>
             Datos del responsable
@@ -28,7 +29,7 @@
           <div class="row">
             <div class="col-md-4"  ng-repeat="responsable in responsables track by $index">
               <label>Nombre de la entidad responsable</label>
-              <input type="text" class="form-control" ng-model="responsable.nombre">
+              <input type="text" class="form-control" ng-model="responsable.nombre" required>
             </div>
           </div>
           <br>
@@ -43,6 +44,7 @@
           <br>
         </div>
       </div>
+      </form>
     </div> <!-- /.content-container -->
     <br>
 

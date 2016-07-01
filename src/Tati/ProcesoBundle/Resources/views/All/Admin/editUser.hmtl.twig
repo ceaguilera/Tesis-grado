@@ -24,40 +24,39 @@
             Datos del usuario
           </strong>
         </div>
-        <form name="new">
-          <div class="portlet-content">
+        <div class="portlet-content">
           <div class="row">
             <div class="col-md-4">
               <label>Nombre y apellido</label>
-              <input type="text" class="form-control" ng-model="datos.nombre" required>
+              <input type="text" class="form-control" ng-model="datos.nombre">
             </div>
             <div class="col-md-4">
               <label>Correo</label>
-              <input type="text" class="form-control" ng-model="datos.correo" required>
+              <input type="text" class="form-control" ng-model="datos.correo">
             </div>
             <div class="col-md-4">
               <label>Cedula</label>
-              <input type="text" class="form-control" ng-model="datos.cedula" required>
+              <input type="text" class="form-control" ng-model="datos.cedula">
             </div> 
           </div>
           <br>
           <div class="row">
             <div class="col-md-4">
               <label>Departamento</label>
-              <select class="form-control" ng-model="departamento" required>
+              <select class="form-control" ng-model="departamento">
                 <option value="">Seleccione</option>
                 <option ng-repeat="departamento in response.departamentos" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
               </select>
             </div>
             <div class="col-md-4">
               <label>Unidad Academica</label>
-              <select class="form-control" ng-model="datos.unidad" required>
+              <select class="form-control" ng-model="datos.unidad">
                 <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
               </select>
             </div> 
             <div class="col-md-4">
               <label>¿Es especialista?</label>
-              <select class="form-control" ng-model="datos.esEspecialista" required>
+              <select class="form-control" ng-model="datos.esEspecialista">
                 <option value="0">No</option>
                 <option value="1">Si</option>
               </select>
@@ -67,7 +66,7 @@
           <div class="row">
             <div class="col-md-4">
               <label>¿Es responsable?</label>
-              <select class="form-control" ng-model="responsable" required>
+              <select class="form-control" ng-model="responsable">
                 <option value="0">No</option>
                 <option value="1">Si</option>
               </select>
@@ -94,7 +93,6 @@
             <button class="btn button-secundary" ng-click="registrar(1)">Registrar</button>
           </div>
         </div>
-        </form>
       </div>
     </div> <!-- /.content-container -->
     <br>

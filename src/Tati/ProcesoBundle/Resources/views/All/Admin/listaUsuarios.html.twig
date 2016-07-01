@@ -13,7 +13,7 @@
         
       </div> <!-- /.content-header -->
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="panel panel-default">
               <!-- Default panel contents -->
               <div class="panel-heading">Listado de Usuarios</div>
@@ -27,6 +27,7 @@
                     <th>Correo</th>
                     <th>Rol</th>
                     <th>Ultima Sesion</th>
+                    <th>Editar</th>
                   </tr>
                 </thead>
                 <tbody ng-repeat="value in response">
@@ -34,8 +35,15 @@
                     <td>{[{value.id}]}</td>
                     <td>{[{value.userName}]}</td>
                     <td>{[{value.email}]}</td>
-                    <td>{[{value.rol}]}</td>
+                    <td>
+                    <label ng-repeat="value in value.rol">
+                       {[{value}]}/
+                    </label>
+                    </td>
                     <td>{[{value.lastLogin.date}]}</td>
+                    <td>
+                      <button class="btn btn-secondary">Editar</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>

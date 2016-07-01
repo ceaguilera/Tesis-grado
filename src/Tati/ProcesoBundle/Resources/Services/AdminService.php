@@ -32,7 +32,7 @@ class AdminService
             $usuario['id'] = $user->getId();
             $usuario['userName'] = $user->getUserName();
             $usuario['email'] = $user->getEmail();
-            $usuario['rol'] = $user->getRoles()[0];
+            $usuario['rol'] = $user->getRoles();
             $usuario['lastLogin'] = $user->getLastLogin();
             array_push($response, $usuario);
         }
@@ -81,78 +81,79 @@ class AdminService
     }
 
     public function registro($data){
-        $user = new EUser();
-        $user->setUsername($data['datos']['correo']);
-        $user->setEmail($data['datos']['correo']);
-        $user->setPlainPassword($data['datos']['cedula']);
-        $user->setNombre($data['datos']['nombre']);
-        $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
-        $user->setDepartamento($departamento);
-        $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);
-        $user->setUnidadAcademcia($unidad);
-        $user->setCedula($data['datos']['cedula']);
-        $user->setEnabled(true);
-        if(isset($data['datos']['responsabilidades'])){
-            if($data['datos']['esEspecialista']==1 ){
-                $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL");
+
+        if(!isset($data['id'])){
+            $user = new EUser();
+            $user->setUsername($data['datos']['correo']);
+            $user->setEmail($data['datos']['correo']);
+            $user->setPlainPassword($data['datos']['cedula']);
+            $user->setNombre($data['datos']['nombre']);
+            $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
+            $user->setDepartamento($departamento);
+            $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);
+            $user->setUnidadAcademcia($unidad);
+            $user->setCedula($data['datos']['cedula']);
+            $user->setEnabled(true);
+            if(isset($data['datos']['responsabilidades'])){
+                if($data['datos']['esEspecialista']==1 ){
+                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                }else{
+                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE");
+                }
+                $user->setRoles($role);
+                foreach ($data['datos']['responsabilidades'] as $resposabilidad) {
+                    $responsable  = $this->em->getRepository('ProcesoBundle:Responsable')->find($resposabilidad['id']);
+                    $user->addResponsabilidade($responsable);
+                }
             }else{
-                $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE");
+                if($data['datos']['esEspecialista']==1 ){
+                    $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                }else{
+                    $role = array("ROLE_SOLICITANTE");
+                }
+                $user->setRoles($role);
             }
-            $user->setRoles($role);
-            foreach ($data['datos']['responsabilidades'] as $resposabilidad) {
-                $responsable  = $this->em->getRepository('ProcesoBundle:Responsable')->find($resposabilidad['id']);
-                $user->addResponsabilidade($responsable);
-            }
+
         }else{
-            if($data['datos']['esEspecialista']==1 ){
-                $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL");
+            $user = $this->em->getRepository('ProcesoBundle:User')->find($data['id']);
+            $user->setUsername($data['datos']['correo']);
+            $user->setEmail($data['datos']['correo']);
+            $user->setPlainPassword($data['datos']['cedula']);
+            $user->setNombre($data['datos']['nombre']);
+            $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
+            $user->setDepartamento($departamento);
+            $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);
+            $user->setUnidadAcademcia($unidad);
+            $user->setCedula($data['datos']['cedula']);
+            $user->setEnabled(true);
+            if(isset($data['datos']['responsabilidades'])){
+                if($data['datos']['esEspecialista']==1 ){
+                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                }else{
+                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE");
+                }
+                $user->setRoles($role);
+                $responsabilidades = getResponsabilidades();
+                foreach ($responsabilidades as $resposabilidad) {
+                    $user->removeResponsabilidade($resposabilidad);
+                }
+                foreach ($data['datos']['responsabilidades'] as $resposabilidad) {
+                    $responsable  = $this->em->getRepository('ProcesoBundle:Responsable')->find($resposabilidad['id']);
+                    $user->addResponsabilidade($responsable);
+                }
             }else{
-                $role = array("ROLE_SOLICITANTE");
+                $responsabilidades = getResponsabilidades();
+                foreach ($responsabilidades as $resposabilidad) {
+                    $user->removeResponsabilidade($resposabilidad);
+                }
+                if($data['datos']['esEspecialista']==1 ){
+                    $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                }else{
+                    $role = array("ROLE_SOLICITANTE");
+                }
+                $user->setRoles($role);
             }
-            $user->setRoles($role);
         }
-
-        // if($data['tipo'] == 1){
-        //     $role = array("ROLE_SOLICITANTE");
-        //     $user->setRoles($role);
-        //     $user->setEnabled(true);
-        //     //Revisar esto DETAIL: Ya existe la llave (departamento_id)=(1).
-        //     $perfilSolicitante = new EPS();
-        //     $perfilSolicitante->setNombre($data['datos']['nombre']);
-        //     //$perfilSolicitante->setCedula($data['datos']['cedula']);
-        //     $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
-        //     $perfilSolicitante->setDepartamento($departamento);
-        //     $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);
-        //     $perfilSolicitante->setUnidadAcademcia($unidad);
-        //     $perfilSolicitante->setUser($user);
-        //     $user->setPerfilSolicitante($perfilSolicitante);
-
-        // }else if($data['tipo'] == 2){
-        //     if($data['datos']['permiso']== 1){
-        //         $role = array("ROLE_RESPONSABLE_READ");
-        //     }else{
-        //         $role = array("ROLE_RESPONSABLE_UPDATE");
-        //     }
-        //     $user->setRoles($role);
-        //     $user->setEnabled(true);
-        //     $perfilResponsable = new EPR();
-        //     $perfilResponsable->setNombre($data['datos']['nombre']);
-        //     $perfilResponsable->setCargo($data['datos']['cargo']);
-        //     if($data['datos']['tipoResponsable'] == 1){
-        //         $responsable = new EResponsanble();
-        //         $responsable->setNombre($data['datos']['responsable']);
-        //         $this->em->persist($responsable);
-        //     }else{
-        //         $responsable = $this->em->getRepository('ProcesoBundle:Responsable')->find($data['datos']['responsable']);
-        //     }
-        //     $perfilResponsable->setResponsable($responsable);
-        //     $departamento = $this->em->getRepository('ProcesoBundle:Departamento')->find($data['datos']['departamento']);
-        //     $perfilResponsable->setDepartamento($departamento);
-        //     $unidad = $this->em->getRepository('ProcesoBundle:UnidadAcademica')->find($data['datos']['unidad']);
-        //     $perfilResponsable->setUnidadAcademcia($unidad);
-        //     $perfilResponsable->setUser($user);
-        //     $user->setPerfilResponsable($perfilResponsable);
-        // }
         $this->em->persist($user);
         $this->em->flush();
 
