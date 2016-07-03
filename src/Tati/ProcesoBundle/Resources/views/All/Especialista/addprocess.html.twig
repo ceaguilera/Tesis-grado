@@ -2,111 +2,178 @@
 
 {% block body %}
 
-<div class="container" class="container" ng-app="addProcessModule" ng-controller="addProcessController">
+<div class="container" class="container" ng-app="addProcessModule" ng-controller="addProcessController" ng-cloak>
 
-  <div class="content">
+  <main class="content" id="inicio">
 
     <div class="content-container">
-
+    <div ng-if="errorProceso" class="col-sm-12">
+      <h2>Erorrrrrrrrrrrrrrrrrrrr</h2>
+    </div>
+    <form name="nuevoProceso" novalidate>
       <div class="content-header">
         <h2 class="content-header-title">Agregar nuevo proceso</h2>
       </div> <!-- /.content-header -->
       <div class="row">
         <div class="col-xs-6"> 
           <label>Nombre del proceso:</label>
-          <input type="text" class="form-control" ng-model="procesoNuevo.nombre">
+          <input type="text" class="form-control" ng-model="procesoNuevo.nombre" required="required" name="nombreProceso"
+          ng-class="{'form-control-error':(nuevoProceso.nombreProceso.$invalid 
+          && nuevoProceso.$submitted)}">
+          <span 
+          class="error" 
+          ng-show="nuevoProceso.nombreProceso.$invalid 
+          && nuevoProceso.$submitted">
+          Este campo es requerido
+          </span>
         </div>
         <div class="col-xs-6"> 
           <label>Descripcion:</label>
-          <textarea class="form-control" style="height: 82px;"  ng-model="procesoNuevo.descripcion"></textarea>
+          <textarea class="form-control" style="height: 82px;"  ng-model="procesoNuevo.descripcion" required="required" name="descripcionProceso"ng-class="{'form-control-error':(nuevoProceso.descripcionProceso.$invalid 
+          && nuevoProceso.$submitted)}"></textarea>
+          <span 
+          class="error" 
+          ng-show="nuevoProceso.descripcionProceso.$invalid 
+          && nuevoProceso.$submitted">
+          Este campo es requerido
+          </span>
           <br>
         </div>
       </div>
-<!--       <div class="container" align="center"> -->
-        <div class="row">
-          <!-- <div class="col-xs-2"></div>   -->
-          <div class="col-xs-12">
-             <div ng-repeat=" (key1, value) in procesoNuevo.actividades" >
-                <div class="portlet">
-                    <div class="portlet-header">
-                      <h3 style="color: #428BCA;font-weight: bold;">Actividad {[{$index+1}]}</h3>
-                      <i class="fa fa-times" style="  margin-left: 89%;position: absolute;  cursor: pointer;" ng-click="delete(key1)"></i>
-                    </div>
-                    <div class="portlet-content">
-                      <div class="row">
-                              <div class="col-xs-4">
-                                 <label>Nombre de la actividad:</label>
-                                 <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre">
-                              </div>
-                              <div class="col-xs-4">
-                                <label>Responsable:</label>
-                                  <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable">
-                                      <option value="">Seleccione</option>
-                                      <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
-                                  </select>
-                              </div>
-                              <div class="col-xs-4">
-                                <label>Tiempo:</label>
-                                <input type="number" min="0" placeholder="Numero de días" class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo">  
-                              </div> 
-                      </div>
-                    <div class="portlet-content">
-                      <div class="row">
-                        <div class="col-xs-16">
-                          <label>Descripcion:</label>
-                          <textarea style="height: 90px;" class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion"></textarea>
-                        </div>
-                      </div>
-                      <hr>
-                    </div>
-                    </div>
+      <div class="row">
+        <!-- <div class="col-xs-2"></div>   -->
+        <div class="col-xs-12">
+           <div ng-repeat=" (key1, value) in procesoNuevo.actividades">
+              <div class="portlet">
+                  <div class="portlet-header">
+                    <h3 style="color: #428BCA;font-weight: bold;">Actividad {[{$index+1}]}</h3>
+                    <i class="fa fa-times" style="  margin-left: 89%;position: absolute;  cursor: pointer;" ng-click="delete(key1)"></i>
+                  </div>
+                  <div class="portlet-content">
                     <div class="row">
-                      <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas track by $index"  >
-                        <div class="col-xs-6">
-                          <div class="portlet" style="margin-left: 3%;margin-right: 3%;">
-                            <div class="portlet-header">
-                              <h3 style="color: #428BCA;font-weight: bold;">Tarea {[{$index+1}]}</h3>
-                              <i class="fa fa-times" style="  margin-left: 81%;position: absolute;cursor: pointer;"ng-click="delete(key1,tarea)"></i>
+                            <div class="col-xs-4">
+                               <label>Nombre de la actividad:</label>
+                               <input type="text" class="form-control" ng-model="procesoNuevo.actividades[$index].nombre" required="required" name="nombreActividad{[{$index}]}" ng-class="{'form-control-error':(nuevoProceso.nombreActividad{[{$index}]}.$invalid 
+                                && nuevoProceso.$submitted)}">
+                               <span 
+                               class="error" 
+                               ng-show="nuevoProceso.nombreActividad{[{$index}]}.$invalid 
+                               && nuevoProceso.$submitted">
+                               Este campo es requerido
+                              </span>
                             </div>
-                            <div class="portlet-content">
-                              <div class="col-xs-12">
-                                  <label>Nombre:</label>
-                                    <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre">
-                                    <br>
-                                    <label>Tipo de tarea:</label>
-                                    <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#}>
+                            <div class="col-xs-4">
+                              <label>Responsable:</label>
+                                <select class="form-control" ng-model="procesoNuevo.actividades[$index].idResponsable" required="required" name="responsableActividad{[{$index}]}" ng-class="{'form-control-error':(nuevoProceso.responsableActividad{[{$index}]}.$invalid 
+                                && nuevoProceso.$submitted)}">
                                     <option value="">Seleccione</option>
-                                      <option ng-repeat="value in response.tareas" value="{[{value.id}]}">{[{value.nombre}]} </option>
-                                    </select>
-                                    <br>
-                                    <label>Descripcion:</label>
-                                    <textarea class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].descripcion"></textarea>
-                              </div>   
+                                    <option ng-repeat="value in response.responsables" value="{[{value.id}]}">{[{value.nombre}]} </option>
+                                </select>
+                                <span 
+                                 class="error" 
+                                 ng-show="nuevoProceso.responsableActividad{[{$index}]}.$invalid 
+                                 && nuevoProceso.$submitted">
+                                 Este campo es requerido
+                                </span>
                             </div>
+                            <div class="col-xs-4">
+                              <label>Tiempo:</label>
+                              <input type="number" min="0" placeholder="Numero de días" required="required" class="form-control" ng-model="procesoNuevo.actividades[$index].tiempo" name="tiempoActividad{[{$index}]}" ng-class="{'form-control-error':(nuevoProceso.tiempoActividad{[{$index}]}.$invalid 
+                                && nuevoProceso.$submitted)}">
+                              <span 
+                               class="error" 
+                               ng-show="nuevoProceso.tiempoActividad{[{$index}]}.$invalid 
+                               && nuevoProceso.$submitted">
+                               Este campo es requerido
+                              </span>  
+                            </div> 
+                    </div>
+                  <div class="portlet-content">
+                    <div class="row">
+                      <div class="col-xs-16">
+                        <label>Descripcion:</label>
+                        <textarea style="height: 90px;" class="form-control"  ng-model="procesoNuevo.actividades[key1].descripcion" name="descripcionActividad{[{$index}]}" ng-class="{'form-control-error':(nuevoProceso.descripcionActividad{[{$index}]}.$invalid 
+                                && nuevoProceso.$submitted)}" required="required"></textarea>
+                        <span 
+                         class="error" 
+                         ng-show="nuevoProceso.descripcionActividad{[{$index}]}.$invalid 
+                         && nuevoProceso.$submitted">
+                         Este campo es requerido
+                        </span>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div ng-repeat=" (tarea, valor) in procesoNuevo.actividades[key1].tareas track by $index"  >
+                      <div class="col-xs-6">
+                        <div class="portlet" style="margin-left: 3%;margin-right: 3%;">
+                          <div class="portlet-header">
+                            <h3 style="color: #428BCA;font-weight: bold;">Tarea {[{$index+1}]}</h3>
+                            <i class="fa fa-times" style="  margin-left: 81%;position: absolute;cursor: pointer;"ng-click="delete(key1,tarea)"></i>
+                          </div>
+                          <div class="portlet-content">
+                            <div class="col-xs-12">
+                                <label>Nombre:</label>
+                                  <input class="form-control" type="text" ng-model="procesoNuevo.actividades[key1].tareas[tarea].nombre" required="required" name="nombreTarea{[{$index}]}{[{key1}]}" ng-class="{'form-control-error':(nuevoProceso.nombreTarea{[{$index}]}{[{key1}]}.$invalid 
+                                && nuevoProceso.$submitted)}">
+                                  <span 
+                                  class="error" 
+                                  ng-show="nuevoProceso.nombreTarea{[{$index}]}{[{key1}]}.$invalid 
+                                  && nuevoProceso.$submitted">
+                                  Este campo es requerido
+                                  </span>
+                                  <br>
+                                  <label>Tipo de tarea:</label>
+                                  <select class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].tipo"  {#ng-model="procesoNuevo.actividades[$index].tareas[index2].Tipo"#} required="required" name="tipoTarea{[{$index}]}{[{key1}]}" ng-class="{'form-control-error':(nuevoProceso.tipoTarea{[{$index}]}{[{key1}]}.$invalid 
+                                && nuevoProceso.$submitted)}">
+                                  <option value="">Seleccione</option>
+                                    <option ng-repeat="value in response.tareas" value="{[{value.id}]}">{[{value.nombre}]} </option>
+                                  </select>
+                                  <span 
+                                  class="error" 
+                                  ng-show="nuevoProceso.tipoTarea{[{$index}]}{[{key1}]}.$invalid 
+                                  && nuevoProceso.$submitted">
+                                  Este campo es requerido
+                                  </span>
+                                  <br>
+                                  <label>Descripcion:</label>
+                                  <textarea class="form-control" ng-model="procesoNuevo.actividades[key1].tareas[tarea].descripcion" required="required" name="descripcionTarea{[{$index}]}{[{key1}]}" ng-class="{'form-control-error':(nuevoProceso.descripcionTarea{[{$index}]}{[{key1}]}.$invalid 
+                                && nuevoProceso.$submitted)}"></textarea>
+                                  <span 
+                                    class="error" 
+                                    ng-show="nuevoProceso.descripcionTarea{[{$index}]}{[{key1}]}.$invalid 
+                                    && nuevoProceso.$submitted">
+                                    Este campo es requerido
+                                  </span>
+                            </div>   
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div align="center">
-                      <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
-                    </div>
-                    <br>
-                </div>
-              <br>
-              <hr>
+                  </div>
+                  <div align="center">
+                    <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
+                  </div>
+                  <br>
               </div>
-              <br>
-              <div align="center">
-                <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
-                <button type="button" class="btn btn-secondary" ng-click="addProcess();">Enviar</button>   
-              </div>
-          </div>
-          <!-- <div class="col-xs-3"></div> -->
+            <br>
+            <hr>
+            </div>
+            <br>
+            <div align="center">
+              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
+              <button type="submit" class="btn btn-secondary" ng-click="validacionProceso(); addProcess();">Enviar</button>   
+            </div>
         </div>
+        <!-- <div class="col-xs-3"></div> -->
       </div>
+    </form>
+    </div>
    <!--  </div> --> <!-- /.content-container -->
       
-  </div> <!-- /.content -->
+  </main> <!-- /.content -->
 </div> <!-- /.container -->
 
 {% endblock %}

@@ -77,7 +77,7 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  font-family: Oswald;
+  font-family: inherit;
   font-weight: 400;
 }
 /* ==Buttons */
@@ -3175,4 +3175,10 @@ ul.support-list li {
 }
 .dragover {
     border: 5px dashed blue;
+}
+.error{
+    color: red;
+}
+.form-control-error{
+  border-color: red;
 }
