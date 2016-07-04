@@ -67,6 +67,12 @@ _expertEditProcess:
     options:
         expose: true
 
+_expertViewProcess:
+    pattern: /specialist/viewProcess/
+    defaults: { _controller: ProcesoBundle:Expert:viewProcess}
+    options:
+        expose: true
+
 #rutas de login
 tatiSoft_login:
     pattern:  /

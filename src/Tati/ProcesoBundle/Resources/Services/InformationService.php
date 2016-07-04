@@ -102,7 +102,7 @@ class InformationService
             return $proceso->getId();
 
         }else{
-
+            //var_dump($data);
             $proceso = $this->em->getRepository('ProcesoBundle:Proceso')->find($data['id']);
             //Eliminando los datos
             foreach ($proceso->getActividades() as $actividad) 
@@ -114,6 +114,21 @@ class InformationService
                     $this->em->remove($tarea);
                 }
                 $actividad->setProceso(null);
+                $actSig = $actividad->getActSig();
+                $actAnt = $actividad->getActAnt();
+                if(!is_null($actSig)){
+                    $actSig->setActAnt(null);
+                    $this->em->persist($actSig);
+                }
+
+                if(!is_null($actAnt)){
+                    $actAnt->setActSig(null);
+                    $this->em->persist($actAnt);
+                }
+
+                $this->em->flush();
+                $actividad->setActSig(null);
+                $actividad->setActAnt(null);
                 $proceso->removeActividade($actividad);
                 $this->em->remove($actividad);
             }
@@ -139,7 +154,7 @@ class InformationService
                     $actividad->addTarea($tarea);
                     $tarea->setActividades($actividad);
                 }
-                $actividad-> setIdResponsable($responsable);
+                $actividad-> setResponsable($responsable);
                 $actividad->setProceso($proceso);
                 $proceso->addActividade($actividad);
             }
@@ -242,6 +257,25 @@ class InformationService
                 $response2 = array();
                 $response2['id'] = $actividad->getId();
                 $response2['nombre'] = $actividad->getNombre();
+                if($actividad->getActSig() == null)
+                {
+                    if($actividad->getInicioFin() == null)
+                        $response2['actSig'] = -3;    
+                    else
+                        $response2['actSig'] = $actividad->getInicioFin();
+                }else{
+                    $response2['actSig'] = $actividad->getActSig()->getId();
+                }
+                if($actividad->getActAnt() == null)
+                {
+                    if($actividad->getInicioFin() == null)
+                        $response2['actAnt'] = -3;    
+                    else
+                        $response2['actAnt'] = $actividad->getInicioFin();
+                }else{
+                    $response2['actAnt'] = $actividad->getActAnt()->getId();
+                }
+                
                 array_push($response['actividades'], $response2);
         }
         return $response;
@@ -256,8 +290,9 @@ class InformationService
         foreach ($data['actividades'] as $actividad) {
               $actividadActual = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['id']);
               
-              if($actividad['actSig']==null){
+              if(($actividad['actSig']==-1) || ($actividad['actSig']==-2)){
                 $actividadActual->setActSig(null);
+                $actividadActual->setInicioFin($actividad['actSig']);
               }else{
                   $actividadSig = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actSig']);
                   $actividadActual->setActSig($actividadSig);
@@ -265,8 +300,9 @@ class InformationService
               $this->em->persist($actividadActual);
               $this->em->flush();
               //$actividadSig->setActAnt($actividadActual);
-              if($actividad['actAnt']==null){
+              if(($actividad['actAnt']==-1) || ($actividad['actAnt']==-2)){
                 $actividadActual->setActAnt(null);
+                $actividadActual->setInicioFin($actividad['actAnt']);
               }else{
                   $actividadAnt = $this->em->getRepository('ProcesoBundle:Actividad')->find($actividad['actAnt']);
                   $actividadActual->setActAnt($actividadAnt);

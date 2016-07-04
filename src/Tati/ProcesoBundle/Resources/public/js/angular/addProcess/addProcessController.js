@@ -5,31 +5,32 @@ addProcess.controller('addProcessController', function($scope, $http, $window, $
 	$scope.response = response;
 	console.log("scope.response",$scope.response);
 	$scope.errorProceso = false;
+	$scope.alerts = [];
 
+	$scope.closeAlert = function(index) {
+		$scope.alerts.splice(index, 1);
+	};
 	$scope.validacionProceso = function(){
 		if($scope.procesoNuevo.actividades != ""){
 			 angular.forEach($scope.procesoNuevo.actividades, function(actividad, index){
                 if (actividad.tareas == "") {
-                    $scope.errorProceso = true
+                    $scope.errorProceso = true;
                 }else{
                 	$scope.errorProceso = false;
                 }
             });
 			if($scope.errorProceso){
-				$scope.errorMensaje = "Parece que una de las actividad no contiene tareas asociadas, agreguelas e intete de nuevo";
+				var alert = {};
+				alert.type = 'danger';
+				alert.msg = "¡Parece que una de las actividad no contiene tareas asociadas, agreguelas e intete de nuevo!";
+				$scope.alerts.push(alert);
 			}
-			// //console.log($scope.procesoNuevo.actividades[$scope.procesoNuevo.actividades.length-1]);
-			// if($scope.procesoNuevo.actividades[$scope.procesoNuevo.actividades.length-1].length>0){
-			// 	console.log("exiten tareas");
-			// 	$scope.procesoNuevo.actividades[$scope.procesoNuevo.actividades.length-1].tareasExiste = true;
-			// }
-			// else{
-			// 	console.log("no existen tareas");
-			// 	$scope.procesoNuevo.actividades[$scope.procesoNuevo.actividades.length-1].tareasExiste = false;
-			// }
 		}else{
 			$scope.errorProceso = true
-			$scope.errorMensaje = "El nuevo proceso debe tener al menos una actividad";
+			var alert = {};
+			alert.type = 'danger';
+			alert.msg = "¡El nuevo proceso debe tener al menos una actividad asociada!";
+			$scope.alerts.push(alert);
 		}
 
 

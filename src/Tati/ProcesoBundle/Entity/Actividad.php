@@ -86,6 +86,15 @@ class Actividad
      */
     private $user;
 
+     /**
+     * @var integer
+     * -2 Inicio
+     * -1 fin
+     *
+     * @ORM\Column(name="inciofin", type="integer", nullable=true)
+     */
+    private $InicioFin;
+
     /**
      * Constructor
      */
@@ -353,5 +362,28 @@ class Actividad
     public function getTiempo()
     {
         return $this->tiempo;
+    }
+
+    /**
+     * Set InicioFin
+     *
+     * @param integer $inicioFin
+     * @return Actividad
+     */
+    public function setInicioFin($inicioFin)
+    {
+        $this->InicioFin = $inicioFin;
+
+        return $this;
+    }
+
+    /**
+     * Get InicioFin
+     *
+     * @return integer 
+     */
+    public function getInicioFin()
+    {
+        return $this->InicioFin;
     }
 }

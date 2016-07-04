@@ -1,4 +1,4 @@
-var listActivity = angular.module("listActivityModule", [])
+var listActivity = angular.module("listActivityModule", ['ui.bootstrap'])
 
 .config(function($interpolateProvider){
 	$interpolateProvider.startSymbol('{[{').endSymbol('}]}');

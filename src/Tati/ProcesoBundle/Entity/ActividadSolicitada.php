@@ -119,6 +119,16 @@ class ActividadSolicitada
     /**
      * Constructor
      */
+
+    /**
+     * @var integer
+     * -2 Inicio
+     * -1 fin
+     *
+     * @ORM\Column(name="inciofin", type="integer", nullable=true)
+     */
+    private $InicioFin;
+
     public function __construct()
     {
         $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
@@ -511,5 +521,28 @@ class ActividadSolicitada
     public function getSolicitante()
     {
         return $this->solicitante;
+    }
+
+    /**
+     * Set InicioFin
+     *
+     * @param integer $inicioFin
+     * @return ActividadSolicitada
+     */
+    public function setInicioFin($inicioFin)
+    {
+        $this->InicioFin = $inicioFin;
+
+        return $this;
+    }
+
+    /**
+     * Get InicioFin
+     *
+     * @return integer 
+     */
+    public function getInicioFin()
+    {
+        return $this->InicioFin;
     }
 }

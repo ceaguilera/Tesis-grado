@@ -63,6 +63,7 @@ class RequestService
             }
             $actividadSol->setResponsable($actividadPP->getResponsable());
             $actividadSol->setSolicitud($solicitud);
+            $actividadSol->setInicioFin($actividadPP->getInicioFin());
             $solicitud->addActividade($actividadSol);
             $actividadSol->setStatus(false);
             $actividadSol->setTiempo($actividadPP->getTiempo());

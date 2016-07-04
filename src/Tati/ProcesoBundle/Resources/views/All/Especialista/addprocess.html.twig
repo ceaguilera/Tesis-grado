@@ -7,9 +7,7 @@
   <main class="content" id="inicio">
 
     <div class="content-container">
-    <div ng-if="errorProceso" class="col-sm-12">
-      <h2>Erorrrrrrrrrrrrrrrrrrrr</h2>
-    </div>
+    <uib-alert dismiss-on-timeout="4000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index)"><strong>{[{alert.msg}]}</strong></uib-alert>
     <form name="nuevoProceso" novalidate>
       <div class="content-header">
         <h2 class="content-header-title">Agregar nuevo proceso</h2>
@@ -47,7 +45,7 @@
               <div class="portlet">
                   <div class="portlet-header">
                     <h3 style="color: #428BCA;font-weight: bold;">Actividad {[{$index+1}]}</h3>
-                    <i class="fa fa-times" style="  margin-left: 89%;position: absolute;  cursor: pointer;" ng-click="delete(key1)"></i>
+                    <i class="fa fa-times" style="  margin-left: 88%;position: absolute;  cursor: pointer;" ng-click="delete(key1)"></i>
                   </div>
                   <div class="portlet-content">
                     <div class="row">
@@ -154,17 +152,17 @@
                     </div>
                   </div>
                   <div align="center">
-                    <button type="button" class="btn btn-secondary" ng-click="addTarea();">Agregar Tarea</button>
+                    <button type="button" class="btn btn-secondary" ng-click="addTarea();"><i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Tarea</button>
                   </div>
                   <br>
               </div>
-            <br>
-            <hr>
             </div>
-            <br>
             <div align="center">
-              <button type="button" class="btn btn-secondary" ng-click="add();">Agregar Actividad</button>
-              <button type="submit" class="btn btn-secondary" ng-click="validacionProceso(); addProcess();">Enviar</button>   
+              <button type="button" class="btn btn-secondary" ng-click="add();"><i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Actividad</button>
+            </div>
+            <hr>
+            <div ng-if="procesoNuevo.actividades.length>0" align="right">
+              <button type="submit" class="btn btn-secondary" ng-click="validacionProceso(); addProcess();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar proceso</button>   
             </div>
         </div>
         <!-- <div class="col-xs-3"></div> -->

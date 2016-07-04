@@ -119,4 +119,11 @@ class ExpertController extends Controller
 
         return $response;
     }
+
+    public function viewProcessAction(){
+         $response = $this->get('InformationService')->getProcess(3);
+         return $this->render('ProcesoBundle:All:Especialista/viewProcess.html.twig', array(
+                'process' =>  json_encode($response)
+            ));
+    }
 }
