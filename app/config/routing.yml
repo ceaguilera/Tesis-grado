@@ -228,3 +228,11 @@ _tatiSoft_admin_register_rep:
     defaults: { _controller:  ProcesoBundle:Admin:registerResponsable}
     options:
         expose: true
+
+#rutas de usuario tipo autoridad
+
+_tatiSoft_autoridad_listaProcesos:
+    pattern:  /autoridad/listaProcesos
+    defaults: { _controller:  ProcesoBundle:Autoridad:listaProcesos}
+    options:
+        expose: true

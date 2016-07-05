@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new Tati\ProcesoBundle\ProcesoBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-	    new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle()
+	        new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Slik\DompdfBundle\SlikDompdfBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

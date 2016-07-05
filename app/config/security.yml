@@ -58,3 +58,5 @@ security:
         - { path: ^/administrador/agregarResponsable, role: ROLE_ADMINISTRADOR}
         - { path: ^/administrador/agregarEspecialista, role: ROLE_ADMINISTRADOR}
         - { path: ^/administrador/agregarAutoridad, role: ROLE_ADMINISTRADOR}
+        #Rutas permitidad para el usuario agregarAutoridad
+        - { path: ^/autoridad/listaProcesos, role: ROLE_AUTORIDAD}
