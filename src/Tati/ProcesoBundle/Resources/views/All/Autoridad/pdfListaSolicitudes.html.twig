@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<table align="center" style="margin-top: 30px;margin-bottom: 34px;">
+		<tr>
+			<th>
+				<img src="http://www.dev-teg.dev/bundles/proceso/img/uc.png" width="120" height="150" style="margin-right: 20px;">
+			</th>
+			<th align="center">
+			<h4 style="font-family:arial;margin-bottom: -16px;">Universidad de Carabobo</h4>
+			<h4 style="font-family:arial;">Facultad Experimental de Ciencias y Tecnología</h4>
+			<h4 style="font-family:arial;margin-top: -19px;">Sistema TatiSoft</h4>
+			</th>
+			<th>
+				<img src="http://www.dev-teg.dev/bundles/proceso/img/facyt.png" width="120" height="120" style="margin-left: 15px;">
+			</th>
+		</tr>
+	</table>
+	<h1 style="font-family:arial;" align="center">Listado de solicitudes</h1>
+	<table  border="1" frame="border" align="center" cellpadding="1px" style="border-style: hidden;font-family:arial;">
+		<thead>
+			<tr>
+				<th>Nro.</th>
+				<th>Nombre de proceso</th>
+				<th>Solicitante</th>
+				<th>Usuario</th>
+				<th>Fecha</th>
+				<th>Responsable actual</th>
+				<th>Estado</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dat in data %}
+				<tr>
+					<td>{{dat.id}}</td>
+					<td>{{dat.nombreProceso}}</td>
+					<td>{{dat.solicitante}}</td>
+					<td>{{dat.usuario}}</td>
+					<td>{{dat.fechaSolicitud}}</td>
+					<td>{{dat.responsableActual}}</td>
+					<td>{{dat.status}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

@@ -4,94 +4,99 @@
 
 <div class="container" ng-app="autoridadModule" ng-controller="autoridadController">
   <div class="content">
+    <form action="{{path('_tatiSoft_pdf_solicitudes')}}" method="post">
+      <div class="content-container">
 
-    <div class="content-container">
-
-      <div class="content-header">
-        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
-        
-      </div> <!-- /.content-header -->
-      <div class="row">
-        <div class="col-xs-2">
-          <label>Nombre Proceso</label>
-           <input type="text" class="form-control"  ng-model="filtros.nombre">
-        </div>
-        <div class="col-xs-2">
-          <label>Solicitante</label>
-          <input type="text" class="form-control"  ng-model="filtros.solicitante">
-        </div>
-        <div class="col-xs-2">
-          <label>Responsable</label>
-          <select class="form-control" ng-model="filtros.responsable">
-            <option ng-repeat="responsable in responsables" value="{[{responsable.nombre}]}">{[{responsable.nombre}]}</option>
-          </select>
-        </div>
-        <div class="col-xs-2">
-          <label>Estado</label>
-          <select class="form-control"  ng-model="filtros.estado">
-            <option></option>
-          </select>
-        </div>
-        <div class="col-xs-2">
-          <label>fecha</label>
-          <input type="date" class="form-control"  ng-model="filtros.fecha">
-        </div>
-        <div class="col-xs-1">
-          <button class="btn btn-secondary" style="margin-top: 26px;" ng-click="filtro()">
-          <strong>Filtrar</strong>
-          </button>
-        </div>
-        <div class="col-xs-1" style="margin-left: -15px;">
-          <button class="btn btn-secondary" style="margin-top: 26px;" ng-click="limpiar()">
-            <strong>Limpiar</strong>
-          </button>
-        </div>
-      </div>
-      <br>
-      <div ng-if="response.length>0" class="row">
-          <div class="col-sm-12">
-              <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Listado</div>
-
-                <!-- Table -->
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Nro.</th>
-                      <th>Nombre de proceso</th>
-                      <th>Solicitante</th>
-                      <th>Usuario</th>
-                      <th>Fecha</th>
-                      <th>Responsable actual</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody ng-repeat="value in response">
-                    <tr>
-                      <td>{[{value.id}]}</td>
-                      <td>{[{value.nombreProceso}]}</td>
-                      <td>{[{value.solicitante}]}</td>
-                      <td>{[{value.usuario}]}</td>
-                      <td>{[{value.fechaSolicitud}]}</td>
-                      <td>{[{value.responsableActual}]}</td>
-                      <td>{[{value.status}]}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <div class="content-header">
+          <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
+          
+        </div> <!-- /.content-header -->
+        <div class="row">
+          <div class="col-xs-2">
+            <label>Nombre Proceso</label>
+             <input type="text" class="form-control" name="nombre"  ng-model="filtros.nombre">
           </div>
-      </div>
-      <div align="right">
-        <button class="btn btn-secondary" style="margin-top: 26px;">
-        <strong>Generar PDF</strong>
-        </button>
-      </div>
-      <div ng-if="response.length==0" class="alert alert-warning " role="alert">
-        <strong>No hay ninguna actividad pendiente en este momento, vuelve mas tarde!</strong>
-      </div>
-      </div>
-    </div> <!-- /.content-container -->
+          <div class="col-xs-2">
+            <label>Solicitante</label>
+            <input type="text" class="form-control" name="solicitante"  ng-model="filtros.solicitante">
+          </div>
+          <div class="col-xs-2">
+            <label>Responsable</label>
+            <select class="form-control" ng-model="filtros.responsable" name="responsable">
+              <option value="">Seleccione</option>
+              <option ng-repeat="responsable in responsables" value="{[{responsable.nombre}]}">{[{responsable.nombre}]}</option>
+            </select>
+          </div>
+          <div class="col-xs-2">
+            <label>Estado</label>
+            <select class="form-control"  ng-model="filtros.estado" name="estado">
+              <option value="">Seleccione</option>
+              <option value="true">Terminado</option>
+              <option value="false">En proceso</option>
+            </select>
+          </div>
+          <div class="col-xs-2">
+            <label>fecha</label>
+            <input type="date" class="form-control"  ng-model="filtros.fecha" name="fecha">
+          </div>
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-secondary" style="margin-top: 26px;" ng-click="filtro()">
+            <strong>Filtrar</strong>
+            </button>
+          </div>
+          <div class="col-xs-1" style="margin-left: -15px;">
+            <button type="button" class="btn btn-secondary" style="margin-top: 26px;" ng-click="limpiar()">
+              <strong>Limpiar</strong>
+            </button>
+          </div>
+        </div>
+        <br>
+        <div ng-if="response.length>0" class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">Listado</div>
+
+                  <!-- Table -->
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Nro.</th>
+                        <th>Nombre de proceso</th>
+                        <th>Solicitante</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                        <th>Responsable actual</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody ng-repeat="value in response">
+                      <tr>
+                        <td>{[{value.id}]}</td>
+                        <td>{[{value.nombreProceso}]}</td>
+                        <td>{[{value.solicitante}]}</td>
+                        <td>{[{value.usuario}]}</td>
+                        <td>{[{value.fechaSolicitud}]}</td>
+                        <td>{[{value.responsableActual}]}</td>
+                        <td>{[{value.status}]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+        <div align="right">
+          <button type="submit" class="btn btn-secondary" style="margin-top: 26px;">
+          <strong>Generar PDF</strong>
+          </button>
+        </div>
+        <div ng-if="response.length==0" class="alert alert-warning " role="alert">
+          <strong>No hay ninguna actividad pendiente en este momento, vuelve mas tarde!</strong>
+        </div>
+        </div>
+      </div> <!-- /.content-container -->
+      
+    </form>
     <br>
 
       

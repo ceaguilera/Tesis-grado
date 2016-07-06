@@ -5,6 +5,9 @@ autoridad.controller('autoridadController', function($scope, $http, $window){
 
 	$scope.filtro = function(){
 		console.log($scope.filtros);
+		// if($scope.filtros.hasOwnProperty('fecha'))
+		// 	$scope.filtros.fecha = $scope.filtros.fecha.toLocaleDateString();
+		
 		var json = {};
 		json = $scope.filtros;
 		json = angular.toJson(json);

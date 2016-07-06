@@ -236,3 +236,12 @@ _tatiSoft_autoridad_listaProcesos:
     defaults: { _controller:  ProcesoBundle:Autoridad:listaProcesos}
     options:
         expose: true
+
+_tatiSoft_pdf_solicitudes:
+    pattern:  /autoridad/pdf
+    defaults: { _controller:  ProcesoBundle:Autoridad:pdf}
+    options:
+        expose: true
+    # requirements:
+    #     {_method: POST}
+
