@@ -127,4 +127,26 @@ class ExpertController extends Controller
                 'process' =>  json_encode($response)
             ));
     }
+
+    public function activar_desactivarAction(Request $request){
+         if ($request->isXmlHttpRequest()) {
+            $data = json_decode($request->getContent(),true);
+            $em = $this->getDoctrine()->getManager();
+            $proceso = $em->getRepository('ProcesoBundle:Proceso')->find($data['id']);
+            $proceso->setStatus($data['status']);
+            $em->persist($proceso);
+            $em->flush();
+
+            if($data['status'] == true)
+                $mensaje = "Proceso activado con exito";
+            else
+                $mensaje = "Proceso desactivado con exito";
+
+            $response = new JsonResponse($mensaje, 200);
+
+            return $response;
+        }
+
+
+    }
 }

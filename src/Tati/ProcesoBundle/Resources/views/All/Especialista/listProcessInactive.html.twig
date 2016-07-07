@@ -7,15 +7,15 @@
   <div class="content">
 
     <div class="content-container">
-
       <div class="content-header">
-        <h2 class="content-header-title">Procesos inactivos</h2>
+        <h2 class="content-header-title">Procesos activos</h2> <estiquta ng-click="showModalConfirm()"></estiquta>
       </div> <!-- /.content-header -->
-      <div class="row" ng-if="response.length>0">
-          <div class="col-sm-8">
+      <uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index)"><strong>{[{alert.msg}]}</strong></uib-alert>
+      <div ng-if="response.length>0" class="row">
+          <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Listado de Procesos Inactivos</div>
+                <div class="panel-heading">Listado de Procesos Activos</div>
 
                 <!-- Table -->
                 <table class="table">
@@ -23,12 +23,16 @@
                     <tr>
                       <th>Nombre</th>
                       <th>Catidad de Actividades</th>
+                      <th>Editar</th>
+                      <th>Activar</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.numActividades}]}</td>
+                      <td> <button ng-click="edit(value.id)" type="button" class="btn btn-info">Editar</button></td>
+                      <td> <button ng-click="desactivar(value.id, $index)" type="button" class="btn btn-success">Activar</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -36,7 +40,7 @@
           </div>
       </div>
       <div ng-if="response.length==0" class="alert alert-warning " role="alert">
-        <strong>No hay ningun proceso inactivo en este momento</strong>
+        <strong>No hay ningun proceso activo en este momento</strong>
       </div>
     </div> <!-- /.content-container -->
       
@@ -54,6 +58,9 @@
           response = JSON.parse(response);
           console.log("response",response);
     </script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}">
+   </script>
    <script src="{{ asset('bundles/proceso/js/angular/processInact/processInactModule.js') }}"></script>
    <script src="{{ asset('bundles/proceso/js/angular/processInact/processInactController.js') }}"></script>
 

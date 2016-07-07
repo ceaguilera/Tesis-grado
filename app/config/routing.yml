@@ -73,6 +73,12 @@ _expertViewProcess:
     options:
         expose: true
 
+_expert_activar_desactivar_Proceso:
+    pattern: /specialist/activar_desactivar/
+    defaults: { _controller: ProcesoBundle:Expert:activar_desactivar}
+    options:
+        expose: true
+
 #rutas de login
 tatiSoft_login:
     pattern:  /

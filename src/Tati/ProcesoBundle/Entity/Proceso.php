@@ -215,7 +215,7 @@ class Proceso
     {
         $this->nombre = $data['nombre'];
         $this->descripcion = $data['descripcion'];
-        $this->status = true;
+        $this->status = false;
 
         return $this;
     }
