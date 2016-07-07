@@ -46,6 +46,7 @@ class AutoridadController extends Controller
 
             foreach ($solicitudes as  $solicitud) {
                 $sol = array();
+                $activa = false;
                 $sol['id'] = $solicitud->getId();
                 $sol['nombreProceso'] = $solicitud->getProceso()->getNombre();
                 $sol['solicitante'] = $solicitud->getSolicitante()->getNombre();
@@ -54,11 +55,17 @@ class AutoridadController extends Controller
                 $sol['status'] = $solicitud->getStatus();
                 $actividades = $solicitud->getActividades();
                 foreach ($actividades as $actividad) {
-                    if($actividad->getActiva()== true)
-                        $sol['responsableActual'] = $actividad->getResponsable()->getNombre();
-                    else
-                        $sol['responsableActual'] = null;
-                } 
+                    if($actividad->getActiva()== true){
+                     $activa = true;
+                     $actividadActiva = $actividad; 
+                 }
+                }
+
+                if($activa)
+                    $sol['responsableActual'] = $actividadActiva->getResponsable()->getNombre();
+                else
+                    $sol['responsableActual'] = null;
+
                 array_push($todoSolicitudes, $sol);
 
             }
@@ -615,6 +622,7 @@ class AutoridadController extends Controller
 
             $response = array();
             foreach($solicitudes as $solicitud){
+                $activa = false;
                 $sol = array();
                 $sol['id'] = $solicitud->getId();
                 $sol['nombreProceso'] = $solicitud->getProceso()->getNombre();
@@ -624,11 +632,15 @@ class AutoridadController extends Controller
                 $sol['status'] = $solicitud->getStatus();
                 $actividades = $solicitud->getActividades();
                 foreach ($actividades as $actividad) {
-                    if($actividad->getActiva()== true)
-                        $sol['responsableActual'] = $actividad->getResponsable()->getNombre();
-                    else
-                        $sol['responsableActual'] = null;
+                   if($actividad->getActiva()== true){
+                     $activa = true;
+                     $actividadActiva = $actividad; 
+                 }
                 }
+                if($activa)
+                    $sol['responsableActual'] = $actividadActiva->getResponsable()->getNombre();
+                else
+                    $sol['responsableActual'] = null;
 
                 array_push($response, $sol);
             }
@@ -651,6 +663,7 @@ class AutoridadController extends Controller
         $response = array();
         foreach ($solicitudes as  $solicitud) {
             $sol = array();
+            $activa = false;
             $sol['id'] = $solicitud->getId();
             $sol['nombreProceso'] = $solicitud->getProceso()->getNombre();
             $sol['solicitante'] = $solicitud->getSolicitante()->getNombre();
@@ -659,11 +672,16 @@ class AutoridadController extends Controller
             $sol['status'] = $solicitud->getStatus();
             $actividades = $solicitud->getActividades();
             foreach ($actividades as $actividad) {
-                if($actividad->getActiva()== true)
-                    $sol['responsableActual'] = $actividad->getResponsable()->getNombre();
-                else
-                    $sol['responsableActual'] = null;
-            } 
+                if($actividad->getActiva()== true){
+                     $activa = true;
+                     $actividadActiva = $actividad; 
+                 }
+            }
+            if($activa)
+                $sol['responsableActual'] = $actividadActiva->getResponsable()->getNombre();
+            else
+                $sol['responsableActual'] = null;
+
             array_push($todoSolicitudes, $sol);
 
         }

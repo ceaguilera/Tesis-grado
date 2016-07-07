@@ -20,6 +20,7 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Nombre</th>
                       <th>Catidad de Actividades</th>
                       <th>Editar</th>
@@ -28,6 +29,7 @@
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
+                      <td>{[{value.id}]}</td>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.numActividades}]}</td>
                       <td> <button ng-click="edit(value.id)" type="button" class="btn btn-info">Editar</button></td>

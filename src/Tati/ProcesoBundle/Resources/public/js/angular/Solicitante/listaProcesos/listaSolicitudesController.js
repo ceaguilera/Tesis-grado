@@ -2,6 +2,15 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 
 	$scope.response = response;
 	$scope.solicitud = {};
+	$scope.alerts = [];
+	$scope.closeAlert = function(index, type) {
+		$scope.alerts.splice(index, 1);
+		if(type == 'success'){
+			var url = Routing.generate('_tatiSoft_soli_finished');
+			$window.location.href = url;
+		}
+	};
+
 	$scope.imprimir = function(){
 		console.log("response", $scope.response);
 	}
@@ -82,9 +91,19 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 			url: url,
 			success: function(data) {
 				console.log(data);
+				var alert = {};
+				alert.type = 'success';
+				alert.msg = data;
+				$scope.alerts.push(alert);
+				$scope.$apply();
 			},
 			error: function(e) {
 				console.log(e);
+				var alert = {};
+				alert.type = 'danger';
+				alert.msg = e.responseJSON;
+				$scope.alerts.push(alert);
+				$scope.$apply();
 			}
 		})
     }

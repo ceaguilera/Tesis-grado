@@ -42,7 +42,16 @@
 					<td>{{dat.usuario}}</td>
 					<td>{{dat.fechaSolicitud}}</td>
 					<td>{{dat.responsableActual}}</td>
-					<td>{{dat.status}}</td>
+					<td> 
+					{% if dat.status==true%}
+						<label style="background-color: #5cb85c">Terminado</label>
+					{% else %}
+						{% if dat.status==false%}
+							<label style="background-color:#f0ad4e">En proceso</label>
+						{% endif %}
+					{% endif %}
+					
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

@@ -2,13 +2,21 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 
 	$scope.response = response;
 	$scope.solicitud = {};
+	$scope.alerts = [];
+	$scope.closeAlert = function(index, typeAlert) {
+		$scope.alerts.splice(index, 1);
+		if(typeAlert != 1){
+			var url = Routing.generate('_tatiSoft_resp_end_acitivity');
+			$window.location.href = url;
+		}
+	};
 
 	$scope.detalleActividad = function(idActividad){
 		var url = Routing.generate('_tatiSoft_resp_getTask', { id: idActividad});
 		$window.location.href = url;
 	}
 
-	 $scope.ejecutarTarea = function(tareaId){
+	 $scope.ejecutarTarea = function(tareaId, key){
     	var json = {};
 		json.idTarea = tareaId;
 		json = angular.toJson(json);
@@ -20,6 +28,14 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 			url: url,
 			success: function(data) {
 				console.log(data);
+				$scope.response.actividad.tareas[key].ejecutada = true;
+				console.log(response);
+				var alert = {};
+				alert.type = 'success';
+				alert.msg = data;
+				alert.typeAlert = 1;
+				$scope.alerts.push(alert);
+				$scope.$apply();
 			},
 			error: function(e) {
 				console.log(e);
@@ -27,7 +43,7 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 		})
 	}
 
-	    $scope.ejecutarActividad = function(){
+	   $scope.ejecutarActividad = function(){
     	var json = {};
 		json.idActividad = response.actividad.id;
 		json = angular.toJson(json);
@@ -39,9 +55,21 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 			url: url,
 			success: function(data) {
 				console.log(data);
+				var alert = {};
+				alert.type = 'success';
+				alert.typeAlert = 2;
+				alert.msg = data;
+				$scope.alerts.push(alert);
+				$scope.$apply();
 			},
 			error: function(e) {
 				console.log(e);
+				var alert = {};
+				alert.type = 'danger';
+				alert.typeAlert = 1;
+				alert.msg = e.responseJSON;
+				$scope.alerts.push(alert);
+				$scope.$apply();
 			}
 		})
     }

@@ -9,7 +9,7 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
+        <h2 class="content-header-title"><strong>Lista de Actividades</strong></h2>
         
       </div> <!-- /.content-header -->
       <div>
@@ -17,21 +17,25 @@
           <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Listado de Actividades Pendientes</div>
+                <div class="panel-heading">Historial de actividades terminadas</div>
 
                 <!-- Table -->
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Nombre de proceso</th>
                       <th>Nombre de Actividad</th>
+                      <th>Responsable por</th>
                       <th>Descripcion</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
+                      <td>{[{value.id}]}</td>
                       <td>{[{value.nombreProceso}]}</td>
                       <td>{[{value.nombre}]}</td>
+                      <td><label>{[{value.resposable_por}]}</label></td>
                       <td>{[{value.descripcion}]}</td>
                     </tr>
                   </tbody>

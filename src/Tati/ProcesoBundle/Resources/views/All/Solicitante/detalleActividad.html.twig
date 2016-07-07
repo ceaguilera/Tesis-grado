@@ -10,6 +10,7 @@
       <div class="content-header">
         <h2 class="content-header-title"><strong>{[{response.actividad.nombre}]}</strong></h2> 
       </div>
+      <uib-alert dismiss-on-timeout="2000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index, alert.type)"><strong>{[{alert.msg}]}</strong></uib-alert>
       <div class="col-md-10">
         <label>Descripcion de la actividad: {[{response.actividad.descripcion}]}</label>
       </div>
@@ -50,14 +51,11 @@
                 <div ng-if="tarea.tipo == 1">
                   <div ng-if="!tarea.filePath">
                       <div class="col-md-3">
-                        <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
+                        <div name="{[{key}]}" type="button" class="btn btn-secondary" ng-model="tarea.file" ngf-multiple="false" ngf-select="upload(tarea.file, key)">
                           Seleccione el archivo
                         </div>
                       </div>
-                      <div class="col-md-3">
-                        <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir
-                        </button>
-                      </div>
+                      
                   </div>
                   <div ng-if="tarea.filePath">
                    <div class="col-md-3">

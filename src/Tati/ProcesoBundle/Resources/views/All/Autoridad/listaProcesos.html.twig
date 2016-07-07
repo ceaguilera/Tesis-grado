@@ -77,8 +77,18 @@
                         <td>{[{value.solicitante}]}</td>
                         <td>{[{value.usuario}]}</td>
                         <td>{[{value.fechaSolicitud}]}</td>
-                        <td>{[{value.responsableActual}]}</td>
-                        <td>{[{value.status}]}</td>
+                        <td>
+                          <label ng-if="value.responsableActual == null">Ninguno</label>
+                          <label ng-if="value.responsableActual != null">{[{value.responsableActual}]}</label>
+                        </td>
+                        <td>
+                          <span ng-if="value.status==true" style="font-size: 100%;" class="label label-success">
+                        Terminado
+                        </span>
+                        <span ng-if="value.status==false" style="font-size: 100%;" class="label label-warning">
+                        En proceso
+                        </span>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

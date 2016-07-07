@@ -39,6 +39,7 @@ class GeneralService
             $tareaAux['id'] = $tarea->getId();
             $tareaAux['nombre'] = $tarea->getNombre();
             $tareaAux['tipo'] = $tarea->getTipoTarea()->getId();
+            $tareaAux['ejecutada'] = $tarea->getStatus();
             $tareaAux['descripcion'] = $tarea->getDescripcion();
             if(($tareaAux['tipo'] == 2) || ($tareaAux['tipo'] == 3) || ($tareaAux['tipo'] == 4) ){
                 $documentos = array();
@@ -110,7 +111,7 @@ class GeneralService
                 $this->em->persist($actividadSig);
 
             }else{
-                $actividad->getSolicitud()->getStatus(true);
+                $actividad->getSolicitud()->setStatus(true);
                 $user = $actividad->getSolicitud()->getSolicitante();
                 $this->generarNotificacion($user, 3, $actividad->getSolicitud()->getProceso()->getNombre());
             }
@@ -184,8 +185,8 @@ class GeneralService
         // dump("")
 
         $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 1, "tipo"  => 3));
-
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 3));
+        //Modificar para que tambien traiga 3
         $getNotificaciones = array();
 
         foreach ($notificaciones as $notificacion) {

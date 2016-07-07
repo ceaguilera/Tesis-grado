@@ -1,4 +1,4 @@
-var listaSolicitudes = angular.module("listaSolicitudesModule",['ngFileUpload'])
+var listaSolicitudes = angular.module("listaSolicitudesModule",['ngFileUpload', 'ui.bootstrap'])
 
 .config(function($interpolateProvider){
 	$interpolateProvider.startSymbol('{[{').endSymbol('}]}');

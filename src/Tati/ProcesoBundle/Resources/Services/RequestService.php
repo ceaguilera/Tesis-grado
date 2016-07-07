@@ -29,7 +29,7 @@ class RequestService
         $solicitud = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
         'solicitante' => $data['userId'], 'proceso' => $data['idSolicitud'], 'status' => false));
 
-        if(count($solicitud)>0)
+        if(count($solicitud)>2)//cambiar a 0
         {
             return false;
 
@@ -158,16 +158,31 @@ class RequestService
 
     public function procesosTerminados($user)
     {
-        $procesos = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
-        'solicitante' => $user->getId(), 'status' => true));
-
+        $solicitudes = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
+        'solicitante' => $user->getId()));
         $response = array();
+        foreach ($solicitudes as  $solicitud) {
+            $activa = false;
+            $sol = array();
+            $sol['id'] = $solicitud->getId();
+            $sol['nombreProceso'] = $solicitud->getProceso()->getNombre();
+            $sol['fechaSolicitud'] = $solicitud->getFecha()->format('d-m-Y');
+            $sol['status'] = $solicitud->getStatus();
+            $actividades = $solicitud->getActividades();
+            foreach ($actividades as $actividad) {
+                if($actividad->getActiva()== true){
+                   $activa = true;
+                   $actividadActiva = $actividad; 
+                }
+            }
+            if($activa)
+                    $sol['responsableActual'] = $actividadActiva->getResponsable()->getNombre();
+                else
+                    $sol['responsableActual'] = null;
 
-        foreach ($procesos as $proceso) {
-            $actiAux = array();
-            $actiAux['id'] = $proceso->getId();
-            $actiAux['nombre'] = $proceso->getProceso()->getNombre();
-            array_push($response, $actiAux);
+
+            array_push($response, $sol);
+
         }
 
         return $response;

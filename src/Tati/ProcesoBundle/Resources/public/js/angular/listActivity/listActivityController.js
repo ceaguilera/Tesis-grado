@@ -45,6 +45,13 @@ listActivity.controller('listActivityController', function($scope, $http, $locat
 				url: url,
 				success: function(data) {
 					console.log(data);
+					var alert = {};
+					alert.type = 'success';
+					alert.msg = data;
+					$scope.alerts.push(alert);
+					var url = Routing.generate('_expertListProcessInactive');
+					$window.location.href = url;
+					$scope.$apply();
 				},
 				error: function(e) {
 

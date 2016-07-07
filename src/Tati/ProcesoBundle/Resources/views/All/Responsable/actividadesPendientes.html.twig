@@ -23,17 +23,21 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Nombre de proceso</th>
                       <th>Nombre de Actividad</th>
                       <th>Descripcion</th>
+                      <th>Responsable por</th>
                       <th>Ajecutar</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
+                      <td>{[{value.id}]}</td>
                       <td>{[{value.nombreProceso}]}</td>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.descripcion}]}</td>
+                      <td><label>{[{value.resposable_por}]}</label></td>
                       <td> <button ng-click="detalleActividad(value.id)" type="button" class="btn btn-secondary">Ejecutar</button></td>
                     </tr>
                   </tbody>

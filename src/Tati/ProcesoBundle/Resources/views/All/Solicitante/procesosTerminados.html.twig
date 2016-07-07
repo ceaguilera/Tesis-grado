@@ -9,7 +9,7 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Lista de procesos terminados</strong></h2>
+        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
         
       </div> <!-- /.content-header -->
       <div>
@@ -17,20 +17,36 @@
           <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Listado de Actividades Pendientes</div>
+                <div class="panel-heading">Historial de solicitudes</div>
 
                 <!-- Table -->
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Id</th>
+                      <th>#</th>
                       <th>Nombre de proceso</th>
+                      <th>Fecha de solicitud</th>
+                      <th>Responsable actual</th>
+                      <th>Estatus</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
                       <td>{[{value.id}]}</td>
-                      <td>{[{value.nombre}]}</td>
+                      <td>{[{value.nombreProceso}]}</td>
+                      <td>{[{value.fechaSolicitud}]}</td>
+                      <td>
+                        <label ng-if="value.responsableActual == null">Ninguno</label>
+                        <label ng-if="value.responsableActual != null">{[{value.responsableActual}]}</label>
+                      </td>
+                      <td>
+                        <span ng-if="value.status==true" style="font-size: 100%;" class="label label-success">
+                        Terminado
+                        </span>
+                        <span ng-if="value.status==false" style="font-size: 100%;" class="label label-warning">
+                        En proceso
+                        </span>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

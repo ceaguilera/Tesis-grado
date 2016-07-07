@@ -6,7 +6,7 @@
 
   <div class="content">
     <div class="content-container">
-
+      <uib-alert dismiss-on-timeout="4000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index,alert.typeAlert)"><strong>{[{alert.msg}]}</strong></uib-alert>
       <div class="content-header">
         <h2 class="content-header-title"><strong>{[{response.actividad.nombre}]}</strong></h2> 
       </div>
@@ -50,13 +50,9 @@
                 <div ng-if="tarea.tipo == 1">
                   <div ng-if="!tarea.filePath">
                       <div class="col-md-3">
-                        <div name="{[{key}]}" type="button" class="btn btn-secondary" ngf-select ng-model="tarea.file" ngf-multiple="false">
+                        <div name="{[{key}]}" type="button" class="btn btn-secondary"  ng-model="tarea.file" ngf-select="upload(tarea.file, key)" ngf-multiple="false">
                           Seleccione el archivo
                         </div>
-                      </div>
-                      <div class="col-md-3">
-                        <button ng-click="upload(tarea.file, key)" type="button" class="btn btn-secondary">Subir
-                        </button>
                       </div>
                   </div>
                   <div ng-if="tarea.filePath">
@@ -78,15 +74,16 @@
                       </div>
 
                       <div class="col-md-3" ng-if="tarea.tipo == 2 ">
-                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Verificar
+                        <button ng-if="!tarea.ejecutada" ng-click="ejecutarTarea(tarea.id, key)" type="button" class="btn btn-secondary">Verificar
                         </button>
+                        <label ng-if="tarea.ejecutada" style="color:green"><i class="fa fa-check" aria-hidden="true"></i>Verificado</label>
                       </div>
                       <div class="col-md-3" ng-if="tarea.tipo == 3 ">
-                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Analizar
+                        <button ng-click="ejecutarTarea(tarea.id, key)" type="button" class="btn btn-secondary">Analizar
                         </button>
                       </div>
                       <div class="col-md-3" ng-if="tarea.tipo == 4 ">
-                        <button ng-click="ejecutarTarea(tarea.id)" type="button" class="btn btn-secondary">Aprobar
+                        <button ng-click="ejecutarTarea(tarea.id, key)" type="button" class="btn btn-secondary">Aprobar
                         </button>
                       </div>
                   </div>
@@ -100,6 +97,7 @@
         <div align="center">
           <button ng-click="ejecutarActividad()" type="button" class="btn btn-secondary">Ejecutar Actividad</button>
         </div>
+        <br>
       </div>
    </div>
   </div>

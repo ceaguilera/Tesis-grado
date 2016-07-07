@@ -46,6 +46,8 @@ _expertListProcessAct:
 _expertListProcessInactive:
     pattern: /specialist/listProcessInactive
     defaults: { _controller: ProcesoBundle:Expert:listProcessInactive }
+    options:
+        expose: true
 
 _expertListTask:
     pattern: /specialist/listTask
@@ -68,7 +70,7 @@ _expertEditProcess:
         expose: true
 
 _expertViewProcess:
-    pattern: /specialist/viewProcess/
+    pattern: /specialist/viewProcess/{id}
     defaults: { _controller: ProcesoBundle:Expert:viewProcess}
     options:
         expose: true
