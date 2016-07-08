@@ -69,6 +69,13 @@ class Notificaciones
      * @ORM\JoinColumn(name="actividad_id", referencedColumnName="id")
      */
     private $actividad;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="terminada", type="boolean", nullable=true)
+     */
+    private $terminada;
     /**
      * Get id
      *

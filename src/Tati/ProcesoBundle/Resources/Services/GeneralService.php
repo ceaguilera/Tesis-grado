@@ -81,6 +81,10 @@ class GeneralService
             return false;
         }else{
             $actividad->setStatus(true);
+            $notificaciones = $actividad->getNotificaciones();
+            foreach ($notificaciones as $notificacion) {
+                $notificacion->setTerminada(true);
+            }
             $actividadSig = $actividad->getActSig();
             if($actividadSig != null){
                 $documentos = $this->em->getRepository('ProcesoBundle:Documento')
@@ -185,7 +189,7 @@ class GeneralService
         // dump("")
 
         $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 3));
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 1, "terminada" => false));
         //Modificar para que tambien traiga 3
         $getNotificaciones = array();
 

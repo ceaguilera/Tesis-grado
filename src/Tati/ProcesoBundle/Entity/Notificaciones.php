@@ -69,6 +69,13 @@ class Notificaciones
      * @ORM\JoinColumn(name="actividad_id", referencedColumnName="id")
      */
     private $actividad;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="terminada", type="boolean", nullable=true)
+     */
+    private $terminada = false;
     /**
      * Get id
      *
@@ -238,5 +245,28 @@ class Notificaciones
     public function getActividad()
     {
         return $this->actividad;
+    }
+
+    /**
+     * Set terminada
+     *
+     * @param boolean $terminada
+     * @return Notificaciones
+     */
+    public function setTerminada($terminada)
+    {
+        $this->terminada = $terminada;
+
+        return $this;
+    }
+
+    /**
+     * Get terminada
+     *
+     * @return boolean 
+     */
+    public function getTerminada()
+    {
+        return $this->terminada;
     }
 }

@@ -125,7 +125,7 @@ class ActividadSolicitada
      * -2 Inicio
      * -1 fin
      *
-     * @ORM\Column(name="incio-fin", type="integer", nullable=true)
+     * @ORM\Column(name="inciofin", type="integer", nullable=true)
      */
     private $InicioFin;
 
@@ -521,5 +521,28 @@ class ActividadSolicitada
     public function getSolicitante()
     {
         return $this->solicitante;
+    }
+
+    /**
+     * Set InicioFin
+     *
+     * @param integer $inicioFin
+     * @return ActividadSolicitada
+     */
+    public function setInicioFin($inicioFin)
+    {
+        $this->InicioFin = $inicioFin;
+
+        return $this;
+    }
+
+    /**
+     * Get InicioFin
+     *
+     * @return integer 
+     */
+    public function getInicioFin()
+    {
+        return $this->InicioFin;
     }
 }
