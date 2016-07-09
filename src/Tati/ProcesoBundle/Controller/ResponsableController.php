@@ -49,7 +49,7 @@ class ResponsableController extends Controller
     }
 
     public function alertAction(){
-        $this->get('GeneralService')->limpiarNotificaciones($this->getUser(),2);
+        //$this->get('GeneralService')->limpiarNotificaciones($this->getUser(),2);
         $this->get('GeneralService')->getNotificacionesNormales($this->getUser()->getId());
         $this->get('GeneralService')->getNotificacionesAlertas($this->getUser()->getId());
         $response = $this->get('GeneralService')->listarNotificaciones($this->getUser(),2);

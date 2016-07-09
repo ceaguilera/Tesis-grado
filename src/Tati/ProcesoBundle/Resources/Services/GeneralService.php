@@ -165,7 +165,7 @@ class GeneralService
         // dump("")
 
         $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 2));
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 2, "terminada" => false));
 
         $getNotificaciones = array();
 
@@ -230,7 +230,7 @@ class GeneralService
         $notificaciones = $user->getNotificaciones();
         $response = array();
         foreach ($notificaciones as $notificacion) {
-            if($notificacion->getTipo()==$tipo)
+            if($notificacion->getTipo()==$tipo && $notificacion->getTerminada()==false)
             {
                 $noti = array();
                 $noti['id'] =$notificacion->getId();

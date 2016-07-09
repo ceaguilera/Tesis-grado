@@ -41,7 +41,13 @@
 					<td>{{dat.solicitante}}</td>
 					<td>{{dat.usuario}}</td>
 					<td>{{dat.fechaSolicitud}}</td>
-					<td>{{dat.responsableActual}}</td>
+					<td>
+						{% if dat.responsableActual == null%}
+							Ninguno
+						{% else %}
+							{{dat.responsableActual}}
+						{% endif %}
+					</td>
 					<td> 
 					{% if dat.status==true%}
 						<label style="background-color: #5cb85c">Terminado</label>

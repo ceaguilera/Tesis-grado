@@ -241,12 +241,21 @@
             Notificaciones
           </a>
         </li>
-        <li class="">
-          <a href="{{path('_tatiSoft_resp_alert')}}">
-            <i class="fa fa-exclamation-triangle"></i>
-            Alertas
-          </a>
-        </li>
+        {% if notificaciones|length > 0 %}
+          <li class="">
+            <a href="{{path('_tatiSoft_resp_alert')}}" style="color:#DAD700">
+              <i class="fa fa-exclamation-triangle"></i>
+              Alertas
+            </a>
+          </li>
+        {% else %}
+          <li class="">
+            <a href="{{path('_tatiSoft_resp_alert')}}">
+              <i class="fa fa-exclamation-triangle"></i>
+              Alertas
+            </a>
+          </li>
+        {% endif %}
       </ul>
 
     </div> <!-- /.navbar-collapse -->   

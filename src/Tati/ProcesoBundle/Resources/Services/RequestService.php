@@ -29,7 +29,7 @@ class RequestService
         $solicitud = $this->em->getRepository('ProcesoBundle:Solicitud')->findBy(array(
         'solicitante' => $data['userId'], 'proceso' => $data['idSolicitud'], 'status' => false));
 
-        if(count($solicitud)>2)//cambiar a 0
+        if(count($solicitud)>0)//cambiar a 0
         {
             return false;
 
