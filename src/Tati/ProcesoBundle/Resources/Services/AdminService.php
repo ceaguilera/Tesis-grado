@@ -95,10 +95,19 @@ class AdminService
             $user->setCedula($data['datos']['cedula']);
             $user->setEnabled(true);
             if(isset($data['datos']['responsabilidades'])){
-                if($data['datos']['esEspecialista']==1 ){
-                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                if($data['datos']['esEspecialista']==true ){
+                    if($data['datos']['esAutoridad']==true){
+                        $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL", "ROLE_AUTORIDAD");
+                    }else{
+                        $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_ESPECIALISTA_CREATE_ALL"); 
+                    }
                 }else{
-                    $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE");
+                    if($data['datos']['esAutoridad']==true){
+                        $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE", "ROLE_AUTORIDAD" );
+                    }else{
+                        $role = array("ROLE_SOLICITANTE", "ROLE_RESPONSABLE_UPDATE"); 
+                    }
+     
                 }
                 $user->setRoles($role);
                 foreach ($data['datos']['responsabilidades'] as $resposabilidad) {
@@ -106,10 +115,18 @@ class AdminService
                     $user->addResponsabilidade($responsable);
                 }
             }else{
-                if($data['datos']['esEspecialista']==1 ){
-                    $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                if($data['datos']['esEspecialista']==true ){
+                    if($data['datos']['esAutoridad']==true){
+                       $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL", "ROLE_AUTORIDAD");
+                    }else{
+                        $role = array("ROLE_SOLICITANTE", "ROLE_ESPECIALISTA_CREATE_ALL");
+                    }
                 }else{
-                    $role = array("ROLE_SOLICITANTE");
+                    if($data['datos']['esAutoridad']==true){
+                       $role = array("ROLE_SOLICITANTE", "ROLE_AUTORIDAD");
+                    }else{
+                       $role = array("ROLE_SOLICITANTE");
+                    }
                 }
                 $user->setRoles($role);
             }

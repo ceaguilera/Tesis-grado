@@ -125,7 +125,7 @@ class RequestService
         $this->em->flush();
         
         $response = array();
-        if($actividadSolicitud[0]->getResponsable()->getId() == 5){
+        if($actividadSolicitud[0]->getResponsable()->getNombre() == "Solicitante"){
             $response['actividad'] = true;
             $response['idActividad'] = $actividadSolicitud[0]->getId();
         }else{

@@ -10,13 +10,6 @@
 
       <div class="content-header">
         <h2 class="content-header-title"><strong>Registrar nuevo usuario</strong></h2>
-        <p>Un usuario es Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        
       </div> <!-- /.content-header -->
       <div class="portlet">
         <div class="portlet-header">
@@ -55,23 +48,45 @@
                 <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
               </select>
             </div> 
-            <div class="col-md-4">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-4 col-md-3">
+              <label>Roles del usuario</label>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="datos.esAutoridad" value="">
+                  Autoridad
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="datos.esEspecialista">
+                  Especialista
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="responsable">
+                  Responsable
+                </label>
+              </div>
+            </div> 
+<!--             <div class="col-md-12">
               <label>¿Es especialista?</label>
               <select class="form-control" ng-model="datos.esEspecialista" required>
                 <option value="0">No</option>
                 <option value="1">Si</option>
               </select>
             </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-4">
+            <br>
+            <div class="col-md-12">
               <label>¿Es responsable?</label>
               <select class="form-control" ng-model="responsable" required>
                 <option value="0">No</option>
                 <option value="1">Si</option>
               </select>
-            </div>
+            </div> -->
           </div>
           <br>
           <div class="row">
@@ -88,7 +103,7 @@
           </div>
           <br>
           <div ng-if="datos.responsabilidades.length>0">
-            <button class="btn btn-secondary" ng-click="addResponsa()">Agregar Otra responsabilidad</button>
+            <button type="button" class="btn btn-secondary" ng-click="addResponsa()">Agregar Otra responsabilidad</button>
           </div>
           <div class="row" align="center">
             <button class="btn button-secundary" ng-click="registrar(1)">Registrar</button>

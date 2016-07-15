@@ -2,6 +2,8 @@ admin.controller('adminController', function($scope, $http, $window){
 
 	$scope.response = response;
 	$scope.datos = {};
+	$scope.datos.esEspecialista = false;
+	$scope.datos.esAutoridad = false;
 	$scope.responsables = [];
 	$scope.responsables.length++;
 	$scope.responsables[0] ={};
@@ -28,7 +30,7 @@ admin.controller('adminController', function($scope, $http, $window){
 	 $scope.$watch('responsable', function() {
 	 	console.log("entro", $scope.responsable);
 
-	 	if($scope.responsable == 1){
+	 	if($scope.responsable == true){
 	 		$scope.datos.responsabilidades = [];
 	 		$scope.datos.responsabilidades[$scope.datos.responsabilidades.length] = {};
 	 	}

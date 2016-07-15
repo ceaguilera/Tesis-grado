@@ -17,7 +17,7 @@ class LoadTareaData extends AbstractFixture implements OrderedFixtureInterface
             "Verificar",
             "Analizar",
             "Aprobar",
-            "Respuesta",
+            //"Respuesta",
         );
         //Carga de datos de una tareas
         foreach ($tareas as $tarea) {

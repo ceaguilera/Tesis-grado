@@ -213,6 +213,7 @@ class InformationService
                 $actividad['tiempo'] = $actividadesP->getTiempo();
                 $actividad['descripcion'] = $actividadesP->getDescripcion();
                 $actividad['idResponsable'] = $actividadesP->getResponsable()->getId();
+                $actividad['nombreResponsable'] = $actividadesP->getResponsable()->getNombre();
                 $actividad['tareas']= array();
                 $tareas = $actividadesP->getTareas();
                 foreach ($tareas as $tareasP) {

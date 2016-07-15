@@ -8,14 +8,14 @@
 
     <div class="content-container">
       <div class="content-header">
-        <h2 class="content-header-title">Procesos activos</h2> <estiquta ng-click="showModalConfirm()"></estiquta>
+        <h2 class="content-header-title">Procesos Inactivos</h2> <estiquta ng-click="showModalConfirm()"></estiquta>
       </div> <!-- /.content-header -->
       <uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index)"><strong>{[{alert.msg}]}</strong></uib-alert>
       <div ng-if="response.length>0" class="row">
           <div class="col-sm-12">
               <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Listado de Procesos Activos</div>
+                <div class="panel-heading">Listado de Procesos Inactivos</div>
 
                 <!-- Table -->
                 <table class="table">

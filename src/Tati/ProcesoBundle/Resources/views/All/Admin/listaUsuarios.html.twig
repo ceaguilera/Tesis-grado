@@ -25,7 +25,7 @@
                     <th>Id</th>
                     <th>UserName</th>
                     <th>Correo</th>
-                    <th>Rol</th>
+                    <th>Roles</th>
                     <th>Ultima Sesion</th>
                     <th>Editar</th>
                   </tr>
@@ -37,7 +37,11 @@
                     <td>{[{value.email}]}</td>
                     <td>
                     <label ng-repeat="value in value.rol">
-                       {[{value}]}/
+                       <label ng-if="value=='ROLE_SOLICITANTE'">Solicitante,</label>
+                        <label ng-if="value=='ROLE_RESPONSABLE_UPDATE'"> Resposnable,</label>
+                         <label ng-if="value=='ROLE_AUTORIDAD'"> Autoridad</label>
+                         <label ng-if="value=='ROLE_ESPECIALISTA_CREATE_ALL'"> Especialista</label>
+                         <label ng-if="value=='ROLE_ADMINISTRADOR'"> Administrador</label>
                     </label>
                     </td>
                     <td>{[{value.lastLogin.date}]}</td>
