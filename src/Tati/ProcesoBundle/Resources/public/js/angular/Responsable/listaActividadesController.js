@@ -43,7 +43,7 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 		})
 	}
 
-	   $scope.ejecutarActividad = function(){
+	$scope.ejecutarActividad = function(){
     	var json = {};
 		json.idActividad = response.actividad.id;
 		json = angular.toJson(json);
@@ -70,6 +70,33 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 				alert.msg = e.responseJSON;
 				$scope.alerts.push(alert);
 				$scope.$apply();
+			}
+		})
+    }
+
+    $scope.devolverActividad = function(mensaje){
+    	var json = {};
+		json.idActividad = response.actividad.id;
+		json.mensaje = mensaje;
+		json = angular.toJson(json);
+		var url= Routing.generate('_tatiSoft_resp_devolverActividad');
+		console.log(json.mensaje);
+		$.ajax({
+			method: 'POST',
+			data: json,
+			url: url,
+			success: function(data) {
+				console.log(data);
+				var alert = {};
+				alert.type = 'success';
+				alert.typeAlert = 2;
+				alert.msg = data;
+				$scope.alerts.push(alert);
+				$scope.$apply();
+			},
+			error: function(e) {
+				console.log(e);
+				
 			}
 		})
     }
@@ -130,12 +157,43 @@ listaActividades.controller('listaActividadesController', function($scope, $http
 	            console.log(data);
 	            $scope.response.actividad.tareas[key].filePath = data.path;
 	            $scope.response.actividad.tareas[key].fileName = data.nombre;
+	           	$scope.response.actividad.tareas[key].fileId = data.fileId;
 	            $scope.response.actividad.tareas[key].subido = true;
 	        }).error(function(data) {
 	          console.log('error block');
 	          console.log(data);
 	      });
     };
+
+      $scope.eliminarArchivo = function(id, pos){
+    	 var json = {};
+		json.idFile = id;
+		json = angular.toJson(json);
+		var url= Routing.generate('_tatiSoft_soli_eliminar_archivo');
+		//console.log(url);
+		$.ajax({
+			method: 'POST',
+			data: json,
+			url: url,
+			success: function(data) {
+				console.log(data);
+				var alert = {};
+				alert.type = 'success';
+				alert.msg = data;
+				$scope.alerts.push(alert);
+				$scope.response.actividad.tareas[pos].filePath = false;
+				$scope.$apply();
+			},
+			error: function(e) {
+				console.log(e);
+				var alert = {};
+				alert.type = 'danger';
+				alert.msg = e.responseJSON;
+				$scope.alerts.push(alert);
+				$scope.$apply();
+			}
+		})
+    }
 
     
 })

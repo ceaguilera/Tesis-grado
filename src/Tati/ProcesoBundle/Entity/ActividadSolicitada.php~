@@ -129,6 +129,13 @@ class ActividadSolicitada
      */
     private $InicioFin;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mensajeDevolucion", type="string", nullable=true)
+     */
+    private $mensajeDevulucion;
+
     public function __construct()
     {
         $this->tareas = new \Doctrine\Common\Collections\ArrayCollection();
@@ -544,5 +551,28 @@ class ActividadSolicitada
     public function getInicioFin()
     {
         return $this->InicioFin;
+    }
+
+    /**
+     * Set mensajeDevulucion
+     *
+     * @param string $mensajeDevulucion
+     * @return ActividadSolicitada
+     */
+    public function setMensajeDevulucion($mensajeDevulucion)
+    {
+        $this->mensajeDevulucion = $mensajeDevulucion;
+
+        return $this;
+    }
+
+    /**
+     * Get mensajeDevulucion
+     *
+     * @return string 
+     */
+    public function getMensajeDevulucion()
+    {
+        return $this->mensajeDevulucion;
     }
 }

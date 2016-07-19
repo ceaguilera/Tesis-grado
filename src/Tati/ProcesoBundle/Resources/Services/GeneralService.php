@@ -26,6 +26,21 @@ class GeneralService
         $this->em= $em;
     }
 
+    public function eliminarArvhivo($id){
+        $documento = $this->em->getRepository('ProcesoBundle:Documento')->find($id);
+        $actividad = $documento->getActividadesSol();
+        $actividad->removeDocumento($documento);
+        $documento->setActividadesSol(null);
+        $tarea = $documento->getTarea();
+        $tarea->setDocumento(null);
+        $documento->setTarea(null);
+        $path = $documento->getPath();
+        if(unlink($path)){
+            $this->em->remove($documento);
+            $this->em->flush();
+            return true;
+        }
+    }
     public function getTareas($id){
         $actividad = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->find($id);
         $response = array();
@@ -33,6 +48,7 @@ class GeneralService
         $response['actividad']['nombre'] = $actividad->getNombre();
         $response['actividad']['id'] = $actividad->getId();
         $response['actividad']['descripcion'] = $actividad->getDescripcion();
+        $response['actividad']['mensaje'] = $actividad->getMensajeDevulucion();
         $tareas = array();
         foreach ($actividad->getTareas() as $tarea) {
             $tareaAux = array();
@@ -51,6 +67,14 @@ class GeneralService
                     array_push($documentos, $docAux);
                 }
                 $tareaAux['documentos'] = $documentos;
+            }else{
+                if($tarea->getStatus() == true){
+                    if($tarea->getDocumento() != null){
+                        $tareaAux['filePath'] = $tarea->getDocumento()->getPath();
+                        $tareaAux['fileName'] = $tarea->getDocumento()->getName();
+                        $tareaAux['fileId'] = $tarea->getDocumento()->getId();
+                    }
+                }
             }
             array_push($tareas, $tareaAux);
         }
@@ -126,6 +150,31 @@ class GeneralService
         }
     }
 
+    public function devolverActividadSolicitada($id, $mensaje){
+        $actividad = $this->em->getRepository('ProcesoBundle:ActividadSolicitada')->find($id);
+        $actividadAnt = $actividad->getActAnt();
+        $actividad->setActiva(false);
+        $actividadAnt->setActiva(true);
+        $actividadAnt->setMensajeDevulucion($mensaje);
+        if($actividadAnt->getSolicitante()!=null)
+        {
+            $this->generarNotificacion($actividadAnt->getSolicitante(),4,$actividadAnt);
+        }
+        else{
+        //     $users = $this->em->getRepository('ProcesoBundle:PerfilResponsable')
+        // ->findBy(array('responsable' => $actividadSig->getResponsable()->getId()));
+            $users = $actividadAnt->getResponsable()->getUsers();
+
+            foreach ($users as $user) {
+                $this->generarNotificacion($user,4,$actividadAnt);
+            }
+        }
+        $this->em->persist($actividad);
+        $this->em->persist($actividadAnt);
+        $this->em->flush();
+        return true;
+    }
+
     public function generarNotificacion($user, $tipoNotificacion, $actividad){
 
         $notificacion = new ENotificacion();
@@ -149,6 +198,9 @@ class GeneralService
                 $this->em->persist($actividad);
                 $notificacion->setMensaje("Parece que la actividad #".$idActividad." ".$nombreActividad.
                     " proviniente del proceso ".$nombreProceso." tiene el tiempo de ejecución VENCIDO");
+            }else if($tipoNotificacion == 4){
+                $notificacion->setMensaje("Parece que la actividad ".$nombreActividad." # ".$idActividad."ha sido devuelta"
+                    );
             }
         }else{
               $notificacion->setMensaje("Proceso ".$actividad." terminado exitosamente"); 
@@ -189,7 +241,7 @@ class GeneralService
         // dump("")
 
         $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 1, "terminada" => false));
+                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 4, "terminada" => false));
         //Modificar para que tambien traiga 3
         $getNotificaciones = array();
 

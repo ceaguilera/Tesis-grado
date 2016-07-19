@@ -94,4 +94,18 @@ class ResponsableController extends Controller
         }
     }
 
+    public function devolverActividadAction(Request $request){
+
+        if ($request->isXmlHttpRequest()){
+            $data = json_decode($request->getContent(),true);
+            $status = $this->get('GeneralService')->devolverActividadSolicitada($data['idActividad'], $data['mensaje']);
+            if($status){
+                $response = new JsonResponse("Actividad devuelta correctamente", 200);
+            }else{
+                $response = new JsonResponse("Hubo un error", 500);
+            }
+            return $response;
+        }
+    }
+
 }

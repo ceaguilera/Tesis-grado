@@ -11,6 +11,7 @@
         <h2 class="content-header-title"><strong>{[{response.actividad.nombre}]}</strong></h2> 
       </div>
       <uib-alert dismiss-on-timeout="2000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index, alert.type)"><strong>{[{alert.msg}]}</strong></uib-alert>
+      <div ng-if="response.actividad.mensaje != null" class="alert alert-warning"><label><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {[{response.actividad.mensaje}]}</label></div>
       <div class="col-md-10">
         <label>Descripcion de la actividad: {[{response.actividad.descripcion}]}</label>
       </div>
@@ -63,6 +64,11 @@
                      <a target="_blank" href="{{ asset('{[{tarea.filePath}]}') }}">
                      {[{tarea.fileName}]}
                      </a>
+                   </div>
+                   <div class="col-md-3">
+                    <button type="button" ng-click="eliminarArchivo(tarea.fileId, $index)" class="btn btn-danger">
+                      Eliminar Archivo
+                    </button>
                    </div>
                   </div>
                 </div>

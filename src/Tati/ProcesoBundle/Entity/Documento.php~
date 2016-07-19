@@ -36,6 +36,11 @@ class Documento
      */
     public $actividades_sol;
 
+     /**
+     * @ORM\OneToOne(targetEntity="TareaSolicitada", mappedBy="documento")
+     */
+    public $tarea;
+
     /**
      * @Assert\File(maxSize="6000000")
      */
@@ -228,4 +233,6 @@ class Documento
     {
         return $this->actividades_sol;
     }
+
+
 }

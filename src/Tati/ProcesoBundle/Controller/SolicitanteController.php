@@ -84,11 +84,14 @@ class SolicitanteController extends Controller
             $userName = $request->get('userName');
             $name = $request->get('name');
             $actividad = $this->getDoctrine()->getRepository('ProcesoBundle:ActividadSolicitada')->find($request->get('actividadRelacionada'));
+            $tarea = $this->getDoctrine()->getRepository('ProcesoBundle:TareaSolicitada')->find($request->get('idTarea'));
             $documento = new Edocumento();
             $documento->setFile($file);
             $documento->setName($userName);
             $documento->upload($name,$actividad->getSolicitud()->getNombreCarpeta(),$userName);
             $documento->setActividadesSol($actividad);
+            $documento->setTarea($tarea);
+            $tarea->setDocumento($documento);
             $em = $this->getDoctrine()->getManager();
             $em->persist($documento);
             $em->flush();
@@ -99,6 +102,7 @@ class SolicitanteController extends Controller
             $response->setData(array(
             'Archivo subido' => 200,
             'path' => $documento->getPath(),
+            'fileId' => $documento->getId(),
             'nombre' => $documento->getName()));
 
         return $response;
@@ -125,6 +129,20 @@ class SolicitanteController extends Controller
                 $response = new JsonResponse("Actividad ejecuada correctamente", 200);
             }else{
                 $response = new JsonResponse("Hubo un error, falta alguna tarea por ser ejecutada", 500);
+            }
+            return $response;
+        }
+    }
+
+    public function eliminarArchivoAction(Request $request){
+
+        if ($request->isXmlHttpRequest()){
+            $data = json_decode($request->getContent(),true);
+            $status = $this->get('GeneralService')->eliminarArvhivo($data['idFile']);
+            if($status){
+                $response = new JsonResponse("Archivo elinado correctamente", 200);
+            }else{
+                $response = new JsonResponse("Hubo un error", 500);
             }
             return $response;
         }

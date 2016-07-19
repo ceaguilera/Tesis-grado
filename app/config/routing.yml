@@ -148,6 +148,12 @@ _tatiSoft_soli_ejecutar_actividad:
     defaults: { _controller:  ProcesoBundle:Solicitante:ejecutarActividad}
     options:
         expose: true
+        
+_tatiSoft_soli_eliminar_archivo:
+    pattern:  /solicitante/eliminarArchivo
+    defaults: { _controller:  ProcesoBundle:Solicitante:eliminarArchivo}
+    options:
+        expose: true
 
 #rutas de usuario responsable
 
@@ -190,6 +196,12 @@ _tatiSoft_resp_setTask:
 _tatiSoft_resp_setActividad:
     pattern: /solicitante/cambioStatusActividad
     defaults: { _controller: ProcesoBundle:Responsable:ejecutarActividad}
+    options:
+        expose: true
+
+_tatiSoft_resp_devolverActividad:
+    pattern: /solicitante/devolverActividad
+    defaults: { _controller: ProcesoBundle:Responsable:devolverActividad}
     options:
         expose: true
 

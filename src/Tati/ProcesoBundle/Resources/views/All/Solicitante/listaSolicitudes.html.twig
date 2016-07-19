@@ -23,6 +23,7 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Nombre de proceso</th>
                       <th>Nombre de Actividad</th>
                       <th>Descripcion</th>
@@ -31,6 +32,7 @@
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
+                      <td>{[{value.id}]}</td>
                       <td>{[{value.nombreProceso}]}</td>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.descripcion}]}</td>

@@ -36,6 +36,11 @@ class Documento
      */
     public $actividades_sol;
 
+     /**
+     * @ORM\OneToOne(targetEntity="TareaSolicitada", mappedBy="documento")
+     */
+    public $tarea;
+
     /**
      * @Assert\File(maxSize="6000000")
      */
@@ -182,28 +187,7 @@ class Documento
         return $this->path;
     }
 
-    /**
-     * Set usuarioSolicitante
-     *
-     * @param \Tati\ProcesoBundle\Entity\PerfilSolicitante $usuarioSolicitante
-     * @return Documento
-     */
-    public function setUsuarioSolicitante(\Tati\ProcesoBundle\Entity\PerfilSolicitante $usuarioSolicitante = null)
-    {
-        $this->usuarioSolicitante = $usuarioSolicitante;
 
-        return $this;
-    }
-
-    /**
-     * Get usuarioSolicitante
-     *
-     * @return \Tati\ProcesoBundle\Entity\PerfilSolicitante 
-     */
-    public function getUsuarioSolicitante()
-    {
-        return $this->usuarioSolicitante;
-    }
 
 
     /**
@@ -227,5 +211,30 @@ class Documento
     public function getActividadesSol()
     {
         return $this->actividades_sol;
+    }
+
+
+
+    /**
+     * Set tarea
+     *
+     * @param \Tati\ProcesoBundle\Entity\TareaSolicitada $tarea
+     * @return Documento
+     */
+    public function setTarea(\Tati\ProcesoBundle\Entity\TareaSolicitada $tarea = null)
+    {
+        $this->tarea = $tarea;
+
+        return $this;
+    }
+
+    /**
+     * Get tarea
+     *
+     * @return \Tati\ProcesoBundle\Entity\TareaSolicitada 
+     */
+    public function getTarea()
+    {
+        return $this->tarea;
     }
 }

@@ -59,6 +59,11 @@ class TareaSolicitada
      */
     private $actividad;
 
+     /**
+     * @ORM\OneToOne(targetEntity="Documento", inversedBy="tarea")
+     * @ORM\JoinColumn(name="documento_id", referencedColumnName="id")
+     */
+    private $documento;
 
     /**
      * Get id
@@ -183,5 +188,29 @@ class TareaSolicitada
     public function getActividad()
     {
         return $this->actividad;
+    }
+
+
+    /**
+     * Set documento
+     *
+     * @param \Tati\ProcesoBundle\Entity\Documento $documento
+     * @return TareaSolicitada
+     */
+    public function setDocumento(\Tati\ProcesoBundle\Entity\Documento $documento = null)
+    {
+        $this->documento = $documento;
+
+        return $this;
+    }
+
+    /**
+     * Get documento
+     *
+     * @return \Tati\ProcesoBundle\Entity\Documento 
+     */
+    public function getDocumento()
+    {
+        return $this->documento;
     }
 }

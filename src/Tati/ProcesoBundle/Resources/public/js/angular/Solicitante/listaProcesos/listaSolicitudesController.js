@@ -6,8 +6,8 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	$scope.closeAlert = function(index, type) {
 		$scope.alerts.splice(index, 1);
 		if(type == 'success'){
-			var url = Routing.generate('_tatiSoft_soli_finished');
-			$window.location.href = url;
+			//var url = Routing.generate('_tatiSoft_soli_finished');
+			//$window.location.href = url;
 		}
 	};
 
@@ -72,12 +72,43 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	            console.log(data);
 	            $scope.response.actividad.tareas[key].filePath = data.path;
 	            $scope.response.actividad.tareas[key].fileName = data.nombre;
+	            $scope.response.actividad.tareas[key].fileId = data.fileId;
 	            $scope.response.actividad.tareas[key].subido = true;
 	        }).error(function(data) {
 	          console.log('error block');
 	          console.log(data);
 	      });
     };
+
+    $scope.eliminarArchivo = function(id, pos){
+    	 var json = {};
+		json.idFile = id;
+		json = angular.toJson(json);
+		var url= Routing.generate('_tatiSoft_soli_eliminar_archivo');
+		//console.log(url);
+		$.ajax({
+			method: 'POST',
+			data: json,
+			url: url,
+			success: function(data) {
+				console.log(data);
+				var alert = {};
+				alert.type = 'success';
+				alert.msg = data;
+				$scope.alerts.push(alert);
+				$scope.response.actividad.tareas[pos].filePath = false;
+				$scope.$apply();
+			},
+			error: function(e) {
+				console.log(e);
+				var alert = {};
+				alert.type = 'danger';
+				alert.msg = e.responseJSON;
+				$scope.alerts.push(alert);
+				$scope.$apply();
+			}
+		})
+    }
 
     $scope.ejecutarActividad = function(){
     	var json = {};

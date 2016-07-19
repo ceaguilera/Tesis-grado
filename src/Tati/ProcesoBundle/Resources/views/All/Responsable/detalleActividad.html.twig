@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="container" ng-app="listaActividadesModule" ng-controller="listaActividadesController" ng-cloak>
+<div class="container" ng-app="listaActividadesModule" ng-controller="listaActividadesController" ng-cloak ng-init="devolucion = false">
 
   <div class="content">
     <div class="content-container">
@@ -39,7 +39,7 @@
               <!-- Default panel contents -->
               <div class="panel-heading">
                 <strong>
-                  Nombre de Tarea Nro {[{$index+1}]}: {[{tarea.nombre}]}  
+                  Nombre de Tarea Nro {[{$index+1}]}: {[{tarea.nombre}]}  {[{devolucion}]}
                 </strong>
               </div>
 
@@ -93,9 +93,18 @@
             </div>
          </div>
         </div>
-
         <div align="center">
-          <button ng-click="ejecutarActividad()" type="button" class="btn btn-secondary">Ejecutar Actividad</button>
+          <button  ng-click="devolucion = true" type="button" class="btn btn-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Desvolver Actividad</button> 
+          <button ng-if="!devolucion" ng-click="ejecutarActividad()" type="button" class="btn btn-secondary">Ejecutar Actividad <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+        <div ng-if="devolucion" class="content-container">
+          <div class="form-group">
+            <label for="comment">Motivos de la devolución:</label>
+            <textarea ng-model="mensaje" class="form-control" rows="5" id="comment"></textarea>{[{mensaje}]}
+          </div> 
+          <div align="center">
+             <button ng-click="devolverActividad(mensaje)" type="button" class="btn btn-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Enviar</button> 
+          </div>
         </div>
         <br>
       </div>
