@@ -249,6 +249,12 @@ _tatiSoft_admin_register_rep:
     options:
         expose: true
 
+_tatiSoft_admin_edit_user:
+    pattern:  /adminstrador/editarUser/{id}
+    defaults: { _controller:  ProcesoBundle:Admin:editarUsuario}
+    options:
+        expose: true
+
 #rutas de usuario tipo autoridad
 
 _tatiSoft_autoridad_listaProcesos:

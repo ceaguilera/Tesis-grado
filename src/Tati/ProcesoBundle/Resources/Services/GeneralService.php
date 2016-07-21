@@ -240,9 +240,23 @@ class GeneralService
         // dump($container->get('session'));
         // dump("")
 
-        $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
-                ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 4, "terminada" => false));
-        //Modificar para que tambien traiga 3
+        // $notificaciones = $this->em->getRepository('ProcesoBundle:Notificaciones')
+        //         ->findBy(array('receptor' => $userId, 'visto' => false, "tipo"  => 4,"tipo"  => 3, "terminada" => false));
+        // //Modificar para que tambien traiga 3
+        $query = $this->em->createQuery('SELECT n 
+            FROM Tati\ProcesoBundle\Entity\Notificaciones n 
+            WHERE n.receptor = :receptor AND 
+            n.visto = :visto AND 
+            ((n.tipo = :tipo1) OR (n.tipo = :tipo2) OR (n.tipo = :tipo3))');
+        $query->setParameters(array(
+            'receptor' => $userId,
+            'visto' => 'false',
+            'tipo1' => 3,
+            'tipo2' => 4,
+            'tipo3' => 1
+            ));
+        $notificaciones = $query->getResult();
+        dump($notificaciones);
         $getNotificaciones = array();
 
         foreach ($notificaciones as $notificacion) {

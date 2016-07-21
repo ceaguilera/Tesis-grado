@@ -1,0 +1,138 @@
+{% extends "ProcesoBundle:All:Admin/layout.html.twig" %}
+
+{% block body %}
+
+<div class="container" ng-app="adminModule" ng-controller="editUserController">
+
+  <div class="content">
+
+    <div class="content-container">
+
+      <div class="content-header">
+        <h2 class="content-header-title"><strong>Registrar nuevo usuario</strong></h2>
+      </div> <!-- /.content-header -->
+      <div class="portlet">
+        <div class="portlet-header">
+          <strong>
+            Datos del usuario
+          </strong>
+        </div>
+        <form name="new">
+          <div class="portlet-content">
+          <div class="row">
+            <div class="col-md-4">
+              <label>Nombre y apellido</label>
+              <input type="text" class="form-control" ng-model="datos.nombre" required>
+            </div>
+            <div class="col-md-4">
+              <label>Correo</label>
+              <input type="text" class="form-control" ng-model="datos.correo" required>
+            </div>
+            <div class="col-md-4">
+              <label>Cedula</label>
+              <input type="text" class="form-control" ng-model="datos.cedula" required>
+            </div> 
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Departamento</label>
+              <select class="form-control" ng-model="departamento" required number-converter>
+                <option value="">Seleccione</option>
+                <option ng-repeat="departamento in response.departamentos" value="{[{departamento.id}]}">{[{departamento.nombre}]}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Unidad Academica</label>
+              <select class="form-control" ng-model="datos.unidad" required number-converter>
+                <option ng-repeat="unidad in unidades" value="{[{unidad.id}]}">{[{unidad.nombre}]}</option>
+              </select>
+            </div> 
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-4 col-md-3">
+              <label>Roles del usuario</label>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="datos.esAutoridad" value="">
+                  Autoridad
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="datos.esEspecialista">
+                  Especialista
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="responsable">
+                  Responsable
+                </label>
+              </div>
+            </div> 
+<!--             <div class="col-md-12">
+              <label>¿Es especialista?</label>
+              <select class="form-control" ng-model="datos.esEspecialista" required>
+                <option value="0">No</option>
+                <option value="1">Si</option>
+              </select>
+            </div>
+            <br>
+            <div class="col-md-12">
+              <label>¿Es responsable?</label>
+              <select class="form-control" ng-model="responsable" required>
+                <option value="0">No</option>
+                <option value="1">Si</option>
+              </select>
+            </div> -->
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4"  ng-repeat="responsabilidad in datos.responsabilidades track by $index">
+              <label>Responsable de:</label>
+              <select class="form-control" ng-model="responsabilidad.id" number-converter>
+                <option value="">Seleccione</option>
+                <option ng-repeat="responsable in response.responsables" value="{[{responsable.id}]}">{[{responsable.nombre}]}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              
+            </div>
+          </div>
+          <br>
+          <div ng-if="datos.responsabilidades.length>0">
+            <button type="button" class="btn btn-secondary" ng-click="addResponsa()">Agregar Otra responsabilidad</button>
+          </div>
+          <div class="row" align="center">
+            <button class="btn button-secundary" ng-click="registrar(1)">Registrar</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div> <!-- /.content-container -->
+    <br>
+
+      
+  </div> <!-- /.content -->
+</div> <!-- /.container -->
+{#{{dump(task)}}#}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+        <script type="text/javascript">
+      var response = "{{ data }}";
+      var div = document.createElement('div');
+      div.innerHTML = response;
+      response = div.firstChild.nodeValue;
+      response = JSON.parse(response);
+      console.log("response",response);
+      </script>
+   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+   <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    </script>
+   <script src="{{ asset('bundles/proceso/js/angular/admin/adminModule.js') }}"></script>
+   <script src="{{ asset('bundles/proceso/js/angular/admin/editUserController.js') }}"></script>
+
+{% endblock %}

@@ -89,4 +89,49 @@ class AdminController extends Controller
         return $response;
     }
 
+    public function editarUsuarioAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('ProcesoBundle:User')->find($id);
+        $data = array();
+        
+        $data['nombre'] = $user->getNombre();
+        $data['cedula'] = $user->getCedula();
+        $data['correo'] = $user->getEmail();
+        $data['departamento'] = $user->getDepartamento()->getId();
+        $data['unidad'] = $user->getUnidadAcademcia()->getId();
+        $roles = $user->getRoles();
+        dump($roles);
+        foreach ($roles as $key => $role) {
+            dump($role);
+            if($role == "ROLE_ESPECIALISTA_CREATE_ALL")
+                $data['esEspecialista'] = true;
+
+            if($role =="ROLE_RESPONSABLE_UPDATE"){
+                $data['esResponsable'] = true;
+                $data['responsabilidades'] = array();
+                $responsabilidades = $user->getResponsabilidades();
+                foreach ($responsabilidades as  $responabilidad) {
+                    $responsa = array();
+                    $responsa['id'] =  $responabilidad->getId();
+                    array_push($data['responsabilidades'], $responsa);
+                }
+            }
+
+            if($role =="ROLE_AUTORIDAD")
+                $data['esAutoridad'] = true;
+            
+        }
+
+        $departamentos = $this->get('AdminService')->getListDepartament();
+        $responsables = $this->get('AdminService')->getTiposResposables();
+        $response['departamentos'] = $departamentos;
+        $response['responsables'] = $responsables;
+        $response['datos'] = $data;
+        return $this->render('ProcesoBundle:All:Admin/editUser.html.twig', array(
+                    'data' =>  json_encode($response)
+                ));
+
+
+    }
+
 }

@@ -1,12 +1,17 @@
-admin.controller('adminController', function($scope, $http, $window){
+admin.controller('editUserController', function($scope, $http, $window){
 
 	$scope.response = response;
 	$scope.datos = {};
 	$scope.datos.esEspecialista = false;
 	$scope.datos.esAutoridad = false;
-	$scope.responsables = [];
-	$scope.responsables.length++;
-	$scope.responsables[0] ={};
+	$scope.datos = response.datos;
+	$scope.departamento = $scope.datos.departamento;
+	if($scope.datos.hasOwnProperty('esResponsable'))
+		$scope.responsable = true;
+
+	// $scope.responsables = [];
+	// $scope.responsables.length++;
+	// $scope.responsables[0] ={};
 	 $scope.$watch('departamento', function() {
 	 	console.log($scope.departamento);
 	 	var json = {};
@@ -27,15 +32,7 @@ admin.controller('adminController', function($scope, $http, $window){
 	 	});        
 	 });
 
-	 $scope.$watch('responsable', function() {
-	 	console.log("entro", $scope.responsable);
 
-	 	if($scope.responsable == true){
-	 		$scope.datos.responsabilidades = [];
-	 		$scope.datos.responsabilidades[$scope.datos.responsabilidades.length] = {};
-	 	}
-
-	 });
 
 	 $scope.addResponsables = function(){
 	 	$scope.responsables[$scope.responsables.length] = {};
@@ -43,7 +40,6 @@ admin.controller('adminController', function($scope, $http, $window){
 	 $scope.addResponsa = function(){
 	 	$scope.datos.responsabilidades[$scope.datos.responsabilidades.length] = {};
 	 }
-
 
 
 	 $scope.registrar = function(tipo){
