@@ -15,6 +15,11 @@ processAct.controller('processActController', function($scope, $http, $window){
 		$window.location.href = url;
 	}
 
+	$scope.view = function(id) {
+		var url = Routing.generate('_expertViewProcess', { id: id});
+		$window.location.href = url;
+	}
+
 	$scope.desactivar = function(id, pos){
 		console.log(id,pos);
 

@@ -9,7 +9,7 @@
       <div class="content-header">
         <h2 class="content-header-title">Procesos activos</h2> <estiquta ng-click="showModalConfirm()"></estiquta>
       </div> <!-- /.content-header -->
-      <uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index)"><strong>{[{alert.msg}]}</strong></uib-alert>
+      <uib-alert dismiss-on-timeout="2000" ng-repeat="alert in alerts" type="{[{alert.type}]}" close="closeAlert($index)"><strong>{[{alert.msg}]}</strong></uib-alert>
       <div ng-if="response.length>0" class="row">
           <div class="col-sm-12">
               <div class="panel panel-default">
@@ -22,18 +22,20 @@
                     <tr>
                       <th>#</th>
                       <th>Nombre</th>
-                      <th>Catidad de Actividades</th>
+                      <th>Descripción</th>
                       <th>Editar</th>
-                      <th>Desactivar</th>
+                      <th>Activar</th>
+                      <th>Ver</th>
                     </tr>
                   </thead>
                   <tbody ng-repeat="value in response">
                     <tr>
                       <td>{[{value.id}]}</td>
                       <td>{[{value.nombre}]}</td>
-                      <td>{[{value.numActividades}]}</td>
+                      <td>{[{value.descripcion}]}</td>
                       <td> <button ng-click="edit(value.id)" type="button" class="btn btn-info">Editar</button></td>
-                      <td> <button ng-click="desactivar(value.id, $index)" type="button" class="btn btn-primary">Desactivar</button></td>
+                      <td> <button ng-click="desactivar(value.id, $index)" type="button" class="btn btn-tertiary">Desactivar</button></td>
+                      <td> <button ng-click="view(value.id)" type="button" class="btn btn-default">Ver proceso</button></td>
                     </tr>
                   </tbody>
                 </table>

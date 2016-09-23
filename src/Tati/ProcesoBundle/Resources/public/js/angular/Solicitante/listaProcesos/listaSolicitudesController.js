@@ -6,8 +6,8 @@ listaSolicitudes.controller('listaSolicitudesController', function($scope, $http
 	$scope.closeAlert = function(index, type) {
 		$scope.alerts.splice(index, 1);
 		if(type == 'success'){
-			//var url = Routing.generate('_tatiSoft_soli_finished');
-			//$window.location.href = url;
+			var url = Routing.generate('_tatiSoft_soli_finished');
+			$window.location.href = url;
 		}
 	};
 

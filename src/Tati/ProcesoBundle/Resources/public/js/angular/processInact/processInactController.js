@@ -15,6 +15,10 @@ processInact.controller('processInactController', function($scope, $http, $windo
 		var url = Routing.generate('_expertEditProcess', { id: id});
 		$window.location.href = url;
 	}
+	$scope.view = function(id) {
+		var url = Routing.generate('_expertViewProcess', { id: id});
+		$window.location.href = url;
+	}
 
 	$scope.desactivar = function(id, pos){
 		console.log(id,pos);

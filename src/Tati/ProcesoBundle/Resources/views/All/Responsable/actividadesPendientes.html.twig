@@ -9,7 +9,7 @@
     <div class="content-container">
 
       <div class="content-header">
-        <h2 class="content-header-title"><strong>Lista de solicitudes</strong></h2>
+        <h2 class="content-header-title"><strong>Actividades pendientes</strong></h2>
         
       </div> <!-- /.content-header -->
       <div>
@@ -25,6 +25,7 @@
                     <tr>
                       <th>#</th>
                       <th>Nombre de proceso</th>
+                      <th>Nombre del solicitante</th>
                       <th>Nombre de Actividad</th>
                       <th>Descripcion</th>
                       <th>Responsable por</th>
@@ -35,6 +36,7 @@
                     <tr>
                       <td>{[{value.id}]}</td>
                       <td>{[{value.nombreProceso}]}</td>
+                      <td>{[{value.solicitante}]}</td>
                       <td>{[{value.nombre}]}</td>
                       <td>{[{value.descripcion}]}</td>
                       <td><label>{[{value.resposable_por}]}</label></td>

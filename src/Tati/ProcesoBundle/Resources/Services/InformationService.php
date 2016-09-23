@@ -172,6 +172,7 @@ class InformationService
             $response2['id']=$valor->getId();
             $response2['nombre'] = $valor->getNombre();
             $response2['numActividades'] = count($valor->getActividades());
+            $response2['descripcion'] = $valor->getDescripcion();
             array_push($response, $response2);
         }
 
@@ -188,6 +189,7 @@ class InformationService
             $response2['id']=$valor->getId();
             $response2['nombre'] = $valor->getNombre();
             $response2['numActividades'] = count($valor->getActividades());
+            $response2['descripcion'] = $valor->getDescripcion();
             array_push($response, $response2);
         }
 

@@ -35,6 +35,7 @@ class ResponsableService
                     $actiAux['descripcion'] = $actividad->getDescripcion();
                     $actiAux['nombreProceso'] = $actividad->getSolicitud()->getProceso()->getNombre();
                     $actiAux['resposable_por'] = $actividad->getResponsable()->getNombre();
+                    $actiAux['solicitante'] = $actividad->getSolicitud()->getSolicitante()->getNombre();
                     array_push($response, $actiAux);
                 }
             }
